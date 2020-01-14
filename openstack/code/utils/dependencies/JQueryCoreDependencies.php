@@ -23,10 +23,13 @@ final class JQueryCoreDependencies
         if(Director::isLive()) {
             Requirements::javascript('node_modules/jquery/dist/jquery.min.js');
             Requirements::javascript("node_modules/jquery-migrate/dist/jquery-migrate.min.js");
+
         }
         else{
             Requirements::javascript('node_modules/jquery/dist/jquery.js');
             Requirements::javascript("node_modules/jquery-migrate/dist/jquery-migrate.js");
         }
+        // Entwine requirements
+        Requirements::javascript(THIRDPARTY_DIR . '/jquery-entwine/dist/jquery.entwine-dist.js');
     }
 }
