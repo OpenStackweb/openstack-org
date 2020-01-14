@@ -40,6 +40,17 @@ class EventPage
 
     private static $has_one = array();
 
+    public static $event_categories = array(
+      'Enterprise',
+      'Hackathons',
+      'Industry',
+      'Meetups',
+      'Mid-Cycle Sprints',
+      'OpenStack Days',
+      'Summit',
+      'Upstream Training',
+      'OSF Events'
+    );
 
     function getCMSFields() {
         $fields = parent::getCMSFields();

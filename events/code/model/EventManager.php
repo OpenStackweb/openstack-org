@@ -279,12 +279,14 @@ final class EventManager implements IEventManager {
      * @return array
      */
     function getAllTypes() {
-        $array = array();
+        $categories = EventPage::$event_categories;
         $event_types = DB::query("SELECT DISTINCT EventCategory FROM EventPage where EventCategory is not null ORDER BY EventCategory");
         foreach ($event_types as $event_type) {
-            $array[] = $event_type["EventCategory"];
+            if (!in_array($event_type["EventCategory"], $categories)){
+                $categories[] = $event_type["EventCategory"];
+            }
         }
-        return $array;
+        return $categories;
     }
 
     /**
