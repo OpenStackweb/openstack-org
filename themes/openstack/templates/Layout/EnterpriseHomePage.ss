@@ -23,7 +23,9 @@
                                     A Guide to Applications on OpenStack
                                 </p>
                                 <p>
-                                    <a href="#" class="path-options-btn" data-toggle="modal" data-target="#BookletModalHero">Read the booklet now</a>
+                                    <button class="path-options-btn" type="button" data-toggle="modal" data-target="#BookletModalHero">
+                                        Read the booklet now
+                                    </button>
                                 </p>
                             </div>
                         </div>
@@ -103,7 +105,9 @@
                             </p>
                         </div>
                         <p> 
-                            <a href="#" class="booklets-btn"  data-toggle="modal" data-target="#businessPersepctivesModal">Download now <i class="fa fa-cloud-download"></i></a>
+                            <button class="booklets-btn"  data-toggle="modal" type="button"  data-target="#businessPersepctivesModal">
+                                Download now <i class="fa fa-cloud-download"></i>
+                            </button>
                         </p>
                     </div>
                 </div>
@@ -116,7 +120,9 @@
                             </p>
                         </div>
                         <p>
-                            <a href="#" class="booklets-btn" data-toggle="modal" data-target="#PathToCloudModal">Download now <i class="fa fa-cloud-download"></i></a>
+                            <button class="booklets-btn" data-toggle="modal" type="button"  data-target="#PathToCloudModal">
+                                Download now <i class="fa fa-cloud-download"></i>
+                            </button>
                         </p>
                     </div>
                 </div>

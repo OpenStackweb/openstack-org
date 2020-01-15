@@ -94,18 +94,19 @@
 .security-action-wrapper p {
     text-align: center;
     color: #2A4E68; }
-.security-action-wrapper a.security-action-btn {
+.security-action-wrapper .security-action-btn {
     display: block;
-    max-width: 300px;
+    width: 300px;
     background: #DA422F;
     color: white;
     padding: 15px 20px;
+    border: none;
     border-radius: 4px;
     margin: 30px auto 0; }
-.security-action-wrapper a.security-action-btn i {
+.security-action-wrapper .security-action-btn i {
     margin-right: 5px;
     font-size: 1.2em; }
-.security-action-wrapper a.security-action-btn:hover {
+.security-action-wrapper .security-action-btn:hover {
     background: #A51B1B;
     text-decoration: none; }
 .sub-text {
