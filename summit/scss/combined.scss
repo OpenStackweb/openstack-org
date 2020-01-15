@@ -1103,7 +1103,7 @@ footer {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  height: 530px;
+  height: 630px;
 }
 
 /*Tokyo Summit Landing Page*/
@@ -1302,6 +1302,9 @@ a.current-summit-link {
   color: #ed1944;
   font-weight: 900;
 }
+.join-us-text-register {
+  margin-top: -25px;
+}
 
 a.sponsors_button, a:visited.sponsors_button  {
     border: none;
@@ -1352,21 +1355,22 @@ a.sponsors_button, a:visited.sponsors_button  {
 }
 .e2ma_signup_form_button {
   border: none;
-  padding: 1rem 6rem;
   text-decoration: none;
   background: #ed1944;
-  color: #ffffff;
-  font-family: sans-serif;
-  font-size: 1.5rem;
   cursor: pointer;
   text-align: center;
   transition: background 250ms ease-in-out, transform 150ms ease;
   -webkit-appearance: none;
   -moz-appearance: none;
   margin-top: 1rem;
-  text-transform: uppercase;
   font-weight: bold;
-  border-radius: 25px;
+  border-radius: 2px;
+  background:#ed1944;
+  color:white;
+  text-transform: uppercase;
+  font-size: 1.1em;
+  font-weight: 400;
+  padding: 12px 30px;
 }
 .future-text-wrapper.blue {
     height:100%;
