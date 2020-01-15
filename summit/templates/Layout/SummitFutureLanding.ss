@@ -25,6 +25,13 @@
                     VANCOUVER, BRITISH COLUMBIA
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-12 join-us-text-register">
+                    <a class="btn register-btn-lrg red eventbrite-register-link" href="https://opendevptg2020.eventbrite.com/?aff=opendevptg2020">
+                            Register <i class="fa fa-arrow-right"></i>
+                        </a>
+                </div>
+            </div>
 
                     <!-- <div class="save-the-date"> Save The Date! </div>
     			<h1> $IntroText </h1>
