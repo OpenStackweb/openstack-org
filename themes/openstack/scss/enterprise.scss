@@ -89,21 +89,22 @@ h5 {
   font-size: 14px;
   font-weight: 300; }
 
-a.download-btn {
+.download-btn {
   display: block;
   background: #b9301d;
   padding: 10px 20px;
+  border: none;
   border-radius: 2px;
   width: 90%;
   margin: 10px auto 0;
   color: #fff;
   font-weight: 600; }
 
-a.download-btn:hover {
+.download-btn:hover {
   text-decoration: none;
   background: #831917; }
 
-a.download-btn:focus {
+.download-btn:focus {
   outline: none;
   text-decoration: none; }
 
@@ -1697,28 +1698,33 @@ img.global-figures-chart {
   .summit-promo.containers p {
     text-align: center; }
   .summit-promo.containers .containers-summit-right {
-    margin-top: 30px; } }
+    margin-top: 30px; }
+}
+
 .mid-overlay {
   background: rgba(0, 0, 0, 0.6);
   padding: 30px 0;
   width: 100%;
   margin: 20px 0; }
 
-a.path-options-btn {
-  max-width: 325px;
+.path-options-btn {
+  width: 325px;
   whitespace: nowrap;
   background: #DA422F;
+  border: none;
   border-radius: 4px;
   padding: 15px 30px;
   color: white;
   display: block;
   margin: 30px auto 10px;
   font-weight: 400;
-  font-size: 14px; }
-  a.path-options-btn:hover, a.path-options-btn:focus {
+  font-size: 14px;
+}
+.path-options-btn:hover, .path-options-btn:focus {
     text-decoration: none;
     background: #A51B1B;
-    outline: none; }
+    outline: none;
+}
 
 .booklets-section {
   padding: 60px 0;
@@ -1746,8 +1752,9 @@ a.path-options-btn {
         display: block;
         padding-bottom: 7px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.5); }
-  .booklets-section a.booklets-btn {
+  .booklets-section .booklets-btn {
     background: #DA422F;
+    border: none;
     border-radius: 4px;
     padding: 10px 20px;
     margin: 20px auto 0;
@@ -1757,10 +1764,10 @@ a.path-options-btn {
     text-transform: uppercase;
     whitespace: nowrap;
     width: 250px; }
-    .booklets-section a.booklets-btn i {
+    .booklets-section .booklets-btn i {
       margin-left: 10px;
       font-size: 1.15em; }
-    .booklets-section a.booklets-btn:hover, .booklets-section a.booklets-btn:focus {
+    .booklets-section .booklets-btn:hover, .booklets-section .booklets-btn:focus {
       background: #A51B1B;
       text-decoration: none;
       outline: none; }

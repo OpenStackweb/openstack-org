@@ -23,9 +23,9 @@
                         <div class="download-text">
                             <em>Version 2 of The Crossroads of Cloud and HPC: OpenStack for Scientific Research</em>
                         </div>
-                        <a href="#" class="download-btn" data-toggle="modal" data-target="#downloadModal">
+                        <button class="download-btn" type="button" data-toggle="modal" data-target="#downloadModal">
                             <i class="fa fa-arrow-circle-down"></i>  Read the enhanced book now
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -258,7 +258,9 @@
             <div class="row">
                 <div class="col-lg-8 col-sm-push-2">
                     <div class="security-action-wrapper">
-                        <a class="security-action-btn" href="#" data-toggle="modal" data-target="#downloadModal"><i class="fa fa-arrow-circle-down"></i> Download or buy the book</a>
+                        <button class="security-action-btn" type="button" data-toggle="modal" data-target="#downloadModal">
+                            <i class="fa fa-arrow-circle-down"></i>  Download or buy the book
+                        </button>
                     </div>
                 </div>
             </div>
@@ -266,7 +268,7 @@
     <!-- End Action Section -->
 
     <!-- Download Modal -->
-    <div class="modal fade" id="downloadModal">
+    <div class="modal fade" id="downloadModal" role="dialog" >
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">

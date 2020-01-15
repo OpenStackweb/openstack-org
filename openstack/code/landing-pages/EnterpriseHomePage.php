@@ -47,7 +47,12 @@ class EnterpriseHomePage_Controller extends Page_Controller {
     public function getEnterpriseEvents($limit = 3)
     {
         $next_summit = $this->getSummitEvent();
-        $filter = array("EventEndDate:GreaterThan" => date('Y-m-d H:i:s'), "ID:not" => $next_summit->ID);
+        $filter = array("EventEndDate:GreaterThan" => date('Y-m-d H:i:s'));
+
+        if ($next_summit) {
+            $filter["ID:not"] = $next_summit->ID;
+        }
+
         return EventPage::get()
             ->where("EventCategory IN('Enterprise','Summit','OpenStack Days')")
             ->filter($filter)
@@ -58,7 +63,12 @@ class EnterpriseHomePage_Controller extends Page_Controller {
     public function getEnterpriseFeaturedEvents($limit = 3)
     {
         $next_summit = $this->getSummitEvent();
-        $filter = array("EventEndDate:GreaterThan" => date('Y-m-d H:i:s'), "ID:not" => $next_summit->ID);
+        $filter = array("EventEndDate:GreaterThan" => date('Y-m-d H:i:s'));
+
+        if ($next_summit) {
+            $filter["ID:not"] = $next_summit->ID;
+        }
+
         return EventPage::get()
             ->where("EventCategory IN('Enterprise','Summit') AND EventSponsorLogoUrl IS NOT NULL")
             ->filter($filter)
