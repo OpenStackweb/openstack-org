@@ -44,7 +44,7 @@
                 <div class="item">
                     <div class="video">
                         <div class="triangle-new">
-                            <p>New Event!<p>
+                            <p>New!<p>
                         </div>
                     </div>
                     <h4>Vancouver, British Columbia</h4>
