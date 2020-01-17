@@ -5,8 +5,8 @@
         <div class="landingintro">
             <div class="row">
                 <div class="col-md-12 join-us-text-black">
-                    Don't miss OSF's next collaborative event
-                    <p style="color:#000;font-weight: normal; font-size:.7em;margin-top:12px;">Bringing developers, operators, architects, and product managers together to shape the future of open infrastructure.</p>
+                    OSF + PTG
+                    <p style="color:#000;font-weight: normal; font-size:.7em;margin-top:12px;">OpenDev + PTG is a collaborative event organized by the OSF (OpenStack Foundation) gathering developers, system architects, and operators to address common open source infrastructure challenges.</p>
                 </div>
             </div>
     	    <div class="row">
