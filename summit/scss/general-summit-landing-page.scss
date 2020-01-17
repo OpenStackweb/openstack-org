@@ -1658,7 +1658,7 @@ ul.navbar-main {
     background-size: cover !important;
 }
 
-.all-summit .summits-wrap .video-container .item .video .triangle {
+.all-summit .summits-wrap .video-container .item .video .triangle, .all-summit .summits-wrap .video-container .item .video .triangle-new {
     width: 0;
     height: 0;
     border-style: solid;
@@ -1667,6 +1667,10 @@ ul.navbar-main {
     left: 0;
     top: 0;
     position: absolute;
+}
+
+.all-summit .summits-wrap .video-container .item .video .triangle-new {
+    border-color: #00468b transparent transparent transparent;
 }
 
 .all-summit .summits-wrap .video-container .item .video .triangle p {

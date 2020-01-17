@@ -43,6 +43,9 @@
             <div class="video-container last col-md-4 col-sm-12 col-xs-12">
                 <div class="item">
                     <div class="video">
+                        <div class="triangle-new">
+                            <p>New Event!<p>
+                        </div>
                     </div>
                     <h4>Vancouver, British Columbia</h4>
                     <p>June 8-11, 2020</p>
