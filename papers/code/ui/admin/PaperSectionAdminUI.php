@@ -44,6 +44,8 @@ class PaperSectionAdminUI extends DataExtension
             // contents
             $config = GridFieldConfig_RecordEditor::create(50);
             $config->removeComponentsByType('GridFieldAddNewButton');
+            $config->removeComponentsByType('GridFieldPaginator');
+            $config->removeComponentsByType('GridFieldPageCount');
             $multi_class_selector = new GridFieldAddNewMultiClass();
             $multi_class_selector->setClasses
             (
