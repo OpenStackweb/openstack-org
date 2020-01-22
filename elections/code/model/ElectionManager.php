@@ -101,7 +101,7 @@ final class ElectionManager implements IElectionManager {
 
 
 			$election =  $this->election_repository->getById($election_id);
-			if(is_null($election)){
+			if(is_null($election) || !$election instanceof Election){
 				throw new NotFoundEntityException('Election');
 			}
 
