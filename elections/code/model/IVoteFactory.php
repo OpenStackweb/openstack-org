@@ -13,9 +13,9 @@
  **/
 interface IVoteFactory {
 	/**
-	 * @param IElection         $election
-	 * @param IFoundationMember $voter
+	 * @param Election         $election
+	 * @param Member $voter
 	 * @return IVote
 	 */
-	public function buildVote(IElection $election, IFoundationMember $voter);
+	public function buildVote(Election $election, Member $voter);
 } 

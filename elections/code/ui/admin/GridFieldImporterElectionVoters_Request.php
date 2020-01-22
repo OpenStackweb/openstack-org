@@ -31,10 +31,16 @@ final class GridFieldImporterElectionVoters_Request extends GridFieldImporter_Re
         global $email_log;
 
         try {
+            $file_name = Director::baseFolder() . $file_path;
+            if (filter_var($file_path, FILTER_VALIDATE_URL)) {
+                // download it
+                $file_name =  '/tmp/'.random_string(16).'.csv';
+                file_put_contents( $file_name, file_get_contents($file_path));
+            }
 
             list($output, $count, $not_processed) = $this->manager->ingestVotersForElection
             (
-                Director::baseFolder() . $file_path,
+                $file_name,
                 intval($this->getRequest()->param("ID"))
             );
             // send email with results;
