@@ -48,7 +48,8 @@
 
             var ddl          = $('select.select-company-name', control);
             var input        = $('input.input-company-name',  control);
-            var company_id   = ddl.val() > 0 ? $("option:selected", ddl).val() : input.attr('data-company-id');
+            //var company_id   = ddl.val() > 0 ? $("option:selected", ddl).val() : input.attr('data-company-id');
+            var company_id   = $("option:selected", ddl).val();
             var company_name = ddl.val() > 0 ? $("option:selected", ddl).text(): input.val();
 
             return {'id': company_id, 'name': company_name};
@@ -63,7 +64,7 @@
             var ddl   = $('select.select-company-name', control);
             var input = $('input.input-company-name',  control);
 
-            if(input.length > 0) {
+            /*if(input.length > 0) {
                 input.autocomplete({
                     source: 'api/v1/job-registration-requests/companies',
                     minLength: 2,
@@ -73,36 +74,39 @@
                             company_id = ui.item.id;
                         }
                         input.attr('data-company-id', company_id);
+                        ddl.val(company_id);
                     }
                 })
-            }
+            }*/
 
             if(ddl.length > 0) {
 
                 input.hide();
-                input.val( $('option:selected', ddl).text() );
 
-                ddl.rules('add',{
-                    required:true,
-                    ValidNewCompanyName:[input]
-                });
+                ddl.rules('add',{required:true});
 
                 ddl.change(function(event){
                     var ddl = $(this);
 
-                    if(ddl.val() == '0'){
+                    input.val('');
+                    //input.attr('data-company-id', 0);
+
+                    if(ddl.val() === '0'){
                         input.show();
-                        input.val('');
-                    }
-                    else{
+                        input.rules('add',{required:true});
+                    } else {
                         input.hide();
-                        input.val( $('option:selected', ddl).text() );
+                        input.rules('remove');
+                        input.val($("option:selected", ddl).text())
+                        input.valid();
                     }
 
                 });
-            }
-            else if(input.length > 0) {
-                input.rules('add',{required:true});
+
+                if (ddl.val() === '0') {
+                  input.show();
+                  input.rules('add',{required:true});
+                }
             }
 
         }
