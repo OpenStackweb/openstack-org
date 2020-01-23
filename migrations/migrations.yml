@@ -123,3 +123,4 @@ migrations:
   - FixFileNamesMigration
   - ShanghaiPresentationSlugMigration
   - Election2018Migration
+  - JobCompanyMigrationTask

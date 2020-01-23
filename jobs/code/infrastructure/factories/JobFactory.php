@@ -43,9 +43,18 @@ final class JobFactory implements IJobFactory {
         $type          = trim($data['job_type']);
 		$company_id    = isset($data['company_id']) ? intval(@$data['company_id']):0;
 		$company_name  = trim(@$data['company']);
-    	$company       = new Company;
-		$company->Name = $company_name;
-		$company->ID   = $company_id;
+		$company       = null;
+
+		if ($company_id) {
+            $company = Company::get()->byID($company_id);
+        }
+
+        if (!$company) {
+            $company       = new Company;
+            $company->Name = $company_name;
+            $company->ID   = 0;
+        }
+
 		return new JobMainInfo
         (
             trim($data['title']),
