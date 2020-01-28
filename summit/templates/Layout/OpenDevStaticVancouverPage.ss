@@ -53,18 +53,15 @@
     </div>
 </div>
 
-<div class="what-to-expect" id="expect">
+<div class="light what-to-expect" id="expect">
     <div class="container">
         <div class="row">
-            <div class="video-container col-md-7 col-sm-12">
+            <div class="text-container col-md-7 col-sm-12">
                 <h3 class="title-section">What to Expect at OpenDev + PTG</h3>
-                <a href="https://youtu.be/1sda4fbKsAg" class="video">
-
-                    <span>
-                        <i class="fal fa-play"></i>
-                    </span>
-
-                </a>
+                <p><strong>OpenDev</strong> is structured to have an impact on future development and integration efforts, achieved by collaboratively produced deliverables to share back with the industry and open source communities. This portion of the event will run <strong>Monday - Wednesday, June 8-10</strong>, and will include discussion oriented sessions around a particular topic to explore a problem within a topic area, share common architectures, and collaborate around potential solutions.
+                </p>
+                <p>The conversations will continue into the afternoon with the <strong>Project Teams Gathering (PTG)</strong>. This is when the morning’s practices will be explored by project teams and SIGs who will have dedicated space to get work done in a productive setting. This portion of the event will run <strong>Monday - Thursday, June 8-11</strong>, and will maximize the ability of contributors to work through their project objectives in an environment that is focused towards work and productivity.
+                </p>
             </div>
             <div class="text-container col-md-5 col-sm-12">
                 <h3 class="title-section">Who Should Attend?</h3>
@@ -72,10 +69,10 @@
                 </p>
 
                 <ul class="attends">
-                    <li><span class="architecture"></span>Hardware Automation</li>
-                    <li><span class="platform"></span>Containers in Production</li>
-                    <li><span class="bussiness"></span>Large Scale Ops</li>
-                    <li><span class="upstream"></span>Key Challenges for Open Source</li>
+                    <li><span class="architecture"></span>Architecture &amp; Ops</li>
+                    <li><span class="platform"></span>Platform Developers</li>
+                    <li><span class="bussiness"></span>Business &amp; Strategy</li>
+                    <li><span class="upstream"></span>Upstream Developers</li>
                 </ul>
             </div>
         </div>
@@ -104,14 +101,17 @@
 
 <div class="diverse">
     <div class="blue-div"></div>
-    <div class="image"></div>
+    <div class="image" style="min-height: 75vh;"></div>
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 text">
                 <span></span>
                 <h2>Inclusive.<br>Diverse.<br>Open.</h2>
                 <p>We are a diverse community of professionals, and the OpenStack Foundation is dedicated to providing an inclusive and safe Summit experience for everyone. <a href="https://www.openstack.org/events/vancouver-2020/code-of-conduct/" target="_blank">View the Community Code of Conduct</a> for more information.</p>
-                </p>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
             </div>
         </div>
     </div>
