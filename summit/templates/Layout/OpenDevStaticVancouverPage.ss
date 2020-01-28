@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-7 col-md-6 col-sm-12">
                 <h4 class="summit-title script">OpenDev + PTG</h4>
-                <h2>Influence the Future of Open Infrastructure</h2>
+                <h2 style="font-size:68px;">Building Intelligent Open Source Infrastructure</h2>
                 <div class="bird">
                     <h5>
                         <strong>
@@ -31,9 +31,9 @@
 
             <div class="col-lg-5 col-md-6 col-sm-12 about-buttons">
 
-                <p>OpenDev + PTG is a collaborative event organized by the OSF (OpenStack Foundation) gathering developers, system architects, and operators to address common open source infrastructure challenges.</p>
+                <p>OpenDev + PTG is a collaborative event organized by the OpenStack Foundation (OSF) gathering developers, system architects, and operators to address common open source infrastructure challenges.</p>
 
-                <p>Together, the discussions held at OpenDev + PTG are critical to the open source advancements addressing current challenges around hardware automation, scale, containers, and the overall open source ecosystem. If you want to influence the direction and future of open infrastructure, join the community and participate in this event. </p>
+                <p>Together, the discussions held at OpenDev + PTG are critical to the open source advancements addressing current challenges around hardware automation, scale, containers, and the overall open source ecosystem. If you want to influence the direction and future of <strong>open source infrastructure</strong>, join the community and participate in this event. </p>
 
                 <a class="btn btn-default" href="mailto:events@openstack.org">Sponsor OpenDev + PTG <i class="fal fa-arrow-right"></i></a>
 
