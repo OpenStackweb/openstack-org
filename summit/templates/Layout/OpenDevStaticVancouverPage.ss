@@ -8,11 +8,15 @@
 .script {
     font-family: "Open Sans" !important;
 }
-.sessions {
-    padding-left: 15% !important; 
-}
 .session {
-    margin-left: 20px !important; 
+    width:25% important!
+    max-width:25% important!
+}
+.academy-wrapper .recap-title {
+    margin: .5em 0 1em;
+}
+.diverse .image {
+    min-height: 70vh;
 }
 </style>
 <div class="white about-summit-header">
@@ -117,7 +121,7 @@
 
 <div class="diverse">
     <div class="blue-div"></div>
-    <div class="image" style="min-height: 75vh;"></div>
+    <div class="image"></div>
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 text">
