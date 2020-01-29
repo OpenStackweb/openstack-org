@@ -1,3 +1,20 @@
+<style>
+.about-summit-header .summit-title {
+    font-size: 2em;
+}
+    .session {
+    max-width: 25% important!;
+}
+.script {
+    font-family: "Open Sans" !important;
+}
+.sessions {
+    padding-left: 15% !important; 
+}
+.session {
+    margin-left: 20px !important; 
+}
+</style>
 <div class="white about-summit-header">
     <div class="container">
         <div class="row">
