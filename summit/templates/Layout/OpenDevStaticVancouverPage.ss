@@ -99,12 +99,11 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h3 class="recap-title script">Sponsor OpenDev + PTG
+                <h3 class="recap-title script">Become a Sponsor of OpenDev + PTG
                 </h3>
             </div>
 
             <div class="col-sm-12 sponsor">
-                <h4 class="title">Become a Sponsor</h4>
                 <p class="text">
                     Sponsoring these events will greatly help ensure the continued growth and success of open infrastructure projects. <strong>A sponsorship prospectus will be available soon</strong>. If your organization is interested in participating and supporting the open infrastructure community, please contact <a href="mailto:events@openstack.org">events@openstack.org</a>.
                 </p>
