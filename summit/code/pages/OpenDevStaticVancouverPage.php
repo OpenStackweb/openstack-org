@@ -12,10 +12,16 @@
  * limitations under the License.
  **/
 
+/**
+ * Class OpenDevStaticVancouverPage
+ */
 class OpenDevStaticVancouverPage extends SummitPage {
 
 }
 
+/**
+ * Class OpenDevStaticVancouverPage_Controller
+ */
 class OpenDevStaticVancouverPage_Controller extends SummitPage_Controller {
 
     public function init()
@@ -31,7 +37,7 @@ class OpenDevStaticVancouverPage_Controller extends SummitPage_Controller {
     }
 
     public function isMultiRegister() {
-        return true;
+        return false;
     }
 
     public function getRegisterButtonLabel() {
