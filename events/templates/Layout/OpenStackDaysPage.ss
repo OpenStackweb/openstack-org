@@ -221,7 +221,7 @@
                         <div class="col-sm-2 col-xs-3"><strong>Date</strong></div>
                         <div class="col-sm-4 col-xs-4"><strong>Event Name</strong></div>
                         <div class="col-sm-3 col-xs-3"><strong>Location</strong></div>
-                         <div class="col-sm-3 col-xs-2"><strong>Region</strong></div>
+                        <div class="col-sm-3 col-xs-2"><strong>Region</strong></div>
                       </div>
                       <div class="row osdays-event">
                         <div class="col-sm-2 col-xs-3"><div class="osd-date">TBA</div></div>
@@ -232,91 +232,91 @@
                       <div class="row osdays-event">
                         <div class="col-sm-2 col-xs-3"><div class="osd-date">TBA</div></div>
                         <div class="col-sm-4 col-xs-4">OpenInfra Day China</div>
-                        <div class="col-sm-4 col-xs-4">Beijing, China</div>
+                        <div class="col-sm-3 col-xs-3">Beijing, China</div>
                         <div class="col-sm-3 col-xs-2">APAC</div>
                       </div>
                       <div class="row osdays-event">
                         <div class="col-sm-2 col-xs-3"><div class="osd-date">July 15, 2020</div></div>
                         <div class="col-sm-4 col-xs-4">Cloud Operator Day Japan</div>
-                        <div class="col-sm-4 col-xs-4">Tokyo, Japan</div>
+                        <div class="col-sm-3 col-xs-3">Tokyo, Japan</div>
                         <div class="col-sm-3 col-xs-2">APAC</div>
                       </div>
                       <div class="row osdays-event">
                         <div class="col-sm-2 col-xs-3"><div class="osd-date">TBA</div></div>
                         <div class="col-sm-4 col-xs-4">OpenInfra Day Vietnam</div>
-                        <div class="col-sm-4 col-xs-4">Vietnam</div>
+                        <div class="col-sm-3 col-xs-3">Vietnam</div>
                         <div class="col-sm-3 col-xs-2">APAC</div>
                       </div>
                       <div class="row osdays-event">
                         <div class="col-sm-2 col-xs-3"><div class="osd-date">TBA</div></div>
                         <div class="col-sm-4 col-xs-4">OpenInfra Day Korea</div>
-                        <div class="col-sm-4 col-xs-4">Korea</div>
+                        <div class="col-sm-3 col-xs-3">Korea</div>
                         <div class="col-sm-3 col-xs-2">APAC</div>
                       </div>
                       <div class="row osdays-event">
                         <div class="col-sm-2 col-xs-3"><div class="osd-date">Q4</div></div>
                         <div class="col-sm-4 col-xs-4">Open Infrastructure Day Indonesia</div>
-                        <div class="col-sm-4 col-xs-4">Indonesia</div>
+                        <div class="col-sm-3 col-xs-3">Indonesia</div>
                         <div class="col-sm-3 col-xs-2">APAC</div>
                       </div>
                       <div class="row osdays-event">
                         <div class="col-sm-2 col-xs-3"><div class="osd-date">March 17, 2020</div></div>
                         <div class="col-sm-4 col-xs-4">OpenInfra Day Turkey</div>
-                        <div class="col-sm-4 col-xs-4">Istanbul, Turkey</div>
+                        <div class="col-sm-3 col-xs-3">Istanbul, Turkey</div>
                         <div class="col-sm-3 col-xs-2">Europe</div>
                       </div>
                       <div class="row osdays-event">
                         <div class="col-sm-2 col-xs-3"><div class="osd-date">Q2</div></div>
                         <div class="col-sm-4 col-xs-4">OpenInfra Day UK</div>
-                        <div class="col-sm-4 col-xs-4">London, UK</div>
+                        <div class="col-sm-3 col-xs-3">London, UK</div>
                         <div class="col-sm-3 col-xs-2">Europe</div>
                       </div>
                       <div class="row osdays-event">
                         <div class="col-sm-2 col-xs-3"><div class="osd-date">Q2</div></div>
                         <div class="col-sm-4 col-xs-4">OpenInfra Day Poland</div>
-                        <div class="col-sm-4 col-xs-4">Poland</div>
+                        <div class="col-sm-3 col-xs-3">Poland</div>
                         <div class="col-sm-3 col-xs-2">Europe</div>
                       </div>
                       <div class="row osdays-event">
                         <div class="col-sm-2 col-xs-3"><div class="osd-date">Q3</div></div>
                         <div class="col-sm-4 col-xs-4">OpenInfra Day Hungary</div>
-                        <div class="col-sm-4 col-xs-4">Hungary</div>
+                        <div class="col-sm-3 col-xs-3">Hungary</div>
                         <div class="col-sm-3 col-xs-2">Europe</div>
                       </div>
                       <div class="row osdays-event">
                         <div class="col-sm-2 col-xs-3"><div class="osd-date">Q4</div></div>
                         <div class="col-sm-4 col-xs-4">OpenInfra Day Benelux</div>
-                        <div class="col-sm-4 col-xs-4">The Netherlands</div>
+                        <div class="col-sm-3 col-xs-3">The Netherlands</div>
                         <div class="col-sm-3 col-xs-2">Europe</div>
                       </div>
                       <div class="row osdays-event">
                         <div class="col-sm-2 col-xs-3"><div class="osd-date">Q4</div></div>
                         <div class="col-sm-4 col-xs-4">OpenStack/Infra Day Russia</div>
-                        <div class="col-sm-4 col-xs-4">Russia</div>
+                        <div class="col-sm-3 col-xs-3">Russia</div>
                         <div class="col-sm-3 col-xs-2">Europe</div>
                       </div>
                       <div class="row osdays-event">
                         <div class="col-sm-2 col-xs-3"><div class="osd-date">Q4</div></div>
                         <div class="col-sm-4 col-xs-4">OpenInfra Day Italy</div>
-                        <div class="col-sm-4 col-xs-4">Italy</div>
+                        <div class="col-sm-3 col-xs-3">Italy</div>
                         <div class="col-sm-3 col-xs-2">Europe</div>
                       </div>
                       <div class="row osdays-event">
                         <div class="col-sm-2 col-xs-3"><div class="osd-date">Q4</div></div>
                         <div class="col-sm-4 col-xs-4">OpenInfra Day Nordics</div>
-                        <div class="col-sm-4 col-xs-4">Sweden - TBC</div>
+                        <div class="col-sm-3 col-xs-3">Sweden - TBC</div>
                         <div class="col-sm-3 col-xs-2">Europe</div>
                       </div>
                       <div class="row osdays-event">
                         <div class="col-sm-2 col-xs-3"><div class="osd-date">TBA</div></div>
                         <div class="col-sm-4 col-xs-4">OpenInfra Day Canada</div>
-                        <div class="col-sm-4 col-xs-4">Ottawa, Canada</div>
+                        <div class="col-sm-3 col-xs-3">Ottawa, Canada</div>
                         <div class="col-sm-3 col-xs-2">North America</div>
                       </div>
                       <div class="row osdays-event">
                         <div class="col-sm-2 col-xs-3"><div class="osd-date">May 4-5, 2020</div></div>
                         <div class="col-sm-4 col-xs-4">OpenStack Day DR Congo</div>
-                        <div class="col-sm-4 col-xs-4">Congo</div>
+                        <div class="col-sm-3 col-xs-3">Congo</div>
                         <div class="col-sm-3 col-xs-2">Central Africa</div>
                       </div>
                     </div>
