@@ -132,7 +132,7 @@ button.btn i, a.btn i {
 }
 
 .summit-hero-landing .summit-hero-logo, .summit-hero-landing-short .summit-hero-logo  {
-    background: url('#{$assets_images_base_url}/Uploads/arrows.svg') center no-repeat;
+    background: url('https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/OSF-Logo-RGB-Initials.svg') center no-repeat;
     background-size:100%;
     height: 2.5em;
     width: 2.5em;
@@ -758,9 +758,9 @@ div.item{
 
 .what-to-expect .text-container .attends li {
     display: inline-block;
-    width: 25%;
+    width: 33%;
     float: left;
-    max-width: 25%;
+    max-width: 33%;
     text-align: center;
     color: #ed1944;
     font-weight: bold;
@@ -1039,7 +1039,6 @@ h3.recap-title {
 .diverse .image {
     background: url("../images/inclusive.jpg") center top no-repeat;
     background-size: cover;
-    min-height: 80vh;
 }
 
 @media all and (max-width: 991px) {
@@ -1522,7 +1521,7 @@ footer .logo {
 }
 
 footer .logo a {
-    background: url("#{$assets_images_base_url}/Uploads/arrows.svg") center no-repeat;
+    background: url("https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/OSF-Logo-RGB-Initials.svg") center no-repeat;
     background-size:100%;
     height: 3.5em;
     width: 3.5em;

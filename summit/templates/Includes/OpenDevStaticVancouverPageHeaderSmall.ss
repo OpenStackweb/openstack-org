@@ -15,9 +15,9 @@
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-main show">
-                    <li class="{$getAboutPageNavClass}">
+                    <!-- <li class="{$getAboutPageNavClass}">
                         <a href="{$getSummitAboutPageLink}" class="drop">About</a>
-                    </li>
+                    </li> -->
                     <% loop $Menu(3) %>
                         <li class="{$LinkingMode}">
                             <a href="{$Link}">$MenuTitle</a>
@@ -26,9 +26,10 @@
                     <li class="link other-summits">
                         <a href="/summit" class="drop">Past Events<i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
                         <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
-                            <li><a href="http://2018.opendevconf.com/">Vancouver 2018</a></li>
-                            <li><a href="http://2017.opendevconf.com/">San Francisco 2017</a></li>
+                            <li><a href="http://2018.opendevconf.com/">OpenDev Vancouver 2018</a></li>
+                            <li><a href="http://2017.opendevconf.com/">OpenDev San Francisco 2017</a></li>
                             <li><a href="https://openstack.org/ptg">PTG</a></li>
+                            <li><a href="/summit/">Open Infrastructure Summits</a></li>
                         </ul>
                     </li>
                     <li class="link button-box">
@@ -49,7 +50,7 @@
     </div>
 
     <a href="{$SummitImage.OriginalURL}" target="_blank" class="photo-credit" title="{$SummitImage.Attribution}">
-        <i class="fa fa-info-circle"></i>
+        <!-- <i class="fa fa-info-circle"></i> -->
     </a>
 
     <div class="row text-wrapper blue">

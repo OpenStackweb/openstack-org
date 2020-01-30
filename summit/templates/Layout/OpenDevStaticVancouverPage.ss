@@ -44,7 +44,7 @@
             <div class="col-md-12 session-box">
                 <h3>Collaborative Discussions and Working Meetings</h3>
                 <ul class="sessions">
-                    <li class="session"> <span class="hpc"></span> Hardware Automation</li>
+                    <li class="session"> <span class="ai"></span> Hardware Automation</li>
                     <li class="session"> <span class="container"></span> Containers in Production</li>
                     <li class="session"> <span class="hpc"></span> Large Scale Ops</li>
                     <li class="session"> <span class="security"></span> Key Challenges for Open Source</li>
@@ -66,14 +66,13 @@
             </div>
             <div class="text-container col-md-5 col-sm-12">
                 <h3 class="title-section">Who Should Attend?</h3>
-                <p>Developers, operators, system architects, and product managers who are actively building and operating open source infrastructure, and Organizations who want to shape the future of
+                <p>Developers, operators, system architects, product managers, and organizations who are actively building and operating open source infrastructure.
                 </p>
 
                 <ul class="attends">
-                    <li><span class="architecture"></span>Architecture &amp; Ops</li>
-                    <li><span class="platform"></span>Platform Developers</li>
-                    <li><span class="bussiness"></span>Business &amp; Strategy</li>
-                    <li><span class="upstream"></span>Upstream Developers</li>
+                    <li><span class="architecture"></span>Architecture<br/>&amp; Ops</li>
+                    <li><span class="platform"></span>Platform<br/>Developers</li>
+                    <li><span class="upstream"></span>Upstream<br/>Developers</li>
                 </ul>
             </div>
         </div>
@@ -92,7 +91,7 @@
                     Sponsoring these events will greatly help ensure the continued growth and success of open infrastructure projects. <strong>A sponsorship prospectus will be available soon</strong>. If your organization is interested in participating and supporting the open infrastructure community, please contact <a href="mailto:events@openstack.org">events@openstack.org</a>.
                 </p>
                 <p style="text-align: center;">
-                    <a class="btn register-btn-lrg" href="mailto:events@openstack.org">Sponsor the Summit <i class="fa fa-arrow-right"></i></a>
+                    <a class="btn register-btn-lrg" href="mailto:events@openstack.org">Sponsor this Event <i class="fa fa-arrow-right"></i></a>
                 </p>
             </div>
         </div>
@@ -107,7 +106,7 @@
             <div class="col-lg-6 col-md-6 col-sm-6 text">
                 <span></span>
                 <h2>Inclusive.<br>Diverse.<br>Open.</h2>
-                <p>We are a diverse community of professionals, and the OpenStack Foundation is dedicated to providing an inclusive and safe Summit experience for everyone. <a href="https://www.openstack.org/events/vancouver-2020/code-of-conduct/" target="_blank">View the Community Code of Conduct</a> for more information.</p>
+                <p>We are a diverse community of professionals, and the OpenStack Foundation is dedicated to providing an inclusive and safe event experience for everyone. <a href="https://www.openstack.org/events/vancouver/code-of-conduct/" target="_blank">View the Community Code of Conduct</a> for more information.</p>
                 <p>&nbsp;</p>
                 <p>&nbsp;</p>
                 <p>&nbsp;</p>
