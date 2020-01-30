@@ -1,25 +1,4 @@
-<style>
-.about-summit-header .summit-title {
-    font-size: 2em;
-}
-    .session {
-    max-width: 25% important!;
-}
-.script {
-    font-family: "Open Sans" !important;
-}
-.session {
-    width:25% important!;
-    max-width:25% important!;
-}
-.academy-wrapper .recap-title {
-    margin: .5em 0 1em;
-}
-.diverse .image {
-    min-height: 70vh;
-}
 
-</style>
 <div class="white about-summit-header">
     <div class="container">
         <div class="row">
