@@ -14,7 +14,7 @@
     </div>
 <% else %>
     <a href="{$Summit.RegistrationLink}/?aff={$Summit.Name}{$Position}" target="_blank" class="btn register-btn-lrg eventbrite-register-link {$ExtraClass}">
-        <% if $RegisterLabel %> {$RegisterLabel} <% else %> {$Top.RegisterButtonLabel} <% end_if %>
+        Register Now 
         <i class="fa fa-arrow-right"></i>
     </a>
 <% end_if %>

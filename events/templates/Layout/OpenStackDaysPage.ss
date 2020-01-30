@@ -10,16 +10,16 @@
     </div>
 </div>
 
-<div class="days-pretext">$EventsYearlyCountText() - <a href="#tab=events_tab" class="deep-link" data-tab="events_tab">find an upcoming OpenStack Day in your region!</a></div>
+<div class="days-pretext"><a href="#tab=events_tab" class="deep-link" data-tab="events_tab">Find an upcoming OpenStack or OpenInfra Day in your region!</a></div>
 
 <div class="software-tab-wrapper">
     <div class="container">
         <ul class="nav nav-tabs project-tabs" id="osdays-tabs" role="tablist">
             <li class="active tab-about_tab nav-item">
-                <a href="#about_tab" class="nav-link" role="tab" data-toggle="tab">About OpenStack Days</a>
+                <a href="#about_tab" class="nav-link" role="tab" data-toggle="tab">About OpenStack & OpenInfra Days</a>
              </li>
             <li class="tab-host_tab nav-item">
-                <a href="#host_tab" class="nav-link" role="tab" data-toggle="tab">Host An OpenStack Day</a>
+                <a href="#host_tab" class="nav-link" role="tab" data-toggle="tab">Host An OpenStack or OpenInfra Day</a>
             </li>
             <li class="tab-events_tab nav-item">
                 <a href="#events_tab" class="nav-link" role="tab" data-toggle="tab">Upcoming Events</a>
@@ -215,28 +215,35 @@
 
             <div role="tabpanel" class="tab-pane fade in" id="events_tab">
                 <div class="inner-osdays">
-                    <h2 class="tab-title">Upcoming OpenStack and OpenStack and OpenInfra days</h2>
+                    <h2 class="tab-title">Upcoming OpenStack and OpenInfra Days</h2>
                     <div class="osdays-events">
-                        <% if $FutureOpenstackDaysEvents(22) %>
-                            <% loop $FutureOpenstackDaysEvents(22) %>
-                            <div class="row osdays-event">
-                                <div class="col-sm-2 col-xs-3"><div class="osd-date">$formatDateRange</div></div>
-                                <div class="col-sm-4 col-xs-4">$Title</div>
-                                <div class="col-sm-3 col-xs-3">$Location</div>
-                                <div class="col-sm-3 col-xs-2 text-right to-top">
-                                    <a href="$EventLink">More Details</a>
-                                    <a class="more-img" href="$EventLink"></a>
-                                </div>
+                      <div class="row osdays-event">
+                        <div class="col-sm-2 col-xs-3"><strong>Date</strong></div>
+                        <div class="col-sm-4 col-xs-4"><strong>Event Name</strong></div>
+                        <div class="col-sm-3 col-xs-3"><strong>Location</strong></div>
+                         <div class="col-sm-3 col-xs-2"><strong>Region</strong></div>
+                      </div>
+                      <div class="row osdays-event">
+                        <div class="col-sm-2 col-xs-3"><div class="osd-date">TBA</div></div>
+                        <div class="col-sm-4 col-xs-4">OpenInfra Day Taiwan</div>
+                        <div class="col-sm-3 col-xs-3">Taipei, Taiwan</div>
+                        <div class="col-sm-3 col-xs-2">APAC</div>
+                      </div>
+                    </div>
+                    <h2 class="tab-title">Mark Your Calendars</h2>
+                    <div class="osdays-events">
+                        <% loop $FutureOpenstackDaysEvents(22) %>
+                        <div class="row osdays-event">
+                            <div class="col-sm-2 col-xs-3"><div class="osd-date">$formatDateRange</div></div>
+                            <div class="col-sm-4 col-xs-4">$Title</div>
+                            <div class="col-sm-3 col-xs-3">$Location</div>
+                            <div class="col-sm-3 col-xs-2 text-right to-top">
+                                <a href="$EventLink">More Details</a>
+                                <a class="more-img" href="$EventLink"></a>
                             </div>
-                            <% end_loop %>
-                        <% else %>
-                            <h3>Sorry, there are no upcoming events listed at the moment.</h3>
-                            <p class="details">
-                                Wow! It really rare that we don't have any upcoming events on display.
-                                Somewhere in the world there's sure to be an OpenStack event in the near future&mdash;
-                                We probably just need to update this list. Please check back soon for more details.
-                            </p>
-                        <% end_if %>
+                        </div>
+                        <% end_loop %>
+
                     </div>
                 </div>
             </div>

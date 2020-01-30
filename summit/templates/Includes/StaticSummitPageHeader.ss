@@ -10,7 +10,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand summit-hero-logo" href="/summit"></a>
+                <a class="navbar-brand summit-hero-logo" href="https://osf.dev"></a>
             </div>
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
