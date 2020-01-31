@@ -10,7 +10,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand summit-hero-logo" href="https://osf.dev"></a>
+                <a class="navbar-brand summit-hero-logo" href="/summit"></a>
             </div>
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -23,12 +23,6 @@
                         <a href="{$Link}">$MenuTitle</a>
                     </li>
                     <% end_loop %>
-
-                    <li class="link button-box">
-                        <a href="https://www.eventbrite.com/e/openstack-summit-november-2018-berlin-tickets-41880169715" class="btn register-btn-lrg">
-                            Get your tickets <i class="fa fa-arrow-right"></i>
-                        </a>
-                    </li>
                 </ul>
             </div>
         </div>

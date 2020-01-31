@@ -10,7 +10,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand summit-hero-logo" href="/events"></a>
+                <a class="navbar-brand summit-hero-logo" href="https://osf.dev"></a>
             </div>
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -20,7 +20,7 @@
                     </li> -->
                     <% loop $Menu(3) %>
                         <li class="{$LinkingMode}">
-                            <a href="{$Link}">$MenuTitle</a>
+                            <!-- <a href="{$Link}"></a> -->$MenuTitle
                         </li>
                     <% end_loop %>
                     <li class="link other-summits">
