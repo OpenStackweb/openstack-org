@@ -292,6 +292,29 @@ class SurveyQuestionTemplate
         return $fields;
     }
 
+
+    /**
+     * Writes all changes to this object to the database.
+     *  - It will insert a record whenever ID isn't set, otherwise update.
+     *  - All relevant tables will be updated.
+     *  - $this->onBeforeWrite() gets called beforehand.
+     *  - Extensions such as Versioned will ammend the database-write to ensure that a version is saved.
+     *
+     *  @uses DataExtension->augmentWrite()
+     *
+     * @param boolean $showDebug Show debugging information
+     * @param boolean $forceInsert Run INSERT command rather than UPDATE, even if record already exists
+     * @param boolean $forceWrite Write to database even if there are no changes
+     * @param boolean $writeComponents Call write() on all associated component instances which were previously
+     *                                 retrieved through {@link getComponent()}, {@link getComponents()} or
+     *                                 {@link getManyManyComponents()} (Default: false)
+     * @return int The ID of the record
+     * @throws ValidationException Exception that can be caught and handled by the calling function
+     */
+    public function write($showDebug = false, $forceInsert = false, $forceWrite = false, $writeComponents = false) {
+        return parent::write($showDebug, $forceInsert, true, $writeComponents);
+    }
+
     /**
      * @return DataList
      */
@@ -347,10 +370,10 @@ class SurveyQuestionTemplate
                 )
                 {
 
-                    $value_ids     = $_REQUEST["Values_{$question->ID}"];
-                    $operator      = $_REQUEST["Operator_{$question->ID}"];
-                    $visibility    = $_REQUEST["Visibility_{$question->ID}"];
-                    $initial_value = $_REQUEST["DefaultValue_{$question->ID}"];
+                    $value_ids        = $_REQUEST["Values_{$question->ID}"];
+                    $operator         = $_REQUEST["Operator_{$question->ID}"];
+                    $visibility       = $_REQUEST["Visibility_{$question->ID}"];
+                    $initial_value    = $_REQUEST["DefaultValue_{$question->ID}"];
                     $boolean_operator = $_REQUEST["BooleanOperatorOnValues_{$question->ID}"];
 
                     if (is_array($value_ids) && count($value_ids) > 0) {
