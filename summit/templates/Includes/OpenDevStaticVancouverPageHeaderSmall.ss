@@ -15,12 +15,12 @@
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-main show">
-                    <!-- <li class="{$getAboutPageNavClass}">
-                        <a href="{$getSummitAboutPageLink}" class="drop">About</a>
-                    </li> -->
+                    <li class="{$getAboutPageNavClass}">
+                        <a href="/opendev-ptg-2020" class="drop">About</a>
+                    </li>
                     <% loop $Menu(3) %>
                         <li class="{$LinkingMode}">
-                            <!-- <a href="{$Link}"></a> -->$MenuTitle
+                            <a href="{$Link}">$MenuTitle</a>
                         </li>
                     <% end_loop %>
                     <li class="link other-summits">
