@@ -1,0 +1,678 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+# paper 5 title
+msgid "2019 OpenStack Foundation Annual Report"
+msgstr ""
+# paper 5 - section 54 title
+msgid "Chairman’s Note"
+msgstr ""
+# paper 5 - section 54 paragraph 668
+msgid "December and January are a favorite time of year for reflection on things past and anticipation for things to come."
+msgstr ""
+# paper 5 - section 54 paragraph 669
+msgid "2019 OSF community achievements, which I will leave to the others in this report to detail, are proof of the successful open source nature of our community in building the open infrastructure software powering today’s and tomorrow’s distributed cloud centered data centers."
+msgstr ""
+# paper 5 - section 54 paragraph 671
+msgid "A super big thank you to all the community contributors, leaders, staff, and users that have all come together to make these 2019 exciting developments possible. In particular, I would like to take this moment to thank the members of the OpenStack Foundation board for its leadership and commitment. Board members during 2019 include: Alan Clark, Allison Randal, Andy Cathrow, Anni Lai, Arkady Kanevsky, Brian Stein, ChangBo Guo (Eric), Christopher Price, Dr. Clemens Hardewig, Daniel Becker, Egle Sigler, Fred Li, Imad Sousou, Jeff Moyer, Johan Christenson, Joseph Wang, JunWei Liu, Mark McLoughlin, Mark Skarpness, Monty Taylor, Prakash Ramchandran, Rob Esker, Ryan Van Wyk, Ryan Beisner, Ruan HE, Sean McGinnis, Shane Wang, Tim Bell and Vijoy Pandey."
+msgstr ""
+# paper 5 - section 54 paragraph 672
+msgid "2019 success places OSF in a unique and exciting position for 2020 and the future. We can all be assured that challenges will be had, achievements made, and discoveries found throughout the coming year. I have strong confidence that we, as a community, will continue to deliver the open infrastructure needed to power, scale, and diversify tomorrow's cloud technology as we continue to strategically align with the transformational changes in tomorrow’s infrastructure needs."
+msgstr ""
+# paper 5 - section 54 paragraph 674
+msgid "Two days ago a 4 year old and I were conversing near a Bluetooth enabled speaker system. I mentioned to him that we should play some holiday music. He quickly turned toward the speaker and boldly said, “Speaker, play my music list”. At that moment it struck me that today’s user expectations have truly gone from simply connected to being smartly connected. Long gone are the days of the unconnected. Everything being smartly connected places requirements that the infrastructure be intelligent! That’s our challenge and anticipation for 2020. As we look to 2020 for project plans and new project ideas let’s build intelligent infrastructure!"
+msgstr ""
+# paper 5 - section 54 paragraph 675
+msgid "Here’s to an exciting 2020 together as a community!"
+msgstr ""
+# paper 5 - section 54 paragraph 683
+msgid "Alan Clark, Chairman of the OpenStack Foundation Board of Directors"
+msgstr ""
+# paper 5 - section 55 title
+msgid "A Letter from the Executive Director"
+msgstr ""
+# paper 5 - section 55 paragraph 696
+msgid "A little over two years ago, we recognized that the community of the OpenStack Foundation had grown beyond a sole focus on OpenStack and had come to care about a broader ecosystem of open source projects. We embarked on a journey to find what role OSF should have in spreading the OpenStack way of collaborating and how the strengths and capabilities of the OSF could help other software communities grow and thrive."
+msgstr ""
+# paper 5 - section 55 paragraph 697
+msgid "Our goal was to do it in a focused way, oriented around emerging markets that were putting new demands on underlying infrastructure. We also wanted to stay true to our values, showing new communities the benefits of the <a href=\"https://osf.dev/about/four-opens/\">Four Opens</a>, while focusing on a pragmatic approach that prioritized the production of software."
+msgstr ""
+# paper 5 - section 55 paragraph 698
+msgid "This year, we saw those initial efforts reach a new level of maturity with the confirmation of three pilot projects, software releases from all projects, a new events model with the creation of the combined Open Infrastructure Summit and PTG, and increased adoption of our communities’ software. These results have shown that our approach works."
+msgstr ""
+# paper 5 - section 55 paragraph 699
+msgid "The confirmation of the pilot projects validated their progress and also the process that our community developed. I believe that process and structure strikes a nice balance between being lightweight enough to allow variation between individual projects while also ensuring a consistent level of openness in our communities."
+msgstr ""
+# paper 5 - section 55 paragraph 700
+msgid "These confirmations also garnered press coverage and started to raise awareness of our OSF expansion. And the new projects have opened up opportunities for engagement with many new companies, including some of the largest technology companies in the world, who have not historically been involved in OpenStack directly."
+msgstr ""
+# paper 5 - section 55 paragraph 701
+msgid "Going forward, there are improvements and growth possible in each of our projects, and our staff is looking at taking the lessons learned in 2018-2019 to create more documentation around our approach and model."
+msgstr ""
+# paper 5 - section 55 paragraph 702
+msgid "Within the OSF ecosystem, we held many in-person meetings this year to discuss our progress and strategy and the value our community brings to the open source infrastructure world. These meetings included every OSF Platinum and Gold Member, as well as new organizations around the world. In some cases these were newer organizations like Troila, who ultimately joined as a new Gold Member. Other times we worked with diverse users such as Baidu, who documented their large scale usage in a <a href=\"https://katacontainers.io/collateral/ApplicationOfKataContainersInBaiduAICloud.pdf\">40-page whitepaper</a>, or <a href=\"https://model-engineers.com/en/company/references/success-stories/volvo-cars/\">auto manufacturers</a> who use and contribute to Zuul. We were also able to participate in joint events throughout the year, speaking to thousands of employees, partners and customers, giving us the opportunity to spread our key messages even farther. This is definitely an activity we will continue into 2020."
+msgstr ""
+# paper 5 - section 55 paragraph 703
+msgid "We did all of this against a backdrop of global uncertainty amid a shifting geopolitical, technology and open source landscape. During one of the most significant “trade wars” in recent history, we threw a successful global Summit+PTG in Shanghai with attendees from 50 countries. The staff of the Foundation pulled together in an incredible way to deliver on our commitments to the communities we serve. While it definitely wasn’t an easy year, thanks to their efforts, it was a good year. As we look forward to 2020, I see enormous opportunities to build on the experience of the last few years to continue to grow our software communities, our commercial ecosystems and the entire open source movement."
+msgstr ""
+# paper 5 - section 57 title
+msgid "OpenStack Foundation Project Updates"
+msgstr ""
+# paper 5 - section 57 paragraph 583
+msgid "Airship Project Update"
+msgstr ""
+# paper 5 - section 57 paragraph 584
+msgid "<a href=\"https://www.airshipit.org/\">Airship</a> established incredible momentum in 2019, including confirmation by the OSF as a top-level project in October, a crucial stage of Airship’s maturity. The confirmation as a top-level project signifies the community’s many accomplishments since being announced as a pilot project supported by the OSF in May 2018, namely:"
+msgstr ""
+# paper 5 - section 57 paragraph 586
+msgid ""
+"<ul><li>Airship's deep involvement with the OSF community</li>"
+"<li>Active participation in both Open Infrastructure Summits and Project Teams Gathering (PTG)</li>"
+"<li>Embrace of the four opens with source code hosted on OpenStack infrastructure</li>"
+"<li>Open governance and mature operation with an open weekly design meeting</li>"
+"<li>Code reviews through OpenStack-hosted Gerrit</li>"
+"<li>Active participation in a Foundation-wide forum session on establishing open governance</li>"
+"</ul>"
+msgstr ""
+# paper 5 - section 57 paragraph 616
+msgid "<img title=\"\" src=\"https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/Uploads/growth-of-community-201912.png?r\" alt=\"\">"
+msgstr ""
+# paper 5 - section 57 paragraph 587
+msgid "Airship is a robust mechanism for cloud operators who want to embrace containers as the new unit of infrastructure delivery at scale to manage the entire lifecycle of data center infrastructure using a unified, declarative, fully containerized, cloud native platform. Airship 1.0 was released at the Open Infrastructure Summit Denver in April. Its enterprise-readiness includes enhanced platform security, resiliency and platform deployment tooling. Airship 2.0 design and development was kicked off post 1.0 release. Its technical roadmap includes leveraging meta3-io for bare metal provisioning, the Cluster-API for Kubernetes bootstrapping and lifecycle management, Containerized Network Function (CNF) support, leverage cloud native workflow management (e.g. Argo), Helm v3 and Armada Operator, edge use cases, and YAML management improvement, etc. The picture below represents the target Airship 2.0 architecture:"
+msgstr ""
+# paper 5 - section 57 paragraph 677
+msgid "<img src=\"https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/Uploads/AirshipDiagram2.png\" alt=\"AirshipDiagram2\" title=\"\">"
+msgstr ""
+# paper 5 - section 57 paragraph 590
+msgid "Key highlights in 2019"
+msgstr ""
+# paper 5 - section 57 paragraph 690
+msgid "<img src=\"https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/Uploads/AS-960x260.jpg\" alt=\"\" title=\"\">"
+msgstr ""
+# paper 5 - section 57 paragraph 593
+msgid ""
+"<ul><li>Airship 1.0 released in April 2019</li>"
+"<li>Confirmed as a top-level project supported by the OpenStack Foundation in October 2019</li>"
+"<li>A continued trend of community growth release after release of OpenStack</li>"
+"<li>Enhancements to Airship including:</li>"
+"<ul><li>Full resiliency against control plane node failure (to 1 node)</li>"
+"<li>Added support for OpenStack Stein deployment via Airship (Train being developed now)</li>"
+"<li>Per patch set virtualized deployment and testing</li>"
+"<li>End to end encryption on the wire and at rest</li>"
+"</ul><li>The adoption of formal governance – and establishing both a Technical and Working Committee</li>"
+"<li>Regular blog posts of Airship 2.0 evolution</li>"
+"<li>Monthly newsletter to potential supporters of Airship community</li>"
+"</ul>"
+msgstr ""
+# paper 5 - section 57 paragraph 594
+msgid "The Airship team is excited to share the future plans – a complete rebuild of Airship core code migration from Python to Golang with an alpha release planned for early 1Q 2020, a beta release late 2Q 2020, and a full 2.0 release in 2020. In addition, Airship 2.0 will penetrate into more industry domains such as common telco NFVi and 5G testbed etc."
+msgstr ""
+# paper 5 - section 57 paragraph 597
+msgid "What to look forward to with Airship 2.0"
+msgstr ""
+# paper 5 - section 57 paragraph 602
+msgid ""
+"<ul><li>Support smaller deployments</li>"
+"<li>Workflows will be fully declarative</li>"
+"<li>Adopting upstream entrenched projects</li>"
+"<li>Simpler document creation and management (Airship YAML was hard)</li>"
+"<li>An improved flow for executing updates (changing the tires while the car is moving is hard)</li>"
+"<li>Penetrate into NFVi domain, enable the reference implementation of Common Telco NFVi (CNTT) and support its VNF certification.</li>"
+"<li>Ericsson and Dell are donating hardware for Airship community lab to leverage as 3rd-party CI</li>"
+"<li>Empower the 5G testbed by Ericsson</li>"
+"</ul>"
+msgstr ""
+# paper 5 - section 57 paragraph 603
+msgid "Airship Channels and Meetings"
+msgstr ""
+# paper 5 - section 57 paragraph 605
+msgid ""
+"<ul><li>IRC: #airshipit on Freenode</li>"
+"<li><a href=\"http://twitter.com/airshipproject\" target=\"_blank\">Twitter</a></li>"
+"<li><a href=\"https://airshipit.org\" target=\"_blank\">Website</a></li>"
+"<li><a href=\"https://www.youtube.com/playlist?list=PLKqaoAnDyfgp8YjZbzjVrmZBJR9thV27y\" target=\"_blank\">YouTube</a></li>"
+"<li><a href=\"http://lists.airshipit.org/cgi-bin/mailman/listinfo\" target=\"_blank\">Mailing Lists</a> (discuss and announce)</li>"
+"<li>Developer Meetings: Tuesdays 9 AM CST in #airshipit on Freenode</li>"
+"<li>Design Meetings: Thursdays, 10:00am-11:30am CST (see mailing list for invitation)</li>"
+"<li>Special Interest Groups:</li>"
+"<ul><li>YAML: Mondays, 10:00am-11:00am CST</li>"
+"<li>Bootstrap: Wednesdays, 9:00am-10:00am CST</li>"
+"<li>UI: Fridays, 12:00-1:00pm CST</li>"
+"</ul></ul>"
+msgstr ""
+# paper 5 - section 57 paragraph 541
+msgid "Kata Containers"
+msgstr ""
+# paper 5 - section 57 paragraph 542
+msgid "Kata Containers seamlessly delivers the speed of containers with the security of virtual machines. Kata Containers became a pilot project in December 2017, in conjunction with the OSF’s evolution from being the home for OpenStack to becoming the home of open infrastructure collaboration. In April of 2019, Kata Containers was the first OSF pilot project to graduate to become an official OSF open infrastructure project. This milestone acknowledged the project's strategic relevance, well-defined governance procedures, commitment to technical best practices and open collaboration, and most importantly, an actively engaged ecosystem of developers and users"
+msgstr ""
+# paper 5 - section 57 paragraph 543
+msgid "The project enjoys a global, engaged and growing community as evidenced by its 2019 stats: 3,164 commits made by 110 authors representing 20+ companies."
+msgstr ""
+# paper 5 - section 57 paragraph 691
+msgid "<a> </a><img src=\"https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/Uploads/KC-960x261.jpg\" alt=\"\" title=\"\">"
+msgstr ""
+# paper 5 - section 57 paragraph 544
+msgid "2019 was a breakthrough year with production deployments of Kata Containers by some of the world's largest cloud service providers, notably in China and North America. In November of 2019, Baidu won the Superuser award at the Open Infrastructure Summit for its numerous production deployments of Kata in both their cloud as well as edge service offerings. More than 20,000 skills from 3,000 developers run in Kata Containers as part of Baidu’s Cloud Function Computing offering. Huawei also has multiple production deployments of Kata Containers in both their public cloud infrastructure as well as their Enterprise Intelligence Service, and in Alibaba and its related company Ant Financial, Kata Containers has been deployed in Alibaba's Cloud products and services, such as Edge Node Service (ENS), and is being tested for more cloud and financial applications. On the innovation front, Tencent is pioneering massive scaling of secure cloud gaming with Android in Kata Containers. Finally, in North America, Kata has been deployed by a leading Edge service provider as well as a popular software build services provider."
+msgstr ""
+# paper 5 - section 57 paragraph 545
+msgid "Although cloud service providers (CSPs) represent the early adopters of Kata Containers, in order to expand further into enterprise, support and integration by operating system vendors (OSVs) is essential. To that end, the project benefits from the deep technical expertise of developers from Red Hat (virtio-fs effort), SUSE (OBS and SLES integration) and Canonical (snap image, Charmed K8S integration). The snap image for Kata Containers in the Snapcraft store is up to nearly 3,400 weekly active users."
+msgstr ""
+# paper 5 - section 57 paragraph 547
+msgid "The Kata Containers Architecture Committee also went through two election cycles in February and Septermber 2019. Now the project is led by Eric Ernst (Intel), Samuel Ortiz (Intel), Xu Wang (Ant Financial, a related company of Alibaba), Justin He (ARM) and Haomin Cai (Huawei). The Architecture Committee members ensure that Kata Containers stays true to its goal of open collaboration and innovation around container speed and security."
+msgstr ""
+# paper 5 - section 57 paragraph 549
+msgid "Kata Containers development continues to thrive in 2019. With developers in Asia, the Americas and Europe, activity in the project's git and slack channel occurs around the clock. Developers with questions or issues genearally receive speedy and thorough responses. Since the 1.5 release in January of 2019, the project has delivered a steady beat of releases to both maintain stability and introduce new features. The 1.5 release included Firecracker hypervisor support, IBM s390 architecture support and a new method to integrate with containerd that greatly simplified Kata Containers architecture. The 1.6 release added open tracing support. The 1.7 release introduced an early preview of virtio-fs which was purposely designed and built for Kata Containers as a replacement of 9pfs. The 1.8 release focused on hypervisor improvements including qemu 4.0 and Firecracker jailer support, adding extra security isolation for the virtual machine manager (VMM) on the host. The 1.9 release towards the end of 2019 included Firecracker virtio-vsock support, rootless Kata with podman, experimental support for the ACRN hypervisor, and per pod custom configuration annotations."
+msgstr ""
+# paper 5 - section 57 paragraph 550
+msgid "Two OSF-sponsored open source hackathons were held in China in 2019 and Kata Containers was a featured project in both. It attracted developers from Alibaba, Baidu, Huawei and Tencent. Participants openly shared their adoption plans and feedback on the Kata Containers roadmap. The Kata Containers community continues to work closely with the OCI (Open Container Initiative) and Kubernetes communities to ensure compatibility. The Pod Overhead feature developed by Kata community was merged by Kubernetes as an alpha feature, to account for the resources consumed by the pod infrastructure on top of the container requests &amp; limits. Following in the footsteps of RuntimeClass, Pod Overhead makes Kubernetes more Kata friendly."
+msgstr ""
+# paper 5 - section 57 paragraph 551
+msgid "Throughout 2019, in order to build awareness and interest for the project, the Kata Containers community presented technical updates and hosted gatherings at several global events including KubeCon + CloudNativeCon Barcelona, Open Infrastructure Summit Denver, KubeCon Shanghai and the Open Infrastructure Summit Shanghai. Kata Containers was also featured at several OpenInfra Days, OpenStack Days and other container-focused meetups around the world."
+msgstr ""
+# paper 5 - section 57 paragraph 552
+msgid "Looking ahead to 2020, the Kata community will focus on supporting its growing user community, driving innovation with the Kata 2.0 roadmap, and continuing open collaboration with the rapidly expanding container ecosystem."
+msgstr ""
+# paper 5 - section 57 paragraph 558
+msgid ""
+"The code is hosted on Github under the Apache 2 license. Learn about the project, how to contribute and support the community at katacontainers.io. Join these channels to get involved:<ul><li>GitHub: <a href=\"&quot;https:/github.com/kata-containers\">github.com/kata-containers</a></li>"
+"<li>Slack: <a href=\"https://bit.ly/katacontainersslack\">bit.ly/katacontainersslack</a></li>"
+"<li>IRC: #kata-dev on Freenode</li>"
+"<li>Mailing list <a href=\"https://lists.katacontainers.io\">lists.katacontainers.io</a></li>"
+"</ul>"
+msgstr ""
+# paper 5 - section 57 paragraph 563
+msgid "OpenStack Updates"
+msgstr ""
+# paper 5 - section 57 paragraph 565
+msgid "A total of 1,518 unique change authors approved more than 47,500 changes and published two major releases, code named Stein and Train (due to our undying love of Trains). We started to work on Ussuri, our next release, to be delivered in 2020. In 2018, we introduced the \"Extended Maintenance\" concept, a period on which bugfixes can be accepted for projects following it (but these won't produce further releases). As of today, Ocata, Pike, and Queens are in extended maintenance."
+msgstr ""
+# paper 5 - section 57 paragraph 692
+msgid "<img title=\"\" src=\"https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/Uploads/OS-960x260new.jpg?r\" alt=\"\">"
+msgstr ""
+# paper 5 - section 57 paragraph 566
+msgid "Like in 2018, the component project teams completed work on stability, performance, and operational/usability improvements. They also worked on themes related to integrating with other OpenStack components, other OpenStack Foundation Open Infrastructure Projects, and projects from adjacent communities, for example Kubernetes or Ansible. We have introduced a deployment tools capabilities map, to make it even easier for new users to select their deployment tool of choice."
+msgstr ""
+# paper 5 - section 57 paragraph 567
+msgid "In addition to component-specific work, we continued to improve our OpenStack-wide processes by adding pop up teams next to goals, in order to have more flexibility on achieving large scale changes. During 2019, we have added two pop up teams \"Image Encryption\" (implementing encryption and decryption of images and the handling of those images in OpenStack) and the \"Secure Default Policies\" (consistent policies across OpenStack). This is in addition to our OpenStack wide goals: we made sure all the projects can render their documentation into PDFs, ensured that OpenStack works and is tested in IPv6 only environments (not only dual stacks!). We are also making sure the community is moving up in the python versions with an ultimate removal of python2 of our development pipelines in 2020."
+msgstr ""
+# paper 5 - section 57 paragraph 568
+msgid "The Technical Committee (TC) itself has evolved in 2019. We plan to reduce our members to 9 in 2020. Over the whole year, Chris Dent, Davanum Srinivas, Sean McGinnis, Doug Hellmann, Jeremy Stanley, Lance Bragstad, and Julia Kreger left the TC, to make way for first-time members Alexandra Settle, Jim Rollenhagen, Rico Lin, Kendall Nelson, Kevin Carter, Nate Johnston, and Jay Bryant."
+msgstr ""
+# paper 5 - section 57 paragraph 715
+msgid "2019 saw the beginnings of a transition from OpenStack project infrastructure hosting into OpenDev project hosting. This process will eventually separate our project hosting tools from OpenStack itself so that they may be more clearly reused by other projects. We expect to make significant progress on this transition in 2020."
+msgstr ""
+# paper 5 - section 57 paragraph 569
+msgid "With the input from the OpenStack Foundation board, the OpenStack TC updated its \"help wanted list\" to actively track where business and leadership opportunities can be for companies willing to invest in OpenStack."
+msgstr ""
+# paper 5 - section 57 paragraph 570
+msgid "During 2019, the OpenStack project infrastructure was renamed opendev.org, to make it clearer it can be used beyond OpenStack. Using Opendev namespaces, we now have a clear separation between official OpenStack projects and non-OpenStack open source projects developed under the same development tooling. In terms of project teams, the most visible change in 2019 was the extraction of Placement from the Nova team. Regarding SIGs, we are launching a \"Multi-architecture\" SIG (including the orginal work from the PowerVM project team which became the PowerVM SIG...), Ansible SIG, Containers SIG, Auto-scaling SIG (which is planned to merge with the existing self-healing SIG to form a new Automation SIG in the near future), Large Scale SIG, Technical Writing SIG, Public Cloud SIG (migrated from Public Cloud WG), Bare Metal SIG, and Edge Computing SIG (renamed from FEMDC SIG). This year, we closed down the Upgrade SIG, as we consider their work achieved and completed. This year, a lot of work was done to help creating and maintaining new SIGs (thanks to the \"Meta SIG\" team). This includes more guidelines and reference documents. As usual, the TC members will continue their work to expose SIGs broadly, to ensure all the different profiles and interests in OpenStack are efficiently represented, working, and collaborating together."
+msgstr ""
+# paper 5 - section 57 paragraph 576
+msgid "In 2019, the OpenStack User Committee (UC) brought onboard several new members including John Studarus (February electee), Belmiro Moreira (February electee), Mohamed Elsakhawy (August electee), and Jaesuk Ahn (September electee). Amy Marrich was re-elected to continue their service on the UC."
+msgstr ""
+# paper 5 - section 57 paragraph 577
+msgid "In this year we worked closely with the OpenStack Foundation staff to adopt new policies to better support the user groups. The migration of the user groups onto Meetup.com has allowed us to better support groups through local leadership transitions and reduce technical headaches. We also smoothed the process for new user groups to come online and be supported by the Foundation increasing the reach in these new and emerging regions of the world."
+msgstr ""
+# paper 5 - section 57 paragraph 578
+msgid "We continue to identify ways in which the new technologies developed can be promoted and evangelized. We believe the current Ambassador program, which is currently focused on supporting the user groups, can either be modified, or a new program created to help support those individuals actively promoting and evangelize our open source offerings."
+msgstr ""
+# paper 5 - section 57 paragraph 579
+msgid "The UC took an active role in updating the SIG and Working Group records to better reflect the leadership, goals, and status of these entities. We feel that having accurate records allows those looking to get involved to readily find the active communities."
+msgstr ""
+# paper 5 - section 57 paragraph 580
+msgid "The UC has been investigating reducing its membership from five (5) to three (3) members with plans to have the membership rules modified in time for the February 2020 election. We believe having fewer UC members will make it easier to keep the UC fully elected."
+msgstr ""
+# paper 5 - section 57 paragraph 625
+msgid "Starling X Project Update"
+msgstr ""
+# paper 5 - section 57 paragraph 627
+msgid "StarlingX is a pilot project supported by the OpenStack Foundation that was announced May 2018. The project integrates well-known open source project including OpenStack, Ceph, Kubernetes, and more to create a cloud platform that is fine tuned for edge and IoT use cases."
+msgstr ""
+# paper 5 - section 57 paragraph 629
+msgid "During 2019 the community was working on creating a fusion between OpenStack and Kubernetes services to provide infrastructure software that creates a flexible environment to support virtual, containerized, or bare metal workloads."
+msgstr ""
+# paper 5 - section 57 paragraph 631
+msgid "The StarlingX community put out two major releases of the software during the year: StarlingX 2.0 (<a href=\"https://docs.starlingx.io/releasenotes/r2_0_1_release.html\">latest version is 2.0.1</a>) and <a href=\"https://docs.starlingx.io/releasenotes/r3_release.html\">StarlingX 3.0</a>. The 2.0 release introduced fundamental changes to the architecture including containerizing OpenStack and other services to provide more flexibility, robustness, and increased manageability. Besides architectural changes community members were also focusing on features to improve security and performance including to start work on creating a performance testing framework to ensure maintaining high standards on an ongoing basis. The 3.0 release add a crucial component called Distributed Cloud architecture to provide synchronization across edge sites. The feature is in line with the Distributed Control Plane scenario of the OSF Edge Computing Group’s <a href=\"https://wiki.openstack.org/wiki/Edge_Computing_Group/Edge_Reference_Architectures\">Reference Architecture models</a>."
+msgstr ""
+# paper 5 - section 57 paragraph 632
+msgid "The latest release is also integrating the Train version of OpenStack. This was an important step as with this step StarlingX doesn’t carry more enhancements to the project as extra patches and the team members are actively working with the OpenStack community on further improvements and new functionality upstream."
+msgstr ""
+# paper 5 - section 57 paragraph 633
+msgid "The community has reached another milestone by having a fully elected leadership. The Technical Steering Committee (TSC) had two elections replacing half of the group each time while Project Leads and Technical Leads got elected during the second half of the year. Elections will be held on a regular basis going forward."
+msgstr ""
+# paper 5 - section 57 paragraph 635
+msgid "Further high priority items included community building and outreach. It is very important for the project to lower the boundaries of entry and make sure that it is easy for newcomers to find entry points. The community has been actively working on improving documentation and creating materials to guide new contributors. The project held a Contributor Meetup in the USA and <a href=\"https://www.starlingx.io/blog/starlingx-meetup-september-2019.html\">further meetups</a> and meetup for release 2.0 and hackathons in China last year and community members also took advantage of the Project Team Gatherings as well as the Open Infrastructure Summits and Forums to have face to face discussions as well as to onboard newcomers. Some of the team members put together a <a href=\"https://www.starlingx.io/blog/starlingx-openinfra-summit-workshop-2019.html\">hands-on workshop</a> which guides participants through installing StarlingX and trying out some of the features it provides. Community members ran the training at various OSF and industry events throughout the year. The infrastructure is running on hardware donated by Packet.com."
+msgstr ""
+# paper 5 - section 57 paragraph 693
+msgid "<img src=\"https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/Uploads/SX-960x260.jpg\" alt=\"\" title=\"\">"
+msgstr ""
+# paper 5 - section 57 paragraph 637
+msgid "The project had 3359 changes committed by 147 authors from more than 10 organizations during the year."
+msgstr ""
+# paper 5 - section 57 paragraph 638
+msgid ""
+"The code is hosted on Github under the Apache 2 license. Learn about the project, how to contribute and support the community at starlingx.io. Join these channels to get involved:<ul><li><a href=\"https://git.starlingx.io/cgit\">GitHub</a></li>"
+"<li>IRC: #starlingx on Freenode</li>"
+"<li><a href=\"https://lists.starlingx.io\">Mailing list</a></li>"
+"</ul>"
+msgstr ""
+# paper 5 - section 57 paragraph 639
+msgid "Zuul Project Update"
+msgstr ""
+# paper 5 - section 57 paragraph 640
+msgid "Zuul is an open source CI/CD platform designed for test-driven open source projects and software development organizations who need to gate against multiple projects and systems before landing a single patch. Since 2012, Zuul has been proven at scale as a critical part of the OpenStack development process. As more users and use cases emerged, the team has been decoupling Zuul from OpenStack-specific systems. 2018's Zuul version 3.0 release was a major landmark in making Zuul generally usable outside of the OpenStack project. In 2019 Zuul has taken general usability even futher, focusing on adding features for a variety of code review systems, cloud resource providers, and container based testing workflows."
+msgstr ""
+# paper 5 - section 57 paragraph 641
+msgid "More than 1,000 changes were made to Zuul in 2019. In an effort to ensure new features and bug fixes reach Zuul users quickly, Zuul has been releasing often, publishing 17 releases in 2019. In this collection of releases support was added for Pagure code review system, AWS cloud resource provider in Nodepool, OpenShift cloud resource provider in Nodepool, improvements to live console log streaming, build dashboards and log navigation and much more."
+msgstr ""
+# paper 5 - section 57 paragraph 642
+msgid "Zuul version 3.7.0 added support for multiple versions of Ansible. With current Zuul deployed, users can select which version of Ansible they want their jobs to run with out of Ansible versions 2.6, 2.7, 2.8, and 2.9."
+msgstr ""
+# paper 5 - section 57 paragraph 644
+msgid "Zuul's standard library saw a major addition of container aware jobs. These standard container base jobs allow Zuul users to do speculative gating of their container images in addition to their source repositories. This feature helps to ensure that the images you deploy to production are identical to those tested and known to work while still having all of the benfits of speculative merge gating."
+msgstr ""
+# paper 5 - section 57 paragraph 694
+msgid "<img title=\"\" src=\"https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/Uploads/Zuul-960x260.jpg\" alt=\"\">"
+msgstr ""
+# paper 5 - section 57 paragraph 645
+msgid "We see these improvements in production, where Zuul is helping a variety of users at different scales produce and deploy quality software. Good Money's 900 jobs a month enable reliable software deployments. At France's Internet flea market, leboncoin, 60,000 jobs a month help you find forgotten treasure. OpenDev's Zuul ran more than 2 million jobs to help produce the OpenStack Train release."
+msgstr ""
+# paper 5 - section 57 paragraph 646
+msgid "Ansiblefest and Gerrit User summit were important events for us in 2019. Not only have we continued to see interest in Zuul from users at Ansiblefest, but Vexxhost launched the first known Zuul as a Service service there. At Gerrit User Summit we discovered Volvo is a happy Zuul user. We have also begun collaborating with the Gerrit project to add Gerrit Checks API support to Zuul. Our goal is to have a Zuul running to help gate the Gerrit project once this feature is added."
+msgstr ""
+# paper 5 - section 57 paragraph 647
+msgid "Looking ahead, the Gerrit Checks API is only one of many features we would like to add to Zuul. From an integration standpoint Gitlab and Bitbucket support is under active development, changes have begun to merge to add Google Compute Engine support to Nodepool, and Microsoft Azure driver work has begun. We still have plans to remove the current single point of failure for the scheduler process and manage job and queue state with the distributed database. This will make it easier to run Zuul reliably without downtime."
+msgstr ""
+# paper 5 - section 57 paragraph 648
+msgid "All of this is possible through the work of our global community. We are proud to say we have contributors from across the globe, including Africa, Asia, Australia, North and South America, and Europe. We thank them for helping to make Zuul possible."
+msgstr ""
+# paper 5 - section 57 paragraph 650
+msgid ""
+"Zuul is free and open source software licensed under the Apache 2 license. If you would like to get involved, join us:<ul><li><a href=\"https://zuul-discuss@zuul-ci.org\">On the mailing list</a></li>"
+"<li>On IRC: #zuul on Freenode</li>"
+"<li><a href=\"https://review.opendev.org/#/q/project:zuul/zuul+OR+project:zuul/zuul-jobs+OR+project:zuul/nodepool\">Code review</a></li>"
+"</ul>"
+msgstr ""
+# paper 5 - section 58 title
+msgid "Press and Analyst Highlights"
+msgstr ""
+# paper 5 - section 58 paragraph 654
+msgid "Public relations efforts are led by a distributed team of professionals in the United States, Europe, and Asia. This team engaged analysts and journalists worldwide in dialogue, proactively delivering news, commentary, and contributed byline content for both the Foundation and for its individual projects. Community news highlights are available at the <a href=\"https://openstack.org/news\">OpenStack Foundation news page</a>."
+msgstr ""
+# paper 5 - section 58 paragraph 655
+msgid "Media Relations"
+msgstr ""
+# paper 5 - section 58 paragraph 659
+msgid ""
+"Key media relations initiatives included the following:<ul><li>OSF Software releases:"
+"<ul><li>OpenStack Stein and Train releases;</li>"
+"<li>Airship 1.0</li>"
+"<li>StarlingX 2.0</li>"
+"</ul></li>"
+"<li>The OSF and China Electronics Standardization Institute <a href=\"news/view/442/openstack-foundation-and-china-electronics-standardization-institute-create-partnership-to-advance-openstack-in-china\">created a partnership</a> to advance OpenStack in China</li>"
+"<li>Agendas for the Open Infrastructure Summits in <a href=\"news/view/414/agenda-for-open-infrastructure-summit-denver-reveals-how-users-combine-vast-array-of-open-source-technologies-for-advanced-applications\">Denver</a> and <a href=\"news/view/433/china-unionpay-china-railway-walmart-among-open-infrastructure-users-sharing-open-source-best-practices-new-ideas-at-shanghai-summit\">Shanghai</a>;</li>"
+"<li>The addition of <a href=\"news/view/443/openstack-board-elects-troila-technology-as-gold-member-of-the-foundation\">Troila as a Gold board member</a> of the OpenStack Foundation;</li>"
+"<li><a href=\"https://superuser.openstack.org/articles/superuser-award-denver/\">Vexxhost</a> and <a href=\"https://superuser.openstack.org/articles/baidu-wins-superuser-award-at-open-infrastructure-summit-shanghai/\">Baidu</a> won the Superuser Awards at the Denver and Shanghai Summits respectively;</li>"
+"<li>Confirmation of <a href=\"news/view/426/kata-containers-and-zuul-are-first-pilot-projects-confirmed-as-toplevel-open-infrastructure-projects-by-the-openstack-foundation-board\">Kata Containers, Zuul</a>, and <a href=\"news/view/440/airship-delivers-openstack-and-kubernetes-at-scale-earns-confirmation-as-toplevel-osf-project\">Airship</a> as Top-Level Open Infrastructure Projects of the OpenStack Foundation; and</li>"
+"<li><a href=\"news/view/441/openstack-project-builds-momentum-in-greater-china-as-adoption-of-open-infrastructure-soars\">Momentum of OSF projects</a> in the broad open infrastructure and cloud IT landscape</li>"
+"</ul>"
+msgstr ""
+# paper 5 - section 58 paragraph 662
+msgid "Analysis shows that OpenStack Foundation news coverage comprised more than 41,500 total placements in 2019 with a potential reach of 71 billion. Media coverage was more than 93% positive or neutral. (Social media coverage accounted for an additional 129,000 mentions, with more than 86% positive or neutral). Media coverage was distributed globally (54% APAC, 34% North America, 12% Europe, by volume), with APAC coverage surging this year as a result of a year-long emphasis on the Open Infrastructure Summit in Shanghai."
+msgstr ""
+# paper 5 - section 58 paragraph 663
+msgid "As evidenced by the highlights shared below, media attention has shifted from questions about OpenStack’s future to an active interest in use cases and the progress of the other projects supported by the OpenStack Foundation."
+msgstr ""
+# paper 5 - section 58 paragraph 664
+msgid "Analyst Relations"
+msgstr ""
+# paper 5 - section 58 paragraph 665
+msgid "The OpenStack Foundation conducted 22 private briefing sessions with analysts in 2019 in addition to hosting a half-day Analyst Briefing and open roundtables at the Open Infrastructure Summit in Denver as well as a press conference and roundtables at the Open Infrastructure Summit in Shanghai."
+msgstr ""
+# paper 5 - section 58 paragraph 666
+msgid "Analyst coverage of OpenStack Foundation projects in 2019 portrayed a factual and positive tone for the most part, peaking with the publication of OpenStack Market Monitor by 451 Research in September 2019."
+msgstr ""
+# paper 5 - section 58 paragraph 667
+msgid "Here are some key excerpts from 451 Research's report:"
+msgstr ""
+# paper 5 - section 58 paragraph 670
+msgid ""
+"<ul><li>The OpenStack market is projected to reach $7.7 billion USD by 2023;</li>"
+"<li>In APAC, the OpenStack market is expected to grow 32% in the next 3 years, accounting for 1/3 of the global OpenStack market;</li>"
+"<li>Addressing what is projected by 451 Research to be a combined $12 billion market in 2023 for OpenStack and Kubernetes, StarlingX and Airship combine these two technologies to tackle use cases like edge computing.</li>"
+"</ul>"
+msgstr ""
+# paper 5 - section 58 paragraph 673
+msgid "For more information about analyst coverage of OpenStack Foundation projects, visit the <a href=\"analysts\">OSF analysts page</a>."
+msgstr ""
+# paper 5 - section 59 title
+msgid "Open Infrastructure Community Highlights"
+msgstr ""
+# paper 5 - section 59 paragraph 585
+msgid "OSF User Groups"
+msgstr ""
+# paper 5 - section 59 paragraph 581
+msgid "OSF user groups are an integral part of the community, bringing together OSF project users, operators, and developers all over the world to discuss common problems, use cases, and even workshops in casual or more formal settings."
+msgstr ""
+# paper 5 - section 59 paragraph 582
+msgid "In early 2019, we moved all of our official User Groups to <a href=\"https://www.meetup.com/pro/osf\">Meetup Pro</a>, which allows them more visibility and ease of planning events. These groups held meetups all around the globe throughout the year, passing a number of milestones on the way. In July, 25 groups from 20 countries celebrated nine years of the OpenStack project and seven years of the OSF, with some groups bringing as many as 200 attendees together for the festivities. Community members gave presentations, handed out awards, printed t-shirts and stickers, and ate birthday cake to celebrate “for the love of open.”"
+msgstr ""
+# paper 5 - section 59 paragraph 717
+msgid "<div class=\"captionImage leftAlone\" style=\"width: 600px;\"><img class=\"caption leftAlone\" src=\"https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/Uploads/indonesia-birthday.jpg\" alt=\"\" title=\"\">Birthday celebration from the Indonesia OpenStack User Group</div>"
+msgstr ""
+# paper 5 - section 59 paragraph 588
+msgid "Open Infrastructure Community Newsletter"
+msgstr ""
+# paper 5 - section 59 paragraph 589
+msgid "The Open Infrastructure Community Newsletter regularly shares the latest developments and activities across open infrastructure projects, events, and users supported by the OSF. The newsletters are sent out to the community in English through email, and they are also published to the OpenStack official WeChat account in Chinese."
+msgstr ""
+# paper 5 - section 59 paragraph 591
+msgid "Since January 2019, 18 newsletters have been distributed to the open infrastructure community. There have been more than 40,000 people who have opened at least one newsletter for the past year and more than 267,000 views on all the newsletters."
+msgstr ""
+# paper 5 - section 59 paragraph 592
+msgid "Looking forward to 2020, we will continue to deliver the most updated quality content to the open infrastructure community and create awareness among the broader audience in the community. Check out <a href=\"https://superuser.openstack.org/articles/tag/newsletter/\">past newsletters</a>, <a href=\"community/email-signup\">subscribe to the newsletter</a>, and if you would like to contribute content, please email <a href=\"mailto:community@openstack.org\">community@openstack.org</a>. "
+msgstr ""
+# paper 5 - section 59 paragraph 595
+msgid "Rust-VMM "
+msgstr ""
+# paper 5 - section 59 paragraph 596
+msgid "The <a href=\"https://github.com/rust-vmm\">rust-vmm project</a> was created in early 2019 by AWS and Intel. The foundational idea behind it is to create a collection of Rust crates for building custom Virtual Machine Monitors (VMM)."
+msgstr ""
+# paper 5 - section 59 paragraph 598
+msgid "In one year, the project has moved from an empty community GitHub repository to a set of fundamental crates providing the initial steps for building KVM based VMMs. A common set of tests and a unified Continuous Integration (CI) pipeline automatically gate any new contributions on those crates."
+msgstr ""
+# paper 5 - section 59 paragraph 599
+msgid "A few projects like AWS Firecracker, Alibaba Dragonball or Intel Cloud Hypervisor are using the rust-vmm crates, leading to increased contributions from these companies. We’ve also seen other contributions from e.g. ARM, Cloudbase or Red Hat."
+msgstr ""
+# paper 5 - section 59 paragraph 600
+msgid "Community wise, the project and its goals have been presented at various conferences and events like the <a href=\"videos/summits/denver-2019/open-collaboration-evolving-the-container-landscape-with-kata-containers-and-firecracker\">Open Infrastructure Summit</a>, <a href=\"https://www.youtube.com/watch?v=t41Bh_sIVDQ\">KubeCon</a>, FOSDEM and the KVM Forum. In order to increase external contributions, simple guidelines have been documented for adding new crates, contributing to existing crates, and understanding how the rust-vmm review and merge process works. Last but not least, rust-vmm now has its own logos, thanks to the OpenStack Foundation."
+msgstr ""
+# paper 5 - section 59 paragraph 601
+msgid "In one year, the project structured itself around the rust-vmm GitHub organization. As a community, it was decided that each VMM feature it wanted to support through rust-vmm will be living under its own dedicated git repository under the rust-vmm organization. Each of those repos is structured as a standalone Rust crate, and can thus be consumed and imported as such by downstream components. A special repository, the community one, is dedicated to community and architectural discussions."
+msgstr ""
+# paper 5 - section 59 paragraph 679
+msgid "Rust-VMM Crates"
+msgstr ""
+# paper 5 - section 59 paragraph 604
+msgid "There are currently 19 repos under the rust-vmm GitHub organization, including the community one. Roughly 12 of them are seeing active development although code maturity varies between repos. The current rust-vmm crates have been classified into three different buckets:"
+msgstr ""
+# paper 5 - section 59 paragraph 606
+msgid ""
+"<ol><li><strong>Production ready crates:</strong> Those crates are ready to be used in production and as such have been published to the canonical Rust crates repository: crates.io. There are currently five rust-vmm crates in that state: kvm-bindings, kvm-ioctls, vfio-bindings, virtio-bindings, and vmm-sys-util.</li>"
+"<li><strong>Work-In-Progress (WIP) crates:</strong> Those crates are in a usable state but do not yet qualify for production readiness. Criteria for being declared production ready and published to crates.io under the rust-vmm organization are defined in the community repository. Crates under the WIP state are the ones that usually see the highest level of activity, from code review to fundamental architectural discussions. As of 01/2020, the rust WIP crates are vm-memory, vm-device, vm-virtio, vhost, and vfio-bindings.</li>"
+"<li><strong>Empty crates</strong>: The rust-vmm project also carries temporarily empty crates. Through the community repository, the rust-vmm community agreed on adding new crates to the project and thus the repository itself has been created. However, no code contribution has been merged yet and the repository is thus empty. The vm-allocator, vmm-epoll, vmm-vcpu and kvm repositories are empty crates.</li>"
+"</ol>"
+msgstr ""
+# paper 5 - section 59 paragraph 607
+msgid "As a project, the community has defined a common set of tests and a unified buildkite based Continuous Integration (CI) pipeline. Each new repository created under the rust-vmm organization will use that CI and its default tests. The goal behind this is to force and mandate a common set of quality and integration gates for each and every rust-vmm crate."
+msgstr ""
+# paper 5 - section 59 paragraph 608
+msgid "The rust-vmm crates' CI automatically runs on bare metal instances (Both ARM and x86, 64-bit) donated to the project by AWS."
+msgstr ""
+# paper 5 - section 59 paragraph 682
+msgid "Community"
+msgstr ""
+# paper 5 - section 59 paragraph 609
+msgid "By nature, the rust-vmm project is not an easy one to contribute to. Experience with the Rust language, and familiarity with hardware virtualization and VMM concepts are basic requirements for contributing to most rust-vmm crates. As a consequence, the community is growing steadily but slowly. We have seen some contributions from AWS, Intel, Alibaba, and Red Hat as well as contributions from ARM engineers."
+msgstr ""
+# paper 5 - section 59 paragraph 610
+msgid ""
+"In order to make contributing easier and transparent, the community has worked on a few things:<ul><li>Creating a gate keeping team, in order to clearly define the rust-vmm code and review process but also to prevent pending PRs from staying inactive for too long;</li>"
+"<li>Tracking and building analytics around PR review and turnaround times, through pullpanda. This gives the community visibility and data to act upon for its community activity;</li>"
+"<li>Documenting review and code contribution process;</li>"
+"<li>Documenting crates publishing criteria. </li>"
+"</ul>"
+msgstr ""
+# paper 5 - section 59 paragraph 611
+msgid "AWS also kindly organized and hosted a rust-vmm meetup in Bucharest. Most of the project contributors attended the event, which helped quite a bit with not only moving forward technically but also strengthening the nascent community links."
+msgstr ""
+# paper 5 - section 59 paragraph 612
+msgid ""
+"The following projects are using rust-vmm crates to build their custom VMM:<ul><li>AWS Firecracker</li>"
+"<li>Alibaba Dragonball</li>"
+"<li>Intel Cloud-Hypervisor</li>"
+"</ul>"
+msgstr ""
+# paper 5 - section 59 paragraph 613
+msgid "OpenStack Bare Metal Program "
+msgstr ""
+# paper 5 - section 59 paragraph 614
+msgid "This year marked an important milestone for OpenStack and the Ironic team as the OSF launched the <a href=\"bare-metal/\">OpenStack Ironic Bare Metal Program</a> on the keynote stage of the Open Infrastructure Summit in Denver. Ironic has become a vital part of OpenStack deployments. In fact, according to the 2018 OpenStack User Survey, “adoption of Ironic grew rapidly with 24% of production deployments now relying on it, up from just 9% in 2016.” The purpose of this newly launched program was to bring more visibility to the usage of Ironic and OpenStack on bare metal. The goal of increasing visibility was to not only showcase the success of Ironic and OpenStack in bare metal, but to create an avenue for users, operators and developers to further collaborate. The launch was a success, with more than 30 users and vendors like Tencent, CERN, and Red Hat joining the program with several also contributing case studies. One of the most exciting examples of bare metal used at scale was Verizon Media. James Penick, Architect Director, spoke on the keynote stage in Denver about how they use Ironic to manage hundreds of thousands of bare metal compute resources with over 4 million cores in their data centers. Learn more with the <a href=\"videos/summits/denver-2019/openstack-ironic-and-bare-metal-infrastructure-all-abstractions-start-somewhere\">launch of the OpenStack Ironic Bare Metal Program</a> and <a href=\"videos/summits/denver-2019/powering-verizon-media-with-open-source-and-open-collaboration\">James Penick’s keynote</a>."
+msgstr ""
+# paper 5 - section 59 paragraph 615
+msgid "Here are the participants of the OpenStack Ironic Bare Metal Program:"
+msgstr ""
+# paper 5 - section 59 paragraph 716
+msgid "<img src=\"https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/Uploads/Screen-Shot-2020-01-22-at-3.24.49-PM.png\" alt=\"Screen Shot 2020 01 22 at 3.24.49 PM\" title=\"\">"
+msgstr ""
+# paper 5 - section 59 paragraph 714
+msgid "OpenStack Upstream Institute "
+msgstr ""
+# paper 5 - section 59 paragraph 617
+msgid "In 2019 OpenStack Upstream Institute was held in seven countries, two of which for the first time. In total over 200 new contributors were on-boarded to the OpenStack community. The training attendees learned about OpenStack governance, the release process, and, most importantly, how to setup and use the tools the community leverages on a daily basis to communicate and collaborate."
+msgstr ""
+# paper 5 - section 59 paragraph 618
+msgid "Thanks to Lenovo, the training was held preceding both Summits this year. In Denver it was hosted as a single day event at the conference venue with office hours the day before to answer any getting started questions. In Shanghai, it was hosted at Lenovo’s office as a day and a half long event."
+msgstr ""
+# paper 5 - section 59 paragraph 619
+msgid "The OpenStack Upstream Institute training team has worked on making the training a standalone package that anyone can pick up and run locally either within their organization or with members within their geographical region. Two great examples of this in 2019 were in Japan and India where the majority of the community members who were running the training are not closely involved in the team and were still able to make their courses a success. In addition, between those two sessions alone, these local communities brought the training to and shared knowledge with over 120 attendees."
+msgstr ""
+# paper 5 - section 59 paragraph 620
+msgid "In 2020, the team hopes to evolve the training even more than the last few years. The team plans to break it apart into two major modules: one containing OpenStack specific information and the other describing the aforementioned tools (OpenDev). This improvement will provide further flexibility to the training to run only the desired parts. With separating sections of the training material, the modules will be applicable and usable for any project under the OpenStack Foundation umbrella to pick up and build them into their own courses."
+msgstr ""
+# paper 5 - section 59 paragraph 621
+msgid "Upstream Investment Opportunities (previously called 'Help Most Needed')"
+msgstr ""
+# paper 5 - section 59 paragraph 622
+msgid "Over the last few years, the OpenStack Technical Committee (TC) maintained the 'Help Most Needed' list that enumerated the five areas where the OpenStack community needed contributions to significantly help OpenStack as a whole. This was promoted through various forums including presentation to the Board of Directors to get help from the corporate as well as the academic side."
+msgstr ""
+# paper 5 - section 59 paragraph 623
+msgid "The original format did not garner the help the TC had hoped so they decided to come at it from another angle. The TC thought a restructuring would help to make it clear that the 'Help Most Needed' list is not only the desires of the community but also provides direct value to sponsoring organizations of OpenStack. This year the TC renamed the 'Help Most Needed' list to <a href=\"https://governance.openstack.org/tc/reference/upstream-investment-opportunities/index.html\">'Upstream Investment Opportunities'</a> and added business values for each opportunity."
+msgstr ""
+# paper 5 - section 59 paragraph 624
+msgid "As per new process, the TC will refresh the list every calendar year and add new opportunities by evaluating the business cases through an understanding of the needs of potential contributing organizations. You can find the 2019 Upstream Investment Opportunities <a href=\"https://governance.openstack.org/tc/reference/upstream-investment-opportunities/2019/index.html\">here</a>."
+msgstr ""
+# paper 5 - section 59 paragraph 626
+msgid "Travel Support Program"
+msgstr ""
+# paper 5 - section 59 paragraph 628
+msgid "The OpenStack Foundation helps new and key contributors who are unable to secure sponsorship to attend events by subsidizing or covering the costs for travel and accommodations. In 2019, the Foundation set aside a budget for each Summit &amp; PTG, which is combined with donations from individuals from the community to fund this program."
+msgstr ""
+# paper 5 - section 59 paragraph 678
+msgid "Denver Summit &amp; PTG"
+msgstr ""
+# paper 5 - section 59 paragraph 630
+msgid "Ten additional community members from seven countries were able to attend the Denver Summit &amp; PTG in April 2019, thanks to $2,905 in donations from 27 individuals, combined with an investment of $22,000 from the OpenStack Foundation."
+msgstr ""
+# paper 5 - section 59 paragraph 680
+msgid "Shanghai Summit &amp; PTG"
+msgstr ""
+# paper 5 - section 59 paragraph 634
+msgid "Twelve community members from seven countries were able to attend the Shanghai Summit &amp; PTG in November 2019, thanks to $1,016 in donations from 11 individuals, combined with an investment of $15,000 from the OpenStack Foundation."
+msgstr ""
+# paper 5 - section 59 paragraph 636
+msgid "Internship &amp; Mentoring Programs supported by the OpenStack Foundation"
+msgstr ""
+# paper 5 - section 59 paragraph 661
+msgid "Outreachy Internship Program"
+msgstr ""
+# paper 5 - section 59 paragraph 649
+msgid ""
+"May - August 2019<ul><li>Each of these organizations funded one intern: Intel, OpenStack Foundation, Red Hat, and Outreachy General Funds </li>"
+"<li>Four interns accepted, three completed successfully:</li>"
+"<ul><li>Varsha Verma from India, Sushy: \"Extend sushy to support RAID\"</li>"
+"<li>Sol from Argentina, Manila and OpenStack Client: \"OpenStack Manila Integration with OpenStack CLI (OSC)\"</li>"
+"<li>Nisha Brahmankar from India, Ironic: \"Improve Ironic Agent Image Builder\"</li>"
+"</ul></ul>"
+msgstr ""
+# paper 5 - section 59 paragraph 651
+msgid ""
+"December 2019 - March 2020<ul><li>Funding from the OpenStack Foundation and Red Hat</li>"
+"<li>Three interns accepted:</li>"
+"<ul><li>Maari Tamm from Estonia, Manila and OpenStack Client: \"OpenStack Client integration\"</li>"
+"<li>Anastasiya Zhyrkevich from Belarus, Cinder and Tempest: \"Improve Cinder Tempest\"</li>"
+"<li>Khansa Amrouni from Tunisia, Ironic: \"Build a Redfish command-line client tool\"</li>"
+"</ul></ul>Given each internship costs USD 6,500, the total funding for the seven interns is USD 45,500."
+msgstr ""
+# paper 5 - section 59 paragraph 660
+msgid "The Oregon State University Internship Program"
+msgstr ""
+# paper 5 - section 59 paragraph 652
+msgid "During the Summit in Vancouver in May 2018, a discussion started during a Forum session about getting more university students involved in OpenStack. The OpenStack community and project provides a lot of practical experience and has the opportunity to teach students skills in collaboration in a large, global community while having the added benefit to OpenStack of new contributors working on backlogs of action items."
+msgstr ""
+# paper 5 - section 59 paragraph 653
+msgid "Having already been using OpenStack in its campus lab and already having a history of relationships with the university via alumni, the Oregon State University was interested in helping to coordinate an internship program. Collaborating with OpenStack community members, it was concluded that the two projects most in need of help were Glance (the Image project) and Designate (the DNS project). Contributors to these projects joined the conversations and helped brainstorm where funding for interns could be found. Currently, the OpenStack Foundation is sponsoring one student from the university to work on the Glance project with plans for more interns to work on Designate if funding from other organizations can be established."
+msgstr ""
+# paper 5 - section 59 paragraph 656
+msgid "North Dakota State University Mentorship Program"
+msgstr ""
+# paper 5 - section 59 paragraph 657
+msgid "At the end of last year, Lance Bragstad, a North Dakota State University alumni and former Keystone PTL, reached out the mailing list looking for mentors to participate in a Capstone project for students at the university. Students would do real work in the community throughout the semester led by one or more mentors. Chris Hoge, Kendall Nelson, and Jeremy Stanley worked with three students to accomplish work across two different OpenStack projects. They worked on a cleanroom implementation of the puppet setup for a version control system and a migration script for moving bugs from Launchpad to StoryBoard. While the work itself was important to the OpenStack community, the skills the students learned working in a community as large and diverse as OpenStack will benefit them long after graduation."
+msgstr ""
+# paper 5 - section 59 paragraph 658
+msgid "The professor liked the results of the community’s work with the students so much that he has asked the community to participate again. For the next round of students, starting in January, Michael Johnson, Adam Harwell, and Kendall Nelson will mentor students working on Octavia, the load balancer OpenStack project."
+msgstr ""
+# paper 5 - section 59 paragraph 695
+msgid "OSF Contributor Recognition"
+msgstr ""
+# paper 5 - section 59 paragraph 684
+msgid "This year, 16 people were added to the list of Community Contributor Award recipients. These amazing people have helped not just the OpenStack project, but the entire open infrastructure community. Recipients represented other top level projects beyond just OpenStack such as Airship, Kata Containers, and StarlingX where historically only contributors to OpenStack had been represented."
+msgstr ""
+# paper 5 - section 59 paragraph 685
+msgid "In Denver, Eric Ernst and Kendall Nelson presented awards to the following people:"
+msgstr ""
+# paper 5 - section 59 paragraph 686
+msgid ""
+"<ul><li>Stig Telfer - The ‘Does anyone actually use this?’ Trophy</li>"
+"<li>Slawek Kaplonski - The Bug Czar Award</li>"
+"<li>John Dickinson - The Key to Stack City</li>"
+"<li>Allison Randal - The Open Infrastructure Shield</li>"
+"<li>Samuel de Medeiros Queiroz - The Mentor of Mentors Award</li>"
+"<li>Gabriela Cervantes Tellez &amp; Salvador Fuentes - The Bonsai Caretaker Award</li>"
+"<li>Carlos Venegas Munoz &amp; Marco Vedovati - The Friends of Mike Rowe, Doers of the Dirty Jobs Award</li>"
+"<li>James O. D. Hunt - The Giving Tree Award</li>"
+"<li>Ian Joliffe - The Hero of the People Award</li>"
+"</ul>"
+msgstr ""
+# paper 5 - section 59 paragraph 687
+msgid "In Shanghai, Xu Wang and Kendall Nelson presented awards to the following people:"
+msgstr ""
+# paper 5 - section 59 paragraph 688
+msgid ""
+"<ul><li>James Penick- The Key to Stack City</li>"
+"<li>Fupan Li- The Duct Tape Medal</li>"
+"<li>Belmiro Moreira- The ‘Does anyone actually use this?’ Trophy</li>"
+"<li>Donny Davis- The When do you Sleep? Award</li>"
+"<li>Austin Sun- The Mentor of Mentors Award</li>"
+"</ul>"
+msgstr ""
+# paper 5 - section 59 paragraph 689
+msgid "Also new this year, the awards are now recorded on their foundation member profiles. Each recipient has the award and place they received it at listed. If they have received multiple awards, they are enumerated together."
+msgstr ""
+# paper 5 - section 60 title
+msgid "Event Highlights"
+msgstr ""
+# paper 5 - section 60 paragraph 559
+msgid "The Open Infrastructure Summits - Denver and Shanghai"
+msgstr ""
+# paper 5 - section 60 paragraph 560
+msgid "Open Infrastructure starts with OpenStack, and users are increasingly relying on the integration of additional open technologies to power their workloads. In 2019, the OpenStack Summit was renamed to the Open Infrastructure Summit to reflect this trend and create a more diverse focus on the open-source projects being built to support open infrastructure."
+msgstr ""
+# paper 5 - section 60 paragraph 575
+msgid "<a href=\"http://openstack.org/summit/denver-2019\">Open Infrastructure Summit Denver</a>"
+msgstr ""
+# paper 5 - section 60 paragraph 561
+msgid "The first <a href=\"http://openstack.org/summit/denver-2019\">Open Infrastructure Summit</a> was held in Denver, Colorado in April 2019, gathering attendees from 50+ different countries to discuss 30+ open source projects. In addition to use cases from users like AT&amp;T<a href=\"videos/summits/denver-2019/5g-built-on-open-infrastructure\"> </a>, Blizzard Entertainment<a href=\"videos/summits/denver-2019/how-blizzard-entertainment-uses-autoscaling-with-overwatch\"> </a>, Box, Reliance Jio, Verizon Media, and more, there were several announcements made in Denver:"
+msgstr ""
+# paper 5 - section 60 paragraph 562
+msgid ""
+"<ul><li><a href=\"https://katacontainers.io/\">Kata Containers</a> and <a href=\"https://zuul-ci.org/\">Zuul</a> were the first pilot projects confirmed as top-level open infrastructure projects by the OSF Board of Directors.</li>"
+"<li>The OSF launched the <a href=\"bare-metal/\">OpenStack Ironic Bare Metal Program</a> highlighting the commercial ecosystem for Ironic, at-scale deployments of Ironic, and evolution of OpenStack beyond virtual machines. Over 30 organizations signed up at launch, and Superuser has been posting case studies highlighting the diverse use cases.</li>"
+"<li>The <a href=\"https://www.airshipit.org/\">Airship</a> community released version 1.0 which was already in production at AT&amp;T and SKT. The first release delivered a wide range of enhancements to security, resiliency, continuous integration and documentation, as well as upgrades to the platform, deployment and tooling features.</li>"
+"<li>Vexxhost won the Superuser Award for its OpenStack-powered public cloud and private cloud offerings, as well as their involvement in the upstream OpenStack community.</li>"
+"</ul>"
+msgstr ""
+# paper 5 - section 60 paragraph 564
+msgid "Summit videos are available on the <a href=\"videos/summits/denver-2019%20\">Summit videos page</a>. Thank you to our <a href=\"summit/denver-2019/sponsors\">Summit sponsors</a> for supporting the event!"
+msgstr ""
+# paper 5 - section 60 paragraph 571
+msgid "<a href=\"http://openstack.org/summit/shanghai-2019\">Open Infrastructure Summit Shanghai</a>"
+msgstr ""
+# paper 5 - section 60 paragraph 572
+msgid "The second Open Infrastructure Summit brought attendees from over 45 countries to Shanghai, China in November 2019, and was followed by the <a href=\"ptg\">Project Teams Gathering (PTG)</a>. Use cases, tutorials, and demos covering 40+ open source projects including Airship, Ceph, Hadoop, Kata Containers, Kubernetes, OpenStack, StarlingX, and Zuul were featured at the Summit. In addition to use cases from users like China Railway, China Mobile, Walmart Labs, LINE and China UnionPay, and more, there were several announcements made in Shanghai:"
+msgstr ""
+# paper 5 - section 60 paragraph 573
+msgid ""
+"<ul><li>The Board of Directors of the OpenStack Foundation <a href=\"news/view/443/openstack-board-elects-troila-technology-as-gold-member-of-the-foundation\">elected Troila Technology</a>, a cloud provider serving the enterprise and government sectors in China, as a new Gold Member of the Foundation. Troila Technology is the 11th company to be approved as a Gold Member that is based in China, a region expecting significant growth in a global market valued at 53.9 billion yuan ($7.7 billion USD) in 2023.</li>"
+"<li>Representatives of powerhouse OpenStack users in China—Baidu, China Mobile, China Telecom, China Unicom, Intel, and Tencent—took to the keynote stage at the Open Infrastructure Summit. These at-scale users shared how additional open source infrastructure software projects such as Kata Containers and StarlingX play a crucial role in their business strategies for 5G and edge computing. These users are instrumental in the rapidly growing OpenStack market in the APAC region which is expected to grow an additional 36 percent in the next four years, accounting for one-third of the $7.7 billion USD global market in 2023.</li>"
+"<li>The OpenStack Foundation and China Electronics Standardization Institute (CESI) <a href=\"news/view/442/openstack-foundation-and-china-electronics-standardization-institute-create-partnership-to-advance-openstack-in-china\">announced a strategic partnership</a> to implement new technology, assessment and certification for OpenStack software in China. The collaboration highlights the validation of OpenStack as the open source infrastructure cloud standard in China partnered with the OSF’s commitment to the growing OpenStack community in China.</li>"
+"<li><a href=\"https://superuser.openstack.org/articles/baidu-wins-superuser-award-at-open-infrastructure-summit-shanghai/\">Baidu won the Superuser Award</a> for its Kata Containers use case that also integrates with OpenStack and Kubernetes for their AI cloud. The Baidu team also <a href=\"https://katacontainers.io/collateral/ApplicationOfKataContainersInBaiduAICloud.pdf\">published a whitepaper</a> detailing its extensive open infrastructure use case.</li>"
+"</ul>"
+msgstr ""
+# paper 5 - section 60 paragraph 574
+msgid "Summit videos are now available on the <a href=\"videos/summits/shanghai-2019\">Summit videos page</a>. Thank you to our <a href=\"summit/shanghai-2019/sponsors\">Shanghai Summit sponsors</a> for supporting the event!"
+msgstr ""
+# paper 5 - section 60 paragraph 553
+msgid "Project Teams Gathering (PTGs) and Forums"
+msgstr ""
+# paper 5 - section 60 paragraph 554
+msgid "Having switched from last year’s model of stand alone <a href=\"ptg\">Project Teams Gatherings</a>, this year both events were co-located with Open Infrastructure Summits. At the beginning of this year, following the Denver Summit, the first colocated PTG was held. There were 391 attendees across 46 teams who attended the PTG in Denver. In Shanghai, approximately 300 attendees across 44 teams attended, including the recently confirmed top level project Airship. StarlingX and Kata Containers also met at both PTGs."
+msgstr ""
+# paper 5 - section 60 paragraph 555
+msgid "Both events were organized similarly in terms of schedule. Depending on the team’s request for time and space, they had varying amounts of space and time, but, roughly, the first day or two were horizontal teams- Special Interest Groups and Working Groups- while the rest of the week was filled with vertical teams- Cinder, Neutron, Nova, Kata Containers, etc. To make sure to accommodate all teams, both events had reservable space for groups that did not formally request time/space to meet."
+msgstr ""
+# paper 5 - section 60 paragraph 556
+msgid "The PTGbot continues to be an asset to this event. It allows teams to reserve extra time and space in the schedule. It also gives teams the ability to announce what they are talking about so that people interested in the topics being discussed know when to change rooms if they are involved in more than one team."
+msgstr ""
+# paper 5 - section 60 paragraph 557
+msgid "In Shanghai, the PTG had a day and a half of overlap with the Summit and it was the first PTG that was hosted where the majority of teams shared one large space together rather than all having their separate rooms. Shanghai also brought a different focus for the PTG. With the potential for a lot of new faces to attend, project onboarding was hosted during the PTG instead of during the Summit, which helped several teams gain new contributors."
+msgstr ""
+# paper 5 - section 60 paragraph 539
+msgid "OpenStack Days and OpenInfra Days "
+msgstr ""
+# paper 5 - section 60 paragraph 540
+msgid "The global open infrastructure community organized 12 <a href=\"community/events/openstackdays\">OpenStack/OpenInfra Day</a> events in Germany, Indonesia, two in Italy, Japan, Korea, Poland, Taiwan, Sweden, at CERN in Switzerland, UK, and Vietnam - educating close to 5,000 attendees around the world."
+msgstr ""
+# paper 5 - section 60 paragraph 546
+msgid "The typical attendee reached at these local events are cloud and IT architects, software developers, platform and solution engineers and product management."
+msgstr ""
+# paper 5 - section 60 paragraph 548
+msgid "These one or two day regional events are organized by the local community and supported by the OSF to include project workshops, upstream training, and booths from the local ecosystem. These events continue to be an excellent touchstone for the community to engage with our ecosystem, and to gather local open source developers and users to collaborate, share use cases, and support for the OSF projects."
+msgstr ""
+# paper 5 - section 61 title
+msgid "A Word from OSF Platinum and Gold Members"
+msgstr ""
+# paper 5 - section 61 paragraph 704
+msgid "“99Cloud, founded in 2012, is one of the earliest and most famous companies in open infrastructure. We witnessed the birth and growth of the OpenStack community and have been heavily contributing to the community for 8 years with high ranking in many aspects. We serve customers with OpenStack in government, financial banking, telco, energy, etc. “What's past is prologue”. 5G is coming. 99Cloud extends the strategy from cloud to edge based on our expertise in OpenStack. We will continue participating in the OpenStack community and involving in new projects such as StarlingX and Airship, implementing open edge cloud solution. We were glad to see that the Open Infrastructure Summit Shanghai burned with passion in China and we look forward to the continuous prosperity of the community in 2020.” - Shuquan Huang, Technical Director, 99Cloud"
+msgstr ""
+# paper 5 - section 61 paragraph 705
+msgid "“The OpenStack community – and the Open Infrastructure Projects it supports – remains vital to the transformation to software defined networks. The OpenStack Foundation’s support of the Airship project was critical to it achieving confirmation in 2019. The project is now rapidly maturing to not only support predictable deployments of OpenStack clouds, but also enable an in-place evolution in 2020 and beyond of those clouds to support both VNFs and CNFs on the same footprint. At AT&amp;T, we will continue to support the OpenStack Foundation and community through code contribution and membership in 2020.\" - Ryan van Wyk – VP Network Cloud, AT&amp;T"
+msgstr ""
+# paper 5 - section 61 paragraph 706
+msgid "“As an established leader in the cloud market, Canonical has been involved in OpenStack development since the very early days. This marks the company’s long-term commitment to open infrastructure and improving the cost of cloud operations. Canonical is delighted to continue to support the OpenStack Foundation, in partnership with leading system integrators, to help enterprises address new challenges such as bringing OpenStack from the cloud to the edge.” - Tytus Kurek, Product Manager, Canonical"
+msgstr ""
+# paper 5 - section 61 paragraph 707
+msgid "\"2019 proved to be the year when regulations took a larger role in a world where the few dominate the cloud space. Nations woke up and realized that data sovereignty is important and maybe nations truly need to have control of certain data? This is the normal situation when you work with banks and other heavily regulated industries like City Network does. That feeling of control has expanded dramatically - to other industries and to nations. OpenStack has again proven to be the one platform those countries and industries rely on for both private- and public offerings in order to satisfy those regulatory requirements. Innovation has crept up as a longer term key aspect in what platforms to choose - as well as how to build those hybrid solutions. The OpenStack Foundation filled that void not only by delivering an improved OpenStack but also four new projects that continue to expand and allow organizations to innovate on open platforms. 2020 will be an exciting year for the OSF as the need for choice continues to expand.\" - Johan Christenson, CEO, City Network"
+msgstr ""
+# paper 5 - section 61 paragraph 708
+msgid "“Red Hat continues to be excited about our ongoing collaboration with the OpenStack community. For many of Red Hat’s largest customers, OpenStack is the heart of current and future deployment plans. With a proven track record of security, stability and the reliability which use cases such as telecommunications and edge infrastructure require, OpenStack is critical for our customers, their partners and for the millions of consumers of services running on that infrastructure. We look forward to an exciting future for Red Hat’s continued strong partnership with the OpenStack Foundation and community as we deliver on the vision of the Open Hybrid Cloud.” - Daniel Becker, Director of Engineering, Red Hat"
+msgstr ""
+# paper 5 - section 61 paragraph 709
+msgid "“Troila Technology has always been committed to transforming outstanding open source technology into the commercial value of customers. Troila Kunlun Cloud is our most successful business practice under the OpenStack technology architecture. In 2019, we became the Gold Member of the OSF and conducted in-depth exchanges and cooperation with OSF. We firmly believe that the open source value is not only the code contribution, but also we should pay more attention to the work beyond the code. As a strategic partner, in 2020 we plan to build a joint laboratory with OSF for the R &amp; D and testing of OpenStack project, build a more complete open-source ecosystem, and continue to promote the innovative application of OpenStack in China. We will also participate more actively in community activities, closely communicate with the Foundation, maintain advanced technology, and continue to contribute excellent codes to the community. Of course, we will also provide customers with more mature, stable and efficient cloud products and solutions based on OpenStack, and share more industry practices.” - Zhang Kunyu, Troila Technology"
+msgstr ""
+# paper 5 - section 62 title
+msgid "OpenStack Working Group Updates"
+msgstr ""
+# paper 5 - section 62 paragraph 711
+msgid "Diversity Working Group"
+msgstr ""
+# paper 5 - section 62 paragraph 712
+msgid "The Diversity Working Group shared the results from the two Diversity Surveys with the CHAOSS project and Open Source communities in order to give insight to the types of questions we used as well as the status of diversity within the OpenStack project over time. We continued with having sponsored Diversity Networking Lunch in both Denver and Shanghai at the Summits. We also had pronoun stickers available at the Summit in Denver We are continuing to work on revitalizing the Cohort Mentoring program and gained new leaders (Meg Heisler and Pete Vander Giessen) for the program during the BoF session held in Denver."
+msgstr ""
+# paper 5 - section 62 paragraph 713
+msgid "Looking forward to 2020, we will be reaching out to the other OSF projects and inviting them to join our efforts as we are not OpenStack specific and hope to continue offering opportunities for diversity at events and in the community."
+msgstr ""
