@@ -36,7 +36,7 @@
 
                 <p>Together, the discussions held at OpenDev + PTG are critical to the open source advancements addressing current challenges around hardware automation, scale, containers, and the overall open source ecosystem. If you want to influence the direction and future of <strong>open source infrastructure</strong>, join the community and participate in this event. </p>
 
-                <a class="btn btn-default" href="mailto:events@openstack.org">Sponsor OpenDev + PTG <i class="fal fa-arrow-right"></i></a>
+                <a class="btn btn-default" href="/events/opendev-ptg-2020/sponsors">Sponsor OpenDev + PTG <i class="fal fa-arrow-right"></i></a>
 
                 <a class="btn btn-default" href="https://opendevptg2020.eventbrite.com/?aff=opendevptg2020-mid">Register Now <i class="fal fa-arrow-right"></i></a>
 
