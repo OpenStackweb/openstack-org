@@ -12,25 +12,18 @@
  * limitations under the License.
  **/
 
-/**
- * Class OpenDevStaticVancouverSponsorPage
- */
-class OpenDevStaticVancouverSponsorPage extends SummitSponsorPage
+class OpenDevStaticVancouverQuestionsPage extends SummitQuestionsPage
 {
+
 }
 
-/**
- * Class OpenDevStaticVancouverSponsorPage_Controller
- */
-class OpenDevStaticVancouverSponsorPage_Controller extends SummitSponsorPage_Controller
-{
-
+class OpenDevStaticVancouverQuestionsPage_Controller extends SummitQuestionsPage_Controller{
     /**
      * @param SS_HTTPRequest $request
      * @return HTMLText|void
      */
     public function index(SS_HTTPRequest $request){
-        return $this->renderWith(['OpenDevStaticVancouverPage', 'OpenDevStaticVancouverSponsorPage']);
+        return $this->renderWith(['OpenDevStaticVancouverPage', 'OpenDevStaticVancouverQuestionsPage']);
     }
 
     public function init()
