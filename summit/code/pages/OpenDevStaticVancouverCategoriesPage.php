@@ -24,7 +24,7 @@ class OpenDevStaticVancouverCategoriesPage_Controller extends SummitCategoriesPa
      * @return HTMLText|void
      */
     public function index(SS_HTTPRequest $request){
-        return $this->renderWith(['OpenDevStaticVancouverPage', 'OpenDevStaticVancouverCategoriesPage']);
+        return $this->renderWith(['OpenDevStaticVancouverCategoriesPage','OpenDevStaticVancouverPage']);
     }
 
     public function init()

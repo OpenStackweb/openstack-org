@@ -30,7 +30,7 @@ class OpenDevStaticVancouverSponsorPage_Controller extends SummitSponsorPage_Con
      * @return HTMLText|void
      */
     public function index(SS_HTTPRequest $request){
-        return $this->renderWith(['OpenDevStaticVancouverPage', 'OpenDevStaticVancouverSponsorPage']);
+        return $this->renderWith(['OpenDevStaticVancouverSponsorPage','OpenDevStaticVancouverPage']);
     }
 
     public function init()

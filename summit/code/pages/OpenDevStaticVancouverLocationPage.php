@@ -23,7 +23,7 @@ class OpenDevStaticVancouverLocationPage_Controller extends SummitLocationPage_C
      * @return HTMLText|void
      */
     public function index(SS_HTTPRequest $request){
-        return $this->renderWith(['OpenDevStaticVancouverPage', 'OpenDevStaticVancouverLocationPage']);
+        return $this->renderWith(['OpenDevStaticVancouverLocationPage','OpenDevStaticVancouverPage']);
     }
 
     public function init()
