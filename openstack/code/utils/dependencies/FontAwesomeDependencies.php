@@ -18,9 +18,10 @@ final class FontAwesomeDependencies
 
         if(Director::isLive()) {
             Requirements::css("node_modules/font-awesome/css/font-awesome.min.css");
+            Requirements::css("node_modules/@fortawesome/fontawesome-pro/css/all.min.css");
             return;
         }
-
         Requirements::css("node_modules/font-awesome/css/font-awesome.css");
+        Requirements::css("node_modules/@fortawesome/fontawesome-pro/css/all.css");
     }
 }

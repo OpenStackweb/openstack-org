@@ -6,27 +6,12 @@
                 <h4 class="summit-title script">OpenDev + PTG</h4>
                 <h2 style="font-size:68px;">Building Intelligent Open Source Infrastructure</h2>
                 <div class="bird">
+                    <a href="https://twitter.com/search?q=%23OpenDevPTG"><span></span></a>
                     <h5>
-                        <strong>
-                            <a href="http://twitter.com/openstack" target="_blank">
-                                <i class="fab fa-twitter" style="font-size: 24px;color:#ffd602;"></i>
-                            </a>
-                            <a href="https://www.facebook.com/openstack/" target="_blank">
-                                <i class="fab fa-facebook-f" style="margin-left:15px;font-size: 24px;color:#ffd602;"></i>
-                            </a>
-                            <a href="" data-toggle="modal" data-target="#wechat-modal">
-                                <i class="fab fa-weixin" style="margin-left:15px;font-size: 24px;color:#ffd602;"></i>
-                            </a>
+                        Join the Conversation<br/>
+                        <strong>#OpenDevPTG 
                         </strong>
                     </h5>
-                </div>
-            </div>
-
-            <div id="wechat-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-sm" role="document">
-                    <div class="modal-content">
-                        <img width="150" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/summits/shanghai/qrcode-for-gh-5cc38c749efd-1280.jpg" />
-                    </div>
                 </div>
             </div>
 
