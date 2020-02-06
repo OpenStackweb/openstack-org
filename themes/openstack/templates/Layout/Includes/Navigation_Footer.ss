@@ -43,7 +43,7 @@
                 <h3>Stay In Touch</h3>
                 <a href="https://twitter.com/OpenStack" target="_blank"><i class="fab fa-twitter-square" style="font-size: 36px;color:#eaeaea;padding-right:10px;"></i></a>
                 <a href="https://www.facebook.com/openstack" target="_blank"><i class="fab fa-facebook-square" style="font-size: 36px;color:#eaeaea;padding-right:10px;"></i></a>
-                <a href="https://www.linkedin.com/company/openstack" target="_blank"><i class="fab fa-linkedin" style="font-size: 36px;color:#eaeaea;padding-right:10px;"></i></a>
+                <a href="https://www.linkedin.com/groups/3239106/" target="_blank"><i class="fab fa-linkedin" style="font-size: 36px;color:#eaeaea;padding-right:10px;"></i></a>
                 <a href="https://www.youtube.com/user/OpenStackFoundation" target="_blank"><i class="fab fa-youtube-square" style="font-size: 36px;color:#eaeaea;padding-right:10px;"></i></a>
                 <a href="" data-toggle="modal" data-target="#wechat-modal"><i style="font-size: 36px;color:#eaeaea;padding-right:10px;" class="fab fa-weixin"></i></a>
                 <!-- <form class="form-inline">
