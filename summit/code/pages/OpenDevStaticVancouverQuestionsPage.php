@@ -23,7 +23,7 @@ class OpenDevStaticVancouverQuestionsPage_Controller extends SummitQuestionsPage
      * @return HTMLText|void
      */
     public function index(SS_HTTPRequest $request){
-        return $this->renderWith(['OpenDevStaticVancouverPage', 'OpenDevStaticVancouverQuestionsPage']);
+        return $this->renderWith(['OpenDevStaticVancouverQuestionsPage', 'OpenDevStaticVancouverPage']);
     }
 
     public function init()
