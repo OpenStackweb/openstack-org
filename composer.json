@@ -93,11 +93,6 @@
     "jumbojett/openid-connect-php": "dev-master"
   },
   "require-dev": {
-    "behat/behat": "@stable",
- 	"behat/mink": "@stable",		
- 	"behat/mink-extension": "@stable",		
- 	"behat/mink-goutte-driver": "@stable",		
- 	"behat/mink-selenium2-driver": "@stable",
     "phpunit/phpunit": "^7.0",
     "mockery/mockery": "^1.0"
   },
