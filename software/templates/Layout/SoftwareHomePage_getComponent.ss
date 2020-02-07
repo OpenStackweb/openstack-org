@@ -252,7 +252,7 @@
 
                 <a class="btn btn-default team-button" href="{$Component.getProjectLink()}">
                     <img src="/software/images/mascots/{$Component.MascotRef}.png" width="50px" /><br/>
-                    {$Component.CodeName}
+                    {$Component.ProjectTeam}
                 </a>
             </div>
         </div>
