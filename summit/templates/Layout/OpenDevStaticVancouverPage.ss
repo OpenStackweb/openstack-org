@@ -73,10 +73,10 @@
 
             <div class="col-sm-12 sponsor">
                 <p class="text">
-                    Sponsoring these events will greatly help ensure the continued growth and success of open infrastructure projects. <strong>A sponsorship prospectus will be available soon</strong>. If your organization is interested in participating and supporting the open infrastructure community, please contact <a href="mailto:events@openstack.org">events@openstack.org</a>.
+                    Sponsoring these events will greatly help ensure the continued growth and success of open infrastructure projects. If your organization is interested in participating and supporting the open infrastructure community, please click the link below.
                 </p>
                 <p style="text-align: center;">
-                    <a class="btn register-btn-lrg" href="mailto:events@openstack.org">Sponsor this Event <i class="fa fa-arrow-right"></i></a>
+                    <a class="btn register-btn-lrg" href="/events/opendev-ptg-2020/sponsors">Sponsor this Event <i class="fa fa-arrow-right"></i></a>
                 </p>
             </div>
         </div>
