@@ -325,7 +325,7 @@
                 <div class="col-sm-8">
                     <div class="col-sm-12">
                         <h3>Get Involved</h3>
-                        <p>The community also formed a Bare Metal Special Interest Group (SIG) in February 2019 with the mission to make Ironic easy to operate and evangelize the use cases and utility of the bare metal service. To get involved in the SIG, subscribe to the OpenStack Discuss mailing list or contact <a href="mailto:chris@openstack.org">chris@openstack.org</a></p>
+                        <p>The community also formed a Bare Metal Special Interest Group (SIG) in February 2019 with the mission to make Ironic easy to operate and evangelize the use cases and utility of the bare metal service. To get involved in the SIG, subscribe to the OpenStack Discuss mailing list or contact <a href="mailto:danny@openstack.org">danny@openstack.org</a></p>
                     </div>
                 </div>
                 <div class="col-sm-2"></div>
