@@ -3,14 +3,14 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <img class="osdays-logo" src="{$Top.CloudUrl('assets/openstack-logo/openstackdays/days-hero-mark.svg')}" alt="OpenStack Days">
+                <img class="osdays-logo" src="{$Top.CloudUrl('assets/openstackdays/openinfradays-d.png')}" alt="OpenStack Days">
                 <h1>$Title</h1>
             </div>
         </div>
     </div>
 </div>
 
-<div class="days-pretext"><a href="#tab=events_tab" class="deep-link" data-tab="events_tab">Find an upcoming OpenStack or OpenInfra Day in your region!</a></div>
+<div class="days-pretext"><a href="./#tab=events_tab" class="deep-link" data-tab="events_tab">Find an upcoming OpenStack or OpenInfra Day in your region!</a></div>
 
 <div class="software-tab-wrapper">
     <div class="container">
@@ -214,6 +214,7 @@
             </div>
 
             <div role="tabpanel" class="tab-pane fade in" id="events_tab">
+                <p>If you are interested in sponsoring, speaking or attending any of the events below, please contact <a href="mailto:events@openstack.org">events@openstack.org</a>.</p>
                 <div class="inner-osdays">
                     <h2 class="tab-title">OpenStack and OpenInfra Days by Region</h2>
                     <div class="osdays-events">
