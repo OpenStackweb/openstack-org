@@ -19,7 +19,7 @@ class PresentationCategory extends DataObject
 
     private static $db = array
     (
-        'Title'                     => 'Varchar',
+        'Title'                     => 'Varchar(255)',
         'Description'               => 'Text',
         'SessionCount'              => 'Int',
         'AlternateCount'            => 'Int',
@@ -28,7 +28,7 @@ class PresentationCategory extends DataObject
         'VotingVisible'             => 'Boolean',
         'ChairVisible'              => 'Boolean',
         'Code'                      => 'Varchar(5)',
-        'Slug'                      => 'Varchar',
+        'Slug'                      => 'Varchar(255)',
     );
 
     private static $defaults = array
