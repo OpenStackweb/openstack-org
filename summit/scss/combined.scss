@@ -1098,7 +1098,7 @@ footer {
   padding: 70px 0;
   background-image: url('#{$static_images_base_url}/boston/boston-bkgd.jpg');
   background-size: cover;
-  background-position: center bottom;
+  background-position: top bottom;
   background-repeat: no-repeat;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -1117,8 +1117,8 @@ footer {
   background-size: cover; }
 
 img.tokyo-landing-logo {
-  width:80%; 
-  margin-bottom: 7rem;
+  width:74%; 
+  margin-bottom: 6.5rem;
 }
 
 .save-the-date {
