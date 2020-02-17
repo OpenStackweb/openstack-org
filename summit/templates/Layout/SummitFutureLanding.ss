@@ -5,8 +5,8 @@
         <div class="landingintro">
             <div class="row">
                 <div class="col-md-12 join-us-text-black">
-                    OpenDev + PTG
-                    <p style="color:#000;font-weight: normal; font-size:.7em;margin-top:12px;">OpenDev + PTG is a collaborative event organized by the OSF (OpenStack Foundation) gathering developers, system architects, and operators to address common open source infrastructure challenges.</p>
+                    Open Infrastructure Summit
+                    <p style="color:#000;font-weight: normal; font-size:.7em;margin-top:12px;">Join the people building and operating open infrastructure, with hundreds of sessions and workshops on Container Infrastructure, CI/CD, Telecom + NFV, Public Cloud, Private & Hybrid Cloud, Security and members of open source communities like Airship, Ansible, Ceph, Docker, Kata Containers, Kubernetes, ONAP, OpenStack, Open vSwitch, OPNFV, StarlingX, Zuul and more.</p>
                 </div>
             </div>
     	    <div class="row">
@@ -17,12 +17,12 @@
             </div>
             <div class="row">
                 <div class="col-md-12 join-us-text-red">
-                        JUNE 8-11, 2020
+                        OCTOBER 19-23, 2020
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 join-us-text-black">
-                    VANCOUVER, BRITISH COLUMBIA
+                    BERLIN, GERMANY
                 </div>
             </div>
             <div class="row">
