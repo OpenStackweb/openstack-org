@@ -25,13 +25,13 @@
                     BERLIN, GERMANY
                 </div>
             </div>
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-md-12 join-us-text-register">
                     <a class="btn register-btn-lrg red eventbrite-register-link" href="https://opendevptg2020.eventbrite.com/?aff=opendevptg2020">
                             Register <i class="fa fa-arrow-right"></i>
                         </a>
                 </div>
-            </div>
+            </div> -->
 
                     <!-- <div class="save-the-date"> Save The Date! </div>
     			<h1> $IntroText </h1>
@@ -82,7 +82,7 @@
     
 </div>
 <div class="row future-text-wrapper blue">
-    <script type="text/javascript" src="https://signup.e2ma.net/tts_signup/1910468/dc3896463a1fcdd2f57f993be48d29f6/1771360/"></script><div id="load_check" class="signup_form_message" >This form needs Javascript to display, which your browser doesn't support. <a href="https://signup.e2ma.net/signup/1910468/1771360/"> Sign up here</a> instead </div><script type="text/javascript">signupFormObj.drawForm();</script>
+    <script type="text/javascript" src="https://signup.e2ma.net/signup/1915805/1771360/"></script><div id="load_check" class="signup_form_message" >This form needs Javascript to display, which your browser doesn't support. <a href="https://signup.e2ma.net/signup/1915805/1771360/"> Sign up here</a> instead </div><script type="text/javascript">signupFormObj.drawForm();</script>
     <p>&nbsp;</p>
     <p>&nbsp;</p>
     <img src="{$Top.CloudUrl('assets/summits/Vancouver2020/OSF-logo.png')}" class="osf-logo">
