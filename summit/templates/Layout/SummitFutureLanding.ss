@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-md-12 join-us-text-black">
                     Open Infrastructure Summit
-                    <p style="color:#000;font-weight: normal; font-size:.7em;margin-top:12px;">Join the people building and operating open infrastructure, with hundreds of sessions and workshops on Container Infrastructure, CI/CD, Telecom + NFV, Public Cloud, Private & Hybrid Cloud, Security and members of open source communities like Airship, Ansible, Ceph, Docker, Kata Containers, Kubernetes, ONAP, OpenStack, Open vSwitch, OPNFV, StarlingX, Zuul and more.</p>
+                    <p style="color:#000;font-weight: normal; font-size:.7em;margin-top:12px;">Join the people building and operating open infrastructure, with hundreds of sessions and workshops on Container Infrastructure, CI/CD, Telecom + NFV, Public Cloud, Private & Hybrid Cloud, Security and members of open source communities like Airship, Ansible, Ceph, Docker, Kata Containers, Kubernetes, ONAP, OpenStack, Open vSwitch, OPNFV, StarlingX, Zuul and more.</p> 
                 </div>
             </div>
     	    <div class="row">
