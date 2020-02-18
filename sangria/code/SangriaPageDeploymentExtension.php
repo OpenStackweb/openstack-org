@@ -1348,8 +1348,10 @@ SQL;
 
         $join_group_ids = implode(",",$group_ids);
 
-        return DB::query("SELECT COUNT(DISTINCT M.Email) from Member M
-                            LEFT JOIN Group_Members GM ON GM.MemberID = M.ID 
+        return DB::query("SELECT COUNT(M.ID) from Member M
+                            INNER JOIN Group_Members GM ON GM.MemberID = M.ID 
+                            INNER JOIN Continent_Countries CC ON M.Country = CC.CountryCode
+                            INNER JOIN Continent C ON C.ID = CC.ContinentID
                             WHERE GM.GroupID IN ($join_group_ids);")
             ->value();
     }
