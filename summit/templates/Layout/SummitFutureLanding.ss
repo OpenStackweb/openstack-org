@@ -24,6 +24,7 @@
                 <div class="col-md-12 join-us-text-black">
                     BERLIN, GERMANY
                 </div>
+                <div class="summit-date">Centrally located at the <a href="https://www.google.com/maps/place/bcc+Berlin+Congress+Center+GmbH/@52.5206407,13.4138012,17z/data=!3m1!4b1!4m5!3m4!1s0x47a84e1898c0bf43:0xd2a15220241f2080!8m2!3d52.5206375!4d13.4159899" style="color:#fff;text-decoration:underline;" target="_blank">bcc Berlin Congress Center GmbH</a></div>
             </div>
             <!-- <div class="row">
                 <div class="col-md-12 join-us-text-register">
