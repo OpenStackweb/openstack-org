@@ -24,9 +24,6 @@ SummitSecurity:
 EventbriteOrderPlacedEndpoint:
   dependencies:
     EventbriteEventManager: '%$EventbriteEventManager'
-EditProfilePageSummitAttendeeExtension:
-  dependencies:
-    EventbriteEventManager: '%$EventbriteEventManager'
 SummitAppSchedPage_Controller:
   dependencies:
     SpeakerRepository: "%$SpeakerRepository"

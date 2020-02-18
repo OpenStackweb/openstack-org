@@ -7,9 +7,6 @@ Member:
     - PresentationMemberExtension
     - MemberTokenProvider
     - AttendeeMember
-EditProfilePage_Controller:
-  extensions:
-    - EditProfilePageSummitAttendeeExtension
 MemberTokenProvider:
   token_expire: 500000
 PresentationCategory:
