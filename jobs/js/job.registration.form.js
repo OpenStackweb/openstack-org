@@ -49,6 +49,43 @@ jQuery(document).ready(function($) {
     if(form.length > 0){
         var form_id = form.attr('id');
 
+        //main form validation
+        form_validator = form.validate({
+            onfocusout: false,
+            focusCleanup: true,
+            ignore: [],
+            rules: {
+              point_of_contact_name    : { required: true , ValidPlainText:true, maxlength: 100 },
+              point_of_contact_email   : { required: true , email:true, maxlength: 100 },
+              title          : { required: true , ValidPlainText:true, maxlength: 100 },
+              description    : { required: true },
+              instructions   : { required: true },
+              url            : {required: true, email_or_url: true, maxlength: 255},
+              job_type       : {required: true},
+              location_type  : {required: true,locations_min_count:[1,  $('#locations_table',form)]},
+              city:{required:true}
+            },
+            focusInvalid: false,
+            invalidHandler: function(form, validator) {
+              if (!validator.numberOfInvalids())
+                return;
+              var element = $(validator.errorList[0].element);
+              if(!element.is(":visible")){
+                element = element.parent();
+              }
+
+              $('html, body').animate({
+                scrollTop: element.offset().top
+              }, 2000);
+            },
+            errorPlacement: function(error, element) {
+              if(!element.is(":visible")){
+                element = element.parent();
+              }
+              error.insertAfter(element);
+            }
+        });
+
         tinymce.init({
             selector: "textarea",
             width:      '100%',
@@ -60,7 +97,7 @@ jQuery(document).ready(function($) {
             menubar:    false,
         });
 
-        jQuery.validator.addMethod("locations_min_count", function (value, element, arg) {
+        $.validator.addMethod("locations_min_count", function (value, element, arg) {
             var location_type = $('#'+form_id+'_location_type',form).val();
             if(location_type!=='Various') return true;
             var min_count      = arg[0];
@@ -69,7 +106,7 @@ jQuery(document).ready(function($) {
             return rows.length >= min_count;
         }, "Please Add at least {0} items.");
 
-        jQuery.validator.addMethod("email_or_url", function (value, element, param) {
+        $.validator.addMethod("email_or_url", function (value, element, param) {
             var result = $.validator.methods['email'].call(this, value, element, param);
             if (!result) {
                 result = $.validator.methods['url'].call(this, value, element, param);
@@ -80,42 +117,7 @@ jQuery(document).ready(function($) {
         }, "Please add a valid url (with http://) or email address.");
 
 
-        //main form validation
-        form_validator = form.validate({
-            onfocusout: false,
-            focusCleanup: true,
-            ignore: [],
-            rules: {
-                point_of_contact_name    : { required: true , ValidPlainText:true, maxlength: 100 },
-                point_of_contact_email   : { required: true , email:true, maxlength: 100 },
-                title          : { required: true , ValidPlainText:true, maxlength: 100 },
-                description    : { required: true },
-                instructions   : { required: true },
-                url            : {required: true, email_or_url: true, maxlength: 255},
-                job_type       : {required: true},
-                location_type  : {required: true,locations_min_count:[1,  $('#locations_table',form)]},
-                city:{required:true}
-            },
-            focusInvalid: false,
-            invalidHandler: function(form, validator) {
-                if (!validator.numberOfInvalids())
-                    return;
-                var element = $(validator.errorList[0].element);
-                if(!element.is(":visible")){
-                    element = element.parent();
-                }
 
-                $('html, body').animate({
-                    scrollTop: element.offset().top
-                }, 2000);
-            },
-            errorPlacement: function(error, element) {
-                if(!element.is(":visible")){
-                    element = element.parent();
-                }
-                error.insertAfter(element);
-            }
-        });
 
         var d = new Date();
         d.setMonth(d.getMonth() + 2);
