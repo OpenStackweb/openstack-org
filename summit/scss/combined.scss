@@ -1093,7 +1093,6 @@ footer {
   position: relative;
   width: 100%;
   text-align: center;
-  padding: 70px 0;
   background-image: url('#{$static_images_base_url}/boston/boston-bkgd.jpg');
   background-size: cover;
   background-position: top bottom;
@@ -1108,7 +1107,7 @@ footer {
   position: relative;
   width: 100%;
   text-align: center;
-  padding: 70px 0;
+  padding-top: 70px;
   background: url('#{$static_images_base_url}/summits/overview/austin-bkgd-lrg.jpg') no-repeat right top;
   background-size: cover; }
 
