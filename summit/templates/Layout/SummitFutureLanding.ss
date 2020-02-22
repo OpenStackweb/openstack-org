@@ -46,7 +46,7 @@
         <input id="id_source" name="source" type="hidden">
         <input id="id_group_4036448" name="group_4036448" type="hidden" value="4036448">
         <input type="hidden" name="private_set" value="{num_private}">
-        <input placeholder="Email Address" id="id_email" name="email" type="email" required class="feedback-input" size="is-large">
+        <input placeholder="Email Address" id="id_email" name="email" type="email" required class="id_email" size="is-large">
         </input>
           <a href="#" class="e2ma_signup_form_button" onclick="document.getElementById('e2ma_signup').submit();" data-sitekey="6LeKvr0UAAAAAItxLgobGpatgngglauCXrZw2Yw4" data-callback='onSubmit'>
             <span>SUBMIT</span>
