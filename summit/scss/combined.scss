@@ -917,7 +917,6 @@ footer {
   border: 2px solid #666; }
 
 .feedback-btn {
-  margin-left: 11px;
   display: inline-block;
   background: #222;
   border: 2px solid #666;
@@ -1117,7 +1116,7 @@ footer {
   background-size: cover; }
 
 img.tokyo-landing-logo {
-  width:74%; 
+  width:84%; 
   margin-bottom: 6.5rem;
 }
 
@@ -1290,12 +1289,24 @@ a.current-summit-link {
 /*End Austin Landing*/
 
 /* Shanghai landing */
-
+.join-us-text-white {
+  color: #fff;
+  font-size: 2.6em;
+  font-weight: 900;
+}
+.join-us-text-white-date {
+  color: #fff;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding-top:15px;
+}
 .join-us-text-black {
   color: #000;
-  font-size: 1.7em;
-  font-weight: bold;
-  margin-bottom:40px;
+  font-size: 1.2em;
+  font-weight: normal;
+}
+.join-us-text-black a {
+  color: #ed1944;
 }
 .join-us-text-red {
   font-size: 2.4em;
@@ -1397,6 +1408,13 @@ a.sponsors_button, a:visited.sponsors_button  {
     background-color: #ffd602;
     text-align: center;
     margin:0 !important;
+}
+.future-text-wrapper.white {
+    width: 100%;
+    background-color: #fff;
+    text-align: center;
+    margin:0 !important;
+    margin-top: 30px;
 }
 /*End Shanghai landing */
 /* Presentation App */
