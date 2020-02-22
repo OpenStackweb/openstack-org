@@ -1345,6 +1345,7 @@ a.sponsors_button, a:visited.sponsors_button  {
   text-transform: uppercase;
   margin-bottom: 0.5em;
   font-weight: bold;
+  padding-top:70px;
 }
 .e2ma_signup_form_label {
   display: none;
@@ -1356,32 +1357,30 @@ a.sponsors_button, a:visited.sponsors_button  {
   display: none;
 }
 #id_email {
-  width: 400px;
-  height: 3em;
+  width: 30%;
+  height: 43px;
   color: #333;
   text-align: center;
+  border: none;
 }
 .e2ma_signup_form_required_footnote {
   display: none;
 }
 .e2ma_signup_form_button {
+  color:
   border: none;
   text-decoration: none;
-  background: #ed1944;
   cursor: pointer;
   text-align: center;
   transition: background 250ms ease-in-out, transform 150ms ease;
   -webkit-appearance: none;
   -moz-appearance: none;
-  margin-top: 1rem;
-  font-weight: bold;
-  border-radius: 2px;
   background:#ed1944;
-  color:white;
+  color:white !important;
   text-transform: uppercase;
   font-size: 1.1em;
   font-weight: 400;
-  padding: 12px 30px;
+  padding: 11.5px 30px;
 }
 .future-text-wrapper.blue {
     height:100%;
