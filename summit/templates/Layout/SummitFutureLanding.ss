@@ -37,29 +37,25 @@
     </div>
 </div>
 <div class="row future-text-wrapper blue">
-    <script type="text/javascript" src="https://signup.e2ma.net/tts_signup/1915805/dc3896463a1fcdd2f57f993be48d29f6/1771360/"></script><div id="load_check" class="signup_form_message" >This form needs Javascript to display, which your browser doesn't support. <a href="https://signup.e2ma.net/signup/1915805/1771360/"> Sign up here</a> instead </div><script type="text/javascript">signupFormObj.drawForm();</script>
-<div class="e2ma_signup_message" id="e2ma_signup_message">    
-        <div>Sign up to find out more.</div>
-</div>
-<div class="e2ma_signup_form_container">
-  <form method="post" id="e2ma_signup" onsubmit="return signupFormObj.checkForm(this)" action="https://app.e2ma.net/app2/audience/signup/1915805/1771360/">
-    <input id="id_prev_member_email" name="prev_member_email" type="hidden">
-    <input id="id_source" name="source" type="hidden">
-    <input id="id_group_4036448" name="group_4036448" type="hidden" value="4036448">
-    <input type="hidden" name="private_set" value="{num_private}">
-    <input placeholder="Email Address" id="id_email" name="email" type="email" required class="feedback-input" size="is-large">
-    </input>
-      <!-- <button class="search-container-submit">Search</button> -->
-      <a href="#" class="e2ma_signup_form_button" onclick="document.getElementById('e2ma_signup').submit();" data-sitekey="6LeKvr0UAAAAAItxLgobGpatgngglauCXrZw2Yw4" data-callback='onSubmit'>
-        <span>SUBMIT</span>
-        <i class="fa fa-chevron-right"></i>
-      </a>
-  </form>
-</div>
-
-
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-    <img src="{$Top.CloudUrl('assets/summits/Vancouver2020/OSF-logo.png')}" class="osf-logo">
+    <div class="e2ma_signup_message" id="e2ma_signup_message">    
+            <div>Sign up to find out more.</div>
+    </div>
+    <div class="e2ma_signup_form_container">
+      <form method="post" id="e2ma_signup" onsubmit="return signupFormObj.checkForm(this)" action="https://app.e2ma.net/app2/audience/signup/1915805/1771360/">
+        <input id="id_prev_member_email" name="prev_member_email" type="hidden">
+        <input id="id_source" name="source" type="hidden">
+        <input id="id_group_4036448" name="group_4036448" type="hidden" value="4036448">
+        <input type="hidden" name="private_set" value="{num_private}">
+        <input placeholder="Email Address" id="id_email" name="email" type="email" required class="feedback-input" size="is-large">
+        </input>
+          <a href="#" class="e2ma_signup_form_button" onclick="document.getElementById('e2ma_signup').submit();" data-sitekey="6LeKvr0UAAAAAItxLgobGpatgngglauCXrZw2Yw4" data-callback='onSubmit'>
+            <span>SUBMIT</span>
+            <i class="fa fa-chevron-right"></i>
+          </a>
+      </form>
+    </div>
+    <div>
+        <img src="{$Top.CloudUrl('assets/summits/Vancouver2020/OSF-logo.png')}" class="osf-logo">
+    </div>
 </div>
 
