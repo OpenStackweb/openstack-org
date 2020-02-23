@@ -1391,8 +1391,8 @@ a.sponsors_button, a:visited.sponsors_button  {
     margin:0 !important;
 }
 .osf-logo {
-   width:25%;
-   margin-top:15px;
+   width:18%;
+   margin-top:30px;
 }
 @media (min-width: 1300px) {
     .future-text-wrapper.blue {
@@ -1400,6 +1400,11 @@ a.sponsors_button, a:visited.sponsors_button  {
       max-height: 500px;
     }
   }
+@media (max-width: 767px) {
+    .osf-logo {
+   width:40%;
+  } 
+}
 .future-text-wrapper.yellow {
     height:2px;
     width: 100%;
