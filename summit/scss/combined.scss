@@ -1293,6 +1293,14 @@ a.current-summit-link {
   font-size: 3.6em;
   font-weight: 900;
 }
+@media (max-width: 767px) {
+    .join-us-text-white {
+  font-size: 1.8em;
+}
+img.tokyo-landing-logo {
+    width: 80%;
+}
+}
 .join-us-text-white-date {
   color: #fff;
   font-size: 1.2em;
