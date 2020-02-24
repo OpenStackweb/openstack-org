@@ -293,7 +293,7 @@
                     IRC channels (on Freenode)
                 </div>
                 <div>
-                    <a href="https://docs.openstack.org/contributors/common/irc.html" target="_blank">How to set up IRC</a>
+                    <a href="https://docs.openstack.org/contributors/common/irc.html" target="_blank">How to set up IRC</a><br>
                     <a href="https://webchat.freenode.net/?channels=openstack" target="_blank">#openstack</a> (usage questions)<br>
                     <a href="https://webchat.freenode.net/?channels=openstack-dev" target="_blank">#openstack-dev</a> (development questions)<br>
                     <a href="https://webchat.freenode.net/?channels=openstack-infra" target="_blank">#openstack-infra</a> (project infrastructure)<br>
