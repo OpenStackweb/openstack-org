@@ -40,7 +40,7 @@
                 <div class="item">
                     <div class="video">
                         <div class="triangle-new">
-                            <p>New Event!<p>
+                            <p>Next Summit!<p>
                         </div>
                         <a href="https://www.flickr.com/photos/sgerner/22636377307" target="_blank" class="photo-credit" title="Steven Gerner">
                             <i class="fa fa-info-circle"></i>
