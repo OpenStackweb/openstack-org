@@ -31,6 +31,7 @@
             <% include SpokenLanguages %>
             <% include Videos %>
             <% include AdditionalResources %>
+            <% include CustomerCaseStudies %>
         </fieldset>
     </div>
     <div class="footer_buttons">

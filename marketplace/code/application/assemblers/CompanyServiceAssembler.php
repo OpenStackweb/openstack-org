@@ -30,6 +30,12 @@ final class CompanyServiceAssembler {
 			array_push($additional_resources,CompanyServiceAssembler::convertResource2Array($resource));
 		}
 		$res['additional_resources'] = $additional_resources;
+        //case studies
+        $customer_case_studies = array();
+        foreach ($company_service->getCustomerCaseStudies() as $caseStudy) {
+            array_push($customer_case_studies,CompanyServiceAssembler::convertCaseStudy2Array($caseStudy));
+        }
+        $res['customer_case_studies'] = $customer_case_studies;
 		//videos
 		$videos = array();
 		foreach($company_service->getVideos() as $video){
@@ -52,5 +58,14 @@ final class CompanyServiceAssembler {
 		$res['link']  = $resource->getUri();
 		return $res;
 	}
+
+    public static function convertCaseStudy2Array(ICustomerCaseStudy $caseStudy){
+        $res = array();
+        $res['id']    = $caseStudy->getIdentifier();
+        $res['name']  = $caseStudy->getName();
+        $res['order'] = $caseStudy->getOrder();
+        $res['link']  = $caseStudy->getUri();
+        return $res;
+    }
 
 } 

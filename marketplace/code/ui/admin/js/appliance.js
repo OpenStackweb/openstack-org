@@ -25,6 +25,7 @@ jQuery(document).ready(function($){
         $("#components_form").components();
         $("#additional-resources-form").additional_resources();
         $("#support-channels-form").support_channels();
+        $("#customer-case-studies-form").customer_case_studies();
 
         //if we are editing data, load it ...
         if(typeof(appliance)!=='undefined'){
@@ -57,6 +58,7 @@ jQuery(document).ready(function($){
             $("#support-channels-form").support_channels('load',appliance.regional_support);
             $("#videos-form").videos('load',appliance.videos);
             $("#additional-resources-form").additional_resources('load',appliance.additional_resources);
+            $("#customer-case-studies-form").customer_case_studies('load',appliance.customer_case_studies);
         }
 
         $('.save-appliance').click(function(event){
@@ -211,6 +213,7 @@ jQuery(document).ready(function($){
 function serializeAppliance(form, publish){
 
     var additional_resources = $("#additional-resources-form").additional_resources('serialize');
+    var customer_case_studies = $("#customer-case-studies-form").customer_case_studies('serialize');
     var regional_support     = $("#support-channels-form").support_channels('serialize');
     var capabilities         = $("#components_form").components('serialize');
     var guest_os             = $("#guest_os_form").guest_os('serialize');
@@ -218,6 +221,7 @@ function serializeAppliance(form, publish){
     var videos               = $("#videos-form").videos('serialize');
 
     if(additional_resources !== false &&
+      customer_case_studies !== false &&
         regional_support    !== false &&
         capabilities        !== false &&
         guest_os            !== false &&
@@ -238,6 +242,7 @@ function serializeAppliance(form, publish){
         appliance.capabilities            = capabilities;
         appliance.regional_support        = regional_support;
         appliance.additional_resources    = additional_resources;
+        appliance.customer_case_studies   = customer_case_studies;
         appliance.published               = publish ? 1 : 0;
 
         return appliance;

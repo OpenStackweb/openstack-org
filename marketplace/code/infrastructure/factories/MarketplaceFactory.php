@@ -90,6 +90,21 @@ final class MarketplaceFactory implements IMarketplaceFactory {
 		return $resource;
 	}
 
+    /**
+     * @param string          $name
+     * @param string          $uri
+     * @param ICompanyService $company_service
+     * @return ICustomerCaseStudy
+     */
+    public function buildCustomerCaseStudy($name, $uri, ICompanyService $company_service)
+    {
+        $caseStudy = new CustomerCaseStudy;
+        $caseStudy->setName($name);
+        $caseStudy->setUri($uri);
+        $caseStudy->setOwner($company_service);
+        return $caseStudy;
+    }
+
 
 	/**
 	 * @param string                $name

@@ -28,6 +28,12 @@ interface IValidatorFactory {
 	 */
 	public function buildValidatorForCompanyResource(array $data);
 
+    /**
+     * @param array $data
+     * @return IValidator
+     */
+    public function buildValidatorForCustomerCaseStudy(array $data);
+
 	/**
 	 * @param array $data
 	 * @return IValidator

@@ -24,6 +24,7 @@ jQuery(document).ready(function($){
         $("#videos-form").videos();
         $("#support-channels-form").support_channels();
         $("#additional-resources-form").additional_resources();
+        $("#customer-case-studies-form").customer_case_studies();
 
         //if we are editing data, load it ...
         if(typeof(remote_cloud)!=='undefined'){
@@ -66,6 +67,7 @@ jQuery(document).ready(function($){
             $("#videos-form").videos('load',remote_cloud.videos);
             $("#support-channels-form").support_channels('load',remote_cloud.regional_support);
             $("#additional-resources-form").additional_resources('load',remote_cloud.additional_resources);
+            $("#customer-case-studies-form").customer_case_studies('load',remote_cloud.customer_case_studies);
         }
 
         $('.save-remote-cloud').click(function(event){
@@ -224,6 +226,7 @@ jQuery(document).ready(function($){
 function serializeRemoteCloud(form, publish){
 
     var additional_resources = $("#additional-resources-form").additional_resources('serialize');
+    var customer_case_studies = $("#customer-case-studies-form").customer_case_studies('serialize');
     var regional_support     = $("#support-channels-form").support_channels('serialize');
     var capabilities         = $("#components_form").components('serialize');
     var guest_os             = $("#guest_os_form").guest_os('serialize');
@@ -231,6 +234,7 @@ function serializeRemoteCloud(form, publish){
     var videos               = $("#videos-form").videos('serialize');
 
     if(additional_resources !== false &&
+      customer_case_studies !== false &&
         regional_support    !== false &&
         capabilities        !== false &&
         guest_os            !== false &&
@@ -256,6 +260,7 @@ function serializeRemoteCloud(form, publish){
         remote_cloud.capabilities            = capabilities;
         remote_cloud.regional_support        = regional_support;
         remote_cloud.additional_resources    = additional_resources;
+        remote_cloud.customer_case_studies   = customer_case_studies;
         remote_cloud.published               = publish? 1:0;
 
         return remote_cloud;

@@ -71,6 +71,29 @@ class ValidatorFactory
 		return ValidatorService::make($data, $rules, $messages);
 	}
 
+    /**
+     * @param array $data
+     * @return IValidator
+     */
+    public function buildValidatorForCustomerCaseStudy(array $data)
+    {
+
+        $rules = array(
+            'name' => 'required|text|max:250',
+            'link' => 'required|url',
+        );
+
+        $messages = array(
+            'name.required' => '(additional case study) - :attribute is required',
+            'name.text'     => '(additional case study) - :attribute should be valid text.',
+            'name.max'      => '(additional case study) - :attribute should have less than 250 chars.',
+            'link.required' => '(additional case study) - :attribute is required',
+            'link.url'      => '(additional case study) - :attribute should be valid url.',
+        );
+
+        return ValidatorService::make($data, $rules, $messages);
+    }
+
 	/**
 	 * @param array $data
 	 * @return IValidator

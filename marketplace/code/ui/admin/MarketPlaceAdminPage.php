@@ -512,6 +512,7 @@ class MarketPlaceAdminPage_Controller extends AdminController
         Requirements::javascript('marketplace/code/ui/admin/js/videos.js');
         Requirements::javascript('marketplace/code/ui/admin/js/support.channels.js');
         Requirements::javascript('marketplace/code/ui/admin/js/additional.resources.js');
+        Requirements::javascript('marketplace/code/ui/admin/js/customer.case.studies.js');
         Requirements::javascript('marketplace/code/ui/admin/js/marketplace.type.header.js');
         HtmlEditorField::include_js();
         Requirements::javascript('marketplace/code/ui/admin/js/distribution.js');
@@ -529,6 +530,7 @@ class MarketPlaceAdminPage_Controller extends AdminController
         Requirements::javascript('marketplace/code/ui/admin/js/videos.js');
         Requirements::javascript('marketplace/code/ui/admin/js/support.channels.js');
         Requirements::javascript('marketplace/code/ui/admin/js/additional.resources.js');
+        Requirements::javascript('marketplace/code/ui/admin/js/customer.case.studies.js');
         Requirements::javascript('marketplace/code/ui/admin/js/marketplace.type.header.js');
         HtmlEditorField::include_js();
         Requirements::javascript('marketplace/code/ui/admin/js/appliance.js');
@@ -546,6 +548,7 @@ class MarketPlaceAdminPage_Controller extends AdminController
         Requirements::javascript('marketplace/code/ui/admin/js/videos.js');
         Requirements::javascript('marketplace/code/ui/admin/js/support.channels.js');
         Requirements::javascript('marketplace/code/ui/admin/js/additional.resources.js');
+        Requirements::javascript('marketplace/code/ui/admin/js/customer.case.studies.js');
         Requirements::javascript('marketplace/code/ui/admin/js/pricing.schemas.js');
         Requirements::javascript('marketplace/code/ui/admin/js/datacenter.locations.js');
         Requirements::javascript('marketplace/code/ui/admin/js/marketplace.type.header.js');
@@ -567,6 +570,7 @@ class MarketPlaceAdminPage_Controller extends AdminController
         Requirements::javascript('marketplace/code/ui/admin/js/videos.js');
         Requirements::javascript('marketplace/code/ui/admin/js/support.channels.js');
         Requirements::javascript('marketplace/code/ui/admin/js/additional.resources.js');
+        Requirements::javascript('marketplace/code/ui/admin/js/customer.case.studies.js');
         Requirements::javascript('marketplace/code/ui/admin/js/pricing.schemas.js');
         Requirements::javascript('marketplace/code/ui/admin/js/datacenter.locations.js');
         Requirements::javascript('marketplace/code/ui/admin/js/marketplace.type.header.js');
@@ -587,6 +591,7 @@ class MarketPlaceAdminPage_Controller extends AdminController
         Requirements::javascript('marketplace/code/ui/admin/js/videos.js');
         Requirements::javascript('marketplace/code/ui/admin/js/support.channels.js');
         Requirements::javascript('marketplace/code/ui/admin/js/additional.resources.js');
+        Requirements::javascript('marketplace/code/ui/admin/js/customer.case.studies.js');
         Requirements::javascript('marketplace/code/ui/admin/js/marketplace.type.header.js');
         HtmlEditorField::include_js();
         Requirements::javascript('marketplace/code/ui/admin/js/remote_cloud.js');
@@ -601,6 +606,7 @@ class MarketPlaceAdminPage_Controller extends AdminController
         Requirements::javascript('marketplace/code/ui/admin/js/videos.js');
         Requirements::javascript('marketplace/code/ui/admin/js/support.channels.js');
         Requirements::javascript('marketplace/code/ui/admin/js/additional.resources.js');
+        Requirements::javascript('marketplace/code/ui/admin/js/customer.case.studies.js');
         Requirements::javascript('marketplace/code/ui/admin/js/reference.clients.js');
         Requirements::javascript('marketplace/code/ui/admin/js/services.offered.js');
         Requirements::javascript('marketplace/code/ui/admin/js/expertise.areas.js');

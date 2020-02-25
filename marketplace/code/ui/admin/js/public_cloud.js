@@ -26,6 +26,7 @@ jQuery(document).ready(function($){
         $("#additional-resources-form").additional_resources();
         $("#data-centers-form").datacenter_locations();
         $('#pricing_schema_form').pricing_schemas();
+        $("#customer-case-studies-form").customer_case_studies();
 
         //if we are editing data, load it ...
         if(typeof(public_cloud)!=='undefined'){
@@ -61,6 +62,7 @@ jQuery(document).ready(function($){
             $("#support-channels-form").support_channels('load',public_cloud.regional_support);
             $("#additional-resources-form").additional_resources('load',public_cloud.additional_resources);
             $("#data-centers-form").datacenter_locations('load',public_cloud.data_centers);
+            $("#customer-case-studies-form").customer_case_studies('load',public_cloud.customer_case_studies);
 
         }
 
@@ -300,6 +302,7 @@ jQuery(document).ready(function($){
 function serializePublicCloud(form, publish){
 
     var additional_resources = $("#additional-resources-form").additional_resources('serialize');
+    var customer_case_studies = $("#customer-case-studies-form").customer_case_studies('serialize');
     var regional_support     = $("#support-channels-form").support_channels('serialize');
     var capabilities         = $("#components_form").components('serialize');
     var guest_os             = $("#guest_os_form").guest_os('serialize');
@@ -309,6 +312,7 @@ function serializePublicCloud(form, publish){
     var pricing_schemas      = $("#pricing_schema_form").pricing_schemas('serialize');
     var public_cloud = {};
     if( additional_resources !== false &&
+      customer_case_studies !== false &&
         regional_support    !== false &&
         capabilities        !== false &&
         guest_os            !== false &&
@@ -336,6 +340,7 @@ function serializePublicCloud(form, publish){
         }
         public_cloud.regional_support        = regional_support;
         public_cloud.additional_resources    = additional_resources;
+        public_cloud.customer_case_studies   = customer_case_studies;
         public_cloud.data_centers            = data_centers;
         public_cloud.published               = publish? 1:0;
         return public_cloud;

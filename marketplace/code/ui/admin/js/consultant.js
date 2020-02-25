@@ -26,6 +26,7 @@ jQuery(document).ready(function($){
         $('#offices_form').offices();
         $('#videos-form').videos();
         $('#additional-resources-form').additional_resources();
+        $("#customer-case-studies-form").customer_case_studies();
 
         //if we are editing data, load it ...
         if(typeof(consultant)!=='undefined'){
@@ -61,6 +62,7 @@ jQuery(document).ready(function($){
             $('#services_offered_form').services_offered('load',consultant.services_offered);
             $('#languages_spoken_form').spoken_languages('load',consultant.languages_spoken);
             $('#offices_form').offices('load',consultant.offices);
+            $("#customer-case-studies-form").customer_case_studies('load',consultant.customer_case_studies);
         }
 
         $('.save-consultant').click(function(event){
@@ -86,6 +88,7 @@ jQuery(document).ready(function($){
             var offices                  = $('#offices_form').offices('serialize');
             var videos                   = $('#videos-form').videos('serialize');
             var additional_resources     = $('#additional-resources-form').additional_resources('serialize');
+            var customer_case_studies    = $("#customer-case-studies-form").customer_case_studies('serialize');
 
             if(expertise_areas!==false &&
                 configuration_management!== false &&
@@ -95,6 +98,7 @@ jQuery(document).ready(function($){
                 languages_spoken !== false &&
                 offices !== false &&
                 videos !== false &&
+              customer_case_studies !== false &&
                 additional_resources !== false ){
 
                 ajaxIndicatorStart('saving data.. please wait..');
@@ -116,6 +120,7 @@ jQuery(document).ready(function($){
                     offices: offices,
                     videos: videos,
                     additional_resources: additional_resources,
+                    customer_case_studies: customer_case_studies,
                     published: 0
                 }
                 $('.save-consultant').prop('disabled',true);

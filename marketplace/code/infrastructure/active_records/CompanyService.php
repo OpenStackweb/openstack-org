@@ -43,10 +43,11 @@ class CompanyService
 	);
 
 	static $has_many = array(
-		'Resources'  => 'CompanyServiceResource',
-		'Videos'     => 'MarketPlaceVideo',
-        'Reviews'    => 'MarketPlaceReview'
-	);
+		'Resources'             => 'CompanyServiceResource',
+		'Videos'                => 'MarketPlaceVideo',
+        'Reviews'               => 'MarketPlaceReview',
+        'CustomerCaseStudies'   => 'CustomerCaseStudy',
+    );
 
 	protected function onBeforeWrite() {
 		//generate slug...
@@ -204,6 +205,36 @@ class CompanyService
 		}
 	}
 
+    public function addCustomerCaseStudy(ICustomerCaseStudy $caseStudy){
+
+        $new_order = 0;
+        $caseStudies = $this->getCustomerCaseStudies();
+        if(count($caseStudies)>0){
+            $last_one  = end($caseStudies);
+            $new_order = $last_one->getOrder()+1;
+        }
+        $caseStudy->setOrder($new_order);
+        AssociationFactory::getInstance()->getOne2ManyAssociation($this,'CustomerCaseStudies')->add($caseStudy);
+    }
+
+    public function getCustomerCaseStudies(){
+        $query = new QueryObject($this);
+        $query->addOrder(QueryOrder::asc('Order'));
+        return AssociationFactory::getInstance()->getOne2ManyAssociation($this,'CustomerCaseStudies',$query)->toArray();
+    }
+
+    /**
+     * @param array $new_sort
+     */
+    public function sortCustomerCaseStudies(array $new_sort)
+    {
+        foreach($this->getCustomerCaseStudies() as $caseStudy){
+            $new_order = array_search($caseStudy->getIdentifier(),$new_sort);
+            if(!$new_order) continue;
+            $caseStudy->setOrder($new_order);
+        }
+    }
+
 	/**
 	 * @param IMarketPlaceVideo $video
 	 * @return void
@@ -248,6 +279,11 @@ class CompanyService
 	{
 		AssociationFactory::getInstance()->getOne2ManyAssociation($this,'Resources')->removeAll();
 	}
+
+    public function clearCustomerCaseStudies()
+    {
+        AssociationFactory::getInstance()->getOne2ManyAssociation($this,'CustomerCaseStudies')->removeAll();
+    }
 
 	/**
 	 * @return string

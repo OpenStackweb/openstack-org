@@ -67,6 +67,15 @@ interface  IMarketplaceFactory {
 	 */
 	public function buildResource($name,$uri,ICompanyService $company_service);
 
+    // caseStudies
+    /**
+     * @param string          $name
+     * @param string          $uri
+     * @param ICompanyService $company_service
+     * @return ICustomerCaseStudy
+     */
+    public function buildCustomerCaseStudy($name,$uri,ICompanyService $company_service);
+
 	/**
 	 * @param int $region_id
 	 * @return IRegion

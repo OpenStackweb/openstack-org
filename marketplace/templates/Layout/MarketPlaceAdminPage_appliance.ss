@@ -28,6 +28,7 @@
         <% include Videos %>
         <% include SupportChannels %>
         <% include AdditionalResources %>
+        <% include CustomerCaseStudies %>
         </fieldset>
     </div>
     <div class="footer_buttons">

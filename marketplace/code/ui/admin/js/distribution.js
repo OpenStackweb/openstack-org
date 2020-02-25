@@ -24,6 +24,7 @@ jQuery(document).ready(function($){
         $("#videos-form").videos();
         $("#support-channels-form").support_channels();
         $("#additional-resources-form").additional_resources();
+        $("#customer-case-studies-form").customer_case_studies();
 
         //if we are editing data, load it ...
         if(typeof(distribution)!=='undefined'){
@@ -55,6 +56,7 @@ jQuery(document).ready(function($){
             $("#videos-form").videos('load',distribution.videos);
             $("#support-channels-form").support_channels('load',distribution.regional_support);
             $("#additional-resources-form").additional_resources('load',distribution.additional_resources);
+            $("#customer-case-studies-form").customer_case_studies('load',distribution.customer_case_studies);
         }
 
         $('.save-distribution').click(function(event){
@@ -217,6 +219,7 @@ jQuery(document).ready(function($){
 function serializeDistribution(form, publish){
 
     var additional_resources = $("#additional-resources-form").additional_resources('serialize');
+    var customer_case_studies = $("#customer-case-studies-form").customer_case_studies('serialize');
     var regional_support     = $("#support-channels-form").support_channels('serialize');
     var capabilities         = $("#components_form").components('serialize');
     var guest_os             = $("#guest_os_form").guest_os('serialize');
@@ -224,6 +227,7 @@ function serializeDistribution(form, publish){
     var videos               = $("#videos-form").videos('serialize');
 
     if(additional_resources !== false &&
+        customer_case_studies !== false &&
         regional_support    !== false &&
         capabilities        !== false &&
         guest_os            !== false &&
@@ -245,6 +249,7 @@ function serializeDistribution(form, publish){
         distribution.capabilities            = capabilities;
         distribution.regional_support        = regional_support;
         distribution.additional_resources    = additional_resources;
+        distribution.customer_case_studies   = customer_case_studies;
         distribution.published               = publish? 1:0;
 
         return distribution;

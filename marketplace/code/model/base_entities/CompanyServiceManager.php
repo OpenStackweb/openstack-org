@@ -229,6 +229,13 @@ abstract class CompanyServiceManager
                 $this->registerCompanyServiceResource($data_resource, $company_service);
             }
         }
+        // case studies
+        if (array_key_exists('customer_case_studies', $data) && is_array($data['customer_case_studies'])) {
+            $data_studies = $data['customer_case_studies'];
+            foreach ($data_studies as $data_study) {
+                $this->registerCustomerCaseStudy($data_study, $company_service);
+            }
+        }
         // videos
         if (array_key_exists('videos', $data) && is_array($data['videos'])) {
             $videos = $data['videos'];
@@ -243,6 +250,7 @@ abstract class CompanyServiceManager
     {
         $company_service->clearVideos();
         $company_service->clearResources();
+        $company_service->clearCustomerCaseStudies();
         return $company_service;
     }
 
@@ -374,6 +382,23 @@ abstract class CompanyServiceManager
         $company_service->addResource($resource);
 
         return $resource->getIdentifier();
+    }
+
+    protected function registerCustomerCaseStudy(array $data, ICompanyService $company_service)
+    {
+        $validator = $this->validator_factory->buildValidatorForCustomerCaseStudy($data);
+        if ($validator->fails()) {
+            return $this->validationError($validator->messages());
+        }
+        $caseStudy = $this->marketplace_factory->buildCustomerCaseStudy($data['name'], $data['link'], $company_service);
+        $company_service_id = $caseStudy->getOwner()->getIdentifier();
+        $company_service = $caseStudy->getOwner();
+        if ($company_service_id > 0 && !$this->repository->getById($company_service_id)) {
+            throw new NotFoundEntityException('CompanyService', sprintf("id %s", $company_service_id));
+        }
+        $company_service->addCustomerCaseStudy($caseStudy);
+
+        return $caseStudy->getIdentifier();
     }
 
     /**

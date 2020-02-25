@@ -74,6 +74,19 @@ interface ICompanyService extends IManipulableEntity
     public function sortResources(array $new_sort);
 
     /**
+     * @param ICompanyServiceResource $resource
+     * @return void
+     */
+    public function addCustomerCaseStudy(ICustomerCaseStudy $caseStudy);
+
+    /**
+     * @return ICustomerCaseStudy[]
+     */
+    public function getCustomerCaseStudies();
+
+    public function sortCustomerCaseStudies(array $new_sort);
+
+    /**
      * @param IMarketPlaceVideo $video
      * @return void
      */
@@ -87,6 +100,8 @@ interface ICompanyService extends IManipulableEntity
     public function clearVideos();
 
     public function clearResources();
+
+    public function clearCustomerCaseStudies();
 
 
 

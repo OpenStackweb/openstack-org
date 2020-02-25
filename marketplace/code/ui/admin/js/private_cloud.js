@@ -29,6 +29,7 @@ jQuery(document).ready(function($){
         $("#additional-resources-form").additional_resources();
         $("#data-centers-form").datacenter_locations();
         $('#pricing_schema_form').pricing_schemas();
+        $("#customer-case-studies-form").customer_case_studies();
 
         //if we are editing data, load it ...
         if(typeof(private_cloud)!=='undefined'){
@@ -64,6 +65,7 @@ jQuery(document).ready(function($){
             $("#support-channels-form").support_channels('load',private_cloud.regional_support);
             $("#additional-resources-form").additional_resources('load',private_cloud.additional_resources);
             $("#data-centers-form").datacenter_locations('load',private_cloud.data_centers);
+            $("#customer-case-studies-form").customer_case_studies('load',private_cloud.customer_case_studies);
         }
 
         $('.save-private-cloud').click(function(event){
@@ -312,8 +314,10 @@ function serializePrivateCloud(form, publish){
     var videos               = $("#videos-form").videos('serialize');
     var data_centers         = $("#data-centers-form").datacenter_locations('serialize');
     var pricing_schemas      = $("#pricing_schema_form").pricing_schemas('serialize');
+    var customer_case_studies = $("#customer-case-studies-form").customer_case_studies('serialize');
 
     if(additional_resources !== false &&
+      customer_case_studies !== false &&
         regional_support    !== false &&
         capabilities        !== false &&
         guest_os            !== false &&
@@ -340,6 +344,7 @@ function serializePrivateCloud(form, publish){
         }
         private_cloud.regional_support        = regional_support;
         private_cloud.additional_resources    = additional_resources;
+        private_cloud.customer_case_studies   = customer_case_studies;
         private_cloud.data_centers            = data_centers;
         private_cloud.published               = publish?1:0;
         return private_cloud;
