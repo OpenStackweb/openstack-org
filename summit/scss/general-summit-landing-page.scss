@@ -1684,14 +1684,15 @@ ul.navbar-main {
 }
 
 .all-summit .summits-wrap .video-container .item .video .triangle-new p {
-    text-align: left;
+    text-align: center;
     transform: rotate(-45deg);
-    top: -50px;
+    top: -90px;
     position: absolute;
     color: 
     #fff;
     left: 0;
     text-transform: uppercase;
+    padding-left: 7px;
 }
 .all-summit .summits-wrap .video-container .item h5 {
     color: #00468B;

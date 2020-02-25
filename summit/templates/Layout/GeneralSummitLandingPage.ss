@@ -7,34 +7,30 @@
                         <div class="triangle">
                             <p>Complete!<p>
                         </div>
-                        <a href="https://www.flickr.com/photos/sgerner/22636377307" target="_blank" class="photo-credit" title="Steven Gerner">
-                            <i class="fa fa-info-circle"></i>
-                        </a>
                     </div>
-                    <h4>Denver, Colorado</h4>
-                    <p>Apr 29-May 4, 2019</p>
+                    <h4>Open Infrastructure Summit</h4>
+                    <p><strong>Shanghai, China</strong></p>
+                    <p>Nov 4-6, 2019</p>
                     <p>
-                        <a href="/videos/summits/denver-2019" target="_blank" class="btn register-btn-lrg ">
-                            See Highlights
-                            <i class="fa fa-arrow-right"></i>
+                        <a class="btn register-btn-lrg" href="/videos/summits/shanghai-2019">
+                            See Highlights <i class="fa fa-arrow-right"></i>
                         </a>
-
                     </p>
-
                 </div>
             </div>
             <div class="video-container second col-md-4 col-sm-12 col-xs-12">
                 <div class="item">
                     <div class="video">
-                        <div class="triangle">
-                            <p>Complete!<p>
+                        <div class="triangle-new">
+                            <p>New Event!<p>
                         </div>
                     </div>
-                    <h4>Shanghai, China</h4>
-                    <p>Nov 4-6, 2019</p>
+                    <h4>OpenDev + PTG</h4>
+                    <p><strong>Vancouver, British Columbia</strong></p>
+                    <p>June 8-11, 2020</p>
                     <p>
-                        <a class="btn register-btn-lrg" href="/videos/summits/shanghai-2019">
-                            See Highlights <i class="fa fa-arrow-right"></i>
+                        <a class="btn register-btn-lrg red eventbrite-register-link" href="/summit/vancouver-2020">
+                            Join Us <i class="fa fa-arrow-right"></i>
                         </a>
                     </p>
 
@@ -44,15 +40,21 @@
                 <div class="item">
                     <div class="video">
                         <div class="triangle-new">
-                            <p>New!<p>
+                            <p>New Event!<p>
                         </div>
-                    </div>
-                    <h4>Vancouver, British Columbia</h4>
-                    <p>June 8-11, 2020</p>
-                    <p>
-                        <a class="btn register-btn-lrg red eventbrite-register-link" href="/summit/vancouver-2020">
-                            Learn More <i class="fa fa-arrow-right"></i>
+                        <a href="https://www.flickr.com/photos/sgerner/22636377307" target="_blank" class="photo-credit" title="Steven Gerner">
+                            <i class="fa fa-info-circle"></i>
                         </a>
+                    </div>
+                    <h4>Open Infrastructure Summit</h4>
+                    <p><strong>Berlin, Germany</strong></p>
+                    <p>Oct 19-23, 2020</p>
+                    <p>
+                        <a href="/videos/summits/berlin-2020" target="_blank" class="btn register-btn-lrg red eventbrite-register-link">
+                            Join Us
+                            <i class="fa fa-arrow-right"></i>
+                        </a>
+
                     </p>
 
                 </div>
