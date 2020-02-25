@@ -40,11 +40,6 @@ jobs:
     cron_expression: "00 06 * * *" # run at 0600 AM every day
     enabled: 1
 
-  - name: "SummitEventSetAvgRateTask"
-    params: "summit_id=27"
-    cron_expression: "*/10 * * * *" # run every 10 minutes
-    enabled: 1
-
   - name: "NewsArticlesUpdateTask"
     cron_expression: "*/10 * * * *" # run every 10 minutes
     enabled: 1
