@@ -29,6 +29,25 @@
         </div>
     <% end_if %>
 
+    <script type="application/javascript">
+        var summitId = $Summit.ID ;
+        var current_user = null;
+        var scheduleUrl = '{$Top.Link}';
+        var apiUrl = '{$getApiUrl().JS}'; //'https://testresource-server.openstack.org';
+        var accessToken = '{$getAccessToken().JS}';
+
+        <% if CurrentMember %>
+            <% with CurrentMember %>
+                current_user = {
+                    id: {$ID},
+                    first_name: '{$FirstName.JS}',
+                    last_name: '{$Surname.JS}',
+                };
+            <% end_with %>
+        <% end_if %>
+
+    </script>
+
     <div id="os-schedule-react"></div>
 </div>
 
