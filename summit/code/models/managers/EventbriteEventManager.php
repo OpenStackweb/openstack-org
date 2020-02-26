@@ -143,6 +143,13 @@ final class EventbriteEventManager implements IEventbriteEventManager
             $qty = 0;
             foreach ($list as $event)
             {
+                if($event->Summit()->exists() && $event->Summit()->isFinished()){
+                    $event->markAsProcessed('void');
+                    $event->write();
+                    $qty++;
+                    continue;
+                }
+
                 $json_data = $this->api->getEntity($event->getApiUrl(), array('expand' => 'attendees'));
                 if (isset($json_data['attendees']))
                 {

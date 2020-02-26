@@ -743,11 +743,20 @@ class Summit extends DataObject implements ISummit
 
     public static function get_not_finished(){
         return Summit::get()
-            //->where(' SummitEndDate > UTC_TIMESTAMP() ')
+            ->where(' SummitEndDate > UTC_TIMESTAMP() ')
             ->sort('SummitEndDate ASC');
     }
 
-
+    /**
+     * @return bool
+     * @throws Exception
+     */
+    public function isFinished(): bool{
+        $utc_timezone    = new DateTimeZone("UTC");
+        $summit_end_date = new DateTime($this->getField('SummitEndDate'), $utc_timezone);
+        $utc_now         = new DateTime('now',$utc_timezone);
+        return $summit_end_date < $utc_now;
+    }
 
     // LINK HELPERS
 
