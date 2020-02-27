@@ -24,6 +24,9 @@
                         <div class="triangle-new">
                             <p>New Event!<p>
                         </div>
+                        <a href="https://www.flickr.com/photos/sgerner/22636377307" target="_blank" class="photo-credit" title="Steven Gerner">
+                            <i class="fa fa-info-circle"></i>
+                        </a>
                     </div>
                     <h4>OpenDev + PTG</h4>
                     <p><strong>Vancouver, British Columbia</strong></p>
@@ -42,15 +45,12 @@
                         <div class="triangle-new">
                             <p>Next Summit!<p>
                         </div>
-                        <a href="https://www.flickr.com/photos/sgerner/22636377307" target="_blank" class="photo-credit" title="Steven Gerner">
-                            <i class="fa fa-info-circle"></i>
-                        </a>
                     </div>
                     <h4>Open Infrastructure Summit</h4>
                     <p><strong>Berlin, Germany</strong></p>
                     <p>Oct 19-23, 2020</p>
                     <p>
-                        <a href="/videos/summits/berlin-2020" target="_blank" class="btn register-btn-lrg red eventbrite-register-link">
+                        <a href="/summit/berlin-2020" target="_blank" class="btn register-btn-lrg red eventbrite-register-link">
                             Join Us
                             <i class="fa fa-arrow-right"></i>
                         </a>
