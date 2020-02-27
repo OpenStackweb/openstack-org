@@ -37,7 +37,7 @@ final class OIDCClientFactory
         $oidc->setVerifyHost(OIDC_VERIFY_HOST);
         $oidc->setVerifyPeer(OIDC_VERIFY_HOST);
 
-        $scopes = defined(OIDC_SCOPES) ? explode(' ', OIDC_SCOPES):explode(' ', self::DefaultScopes);
+        $scopes = defined('OIDC_SCOPES') ? explode(' ', OIDC_SCOPES):explode(' ', self::DefaultScopes);
         $oidc->addScope($scopes);
         // for refresh tokens
         $oidc->addScope('offline_access');
