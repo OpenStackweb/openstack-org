@@ -17,6 +17,8 @@ use Jumbojett\OpenIDConnectClient;
  */
 final class OIDCClientFactory
 {
+    const DefaultScopes = 'openid profile email address';
+
     public static function build():OpenIDConnectClient {
         $oidc = new OpenIDConnectClient(
             IDP_OPENSTACKID_URL,
@@ -32,15 +34,14 @@ final class OIDCClientFactory
             'end_session_endpoint'    => IDP_OPENSTACKID_URL.'/oauth2/end-session',
             'jwks_uri'                => IDP_OPENSTACKID_URL.'/oauth2/certs'
         ]);
-        // only dev
-        $oidc->addAuthParam( ["prompt" => "consent"]);
         $oidc->setVerifyHost(OIDC_VERIFY_HOST);
         $oidc->setVerifyPeer(OIDC_VERIFY_HOST);
-        $oidc->addScope('openid');
-        $oidc->addScope('profile');
-        $oidc->addScope('email');
-        $oidc->addScope('address');
+
+        $scopes = defined(OIDC_SCOPES) ? explode(' ', OIDC_SCOPES):explode(' ', self::DefaultScopes);
+        $oidc->addScope($scopes);
+        // for refresh tokens
         $oidc->addScope('offline_access');
+        $oidc->addAuthParam( ["prompt" => "consent"]);
         $oidc->setRedirectURL(OpenStackIdCommon::getReturnTo());
 
         return $oidc;
