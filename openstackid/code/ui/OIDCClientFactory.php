@@ -33,12 +33,14 @@ final class OIDCClientFactory
             'jwks_uri'                => IDP_OPENSTACKID_URL.'/oauth2/certs'
         ]);
         // only dev
+        $oidc->addAuthParam( ["prompt" => "consent"]);
         $oidc->setVerifyHost(OIDC_VERIFY_HOST);
         $oidc->setVerifyPeer(OIDC_VERIFY_HOST);
         $oidc->addScope('openid');
         $oidc->addScope('profile');
         $oidc->addScope('email');
         $oidc->addScope('address');
+        $oidc->addScope('offline_access');
         $oidc->setRedirectURL(OpenStackIdCommon::getReturnTo());
 
         return $oidc;
