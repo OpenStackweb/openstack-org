@@ -69,7 +69,7 @@ final class OpenStackIdAuthenticator extends Controller
             return $this->redirect($backUrl);
         }
         catch (OpenIDConnectClientException $ex) {
-            SS_Log ::log($ex, SS_Log::ERR);
+            SS_Log ::log($ex, SS_Log::WARN);
             return OpenStackIdCommon::error($ex->getMessage(), OpenStackIdCommon::getRedirectBackUrl());
         }
         catch (Exception $ex) {
