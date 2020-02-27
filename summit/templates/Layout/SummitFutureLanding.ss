@@ -19,18 +19,18 @@
                         OCTOBER 19-23, 2020
                 </div>
             </div>
-            <!-- <div class="row">
+            <div class="row">
                 <div class="col-md-12 join-us-text-register">
-                    <a class="btn register-btn-lrg red eventbrite-register-link" href="https://opendevptg2020.eventbrite.com/?aff=opendevptg2020">
-                            Register <i class="fa fa-arrow-right"></i>
+                    <a class="btn register-btn-lrg red eventbrite-register-link" href="https://openinfrasummitberlin.eventbrite.com?aff=berlin2020">
+                            JOIN US <i class="fa fa-arrow-right"></i>
                         </a>
                 </div>
-            </div> -->
+            </div>
         </div>
     </div>
 </div>
 <div class="row future-text-wrapper white">
-    <div class="col-md-8 col-md-offset-2 join-us-text-black"><p>Join the people building and operating open infrastructure, with hundreds of sessions and workshops on Container Infrastructure, CI/CD, Telecom + NFV, Public Cloud, Private &amp; Hybrid Cloud, Security and members of open source communities like Airship, Ansible, Ceph, Docker, Kata Containers, Kubernetes, ONAP, OpenStack, Open vSwitch, OPNFV, StarlingX, Zuul and more.</p>
+    <div class="col-md-8 col-md-offset-2 join-us-text-black"><p><a class="btn register-btn-lrg red eventbrite-register-link" href="https://openinfrasummitberlin.eventbrite.com?aff=berlin2020">Register today</a> to join the people building and operating open infrastructure, with hundreds of sessions and workshops on Container Infrastructure, CI/CD, Telecom + NFV, Public Cloud, Private &amp; Hybrid Cloud, Security and members of open source communities like Airship, Ansible, Ceph, Docker, Kata Containers, Kubernetes, ONAP, OpenStack, Open vSwitch, OPNFV, StarlingX, Zuul and more.</p>
     <p>Centrally located at the <a href="https://www.google.com/maps/place/bcc+Berlin+Congress+Center+GmbH/@52.5206407,13.4138012,17z/data=!3m1!4b1!4m5!3m4!1s0x47a84e1898c0bf43:0xd2a15220241f2080!8m2!3d52.5206375!4d13.4159899" target="_blank">bcc Berlin Congress Center GmbH</a></p>
     <p><br/><br/></p>
     <p><img class="tokyo-landing-logos" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/summits/Vancouver2020/project-logos.png" onerror="this.onerror=null; this.src=https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/summits/Vancouver2020/project-logos.png" alt="OpenStack Infrastructure Summit"></p>
