@@ -21,8 +21,6 @@ class CustomPasswordController extends Security
     private static $allowed_actions = array(
         'changepassword',
         'lostpassword',
-        'ChangePasswordForm',
-        'LostPasswordForm',
     );
 
     /**
@@ -42,83 +40,15 @@ class CustomPasswordController extends Security
         $this->password_manager = new PasswordManager($this->tx_manager);
     }
 
-    /**
-     * Factory method for the lost password form
-     * @return Form Returns the lost password form
-     */
-    public function ChangePasswordForm()
-    {
-        return new CustomChangePasswordForm($this, 'ChangePasswordForm');
-    }
+
 
     /**
      * @return string
      */
     public function changepassword()
     {
-        $controller = $this->getResponseController(_t('Security.CHANGEPASSWORDHEADER', 'Change your password'));
-
-        // if the controller calls Director::redirect(), this will break early
-        if(($response = $controller->getResponse()) && $response->isFinished()) return $response;
-
-        try {
-
-            $former_hash = Session::get('AutoLoginHash');
-
-            // if we have the token and the member redirect back to clear those values and avoid leaking
-            // on referer header
-            if (isset($_REQUEST['t']) && isset($_REQUEST['m'])) {
-                // if we dont have a former autologin hash, generate it ...
-                if (empty($former_hash)) {
-                    $new_hash = $this->password_manager->verifyToken((int)@$_REQUEST['m'], @$_REQUEST['t']);
-                    Session::set('AutoLoginHash', $new_hash);
-                }
-                return $this->redirect($this->Link('changepassword'));
-            }
-
-            if (!empty($former_hash)) {
-                // Subsequent request after the "first load with hash"
-                $customisedController = $controller->customise(array(
-                    'Content' =>
-                        '<p>' .
-                        _t('Security.ENTERNEWPASSWORD', 'Please enter a new password.') .
-                        '</p>',
-                    'Form' => $this->ChangePasswordForm(),
-                ));
-            } else {
-                if (Member::currentUser()) {
-                    // Logged in user requested a password change form.
-                    $customisedController = $controller->customise(array(
-                        'Content' => '<p>'
-                            . _t('Security.CHANGEPASSWORDBELOW', 'You can change your password below.') . '</p>',
-                        'Form' => $this->ChangePasswordForm()
-                    ));
-                } else {
-                    self::permissionFailure(
-                        $this,
-                        _t('Security.ERRORPASSWORDPERMISSION',
-                            'You must be logged in in order to change your password!')
-                    );
-
-                    return;
-                }
-            }
-        } catch (InvalidPasswordResetLinkException $ex1) {
-            $customisedController = $controller->customise(
-                array(
-                    'Content' =>
-                        sprintf('<p>This link is no longer valid as a newer request for a password reset has been made. Please check your mailbox for the most recent link</p><p>You can request a new one <a href="%s">here',
-                            $this->Link('lostpassword'))
-                )
-            );
-        }
-
-        return $customisedController->renderWith(array(
-            'Security_changepassword',
-            'Security',
-            $this->stat('template_main'),
-            'ContentController'
-        ));
+        $url = OpenStackIdCommon::getLostPasswordUrl($_SERVER['HTTP_REFERER']);
+        return $this->redirect($url);
     }
 
     /**
@@ -127,32 +57,8 @@ class CustomPasswordController extends Security
      * @return string Returns the "lost password" page as HTML code.
      */
     public function lostpassword() {
-        $controller = $this->getResponseController(_t('Security.LOSTPASSWORDHEADER', 'Lost Password'));
-
-        // if the controller calls Director::redirect(), this will break early
-        if(($response = $controller->getResponse()) && $response->isFinished()) return $response;
-
-        $customisedController = $controller->customise(array(
-            'Content' =>
-                '<br><p>' .
-                _t(
-                    'Security.NOTERESETPASSWORD',
-                    'Enter your e-mail address and we will send you a link with which you can reset your password'
-                ) .
-                '</p>' .
-                '<p>' .
-                'If you no longer have access to the email address associated with your OpenStackID, please send an email to ' .
-                '<a href="mailto:info@openstack.org">info@openstack.org</a> with the relevant details.' .
-                '</p>',
-            'Form' => $this->LostPasswordForm(),
-        ));
-
-        //Controller::$currentController = $controller;
-        return $customisedController->renderWith($this->getTemplatesFor('lostpassword'));
+        $url = OpenStackIdCommon::getLostPasswordUrl($_SERVER['HTTP_REFERER']);
+        return $this->redirect($url);
     }
 
-    public function LostPasswordForm()
-    {
-        return new CustomLostPasswordForm(Controller::curr(), 'LostPasswordForm', $this->tx_manager);
-    }
 }
