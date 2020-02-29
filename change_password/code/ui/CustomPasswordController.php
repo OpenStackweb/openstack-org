@@ -47,8 +47,9 @@ class CustomPasswordController extends Security
      */
     public function changepassword()
     {
-        $url = OpenStackIdCommon::getLostPasswordUrl($_SERVER['HTTP_REFERER']);
-        return $this->redirect($url);
+        return $this->redirect(OpenStackIdCommon::getLostPasswordUrl(
+            Director::absoluteURL(sprintf('/Security/login?BackURL=%s', urlencode($_SERVER['HTTP_REFERER']))), false)
+        );
     }
 
     /**
@@ -57,8 +58,10 @@ class CustomPasswordController extends Security
      * @return string Returns the "lost password" page as HTML code.
      */
     public function lostpassword() {
-        $url = OpenStackIdCommon::getLostPasswordUrl($_SERVER['HTTP_REFERER']);
-        return $this->redirect($url);
+
+        return $this->redirect(OpenStackIdCommon::getLostPasswordUrl(
+            Director::absoluteURL(sprintf('/Security/login?BackURL=%s', urlencode($_SERVER['HTTP_REFERER']))), false)
+        );
     }
 
 }
