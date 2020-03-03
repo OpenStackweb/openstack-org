@@ -61,7 +61,6 @@ migrations:
   - NewsFeaturedToArchiveMigration
   - SummitEventWithFileMigration
   - SurveyStateMigration
-  - InsertEmailForgotPasswordTemplateMigration
   - CleanMemberFirstNameSurnameMigration
   - AddUniqueIndexToSummitEventsFavorites
   - MemberLinkedInCleanMigration
