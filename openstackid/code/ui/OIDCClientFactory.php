@@ -38,9 +38,15 @@ final class OIDCClientFactory
         $oidc->setVerifyPeer(OIDC_VERIFY_HOST);
 
         $scopes = defined('OIDC_SCOPES') ? explode(' ', OIDC_SCOPES):explode(' ', self::DefaultScopes);
+        // is openid scope is not present ... add it
+        if(!in_array('openid', $scopes)){
+            $scopes = array_merge(['openid', $scopes]);
+        }
+        // is offline_access scope is not present ... add it
+        if(!in_array('offline_access', $scopes)){
+            $scopes = array_merge(['offline_access', $scopes]);
+        }
         $oidc->addScope($scopes);
-        // for refresh tokens
-        $oidc->addScope('offline_access');
         $oidc->addAuthParam( ["prompt" => "consent"]);
         $oidc->setRedirectURL(OpenStackIdCommon::getReturnTo());
 
