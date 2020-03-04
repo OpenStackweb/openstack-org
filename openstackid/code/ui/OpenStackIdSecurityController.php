@@ -15,7 +15,7 @@ use Jumbojett\OpenIDConnectClientException;
 /**
  * Class OpenStackIdSecurityController
  */
-final class OpenStackIdSecurityController extends CustomPasswordController
+final class OpenStackIdSecurityController extends Security
 {
 
     private static $allowed_actions = [
@@ -24,7 +24,7 @@ final class OpenStackIdSecurityController extends CustomPasswordController
         'error',
         'ping',
         'changepassword',
-        'ChangePasswordForm',
+        'lostpassword',
     ];
 
     public function __construct()
@@ -148,5 +148,27 @@ SCRIPT;
     public function BackUrl()
     {
         return OpenStackIdCommon::getRedirectBackUrl();
+    }
+
+    /**
+     * @return string
+     */
+    public function changepassword()
+    {
+        return $this->redirect(OpenStackIdCommon::getLostPasswordUrl(
+            Director::absoluteURL(sprintf('/Security/login?BackURL=%s', urlencode($_SERVER['HTTP_REFERER']))), false)
+        );
+    }
+
+    /**
+     * Show the "lost password" page
+     *
+     * @return string Returns the "lost password" page as HTML code.
+     */
+    public function lostpassword() {
+
+        return $this->redirect(OpenStackIdCommon::getLostPasswordUrl(
+            Director::absoluteURL(sprintf('/Security/login?BackURL=%s', urlencode($_SERVER['HTTP_REFERER']))), false)
+        );
     }
 }
