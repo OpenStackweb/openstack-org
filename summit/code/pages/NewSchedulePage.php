@@ -62,8 +62,8 @@ class NewSchedulePage_Controller extends SummitPage_Controller
         Requirements::css(Director::protocol() . 'maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css?'.time());
         Requirements::css("marketplace/code/ui/frontend/css/star-rating.min.css");
         Requirements::css('node_modules/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
-        Requirements::css('node_modules/summit-schedule-app/lib/main.css');
-        Requirements::javascript('node_modules/summit-schedule-app/lib/main.js');
+        Requirements::css('node_modules/summit-schedule-app/dist/main.css');
+        Requirements::javascript('node_modules/summit-schedule-app/dist/main.js');
 
     }
 
