@@ -17,12 +17,17 @@
         </div>
     </div>
 
+    <br>
+    <br>
+    <br>
+
     <summit-schedule
         summit_id="$Summit.ID"
         api_access_token="$getAccessToken()"
         api_url="$getApiUrl()"
         schedule_base="$Top.Link"
         schedule_url="$Top.AbsoluteLink"
+        login_url="{$AbsoluteBaseURL}Security/login"
     ></summit-schedule>
 
 </div>

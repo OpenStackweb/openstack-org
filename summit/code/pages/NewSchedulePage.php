@@ -35,12 +35,21 @@ class NewSchedulePage extends SummitPage
 class NewSchedulePage_Controller extends SummitPage_Controller
 {
 
+    static $url_handlers = array
+    (
+        ''                              => 'index',
+        '$ANY/$ACTION/$MATCHING/$HERE'  => 'index',
+    );
+
     public function init()
     {
 
         $this->top_section = 'short'; //or full
 
         parent::init();
+
+        SweetAlert2Dependencies::blockRequirements();
+
         Requirements::css('summit/css/install_mobile_app.css');
 
         Requirements::javascript('node_modules/js-cookie/src/js.cookie.js');
@@ -60,7 +69,7 @@ class NewSchedulePage_Controller extends SummitPage_Controller
 
     public function getPageTitle()
     {
-        $entity  = $this->getSummitEntity($this->getRequest());
+        /*$entity  = $this->getSummitEntity($this->getRequest());
 
         if(!is_null($entity)) {
             $title = Convert::raw2att($entity->getOGTitle());
@@ -69,12 +78,12 @@ class NewSchedulePage_Controller extends SummitPage_Controller
             }
         }
 
-        return parent::getPageTitle();
+        return parent::getPageTitle();*/
     }
 
     public function MetaTags()
     {
-        $request = $this->getRequest();
+        /*$request = $this->getRequest();
         $action  = $request->param("Action");
         $entity  = $this->getSummitEntity($request);
 
@@ -101,14 +110,14 @@ class NewSchedulePage_Controller extends SummitPage_Controller
         $tags .= AppLinkIOSMetadataBuilder::buildAppLinksMetaTags($tags, $url_path);
         // Android
         $tags .= AppLinkIAndroidMetadataBuilder::buildAppLinksMetaTags($tags, $url_path);
-        return $tags;
+        return $tags;*/
     }
 
     public function index(SS_HTTPRequest $request){
         // only send meta tags ( needed for android deep linking)
-        if($request->getHeader("Prefer-Html-Meta-Tags")){
+        /*if($request->getHeader("Prefer-Html-Meta-Tags")){
             return $this->buildOnlyMetaTagsResponse($this->MetaTags());
-        }
+        }*/
 
         return $this->getViewer('index')->process($this);
     }

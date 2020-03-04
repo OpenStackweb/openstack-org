@@ -18,4 +18,9 @@ final class SweetAlert2Dependencies
         Requirements::css('node_modules/sweetalert2/dist/sweetalert2.min.css');
         Requirements::javascript('node_modules/sweetalert2/dist/sweetalert2.min.js');
     }
+
+    public static function blockRequirements() {
+        Requirements::block('node_modules/sweetalert2/dist/sweetalert2.min.css');
+        Requirements::block('node_modules/sweetalert2/dist/sweetalert2.min.js');
+    }
 }
