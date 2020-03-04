@@ -745,13 +745,4 @@ APP_LINKS;
         return $this->getViewer('index')->process($this);
     }
 
-    public function getAccessToken() {
-        $accessToken = Session::get('access_token');
-        return $accessToken;
-    }
-
-    public function getApiUrl() {
-        return OPENSTACK_RESOURCE_API_BASE_URL;
-    }
-
 }
