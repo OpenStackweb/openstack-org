@@ -28,7 +28,7 @@
                     </tr>
                         <% loop Courses %>
                         <tr>
-                            <td class="course"><a href="{$TrainingLink}{$BookMark}" >$CourseName</a></td>
+                            <td class="course"><a href="{$Top.TrainingLink}{$BookMark}" >$CourseName</a></td>
                             <td class="level">
                                 <span class="$LwrLevel">$Level</span>
                             </td>
