@@ -183,10 +183,14 @@ class TrainingDirectoryPage_Controller extends MarketPlaceDirectoryPage_Controll
         return $ddl;
     }
 
-    public function CompanyCombo()
+    public function CompanyCombo($getUpcomming = true)
     {
-        $source = array();
-        $result = $this->course_company_query->handle(new OpenStackImplementationNamesQuerySpecification(DateTimeUtils::getCurrentDate()));
+        $getUpcomming = boolval($getUpcomming);
+        $source = [];
+        $result = $this->course_company_query->handle
+        (
+            new OpenStackImplementationNamesQuerySpecification($getUpcomming? DateTimeUtils::getCurrentDate(): null)
+        );
         foreach ($result->getResult() as $dto) {
             $source[$dto->getValue()] = $dto->getValue();
         }

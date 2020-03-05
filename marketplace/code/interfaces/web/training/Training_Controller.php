@@ -73,7 +73,7 @@ class Training_Controller extends AbstractController {
 			$search_params = json_decode($this->request->getBody(),true);
 
 			$trainings     = $this->training_facade->getTrainings(
-				$search_params['topic_term'],
+                $search_params['company_term'],
 				$search_params['location_term'],
 				$search_params['level_term']);
 

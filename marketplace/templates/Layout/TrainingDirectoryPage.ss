@@ -12,7 +12,7 @@
 <div class="grey-bar">
     <div class="container">
         <p class="filter-label">Filter Courses</p>
-        <input type="text" id="topic-term" placeholder="ANY TOPIC" name="topic-term" value="{$Keyword}">
+        $CompanyCombo(0)
         $LocationCombo
         $LevelCombo
     </div>

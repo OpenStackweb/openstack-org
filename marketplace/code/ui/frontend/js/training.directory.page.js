@@ -12,20 +12,14 @@
  **/
 jQuery(document).ready(function($){
 
-        var topic_filter = $('#topic-term');
-
-        if(topic_filter.length > 0){
-            topic_filter.autocomplete({
-                source: 'trainings/topics',
-                minLength: 2,
-                select: function (event, ui) {
-                    $('.filter-label').trigger("click");
-                }
-            })
-            .keydown(function (e) {
-                    if (e.keyCode === 13) {
-                        $('.filter-label').trigger("click");
-                    }
+        var company_filter = $('#company-term');
+        if(company_filter.length > 0){
+            if ($('#company-term option:contains("-- Select a Company--")').length == 0) {
+                company_filter.prepend("<option value='' selected='selected'>-- Select a Company--</option>");
+            }
+            company_filter.chosen({disable_search_threshold: 3, width:200});
+            company_filter.change(function () {
+                $('.filter-label').trigger("click");
             });
         }
 
@@ -53,7 +47,7 @@ jQuery(document).ready(function($){
 
         $(document).on('click', '.filter-label', function (event) {
             var params = {
-                topic_term:    $('#topic-term').val(),
+                company_term:    $('#company-term').val(),
                 location_term: $('#location-term').val(),
                 level_term:    $('#level-term').val()
             }
@@ -61,12 +55,12 @@ jQuery(document).ready(function($){
             if(last_filter_request!=null)
                 last_filter_request.abort();
 
-            var topic = (params.topic_term == '') ? 'a' : params.topic_term;
+            var company = (params.company_term == '') ? 'a' : params.company_term;
             var location = (params.location_term == '') ? 'a' : params.location_term;
             var level = (params.level_term == '') ? 'a' : params.level_term;
             var state = '/marketplace/training';
-            if (params.topic_term){
-                state += '/f/'+location+'/'+level+'/'+topic;
+            if (params.company){
+                state += '/f/'+location+'/'+level+'/'+company;
             } else if (params.level_term){
                 state += '/f/'+location+'/'+level;
             } else if (params.location_term){
