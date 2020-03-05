@@ -3,7 +3,7 @@
 ```bash
 wget https://releases.hashicorp.com/vagrant/2.0.0/vagrant_2.0.0_x86_64.deb
 dpkg -i vagrant_2.0.0_x86_64.deb
-apt-get install docker.io
+apt-get --no-install-recommends install docker.io
 adduser [user] docker 
 ```
 
