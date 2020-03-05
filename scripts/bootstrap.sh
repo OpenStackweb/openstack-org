@@ -20,7 +20,7 @@ echo "GITHUB_OAUTH_TOKEN is $GITHUB_OAUTH_TOKEN";
 
 sudo apt-get update;
 sudo apt-get --yes upgrade;
-sudo apt-get --yes install puppet composer;
+sudo apt-get --no-install-recommends --yes install puppet composer;
 if [[ -n "$GITHUB_OAUTH_TOKEN" ]]; then
     echo "running composer config -g github-oauth.github.com $GITHUB_OAUTH_TOKEN";
   	sudo -H -u vagrant bash -c "composer config -g github-oauth.github.com $GITHUB_OAUTH_TOKEN";
