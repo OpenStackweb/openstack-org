@@ -122,9 +122,12 @@ class NewSchedulePage_Controller extends SummitPage_Controller
         return $this->getViewer('index')->process($this);
     }
 
+    /**
+     * @return string|null
+     * @throws \Jumbojett\OpenIDConnectClientException
+     */
     public function getAccessToken() {
-        $accessToken = Session::get('access_token');
-        return $accessToken;
+       return OpenStackIdCommon::getAccessToken();
     }
 
     public function getApiUrl() {
