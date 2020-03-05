@@ -1,18 +1,18 @@
 # Requirements
 
 ````bash
- sudo apt-get install gettext
- sudo apt-get install language-pack-en-base
- sudo apt-get install language-pack-es-base
- sudo apt-get install language-pack-de-base
- sudo apt-get install language-pack-fr-base
- sudo apt-get install language-pack-ru-base
- sudo apt-get install language-pack-gr-base
- sudo apt-get install language-pack-ko-base
- sudo apt-get install language-pack-ja-base
- sudo apt-get install language-pack-id-base
- sudo apt-get install language-pack-zh-hant-base
- sudo apt-get install language-pack-zh-hans-base
+ sudo apt-get --no-install-recommends install gettext
+ sudo apt-get --no-install-recommends install language-pack-en-base
+ sudo apt-get --no-install-recommends install language-pack-es-base
+ sudo apt-get --no-install-recommends install language-pack-de-base
+ sudo apt-get --no-install-recommends install language-pack-fr-base
+ sudo apt-get --no-install-recommends install language-pack-ru-base
+ sudo apt-get --no-install-recommends install language-pack-gr-base
+ sudo apt-get --no-install-recommends install language-pack-ko-base
+ sudo apt-get --no-install-recommends install language-pack-ja-base
+ sudo apt-get --no-install-recommends install language-pack-id-base
+ sudo apt-get --no-install-recommends install language-pack-zh-hant-base
+ sudo apt-get --no-install-recommends install language-pack-zh-hans-base
 ````
 
 to compile from .po to .mo files 
