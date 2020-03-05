@@ -54,9 +54,8 @@ final class OpenStackIdAuthenticator extends Controller
             if(!$oidc->authenticate())
                 throw new OpenIDConnectClientException("failed auth");
 
-            Session::set("access_token", $oidc->getAccessToken());
-            Session::set("refresh_token", $oidc->getRefreshToken());
-            Session::set("id_token", $oidc->getIdToken());
+
+            OpenStackIdCommon::saveTokens($oidc);
 
             $member = $this->member_manager->registerByClaims($oidc->getVerifiedClaims());
             $backUrl = OpenStackIdCommon::getRedirectBackUrl();

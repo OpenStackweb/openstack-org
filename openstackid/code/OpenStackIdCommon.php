@@ -11,7 +11,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
+use Jumbojett\OpenIDConnectClient;
+/**
+ * Class OpenStackIdCommon
+ */
 final class OpenStackIdCommon {
 
     public static function redirectToSSL($url){
@@ -49,6 +52,44 @@ final class OpenStackIdCommon {
         return sprintf("%s/auth/password/reset?client_id=%s&redirect_uri=%s",IDP_OPENSTACKID_URL,OIDC_CLIENT, urlencode($redirect_uri));
     }
 
+    /**
+     * @param \Jumbojett\OpenIDConnectClient $oidc
+     */
+    public static function saveTokens(OpenIDConnectClient $oidc){
+        Session::set("access_token", $oidc->getAccessToken());
+        Session::set("refresh_token", $oidc->getRefreshToken());
+        Session::set("id_token", $oidc->getIdToken());
+        Session::save();
+    }
+
+
+    public function getIdToken():?string{
+        return Session::get("id_token");
+    }
+
+    /**
+     * @return string|null
+     * @throws \Jumbojett\OpenIDConnectClientException
+     */
+    public static function getAccessToken():?string{
+        $oidc         = OIDCClientFactory::build();
+        $access_token = Session::get("access_token");
+        if(empty($access_token)) return null;
+        $data = $oidc->introspectToken($access_token);
+        if(isset($data->error)) {
+            // the token is no longer usable
+            $refresh_token = Session::get("refresh_token");
+            if(empty($refresh_token)) return null;
+            $oidc->refreshToken($refresh_token);
+            Session::set("access_token", $oidc->getAccessToken());
+            $newRefreshToken =  $oidc->getRefreshToken();
+            if(!empty($newRefreshToken))
+            Session::set("refresh_token", $newRefreshToken);
+            Session::save();
+            $access_token = Session::get("access_token");
+        }
+        return $access_token;
+    }
     /**
      * @return string
      */
