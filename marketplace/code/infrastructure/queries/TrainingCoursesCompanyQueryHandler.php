@@ -51,7 +51,7 @@ final class TrainingCoursesCompanyQueryHandler implements IQueryHandler {
 SQL;
 
         $results   = DB::query($sql);
-        $companies = array();
+        $companies = [];
 
         for ($i = 0; $i < $results->numRecords(); $i++) {
             $record = $results->nextRecord();
