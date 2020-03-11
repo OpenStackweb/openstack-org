@@ -181,18 +181,6 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/Uploads/photo9.JPG')}" alt="Masahito Muroi"
-                                 class="summit-user-image">
-                        </div>
-                        <div class="info">
-                            <div class="name">Masahito Muroi</div>
-                            <div class="title">Line Corp</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
-                    <div class="summit-user-section">
-                        <div class="summit-user-image-box">
                             <img src="{$Top.CloudUrl('assets/profile-images/prof-pic-low-quality.jpg')}" alt="Kendall Nelson"
                                  class="summit-user-image">
                         </div>
