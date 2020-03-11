@@ -63,6 +63,269 @@
         </div>
     </div>
 </div>
+
+<div class="light about-summit-users-wrapper" id="{$Name}">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-lg-8 col-md-6">
+                <h3 class="title-section">Vancouver 2020 Open Dev Programming Committee</h3>
+                <!-- Start Speakers -->
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/profile-images/5ae1fab52c42f.jpg')}" alt="Mark Collier"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Mark Collier</div>
+                            <div class="title">OpenStack Foundation</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/keithberger.jpg')}" alt="Keith Berger"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Keith Berger</div>
+                            <div class="title">SUSE</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/Uploads/penick-profile-pic2.png')}" alt="James Penick"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">James Penick</div>
+                            <div class="title">Verizon Media</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/mnaser.jpg')}" alt="Mohammed Naser"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Mohammed Naser</div>
+                            <div class="title">VEXXHOST</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/Uploads/AllisonPrice.jpg')}" alt="Allison Price"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Allison Price</div>
+                            <div class="title">OpenStack Foundation</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/BelmiroMoreira.JPG')}" alt="Belmiro Moreira"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Belmiro Moreira</div>
+                            <div class="title">CERN</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/Roman.jpg')}" alt="Roman Gorshunov"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Roman Gorshunov</div>
+                            <div class="title">AT&T</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/BethCohen.jpg')}" alt="Beth Cohen"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Beth Cohen</div>
+                            <div class="title">Verizon</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/Uploads/photo9.JPG')}" alt="Masahito Muroi"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Masahito Muroi</div>
+                            <div class="title">Line Corp</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/Uploads/photo9.JPG')}" alt="Masahito Muroi"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Masahito Muroi</div>
+                            <div class="title">Line Corp</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/profile-images/prof-pic-low-quality.jpg')}" alt="Kendall Nelson"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Kendall Nelson</div>
+                            <div class="title">OpenStack Foundation</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/qihui.jpg')}" alt="Qihui Zhao"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Qihui Zhao</div>
+                            <div class="title">China Mobile</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/nokia-gergely-csatari.jpg')}" alt="Gergely Csatari"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Gergely Csatari</div>
+                            <div class="title">Nokia</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/Lingxian-Kong.JPG')}" alt="Lingxian Kong"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Lingxian Kong</div>
+                            <div class="title">Catalyst Cloud</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/Uploads/thierry.jpeg')}" alt="Thierry Carrez"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Thierry Carrez</div>
+                            <div class="title">OpenStack Foundation</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/profile-images/allisonicon128x128.png')}" alt="Allison Randal"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Allison Randal</div>
+                            <div class="title">Software Freedom conservancy</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/Uploads/vmb-helvetica-sm.png')}" alt="VM Brasseur"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">VM Brasseur</div>
+                            <div class="title">Juniper</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/joshsimmons.jpg')}" alt="Josh Simmons"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Josh Simmons</div>
+                            <div class="title">Open Source Initiative</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- End Speakers -->
+                <!-- <div class="col-xs-12">
+                    <a class="btn" href="/summit/vancouver-2020/speakers">See all summit speakers <i class="fa fa-arrow-right"></i></a>
+                </div> -->
+            </div>
+            <!-- <div class="col-sm-12 col-lg-4 col-md-6 col-xs-12">
+                <h3 class="title-section">Summit Overview</h3>
+                <div class="col-12 col-md-12 col-sm-6 col-xs-12 featured">
+                    <ul class="overview">
+                        <li><a href="https://www.openstack.org/summit/shanghai-2019/summit-schedule/events/24344/openstack-upstream-institute-day-1-sponsored-by-lenovo-rsvp-required"><h5>OpenStack Upstream Institute</h5>
+                            <p><small>Saturday-Sunday</small></p> <i class="fal fa-info-circle"></i></a></li>
+                        <li><a href="https://www.openstack.org/summit/shanghai-2019/summit-schedule/global-search?t=Keynotes"><h5>Keynotes</h5>
+                            <p><small>Monday</small></p> <i class="fal fa-info-circle"></i></a></li>
+                        <li><a href="https://www.openstack.org/summit/shanghai-2019/summit-schedule"><h5>Breakout Sessions</h5>
+                            <p><small>Monday-Wednesday</small></p> <i class="fal fa-info-circle"></i></a></li>
+                        <li><a href="https://wiki.openstack.org/wiki/Forum"><h5>The Forum</h5>
+                            <p><small>Monday-Wednesday</small></p> <i class="fal fa-info-circle"></i></a></li>
+                        <li><a href="https://www.openstack.org/summit/shanghai-2019/summit-schedule/"><h5>Workshops and Trainings</h5>
+                            <p><small>Monday-Wednesday</small></p> <i class="fal fa-info-circle"></i></a></li>
+                        <li><a href="https://www.openstack.org/summit/shanghai-2019/summit-schedule/global-search?t=Marketplace"><h5>Open Infrastructure Marketplace</h5>
+                            <p><small>Monday-Wednesday</small></p> <i class="fal fa-info-circle"></i></a></li>
+                        <li><a href="https://www.openstack.org/ptg"><h5>Project Teams Gathering (PTG)</h5>
+                            <p><small>Wednesday-Friday</small></p> <i class="fal fa-info-circle"></i></a></li>
+                    </ul>
+
+                </div>
+
+                <div class="col-xs-12">
+                    <a class="btn" href="/summit/shanghai-2019/summit-schedule/">Full Summit Schedule<i class="fa fa-arrow-right"></i></a>
+                </div>
+            </div> -->
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                {$Text}
+            </div>
+        </div>
+    </div>
+</div>
 <div class="academy-wrapper" id="Sponsors">
     <div class="container">
         <div class="row">
