@@ -39,7 +39,7 @@
     </div>
 </div>
 
-<div class="light what-to-expect" id="expect">
+<div class="white what-to-expect" id="expect">
     <div class="container">
         <div class="row">
             <div class="text-container col-md-7 col-sm-12">
