@@ -70,7 +70,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 session-box">
-                <h3>Hundreds of Presentations, Workshops, and Collaborative Sesssions</h3>
+                <h3>Hundreds of Presentations, Workshops, and Collaborative Sessions</h3>
                 <ul class="sessions">
                     <li class="session"> <span class="ai"></span> AI</li>
                     <li class="session"> <span class="cicd"></span> CI/CD</li>
