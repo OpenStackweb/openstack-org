@@ -5,7 +5,7 @@
         <div class="landingintro">
     	    <div class="row">
                 <div class="col-md-12">
-                    <img class="tokyo-landing-logo" src="{$Top.CloudUrl('assets/summits/Vancouver2020/ODPTG-Logo-Horiz-RGB-white.svg')}"
+                    <img class="vancouver-landing-logo" src="{$Top.CloudUrl('assets/summits/Vancouver2020/ODPTG-Logo-Horiz-RGB-white.svg')}"
                              onerror="this.onerror=null; this.src={$Top.CloudUrl('assets/summits/Vancouver2020/ODPTG-Logo-Horiz-RGB-white.svg')}" alt="OpenDev + PTG">
                 </div>
             </div>
@@ -13,7 +13,7 @@
     </div>
 </div>
 <div class="row future-text-wrapper white">
-    <div class="col-md-8 col-md-offset-2 join-us-text-vancouver"><p>Based on the input from the community, board, and the latest information available from the health experts, <strong>we've made the decision not to hold the OpenDev + PTG in Vancouver this June</strong>. Instead, we're exploring ways to turn it into a virtual event and would love the help of everyone in the community to make it a success.</p>
+    <div class="col-md-10 col-md-offset-1 join-us-text-vancouver"><p>Based on the input from the community, board, and the latest information available from the health experts, <strong>we've made the decision not to hold the OpenDev + PTG in Vancouver this June</strong>. Instead, we're exploring ways to turn it into a virtual event and would love the help of everyone in the community to make it a success.</p>
 
 		<p>We would like to virtualize the PTG, since it is critical to producing the next release, targeting the same timeframe. We would like to recruit community volunteers to form a Virtual PTG Organization Team to collaborate with the OSF staff to incorporate current best practices and ensure the event continues to meet the goals of the upstream community. We will need to begin pulling this plan together soon, so please <a href="https://etherpad.openstack.org/p/Virtual_PTG_Planning">add your name to this list</a> if you are interested in participating. 
 
