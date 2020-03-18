@@ -1116,8 +1116,16 @@ img.tokyo-landing-logo {
   width: 34%;
 }
 
+img.vancouver-landing-logo {
+  width: 60%;
+}
+
 img.tokyo-landing-logos {
   width: 84%;
+}
+
+img.vancouver-landing-logos {
+  width: 54%;
 }
 
 .save-the-date {
@@ -1308,12 +1316,16 @@ img.tokyo-landing-logo {
   font-weight: bold;
   padding-bottom:65px;
 }
-.join-us-text-black {
+.join-us-text-black, .join-us-text-vancouver {
   color: #000;
   font-size: 1.2em;
   font-weight: normal;
 }
-.join-us-text-black a, .join-us-text-black a:visited {
+
+.join-us-text-vancouver {
+  font-size: 1.0em;
+}
+.join-us-text-black a, .join-us-text-black a:visited, .join-us-text-vancouver a, .join-us-text-vancouver a:visited {
   color: #ed1944;
   text-decoration: underline;
 }
