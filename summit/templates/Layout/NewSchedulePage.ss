@@ -28,7 +28,6 @@
         schedule_base="$Top.Link"
         schedule_url="$Top.AbsoluteLink"
         login_url="{$AbsoluteBaseURL}Security/login"
-        calendar_instructions_link="calendar-instructions-link-not-set"
         venues_page_link="{$AbsoluteBaseURL}/summit/shanghai-2019/venues"
     ></summit-schedule>
 
