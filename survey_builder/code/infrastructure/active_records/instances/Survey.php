@@ -107,6 +107,13 @@ class Survey extends DataObject implements ISurvey
     }
 
     /**
+     * @return string|null
+     */
+    public function getOrganization():?string{
+        return $this->getAnswerFor('Organization');
+    }
+
+    /**
      * @param $question_name
      * @return null|string
      */
