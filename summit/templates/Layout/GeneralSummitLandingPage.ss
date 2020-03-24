@@ -29,10 +29,8 @@
                         </a>
                     </div>
                     <h4>OpenDev + PTG</h4>
-                    <p><strong>Vancouver, British Columbia</strong></p>
-                    <p>June 8-11, 2020</p>
                     <p>
-                        <a class="btn register-btn-lrg red eventbrite-register-link" href="/summit/vancouver-2020">
+                        <a class="btn register-btn-lrg red eventbrite-register-link" href="/events/opendev-ptg-2020/">
                             Join Us <i class="fa fa-arrow-right"></i>
                         </a>
                     </p>
