@@ -29,6 +29,8 @@
                         </a>
                     </div>
                     <h4>OpenDev + PTG</h4>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
                     <p>
                         <a class="btn register-btn-lrg red eventbrite-register-link" href="/events/opendev-ptg-2020/">
                             Join Us <i class="fa fa-arrow-right"></i>
