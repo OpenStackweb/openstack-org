@@ -13,6 +13,7 @@ GetText:
      - id_ID : "Bahasa indonesia / Indonesian"
      - fr_FR : "Français / French"
      - de_DE : "Deutsch / German"
+     - ru_RU : "русский / Russian"
   # ID to persist the locale in cookies / session in the front end
   persist_id: 'GetTextLocale'
   # ID to persist the locale in cookies / session in the CMS

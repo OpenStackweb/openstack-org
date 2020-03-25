@@ -33,7 +33,7 @@ const languages = [
     "id_ID", // Indonesian
     //"fr_FR", // French
     "de_DE", // German
-    //"ru_RU", // Russian
+    "ru_RU", // Russian
 ];
 // get language cookie, is none, then default is en_US
 var lang = Cookies.get('GetTextLocale');
