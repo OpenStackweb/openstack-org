@@ -123,7 +123,7 @@ class GetText extends SS_Object implements TemplateGlobalProvider
                 !isset(self::$last_set_locale[$key]) || self::$last_set_locale[$key] !== $locale
             )) {
             self::$last_set_locale[$key] = $locale;
-            Cookie::set($key, $locale);
+            Cookie::set($key, $locale, 90 , null, null, true, false);
         }
     }
 
