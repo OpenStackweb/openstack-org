@@ -110,7 +110,7 @@ class Survey extends DataObject implements ISurvey
      * @return string|null
      */
     public function getOrganization():?string{
-        return $this->getAnswerFor('Organization');
+        return $this->getAnswerFor(SurveyOrganizationQuestionTemplate::FieldName);
     }
 
     /**

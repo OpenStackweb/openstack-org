@@ -93,7 +93,7 @@ class EntitySurvey extends Survey implements IEntitySurvey
     /**
      * @return string|null
      */
-    public function getOrganization(){
+    public function getOrganization():?string{
         // search first on entity
         foreach ($this->getSteps() as $step) {
             if ($step instanceof ISurveyRegularStep && $step->template()->getQuestionByClassName('SurveyOrganizationQuestionTemplate')) {
