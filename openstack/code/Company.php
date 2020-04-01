@@ -200,7 +200,7 @@ SQL;
                 new HeaderField("Company Data"),
                 new CheckboxField('isDeleted', 'Deleted'),
                 new TextField('Name', 'Company Name'),
-                new TextField('URLSegment', 'Unique page name for this company profile (ie: company-name)'),
+                new TextField('URLSegment', 'Unique page name for this company profile (ie: company-name) - ONLY ALPHANUMERIC'),
                 new TextField ('URL', 'Company Web Address (URL)'),
                 $level = new DropDownField(
                     'MemberLevel',
