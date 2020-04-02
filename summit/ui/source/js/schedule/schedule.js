@@ -11,12 +11,12 @@ const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 require("awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css");
 
 const props = {
-    ...window.ReactScheduleGridProps,
+  ...window.ReactScheduleGridProps,
 }
 
 ReactDOM.render(
-    <Provider store={createStoreWithMiddleware(reducers)}>
-        <Schedule {...props} />
-    </Provider>,
-    document.getElementById('os-schedule-react')
+  <Provider store={createStoreWithMiddleware(reducers)}>
+    <Schedule {...props} />
+  </Provider>,
+  document.getElementById('os-schedule-react')
 );
