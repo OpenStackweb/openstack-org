@@ -17,6 +17,8 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import reducers from '../reducers/index';
 import ScheduleEventList from '../components/schedule/event-list'
+import { fbApiScript } from '~core-utils/methods';
+
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 
@@ -59,26 +61,6 @@ ScheduleProps.base_url = props.ScheduleProps.base_url;
 ScheduleProps.search_url = props.ScheduleProps.search_url;
 
 class SearchResultEventList extends React.Component {
-
-    loadFacebookSdk(appId) {
-        window.fbAsyncInit = function() {
-            FB.init({
-                appId: appId,
-                xfbml: true,
-                status: true,
-                version : 'v2.12'
-            });
-        };
-
-        (function(d, s, id){
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {return;}
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    }
-
     componentDidMount() {
         const { summit } = this.props.ScheduleProps;
 
@@ -86,7 +68,7 @@ class SearchResultEventList extends React.Component {
             $('[data-toggle="tooltip"]').tooltip();
         }
 
-        this.loadFacebookSdk(summit.share_info.fb_app_id)
+        fbApiScript(summit.share_info.fb_app_id);
     }
 
     render(){

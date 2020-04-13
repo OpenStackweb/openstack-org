@@ -11,6 +11,8 @@
  * limitations under the License.
  **/
 import React from 'react';
+import { fbApiScript } from '~core-utils/methods';
+
 
 export class ShareButtons extends React.Component {
 
@@ -74,29 +76,7 @@ export class ShareButtons extends React.Component {
         $('#email-modal').on('click', '[data-dismiss="modal"]', function (e) {
             e.stopPropagation();
         });
-        this.loadFacebookSdk(share_info.fb_app_id);
-    }
-
-    loadFacebookSdk(appId) {
-        window.fbAsyncInit = function () {
-            FB.init({
-                appId: appId,
-                xfbml: true,
-                status: true,
-                version: 'v2.12'
-            });
-        };
-
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {
-                return;
-            }
-            js = d.createElement(s);
-            js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
+        fbApiScript(share_info.fb_app_id);
     }
 
     render() {
