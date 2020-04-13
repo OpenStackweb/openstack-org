@@ -11,6 +11,7 @@ import ScheduleMainView, { VIEW_DAYS, VIEW_TRACKS, VIEW_LEVELS } from './schedul
 import ScheduleEventList from './schedule/event-list'
 import ScheduleMainFilter from './schedule/main-filter'
 import { AjaxLoader } from '~core-components/ajaxloader';
+import { fbApiScript } from '~core-utils/methods';
 
 class ScheduleGrid extends Component {
 
@@ -30,7 +31,7 @@ class ScheduleGrid extends Component {
             $('[data-toggle="tooltip"]').tooltip();
         }
 
-        this.loadFacebookSdk(summit.share_info.fb_app_id)
+        fbApiScript(summit.share_info.fb_app_id);
 
         loadFilters() // Load filters from URL and trigger view change
     }
@@ -65,25 +66,6 @@ class ScheduleGrid extends Component {
             </div>
         </div>
         )
-    }
-
-    loadFacebookSdk(appId) {
-        window.fbAsyncInit = function() {
-            FB.init({
-                appId: appId,
-                xfbml: true,
-                status: true,
-                version : 'v2.12'
-            });
-        };
-
-        (function(d, s, id){
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {return;}
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
     }
 }
 
