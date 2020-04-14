@@ -51,10 +51,8 @@ class UserSurveyPage extends SurveyPage
         $res = (string)$this->getField('LoginPageContent');
         if (empty($res)) {
             $res = <<< HTML
-			<p>This survey provides users an opportunity to influence the community and software
-		direction. By sharing information about your configuration and requirements, the OpenStack
-		Foundation User Committee will be able to advocate on your behalf.</p>
-		<p><a href="/user-survey/faq" class="roundedButton">More Information About The Survey</a></p>
+			<p>The OpenStack User Survey provides users an opportunity to influence the community and software direction. The anonymized information is shared with OpenStack project team leads as well as the OpenStack Technical Committee. By sharing information about your configuration and requirements, the OpenStack Foundation and OpenStack community leaders will be able to advocate on your behalf. The 2020 survey results will be presented later this year. Take the OpenStack User Survey by Thursday, August 20, 2020 to be included in this round of analysis.</p>
+		<p>Learn more about <a href="https://superuser.openstack.org/articles/operate-openstack-take-the-survey-heres-why-it-matters/" target="_blank">why taking the OpenStack Survey is important</a> for the software development, and take a look at the <a href="https://governance.openstack.org/tc/user_survey/analysis-12-2019.html" target="_blank">OpenStack Technical Committee’s 2019 feedback analysis</a>.</p>
 		<hr/>
 HTML;
         }
