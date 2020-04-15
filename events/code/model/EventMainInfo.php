@@ -32,16 +32,23 @@ final class EventMainInfo {
 	 */
 	private $label;
 
+    /**
+     * @var string
+     */
+    private $date_string;
+
 	/**
 	 * @param string $title
 	 * @param string $url
 	 * @param string $label
+	 * @param string $date_string
 	 */
-	public function __construct($title,$url,$label,$category){
+	public function __construct($title,$url,$label,$category, $date_string = ''){
 		$this->title = $title;
 		$this->url   = $url;
         $this->category = $category;
 		$this->label = $label;
+		$this->date_string = $date_string;
 	}
 
 	public function getTitle(){
@@ -59,4 +66,8 @@ final class EventMainInfo {
 	public function getLabel(){
 		return $this->label;
 	}
+
+    public function getDateString(){
+        return $this->date_string;
+    }
 } 

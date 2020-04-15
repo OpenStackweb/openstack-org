@@ -31,6 +31,7 @@ class EventPage
         'IsSummit'             => 'Boolean',
         'ExternalSourceId'     => 'Varchar(255)',
         'EventContinent'       => 'Varchar(255)',
+        'DateString'           => 'Varchar(255)',
     );
 
     private static $defaults = array(
@@ -61,11 +62,15 @@ class EventPage
         $EventStartDate->setConfig('showdropdown', true);
         $fields->addFieldToTab('Root.Main', $EventStartDate, 'Content');
 
+
         // same things for the event end date
         $EventEndDate = new DateField('EventEndDate','Last Day of Event');
         $EventEndDate->setConfig('showcalendar', true);
         $EventEndDate->setConfig('showdropdown', true);
         $fields->addFieldToTab('Root.Main', $EventEndDate, 'Content');
+
+        $fields->addFieldToTab('Root.Main', new TextField('DateString','Date String'), 'Content');
+
 
         $fields->addFieldToTab('Root.Main', new TextField('EventLink','Event Button Link (URL)'), 'Content');
         $fields->addFieldToTab('Root.Main', new TextField('EventLinkLabel','Event Button Label'), 'Content');
@@ -114,6 +119,10 @@ class EventPage
         }
     }
 
+    public function getDateString() {
+        return $this->getField("DateString") ? $this->getField("DateString") : 'TBA';
+    }
+
     public function getIdentifier()
     {
         return (int)$this->getField('ID');
@@ -128,7 +137,7 @@ class EventPage
      */
     function getMainInfo()
     {
-        return new EventMainInfo($this->Title, $this->EventLink,$this->EventLinkLabel, $this->EventCategory);
+        return new EventMainInfo($this->Title, $this->EventLink,$this->EventLinkLabel, $this->EventCategory, $this->DateString);
     }
 
     /**
@@ -173,6 +182,7 @@ class EventPage
         $this->EventLink = $info->getUrl();
         $this->EventLinkLabel = $info->getLabel();
         $this->EventCategory = $info->getCategory();
+        $this->DateString = $info->getDateString();
     }
 
     /**

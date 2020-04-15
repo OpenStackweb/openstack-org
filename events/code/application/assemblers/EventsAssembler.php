@@ -56,6 +56,7 @@ final class EventsAssembler {
         $duration                      = $event->getDuration();
         $res['start_date']             = $duration->getStartDate()->format('Y-m-d');
         $res['end_date']               = $duration->getEndDate()->format('Y-m-d');
+        $res['date_string']            = $main_info->getDateString();
         return $res;
     }
 }

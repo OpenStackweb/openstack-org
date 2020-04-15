@@ -164,7 +164,12 @@ class OpenStackDaysPage_Controller extends Page_Controller {
 
         Requirements::javascript('node_modules/slick-carousel/slick/slick.min.js');
         Requirements::javascript('themes/openstack/javascript/urlfragment.jquery.js');
+
+        Requirements::css(Director::protocol().'unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css');
+        Requirements::javascript(Director::protocol().'unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js');
         Requirements::javascript('events/js/openstackdays.js');
+
+
         $this->buildEventManager();
 	}
 
@@ -220,4 +225,11 @@ class OpenStackDaysPage_Controller extends Page_Controller {
         return new ArrayList($grouped_array);
     }
 
+    function EventsWithoutDate() {
+        $pulled_events = EventPage::get()
+            ->where("EventEndDate IS NULL AND EventStartDate IS NULL AND EventCategory = 'Openstack Days'")
+            ->sort("EventContinent");
+
+        return $pulled_events;
+    }
 }

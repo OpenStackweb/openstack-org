@@ -108,9 +108,12 @@ final class EventManager implements IEventManager {
 			if(!$event)
 				throw new NotFoundEntityException('EventPage',sprintf('id %s',$data['id'] ));
 
+
             $event->registerMainInfo($factory->buildEventMainInfo($data));
             $event->registerLocation($data['location'],$data['continent']);
-            $event->registerDuration($factory->buildEventDuration($data));
+            if ($data['start_date'] && $data['end_date']) {
+                $event->registerDuration($factory->buildEventDuration($data));
+            }
             $event->registerLogoUrl($data['logo_url']);
 		});
 	}
@@ -136,7 +139,9 @@ final class EventManager implements IEventManager {
 
             $event->registerMainInfo($factory->buildEventMainInfo($data));
             $event->registerLocation($data['location'],$data['continent']);
-            $event->registerDuration($factory->buildEventDuration($data));
+            if ($data['start_date'] && $data['end_date']) {
+                $event->registerDuration($factory->buildEventDuration($data));
+            }
             $event->registerLogoUrl($data['logo_url']);
 
             $repository->add($event);
