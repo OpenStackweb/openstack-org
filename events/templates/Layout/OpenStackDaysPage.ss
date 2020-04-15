@@ -215,96 +215,89 @@
 
             <div role="tabpanel" class="tab-pane fade in" id="events_tab">
                 <p>If you are interested in sponsoring, speaking or attending any of the events below, please contact <a href="mailto:events@openstack.org">events@openstack.org</a>.</p>
+                <br>
                 <div class="inner-osdays">
                     <h2 class="tab-title">OpenStack and OpenInfra Days by Region</h2>
                     <div class="osdays-events">
-                      <div class="row osdays-event">
-                        <div class="col-sm-2 col-xs-3"><strong>Date</strong></div>
-                        <div class="col-sm-4 col-xs-4"><strong>Event Name</strong></div>
-                        <div class="col-sm-3 col-xs-3"><strong>Location</strong></div>
-                        <div class="col-sm-3 col-xs-2"><strong>Region</strong></div>
-                      </div>
-                      <div class="row osdays-event">
-                        <div class="col-sm-2 col-xs-3"><div class="osd-date">TBA</div></div>
-                        <div class="col-sm-4 col-xs-4">OpenInfra Day Taiwan</div>
-                        <div class="col-sm-3 col-xs-3">Taipei, Taiwan</div>
-                        <div class="col-sm-3 col-xs-2">APAC</div>
-                      </div>
-                      <div class="row osdays-event">
-                        <div class="col-sm-2 col-xs-3"><div class="osd-date">Q3</div></div>
-                        <div class="col-sm-4 col-xs-4">OpenInfra Day China</div>
-                        <div class="col-sm-3 col-xs-3">Beijing, China</div>
-                        <div class="col-sm-3 col-xs-2">APAC</div>
-                      </div>
-                      <div class="row osdays-event">
-                        <div class="col-sm-2 col-xs-3"><div class="osd-date">TBA</div></div>
-                        <div class="col-sm-4 col-xs-4">OpenInfra Day Vietnam</div>
-                        <div class="col-sm-3 col-xs-3">Vietnam</div>
-                        <div class="col-sm-3 col-xs-2">APAC</div>
-                      </div>
-                      <div class="row osdays-event">
-                        <div class="col-sm-2 col-xs-3"><div class="osd-date">Q4</div></div>
-                        <div class="col-sm-4 col-xs-4">Open Infrastructure Day Indonesia</div>
-                        <div class="col-sm-3 col-xs-3">Indonesia</div>
-                        <div class="col-sm-3 col-xs-2">APAC</div>
-                      </div>
-                      <div class="row osdays-event">
-                        <div class="col-sm-2 col-xs-3"><div class="osd-date">Q2</div></div>
-                        <div class="col-sm-4 col-xs-4">OpenInfra Day UK</div>
-                        <div class="col-sm-3 col-xs-3">London, UK</div>
-                        <div class="col-sm-3 col-xs-2">Europe</div>
-                      </div>
-                      <div class="row osdays-event">
-                        <div class="col-sm-2 col-xs-3"><div class="osd-date">Q4</div></div>
-                        <div class="col-sm-4 col-xs-4">OpenInfra Day Hungary</div>
-                        <div class="col-sm-3 col-xs-3">Hungary</div>
-                        <div class="col-sm-3 col-xs-2">Europe</div>
-                      </div>
-                      <div class="row osdays-event">
-                        <div class="col-sm-2 col-xs-3"><div class="osd-date">Q4</div></div>
-                        <div class="col-sm-4 col-xs-4">OpenInfra Day Benelux</div>
-                        <div class="col-sm-3 col-xs-3">The Netherlands</div>
-                        <div class="col-sm-3 col-xs-2">Europe</div>
-                      </div>
-                      <div class="row osdays-event">
-                        <div class="col-sm-2 col-xs-3"><div class="osd-date">Q3</div></div>
-                        <div class="col-sm-4 col-xs-4">OpenStack/Infra Day Russia</div>
-                        <div class="col-sm-3 col-xs-3">Russia</div>
-                        <div class="col-sm-3 col-xs-2">Europe</div>
-                      </div>
-                      <div class="row osdays-event">
-                        <div class="col-sm-2 col-xs-3"><div class="osd-date">Q4</div></div>
-                        <div class="col-sm-4 col-xs-4">OpenInfra Day Italy</div>
-                        <div class="col-sm-3 col-xs-3">Italy</div>
-                        <div class="col-sm-3 col-xs-2">Europe</div>
-                      </div>
-                      <div class="row osdays-event">
-                        <div class="col-sm-2 col-xs-3"><div class="osd-date">Q4</div></div>
-                        <div class="col-sm-4 col-xs-4">OpenInfra Day Nordics</div>
-                        <div class="col-sm-3 col-xs-3">Sweden - TBC</div>
-                        <div class="col-sm-3 col-xs-2">Europe</div>
-                      </div>
-                      <div class="row osdays-event">
-                        <div class="col-sm-2 col-xs-3"><div class="osd-date">TBA</div></div>
-                        <div class="col-sm-4 col-xs-4">OpenInfra Day Canada</div>
-                        <div class="col-sm-3 col-xs-3">Ottawa, Canada</div>
-                        <div class="col-sm-3 col-xs-2">North America</div>
-                      </div>
+                        <table data-toggle="table" data-classes="table" data-sort-name="region" style="width:100%">
+                            <thead>
+                            <tr class="osdays-event">
+                                <th>
+                                    <strong>Date</strong>
+                                </th>
+                                <th>
+                                    <strong>Event Name</strong>
+                                </th>
+                                <th>
+                                    <strong>Location</strong>
+                                </th>
+                                <th data-sortable="true" data-field="region">
+                                    <strong>Region</strong>
+                                </th>
+                                <th>&nbsp;</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <% loop $EventsWithoutDate() %>
+                                <tr class="osdays-event">
+                                    <td class="col-sm-2 col-xs-2">
+                                        <div class="osd-date">$DateString</div>
+                                    </td>
+                                    <td class="col-sm-4 col-xs-4">
+                                        <strong>$Title</strong>
+                                    </td>
+                                    <td class="col-sm-2 col-xs-2">$Location</td>
+                                    <td class="col-sm-2 col-xs-2">$Continent</td>
+                                    <td class="col-sm-2 col-xs-2"></td>
+                                </tr>
+                                <% end_loop %>
+                            </tbody>
+                        </table>
                     </div>
+                    <br>
                     <h2 class="tab-title">Mark Your Calendars</h2>
                     <div class="osdays-events">
-                        <% loop $FutureOpenstackDaysEvents(22) %>
-                        <div class="row osdays-event">
-                            <div class="col-sm-2 col-xs-3"><div class="osd-date">$formatDateRange</div></div>
-                            <div class="col-sm-4 col-xs-4">$Title</div>
-                            <div class="col-sm-3 col-xs-3">$Location</div>
-                            <div class="col-sm-3 col-xs-2 text-right to-top">
-                                <a href="$EventLink">More Details</a>
-                                <a class="more-img" href="$EventLink"></a>
-                            </div>
-                        </div>
-                        <% end_loop %>
-
+                        <table data-toggle="table" data-classes="table" data-sort-name="dateraw" style="width:100%">
+                            <thead>
+                            <tr class="osdays-event">
+                                <th data-visible="false" data-field="dateraw"></th>
+                                <th data-sortable="true" data-sort-name="dateraw">
+                                    <strong>Date</strong>
+                                </th>
+                                <th>
+                                    <strong>Event Name</strong>
+                                </th>
+                                <th>
+                                    <strong>Location</strong>
+                                </th>
+                                <th data-sortable="true" data-field="region">
+                                    <strong>Region</strong>
+                                </th>
+                                <th>&nbsp;</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <% loop $FutureOpenstackDaysEvents(22) %>
+                                <tr class="osdays-event">
+                                    <td data-visible="false">$EventStartDate</td>
+                                    <td class="col-sm-2 col-xs-2">
+                                        <div class="osd-date">$formatDateRange</div>
+                                    </td>
+                                    <td class="col-sm-4 col-xs-4">
+                                        <strong>$Title</strong>
+                                    </td>
+                                    <td class="col-sm-2 col-xs-2">$Location</td>
+                                    <td class="col-sm-2 col-xs-2">$Continent</td>
+                                    <td class="col-sm-2 col-xs-2">
+                                        <div class="actions text-right to-top">
+                                            <a href="$EventLink">More Details</a>
+                                            <a class="more-img" href="$EventLink"></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <% end_loop %>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

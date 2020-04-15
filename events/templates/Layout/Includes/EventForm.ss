@@ -71,18 +71,27 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-2" id="start_date">
+            <div class="col-md-6" id="start_date">
                 <label for="$FormName_start_date" class="left">Start Date</label>
 
                 <div class="middleColumn">
                     $Fields.dataFieldByName(start_date)
                 </div>
             </div>
-            <div class="col-md-2" id="end_date">
+            <div class="col-md-6" id="end_date">
                 <label for="$FormName_end_date" class="left">End Date</label>
 
                 <div class="middleColumn">
                     $Fields.dataFieldByName(end_date)
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" id="date_string">
+                <label for="$FormName_date_string" class="left">Date String</label>
+
+                <div class="middleColumn">
+                    $Fields.dataFieldByName(date_string)
                 </div>
             </div>
         </div>

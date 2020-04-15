@@ -70,26 +70,23 @@ final class EventValidatorFactory
     {
         $rules = array(
             'title'                  => 'required|text|max:35',
-            'url'                    => 'required|url',
+            'url'                    => 'url',
             'category'               => 'required|text',
             'location'               => 'required|text',
-            'start_date'             => 'required|date',
-            'end_date'               => 'required|date|after:start_date',
+            'start_date'             => 'date',
+            'end_date'               => 'date|after:start_date',
         );
 
         $messages = array(
             'title.required'                  => ':attribute is required',
             'title.text'                      => ':attribute should be valid text.',
             'title.max'                       => ':attribute should have less than 35 chars.',
-            'url.required'                    => ':attribute is required',
             'url.url'                         => ':attribute should be valid url.',
             'category.required'               => ':attribute is required',
             'category.text'                   => ':attribute should be valid text.',
             'location.required'               => ':attribute is required',
             'location.text'                   => ':attribute should be valid text.',
-            'start_date.required'             => ':attribute is required',
             'start_date.date'                 => ':attribute should be valid date.',
-            'end_date.required'               => ':attribute is required',
             'end_date.date'                   => ':attribute should be valid date.',
             'end_date.after'                  => ':attribute should be after than start_date.'
         );

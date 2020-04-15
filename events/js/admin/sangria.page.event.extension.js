@@ -62,7 +62,8 @@ jQuery(document).ready(function($) {
                         state      : $('#'+form_id+'_state',form).val(),
                         country    : $('#'+form_id+'_country',form).val(),
                         start_date : $('#'+form_id+'_start_date',form).val(),
-                        end_date   : $('#'+form_id+'_end_date',form).val()
+                        end_date   : $('#'+form_id+'_end_date',form).val(),
+                        date_string: $('#'+form_id+'_date_string',form).val()
                     };
 
                     $.ajax({
@@ -83,6 +84,7 @@ jQuery(document).ready(function($) {
                             $('.country',row).text(request.country);
                             $('.start-date',row).text(request.start_date);
                             $('.end-date',row).text(request.end_date);
+                            $('.string-date',row).text(request.date_string);
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
                             ajaxError(jqXHR, textStatus, errorThrown);
@@ -126,7 +128,8 @@ jQuery(document).ready(function($) {
                     location   : $('#'+form_id+'_location',form).val(),
                     continent  : $('#'+form_id+'_continent',form).val(),
                     start_date : $('#'+form_id+'_start_date',form).val(),
-                    end_date   : $('#'+form_id+'_end_date',form).val()
+                    end_date   : $('#'+form_id+'_end_date',form).val(),
+                    date_string: $('#'+form_id+'_date_string',form).val()
                 };
 
                 if (!is_new_event) {
@@ -164,6 +167,7 @@ jQuery(document).ready(function($) {
                             $('.location',row).text(event.location);
                             $('.start-date',row).text(event.start_date);
                             $('.end-date',row).text(event.end_date);
+                            $('.string-date',row).text(event.date_string);
                         }
 
                         buildAutocompleteCategory(false);
@@ -352,6 +356,7 @@ jQuery(document).ready(function($) {
                 $('#'+form_id+'_country',form).trigger("chosen:updated");
                 $('#'+form_id+'_start_date',form).val(data.start_date);
                 $('#'+form_id+'_end_date',form).val(data.end_date);
+                $('#'+form_id+'_date_string',form).val(data.date_string);
                 edit_dialog.data('id',id).data('row',row).dialog( "open");
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -429,6 +434,7 @@ jQuery(document).ready(function($) {
                 $('#'+form_id+'_continent',form).val(data.continent);
                 $('#'+form_id+'_start_date',form).val(data.start_date);
                 $('#'+form_id+'_end_date',form).val(data.end_date);
+                $('#'+form_id+'_date_string',form).val(data.date_string);
                 edit_live_dialog.data('id',id).data('row',row).dialog( "open");
 
                 var date_picker_start = $('#'+form_id+'_start_date',form);

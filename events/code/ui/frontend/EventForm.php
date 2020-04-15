@@ -32,6 +32,7 @@ final class EventForm extends SafeXSSForm {
 		//duration
 		$fields->push($start_date = new TextField('start_date','Start Date'));
 		$fields->push($end_date   = new TextField('end_date','End Date'));
+		$fields->push($date_string   = new TextField('date_string','Date String'));
 		$start_date->addExtraClass('date');
 		$end_date->addExtraClass('date');
 

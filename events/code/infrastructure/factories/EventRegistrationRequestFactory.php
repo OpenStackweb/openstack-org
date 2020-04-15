@@ -47,7 +47,7 @@ final class EventRegistrationRequestFactory
 	 */
 	public function buildEventMainInfo(array $data)
 	{
-		$main_info = new EventMainInfo(trim($data['title']) ,trim($data['url']), 'Details', trim($data['category']));
+		$main_info = new EventMainInfo(trim($data['title']), trim($data['url']), 'Details', trim($data['category']), trim($data['date_string']));
 		return $main_info;
 	}
 
