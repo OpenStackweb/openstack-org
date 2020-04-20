@@ -6,7 +6,7 @@
     	    <div class="row">
                 <div class="col-md-12">
                     <img class="vancouver-landing-logo" src="{$Top.CloudUrl('assets/summits/Vancouver2020/ODPTG-Logo-Horiz-RGB-white.svg')}"
-                             onerror="this.onerror=null; this.src={$Top.CloudUrl('assets/summits/Vancouver2020/ODPTG-Logo-Horiz-RGB-white.svg')}" alt="OpenDev + PTG">
+                             onerror="this.onerror=null; this.src={$Top.CloudUrl('assets/summits/Vancouver2020/opendev-logo-red-white.svg')}" alt="OpenDev">
                 </div>
             </div>
         </div>
