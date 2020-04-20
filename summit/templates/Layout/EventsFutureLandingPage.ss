@@ -13,7 +13,7 @@
     </div>
 </div>
 <div class="row future-text-wrapper white" style="text-align:left !important;">
-    <div class="col-md-10 col-md-offset-1 join-us-text-vancouver"><p>OpenDev events are structured to have an impact on future development and integration efforts, achieved by collaboratively produced deliverables to share back with the industry and open source communities.</p>
+    <div class="col-md-8 col-md-offset-2 join-us-text-vancouver"><p>OpenDev events are structured to have an impact on future development and integration efforts, achieved by collaboratively produced deliverables to share back with the industry and open source communities.</p>
 
         <p>The event series will include <strong>discussion oriented sessions</strong> around Large-scale Usage of Open Infrastructure Software, Hardware Automation, and Containers in Production to explore challenges, share common architectures, and collaborate around potential solutions. Ideal outcomes of each event might look like:
         <ul><li>New members joining the SIG related to the topic to continue the discussions</li>
