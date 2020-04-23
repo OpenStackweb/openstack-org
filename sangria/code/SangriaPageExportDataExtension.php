@@ -391,6 +391,7 @@ SQL;
 
     private function ExportSurveyResultsDataSurveyBuilder($template_id, $filters)
     {
+        $init_time = time();
 
         $sql = <<<SQL
 SELECT * FROM (
@@ -413,15 +414,15 @@ THEN (
 IF(
 	( SELECT IsCountrySelector FROM SurveyDropDownQuestionTemplate DDL WHERE DDL.ID = Q.ID) = 1,
     SA.Value,
-    ( SELECT GROUP_CONCAT(Value SEPARATOR '|') FROM SurveyQuestionValueTemplate WHERE FIND_IN_SET(ID, SA.Value) > 0)
+    ( SELECT GROUP_CONCAT(Value SEPARATOR '|') FROM SurveyQuestionValueTemplate WHERE  urveyQuestionValueTemplate.OwnerID = Q.ID AND FIND_IN_SET(ID, SA.Value) > 0)
     )
 )
 WHEN 'SurveyCheckBoxListQuestionTemplate'
-THEN ( SELECT GROUP_CONCAT(Value SEPARATOR '|') FROM SurveyQuestionValueTemplate WHERE FIND_IN_SET(ID, SA.Value) > 0)
+THEN ( SELECT GROUP_CONCAT(Value SEPARATOR '|') FROM SurveyQuestionValueTemplate WHERE SurveyQuestionValueTemplate.OwnerID = Q.ID AND FIND_IN_SET(ID, SA.Value) > 0)
 WHEN 'SurveyRankingQuestionTemplate'
-THEN ( SELECT GROUP_CONCAT(Value ORDER BY FIND_IN_SET(ID, SA.Value) SEPARATOR '|') FROM SurveyQuestionValueTemplate WHERE FIND_IN_SET(ID, SA.Value) > 0)
+THEN ( SELECT GROUP_CONCAT(Value ORDER BY FIND_IN_SET(ID, SA.Value) SEPARATOR '|') FROM SurveyQuestionValueTemplate WHERE SurveyQuestionValueTemplate.OwnerID = Q.ID AND FIND_IN_SET(ID, SA.Value) > 0)
 WHEN 'SurveyRadioButtonListQuestionTemplate'
-THEN ( SELECT GROUP_CONCAT(Value SEPARATOR '|') FROM SurveyQuestionValueTemplate WHERE FIND_IN_SET(ID, SA.Value) > 0)
+THEN ( SELECT GROUP_CONCAT(Value SEPARATOR '|') FROM SurveyQuestionValueTemplate WHERE SurveyQuestionValueTemplate.OwnerID = Q.ID AND FIND_IN_SET(ID, SA.Value) > 0)
 ELSE SA.Value END AS Answer
 FROM Survey S
 INNER JOIN SurveyStep SE ON SE.SurveyID = S.ID
@@ -439,11 +440,14 @@ ORDER BY SurveyID ASC , StepOrder ASC, QuestionOrder ASC;
 SQL;
 
         $result = DB::query($sql);
+        SS_Log::log(sprintf("SangriaPageExportDataExtension::ExportSurveyResultsDataSurveyBuilder time elapsed %s seconds", time() - $init_time), SS_Log::WARN);
         return $result;
     }
 
     function ExportSurveyResults()
     {
+        $init_time  = time();
+
         $fileDate = date('Ymdhis');
         $template_id = intval(Controller::curr()->getRequest()->getVar('Range'));
         SangriaPage_Controller::generateDateFilters('REPORT', 'LastEdited');
@@ -451,7 +455,10 @@ SQL;
 
         $data = $this->getSurveyBuilderExportData($template_id, $date_filter);
         $filename = "Survey_" . $fileDate . ".csv";
-        return CSVExporter::getInstance()->export($filename, $data, ',');
+        $response =  CSVExporter::getInstance()->export($filename, $data, ',');
+
+        SS_Log::log(sprintf("SangriaPageExportDataExtension::ExportSurveyResults time elapsed %s seconds", time() - $init_time), SS_Log::WARN);
+        return $response;
     }
 
     private function buildSurveyBuilderHeaders($template_id, $flat_fields = array(), $flat_fields_entity = array())
@@ -637,6 +644,7 @@ SQL;
 
     public function getSurveyBuilderExportData($template_id, $survey_filters='', $deployment_filters='', $flat_fields = array(), $flat_fields_entity = array())
     {
+        $init_time  = time();
         $res         = $this->ExportSurveyResultsDataSurveyBuilder($template_id, $survey_filters);
         $survey_id   = 0;
         $file_data   = [];
@@ -841,6 +849,7 @@ SQL;
         if(isset($line['SurveyID']) && intval($line['SurveyID']) > 0)
             $file_data[] = array_merge($line, $header_template2);
 
+        SS_Log::log(sprintf("SangriaPageExportDataExtension::getSurveyBuilderExportData time elapsed %s seconds", time() - $init_time), SS_Log::WARN);
         return $file_data;
     }
 
