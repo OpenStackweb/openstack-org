@@ -414,7 +414,7 @@ THEN (
 IF(
 	( SELECT IsCountrySelector FROM SurveyDropDownQuestionTemplate DDL WHERE DDL.ID = Q.ID) = 1,
     SA.Value,
-    ( SELECT GROUP_CONCAT(Value SEPARATOR '|') FROM SurveyQuestionValueTemplate WHERE  urveyQuestionValueTemplate.OwnerID = Q.ID AND FIND_IN_SET(ID, SA.Value) > 0)
+    ( SELECT GROUP_CONCAT(Value SEPARATOR '|') FROM SurveyQuestionValueTemplate WHERE SurveyQuestionValueTemplate.OwnerID = Q.ID AND FIND_IN_SET(ID, SA.Value) > 0)
     )
 )
 WHEN 'SurveyCheckBoxListQuestionTemplate'
