@@ -578,15 +578,15 @@ THEN (
 IF(
     ( SELECT IsCountrySelector FROM SurveyDropDownQuestionTemplate DDL WHERE DDL.ID = Q.ID) = 1,
     SA.Value,
-    ( SELECT GROUP_CONCAT(Value SEPARATOR '|') FROM SurveyQuestionValueTemplate WHERE FIND_IN_SET(ID, SA.Value) > 0)
+    ( SELECT GROUP_CONCAT(Value SEPARATOR '|') FROM SurveyQuestionValueTemplate WHERE SurveyQuestionValueTemplate.OwnerID = Q.ID AND FIND_IN_SET(ID, SA.Value) > 0)
     )
 )
 WHEN 'SurveyCheckBoxListQuestionTemplate'
-THEN ( SELECT GROUP_CONCAT(Value SEPARATOR '|') FROM SurveyQuestionValueTemplate WHERE FIND_IN_SET(ID, SA.Value) > 0)
+THEN ( SELECT GROUP_CONCAT(Value SEPARATOR '|') FROM SurveyQuestionValueTemplate WHERE SurveyQuestionValueTemplate.OwnerID = Q.ID AND FIND_IN_SET(ID, SA.Value) > 0)
 WHEN 'SurveyRankingQuestionTemplate'
-THEN ( SELECT GROUP_CONCAT(Value SEPARATOR '|') FROM SurveyQuestionValueTemplate WHERE FIND_IN_SET(ID, SA.Value) > 0)
+THEN ( SELECT GROUP_CONCAT(Value SEPARATOR '|') FROM SurveyQuestionValueTemplate WHERE SurveyQuestionValueTemplate.OwnerID = Q.ID AND FIND_IN_SET(ID, SA.Value) > 0)
 WHEN 'SurveyRadioButtonListQuestionTemplate'
-THEN ( SELECT GROUP_CONCAT(Value SEPARATOR '|') FROM SurveyQuestionValueTemplate WHERE FIND_IN_SET(ID, SA.Value) > 0)
+THEN ( SELECT GROUP_CONCAT(Value SEPARATOR '|') FROM SurveyQuestionValueTemplate WHERE SurveyQuestionValueTemplate.OwnerID = Q.ID AND FIND_IN_SET(ID, SA.Value) > 0)
 ELSE SA.Value END AS Answer
 FROM Survey S
 INNER JOIN EntitySurvey ES ON ES.ID = S.ID
