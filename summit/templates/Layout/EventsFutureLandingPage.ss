@@ -13,9 +13,8 @@
     </div>
 </div>
 <div class="row future-text-wrapper white" style="text-align:left !important;">
-    <div class="col-md-8 col-md-offset-2 join-us-text-vancouver"><p>OpenDev events are structured to have an impact on future development and integration efforts, achieved by collaboratively produced deliverables to share back with the industry and open source communities.</p>
-
-        <p>The event series will include <strong>discussion oriented sessions</strong> around Large-scale Usage of Open Infrastructure Software, Hardware Automation, and Containers in Production to explore challenges, share common architectures, and collaborate around potential solutions. Ideal outcomes of each event might look like:
+    <div class="col-md-8 col-md-offset-2 join-us-text-vancouver"><p>OpenDev events help influence open source software and communities. During these events, attendees collaborate to discuss problem areas, answer questions and create valuable resources that push budding topic areas forward, like Edge Computing in 2017 and CI/CD in 2018.</p>
+        <p>This new virtual event series will include discussion oriented sessions around Large-scale Usage of Open Infrastructure Software, Hardware Automation, and Containers in Production to explore challenges, share common architectures, and collaborate around potential solutions. Ideal outcomes of each event might look like:
         <ul><li>New members joining the SIG related to the topic to continue the discussions</li>
         <li>Continuing to meet, eventually producing a whitepaper on the topic (<a href="https://superuser.openstack.org/articles/report-cloud-edge-computing/">see the OpenDev Edge example</a>!)
         <li>Incorporating discussion outcomes into upstream software development</li>
