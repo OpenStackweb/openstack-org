@@ -85,7 +85,7 @@ final class OpenStackIdCommon {
 
     public static function getTrustRoot()
     {
-        return Auth_OpenID_Realm;
+        return sprintf("%s://%s", $_SERVER['REQUEST_SCHEME'], $_SERVER['HTTP_HOST']);
     }
 
     public static function escape($thing) {
