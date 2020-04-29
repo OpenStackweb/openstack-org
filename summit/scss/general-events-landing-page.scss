@@ -950,6 +950,16 @@ footer {
     background-color: transparent;
 }
 
+a.register-btn-soon, .register-btn-soon {
+    border-radius: 2px;
+    background: #999 !important;
+    color: white;
+    text-transform: uppercase;
+    font-size: 1.1em;
+    font-weight: 400;
+    padding: 12px 30px;
+}
+
 .sponsor .btn.register-btn-lrg i {
     color: #ed1944;
     margin-left: 0.5em;
@@ -2164,3 +2174,103 @@ a.photo-credit {
 .row-eq-height .item {
     height: 100%
 }
+
+.about-summit-users-wrapper {
+  padding-top: 5em; }
+
+.about-summit-users-wrapper .summit-user-section {
+  background-color: #fff;
+  height: 19em; }
+
+@media (min-width: 570px) and (max-width: 720px) {
+  .about-summit-users-wrapper .summit-user-section {
+    height: 21em; } }
+
+@media all and (max-width: 569px) {
+  .about-summit-users-wrapper .summit-user-section {
+    height: 17em; } }
+
+@media (min-width: 720px) and (max-width: 1200px) {
+  .about-summit-users-wrapper .summit-user-section {
+    height: 23em; } }
+
+.about-summit-users-wrapper .summit-user-section .summit-user-image-box {
+  margin: 0 0 0.5em 0;
+  border-radius: 0; }
+
+.overview {
+  margin: 0;
+  list-style: none;
+  padding: 0; }
+
+.overview li {
+  padding-bottom: 1px; }
+
+.overview li a {
+  width: 100%;
+  background-color: #ed1944;
+  display: inline-block;
+  color: #fff;
+  text-align: left;
+  padding: 1em;
+  text-transform: uppercase;
+  position: relative; }
+
+.overview li a h5 {
+  color: #fff;
+  line-height: 1.2em;
+  font-size: 1.25em;
+  margin-top: 0; }
+
+.overview li a i {
+  position: absolute;
+  right: 1em;
+  top: 1em;
+  font-size: 1.5em; }
+
+.about-summit-users-wrapper .featured {
+  height: auto;
+  padding: 0 0.5em;
+  margin-bottom: 1em; }
+
+.about-summit-users-wrapper .summit-user-section img.summit-user-image {
+  height: 180px;
+  width: 173px;
+  object-fit: cover; }
+
+.about-summit-users-wrapper .summit-user-section .info {
+  padding: 0.25em 0.75em;
+  text-align: left; }
+
+.about-summit-users-wrapper .summit-user-section .name {
+  color: #ed1944;
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 0.5em;
+  line-height: 1.2em;
+  word-break: break-word; }
+
+.about-summit-users-wrapper .summit-user-section .title {
+  font-size: 0.8em;
+  text-transform: uppercase;
+  font-style: normal;
+  text-align: left; }
+
+.about-summit-users-wrapper .summit-user-section .topic {
+  font-size: 0.8em;
+  text-align: left;
+  font-weight: bold; }
+
+.about-summit-users-wrapper .btn {
+  background-color: transparent;
+  color: #000;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-top: 1em; }
+
+.about-summit-users-wrapper .btn i {
+  margin-left: 1em; }
+
+h3.recap-title {
+  font-size: 3em; }

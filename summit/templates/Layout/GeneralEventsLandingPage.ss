@@ -5,17 +5,18 @@
                 <div class="item">
                     <div class="video">
                         <div class="triangle">
-                            <p>Complete!<p>
+                            <p>REGISTER<p>
                         </div>
                         <a href="https://www.flickr.com/photos/sgerner/22636377307" target="_blank" class="photo-credit" title="Steven Gerner">
                             <i class="fa fa-info-circle"></i>
                         </a>
                     </div>
-                    <h4>Denver, Colorado</h4>
-                    <p>Apr 29-May 4, 2019</p>
+                    <h4>Large-scale Usage of Open Infrastructure Software</h4>
+                    <p><strong>Virtual Event</strong></p>
+                    <p>June 29 - July 1, 2020</p>
                     <p>
-                        <a href="/videos/summits/denver-2019" target="_blank" class="btn register-btn-lrg ">
-                            See Highlights
+                        <a href="https://opendev_largescale.eventbrite.com" target="_blank" class="btn register-btn-lrg " target="_blank">
+                            Register Now!
                             <i class="fa fa-arrow-right"></i>
                         </a>
 
@@ -26,16 +27,15 @@
             <div class="video-container second col-md-4 col-sm-12 col-xs-12">
                 <div class="item">
                     <div class="video">
-                        <div class="triangle">
-                            <p>Complete!<p>
+                        <div class="triangle-new">
+                            <p>UPCOMING<p>
                         </div>
                     </div>
-                    <h4>Shanghai, China</h4>
-                    <p>Nov 4-6, 2019</p>
-                    <p>
-                        <a class="btn register-btn-lrg" href="/videos/summits/shanghai-2019">
-                            See Highlights <i class="fa fa-arrow-right"></i>
-                        </a>
+                    <h4>Hardware Automation</h4>
+                    <p><strong>Virtual Event</strong></p>
+                    <p>July 20 - 22, 2020</p>
+                    <p class="btn register-btn-soon">
+                            Registration Coming Soon
                     </p>
 
                 </div>
@@ -44,11 +44,12 @@
                 <div class="item">
                     <div class="video">
                         <div class="triangle-new">
-                            <p>New!<p>
+                            <p>UPCOMING<p>
                         </div>
                     </div>
-                    <h4>Vancouver, British Columbia</h4>
-                    <p>June 8-11, 2020</p>
+                    <h4>Containers in Production</h4>
+                    <p><strong>Virtual Event</strong></p>
+                    <p>August 10 - 12, 2020</p>
                     <p>
                         <a class="btn register-btn-lrg red eventbrite-register-link" href="/summit/vancouver-2020">
                             Learn More <i class="fa fa-arrow-right"></i>
@@ -62,30 +63,6 @@
         </div>
     </div>
 </div>
-
-
-<div class="white about-summit-header">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 session-box">
-                <h3>Hundreds of Presentations, Workshops, and Collaborative Sesssions</h3>
-                <ul class="sessions">
-                    <li class="session"> <span class="ai"></span> AI</li>
-                    <li class="session"> <span class="cicd"></span> CI/CD</li>
-                    <li class="session"> <span class="container"></span> Containers</li>
-                    <li class="session"> <span class="edge"></span> Edge Computing</li>
-                    <li class="session"> <span class="hybrid"></span> Hybrid Cloud</li>
-                    <li class="session"> <span class="hpc"></span> HPC</li>
-                    <li class="session"> <span class="nfv"></span> NFV</li>
-                    <li class="session"> <span class="cloud"></span> Public & Private Cloud</li>
-                    <li class="session"> <span class="security"></span> Security</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 <div class="what-to-expect" id="expect">
     <div class="container">
         <div class="row">
@@ -95,26 +72,30 @@
         </div>
         <div class="row row-eq-height">
             <div class="video-container col-md-6 col-sm-12 col-xs-12">
-                <a href="https://www.openstack.org/videos/summits/berlin-2018/tracks/keynotes" class="play video first">
-                    <i class="fal fa-play"></i>
+                <a class="play video first">
                 </a>
             </div>
             <div class="text-container col-md-6 col-sm-12">
-                <h4 class="title-section">Get Inspired by the Keynotes</h4>
-                <p>Kick off the Summit by joining thousands of community members to witness open infrastructure in action: hear project updates from technical leaders, learn how operators are running open infrastructure in production, and brace yourself for the live demos. The keynotes will set you up to understand the open infrastructure vision, trends and latest news, so you can be prepared to have a successful Summit week.</p>
-                <p><a class="btn btn-link" href="https://www.openstack.org/videos/summits/berlin-2018/tracks/keynotes">Watch keynotes from the Berlin Summit <i class="fa fa-chevron-right"></i></a></p>
+                <h4 class="title-section">What is OpenDev?</h4>
+                <p>OpenDev events bring together the developers and users of the open source software powering today's infrastructure, to share best practices, identify gaps, and advance the state of the art in open infrastructure. OpenDev events focused on <a href="https://superuser.openstack.org/articles/report-cloud-edge-computing/">Edge Computing</a> in 2017 and CI/CD in 2018. In 2020, OpenDev is a virtual series of three separate events, each covering a different open infrastructure topic. Participants can expect discussion oriented, collaborative sessions exploring challenges, sharing common architectures, and collaborating around potential solutions.</p>
             </div>
         </div>
         <div class="row row-eq-height">
             <div class="video-container col-md-6 col-sm-12 col-xs-12 col-md-push-6">
-                <a href="https://www.openstack.org/videos/" class="play video second">
-                    <i class="fal fa-play"></i>
+                <a class="play video second">
                 </a>
             </div>
             <div class="text-container col-md-6 col-sm-12 col-md-pull-6">
-                <h4 class="title-section">Learn from your Peers in Breakout Sessions &amp; Lightning Talks</h4>
-                <p>After keynotes, the week is full of presentations and panels covering open infrastructure use cases ranging from CI/CD, edge computing, and AI / machine learning to hybrid cloud and more. Expect to hear technical deep dives and use cases covering more than 35 open source projects that are used to build open infrastructure.</p>
-                <p><a class="btn btn-link" href="https://www.openstack.org/videos/">Check out past Summit session videos <i class="fa fa-chevron-right"></i></a></p>
+                <h4 class="title-section">Event 1: Large Scale Usage of Open Infrastructure</h4>
+                <p>Operating open infrastructure at scale presents common challenges and constraints. During this event, users will share case studies and architectures, discuss problem areas impacting their environments, and collaborate around open source requirements directly with upstream developers.</p> 
+                <p>Topics include: 
+                    <ul>
+                        <li>Scaling user stories with the goal of pushing back cluster scaling limits</li>
+                        <li>Upgrades</li> 
+                        <li>Centralized compute vs distributed compute for NFV and edge computing use case</li> 
+                        <li>User Stories - challenges based on size of the deployment</li>
+                    </ul>
+                </p>
             </div>
         </div>
         <div class="row row-eq-height">
@@ -123,8 +104,15 @@
                 </a>
             </div>
             <div class="text-container col-md-6 col-sm-12">
-                <h4 class="title-section">Get Started Contributing with Mentoring and Hands-on Trainings</h4>
-                <p>New to open source or want to learn new skills from community experts? The Summit offers dozens of on-site training opportunities—at no additional cost—where you can begin contributing upstream, find a mentor, or learn best practices for upgrades, bare metal, container strategy, and more.</p>
+                <h4 class="title-section">Event 2: Hardware Automation topics</h4>
+                <p>From hardware acceleration to running applications directly on bare metal, hardware automation enables organizations to save resources and increase productivity. During this OpenDev event, operators will discuss hardware limitations for cloud provisioning, share networking challenges, and collaborate on open source requirements directly with upstream developers.</p>
+                <p>Topics include: 
+                    <ul>
+                        <li>End-to-end hardware provisioning lifecycle for bare metal / cradle to grave for hypervisors</li>
+                        <li>Networking</li>
+                        <li>Consuming bare metal infrastructure to provision cloud based workloads</li>
+                    </ul>
+                </p>
             </div>
         </div>
         <div class="row row-eq-height">
@@ -133,8 +121,17 @@
                 </a>
             </div>
             <div class="text-container col-md-6 col-sm-12 col-md-pull-6">
-                <h4 class="title-section">Collaborate and Influence Project Roadmaps at the Forum</h4>
-                <p>Join fellow operators and developers to collaborate and brainstorm the requirements for upcoming software releases, gather feedback for existing releases, and engage in strategic discussions about the direction of open infrastructure projects.</p>
+                <h4 class="title-section">Event 3: Containers in Production topics</h4>
+                <p>Whether you want to run containerized applications on bare metal or VMs, organizations are developing architectures for a variety of workloads. During this event, users will discuss the infrastructure requirements to support containers, share challenges from their production environments, and collaborate on open source requirements directly with upstream developers. </p>
+                <p>Topics include: 
+                    <ul>
+                        <li>Using OpenStack and containers together</li>
+                        <li>Security and Isolation</li>
+                        <li>Telco and Network Functions</li>
+                        <li>Bare metal and containers</li>
+                        <li>Acceleration and optimization</li>
+                    </ul>
+                </p>
             </div>
         </div>
     </div>
@@ -145,7 +142,7 @@
         <div class="row">
             <div class="col-lg-12 timeline">
                 <h3>Timeline</h3>
-                <span></span>
+                <p style="font-size: 1.4em;margin-top: 20px;">The collaboration does not stop when OpenDev ends. After the event, participants are encouraged to join the SIG related to the topic to continue the discussions. Successful SIGs would continue to meet, produce relevant content (see the OpenDev Edge example!), and incorporate discussion outcomes into upstream software development.</p>
             </div>
 
         </div>
@@ -159,12 +156,9 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12 text text-container">
-                <h3 class="title-section">Who Attends the Summit</h3>
+                <h3 class="title-section">Who Attends OpenDev</h3>
 
-                <p>The Open Infrastructure Summit is for people who run and make decisions about IT infrastructure
-                    strategy, technologies and vendors. Open source infrastructure is flexible, innovative and
-                    interoperable. And it’s made up of many different technologies and providers around the world. The
-                    Open Infrastructure Summit brings together thousands of people to learn and collaborate. </p>
+                <p>The OpenDev 2020 event series focuses on user stories and challenges around scaling, hardware automation, and containers using open source software. During the event, operators will collaborate on requirements with the developers contributing upstream and the vendors creating product roadmaps. </p>
                 <h5>Join Us</h5>
                 <ul class="attends">
                     <li><span class="architecture"></span>Architecture & Ops</li>
@@ -176,12 +170,244 @@
         </div>
     </div>
 </div>
+<div class="light about-summit-users-wrapper" id="">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-lg-8 col-md-6">
+                <h3 class="title-section">Vancouver 2020 Open Dev Programming Committee</h3>
+                <!-- Start Speakers -->
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/profile-images/5ae1fab52c42f.jpg" alt="Mark Collier" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Mark Collier</div>
+                            <div class="title">OpenStack Foundation</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/keithberger.jpg" alt="Keith Berger" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Keith Berger</div>
+                            <div class="title">SUSE</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/Uploads/penick-profile-pic2.png" alt="James Penick" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">James Penick</div>
+                            <div class="title">Verizon Media</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/mnaser.jpg" alt="Mohammed Naser" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Mohammed Naser</div>
+                            <div class="title">VEXXHOST</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/Uploads/AllisonPrice.jpg" alt="Allison Price" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Allison Price</div>
+                            <div class="title">OpenStack Foundation</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/summits/denver-2019/programming-commitee/BelmiroMoreira.JPG" alt="Belmiro Moreira" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Belmiro Moreira</div>
+                            <div class="title">CERN</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/Roman.jpg" alt="Roman Gorshunov" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Roman Gorshunov</div>
+                            <div class="title">AT&amp;T</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/summits/denver-2019/programming-commitee/BethCohen.jpg" alt="Beth Cohen" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Beth Cohen</div>
+                            <div class="title">Verizon</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/Uploads/photo9.JPG" alt="Masahito Muroi" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Masahito Muroi</div>
+                            <div class="title">Line Corp</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/profile-images/prof-pic-low-quality.jpg" alt="Kendall Nelson" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Kendall Nelson</div>
+                            <div class="title">OpenStack Foundation</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/qihui.jpg" alt="Qihui Zhao" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Qihui Zhao</div>
+                            <div class="title">China Mobile</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/nokia-gergely-csatari.jpg" alt="Gergely Csatari" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Gergely Csatari</div>
+                            <div class="title">Nokia</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/Lingxian-Kong.JPG" alt="Lingxian Kong" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Lingxian Kong</div>
+                            <div class="title">Catalyst Cloud</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/Uploads/thierry.jpeg" alt="Thierry Carrez" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Thierry Carrez</div>
+                            <div class="title">OpenStack Foundation</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/profile-images/allisonicon128x128.png" alt="Allison Randal" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Allison Randal</div>
+                            <div class="title">Software Freedom conservancy</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/Uploads/vmb-helvetica-sm.png" alt="VM Brasseur" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">VM Brasseur</div>
+                            <div class="title">Juniper</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/joshsimmons.jpg" alt="Josh Simmons" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Josh Simmons</div>
+                            <div class="title">Open Source Initiative</div>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- End Speakers -->
+                <!-- <div class="col-xs-12">
+                    <a class="btn" href="/summit/vancouver-2020/speakers">See all summit speakers <i class="fa fa-arrow-right"></i></a>
+                </div> -->
+            </div>
+            <!-- <div class="col-sm-12 col-lg-4 col-md-6 col-xs-12">
+                <h3 class="title-section">Summit Overview</h3>
+                <div class="col-12 col-md-12 col-sm-6 col-xs-12 featured">
+                    <ul class="overview">
+                        <li><a href="https://www.openstack.org/summit/shanghai-2019/summit-schedule/events/24344/openstack-upstream-institute-day-1-sponsored-by-lenovo-rsvp-required"><h5>OpenStack Upstream Institute</h5>
+                            <p><small>Saturday-Sunday</small></p> <i class="fal fa-info-circle"></i></a></li>
+                        <li><a href="https://www.openstack.org/summit/shanghai-2019/summit-schedule/global-search?t=Keynotes"><h5>Keynotes</h5>
+                            <p><small>Monday</small></p> <i class="fal fa-info-circle"></i></a></li>
+                        <li><a href="https://www.openstack.org/summit/shanghai-2019/summit-schedule"><h5>Breakout Sessions</h5>
+                            <p><small>Monday-Wednesday</small></p> <i class="fal fa-info-circle"></i></a></li>
+                        <li><a href="https://wiki.openstack.org/wiki/Forum"><h5>The Forum</h5>
+                            <p><small>Monday-Wednesday</small></p> <i class="fal fa-info-circle"></i></a></li>
+                        <li><a href="https://www.openstack.org/summit/shanghai-2019/summit-schedule/"><h5>Workshops and Trainings</h5>
+                            <p><small>Monday-Wednesday</small></p> <i class="fal fa-info-circle"></i></a></li>
+                        <li><a href="https://www.openstack.org/summit/shanghai-2019/summit-schedule/global-search?t=Marketplace"><h5>Open Infrastructure Marketplace</h5>
+                            <p><small>Monday-Wednesday</small></p> <i class="fal fa-info-circle"></i></a></li>
+                        <li><a href="https://www.openstack.org/ptg"><h5>Project Teams Gathering (PTG)</h5>
+                            <p><small>Wednesday-Friday</small></p> <i class="fal fa-info-circle"></i></a></li>
+                    </ul>
+
+                </div>
+
+                <div class="col-xs-12">
+                    <a class="btn" href="/summit/shanghai-2019/summit-schedule/">Full Summit Schedule<i class="fa fa-arrow-right"></i></a>
+                </div>
+            </div> -->
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                
+            </div>
+        </div>
+    </div>
+</div>
 <div class="academy-wrapper" id="Sponsors">
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h3>These organizations are coming together at the Summit</h3>
+                <h3>Thank you to the OpenStack Foundation Platinum, Gold, and Corporate sponsors for their ongoing support!</h3>
             </div>
             <div id="sponsorsCarousel" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
