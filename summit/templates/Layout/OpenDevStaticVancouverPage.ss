@@ -314,25 +314,6 @@
         </div>
     </div>
 </div>
-<div class="academy-wrapper" id="Sponsors">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <h3 class="recap-title script">Become a Sponsor of OpenDev + PTG
-                </h3>
-            </div>
-
-            <div class="col-sm-12 sponsor">
-                <p class="text">
-                    Sponsoring these events will greatly help ensure the continued growth and success of open infrastructure projects. If your organization is interested in participating and supporting the open infrastructure community, please click the link below.
-                </p>
-                <p style="text-align: center;">
-                    <a class="btn register-btn-lrg" href="/events/opendev-ptg-2020/sponsors">Sponsor this Event <i class="fa fa-arrow-right"></i></a>
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div class="diverse">
     <div class="blue-div"></div>
