@@ -141,7 +141,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 timeline">
-                <h3>Timeline</h3>
+                <h3>Next Steps/Outcomes</h3>
                 <p style="font-size: 1.4em;margin-top: 20px;">The collaboration does not stop when OpenDev ends. After the event, participants are encouraged to join the SIG related to the topic to continue the discussions. Successful SIGs would continue to meet, produce relevant content (see the OpenDev Edge example!), and incorporate discussion outcomes into upstream software development.</p>
             </div>
 
@@ -173,10 +173,10 @@
 <div class="light about-summit-users-wrapper" id="">
     <div class="container">
         <div class="row">
-            <div class="col-sm-12 col-lg-8 col-md-6">
-                <h3 class="title-section">Vancouver 2020 Open Dev Programming Committee</h3>
+            <div class="col-sm-12 col-lg-12 col-md-6">
+                <h3 class="title-section">2020 Open Dev Programming Committee</h3>
                 <!-- Start Speakers -->
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
                             <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/profile-images/5ae1fab52c42f.jpg" alt="Mark Collier" class="summit-user-image">
@@ -187,7 +187,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
                             <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/keithberger.jpg" alt="Keith Berger" class="summit-user-image">
@@ -198,7 +198,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
                             <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/Uploads/penick-profile-pic2.png" alt="James Penick" class="summit-user-image">
@@ -209,7 +209,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
                             <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/mnaser.jpg" alt="Mohammed Naser" class="summit-user-image">
@@ -220,7 +220,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
                             <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/Uploads/AllisonPrice.jpg" alt="Allison Price" class="summit-user-image">
@@ -231,7 +231,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
                             <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/summits/denver-2019/programming-commitee/BelmiroMoreira.JPG" alt="Belmiro Moreira" class="summit-user-image">
@@ -242,7 +242,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
                             <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/Roman.jpg" alt="Roman Gorshunov" class="summit-user-image">
@@ -253,7 +253,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
                             <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/summits/denver-2019/programming-commitee/BethCohen.jpg" alt="Beth Cohen" class="summit-user-image">
@@ -264,7 +264,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
                             <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/Uploads/photo9.JPG" alt="Masahito Muroi" class="summit-user-image">
@@ -275,7 +275,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
                             <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/profile-images/prof-pic-low-quality.jpg" alt="Kendall Nelson" class="summit-user-image">
@@ -286,7 +286,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
                             <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/qihui.jpg" alt="Qihui Zhao" class="summit-user-image">
@@ -297,7 +297,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
                             <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/nokia-gergely-csatari.jpg" alt="Gergely Csatari" class="summit-user-image">
@@ -308,7 +308,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
                             <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/Lingxian-Kong.JPG" alt="Lingxian Kong" class="summit-user-image">
@@ -319,7 +319,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
                             <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/Uploads/thierry.jpeg" alt="Thierry Carrez" class="summit-user-image">
@@ -330,7 +330,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
                             <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/profile-images/allisonicon128x128.png" alt="Allison Randal" class="summit-user-image">
@@ -341,7 +341,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
                             <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/Uploads/vmb-helvetica-sm.png" alt="VM Brasseur" class="summit-user-image">
@@ -352,7 +352,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
                             <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/joshsimmons.jpg" alt="Josh Simmons" class="summit-user-image">
@@ -612,170 +612,6 @@
                        target="_blank">
                         Donate to the travel support program.
                     </a>
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="summit-sponsor">
-    <div class="container">
-        <div class="row">
-
-            <div class="col-sm-12 sponsor">
-                <h3 class="title">Become a Summit Sponsor</h3>
-                <p class="text">
-                    Meet the open source users, IT decision makers and passionate developers, administrators and
-                    operators building the modern infrastructure stack. Content and attendees span more than 30
-                    open
-                    source communities including Ceph, Docker, Kata Containers, Kubernetes, OpenStack, OPNFV, Zuul
-                    and
-                    more.
-                </p>
-                <p style="text-align: center;">
-                    <a class="btn register-btn-lrg" href="{$CurrentSummit.Link}sponsors/">Sponsor the Summit <i class="fa fa-arrow-right"></i></a>
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="summit-insights">
-    <div class="container">
-        <div class="row row-eq-height">
-            <div class="col-lg-4 col-md-4 col-sm-12">
-                <div class="pink box item big">
-                    <h4>Get buy in from your boss</h4>
-                    <p>Justifying your trip to Denver this April is easier when armed with the right information.</p>
-                    <p>Get budget info and event details to help convince your boss that you need to attend the
-                        Summit.</p>
-                    <p>
-                        Whether you’re interested in ci/cd, containers, edge, hpc, nfv, or public and private
-                        cloud, the
-                        summit is the place to be.
-                    </p>
-                    <p>
-                        To make it even easier, here’s a sample letter filled with demographics, attending
-                        companies,
-                        featured speakers and more that is bound to send you and your coworkers to the home of open
-                        infrastructure.
-                    </p>
-
-                    <a class="btn" href="{$CurrentSummit.Link}sample-letter/">Sample Letter <i class="fa fa-arrow-right"></i></a>
-                </div>
-            </div>
-            <div class="col-lg-8 col-md-8 col-sm-12">
-                <div class="row row-eq-height">
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div class="video-container video second item">
-                            <a href="https://youtu.be/8I2P1QKxUZA" class="play">
-                        <span>
-                            <i class="fa fa-play"></i>
-                        </span>
-                            </a>
-                            <div class="video-cover">
-                                <h5>Lets Build the Open Infrastructure Economy</h5>
-                                <h6>Vancouver 2018</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12">
-                        <div class="box light item">
-                            <h4>Contribute Upstream at the Project Teams Gathering</h4>
-                            <p>Contributors and users will gather for extended working sessions for their projects.</p>
-                            <a class="btn" href="https://www.openstack.org/ptg">
-                                Learn More <i class="fa fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="row row-eq-height">
-                    <div class="col-lg-6 col-md-6 col-sm-12">
-                        <div class="box light item">
-                            <h5 class="insight">
-                                “The Summit is a great opportunity for a member company to show, share and learn from
-                                communities and users.”
-                            </h5>
-                            <div class="signature">
-                                <div class="info">
-                                    <h5 class="name">Hellen Hao</h5>
-                                    <div class="company">Inspur</div>
-                                </div>
-
-                                <span class="brand"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12">
-                        <div class="pink box item community">
-                            <h4>What to expect from your first Summit</h4>
-                            <p>Community leaders share tips and need-to-knows for the Summit-curious.</p>
-
-                            <a class="btn" href="http://superuser.openstack.org/articles/first-open-infrastructure-summit-schedule-launch/"
-                               target="_blank">Read the article<i class="fa fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row row-eq-height">
-            <div class="col-lg-4 col-md-4 col-sm-12">
-                <div class="video-container video first item">
-                    <a href="https://youtu.be/8I2P1QKxUZA" class="play">
-                        <span>
-                            <i class="fa fa-play"></i>
-                        </span>
-                    </a>
-                    <div class="video-cover">
-                        <h5>OpenStack at Progressive Insurance: Data Science  and Machine Learning</h5>
-                        <h6>Vancouver 2018</h6>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-12">
-                <div class="box light item  spec">
-                    <h4>How are Summit sessions selected?</h4>
-                    <p>What’s new and time-tested tips for the July 17 deadline</p>
-                    <a class="btn" href="{$CurrentSummit.Link}call-for-presentations">
-                        Learn More <i class="fa fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-12">
-                <div class="box more-text light item">
-                    <h5 class="insight">
-                        “The overall quality of leads is spot on. The conversations were extremely valuable,
-                        and attendees connected with our solution. The whole team is super happy with quality”
-                    </h5>
-
-                    <div class="signature">
-                        <span class="photo photo-bis"></span>
-                        <div class="info">
-                            <h5 class="name">Johan Christenson</h5>
-                            <div class="company">City Network</div>
-                        </div>
-
-                        <span class="brand  second"></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="summit-register">
-    <div class="container">
-        <div class="row">
-
-            <div class="col-sm-12 sponsor">
-                <h3 class="title">Ready to go?</h3>
-                <p>
-                    <a href="/summit/shanghai-2019" class="btn register-btn-lrg eventbrite-register-link ">
-                        LEARN MORE ABOUT THE SHANGHAI SUMMIT
-                        <i class="fa fa-arrow-right"></i>
-                    </a>
-                    <!-- <% include EventbriteRegisterLink Summit=$CurrentSummit(),Position='m-2',RegisterLabel='REGISTER FOR THE DENVER SUMMIT' %> -->
                 </p>
             </div>
         </div>
