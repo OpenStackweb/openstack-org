@@ -35,7 +35,7 @@
     "i18n-react": "^0.6.4",
     "idtoken-verifier": "^1.3.1",
     "immutability-helper": "^2.7.1",
-    "jquery": "3.0.0",
+    "jquery": "3.5.0",
     "jquery-datetimepicker": "^2.5.11",
     "jquery-migrate-legacy": "npm:jquery-migrate@1.4.1",
     "jquery-migrate": "3.1.0",
