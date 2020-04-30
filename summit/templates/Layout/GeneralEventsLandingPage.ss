@@ -4,15 +4,8 @@
             <div class="video-container first col-md-4 col-sm-12 col-xs-12">
                 <div class="item">
                     <div class="video">
-                        <div class="triangle">
-                            <p>REGISTER<p>
-                        </div>
-                        <a href="https://www.flickr.com/photos/sgerner/22636377307" target="_blank" class="photo-credit" title="Steven Gerner">
-                            <i class="fa fa-info-circle"></i>
-                        </a>
                     </div>
                     <h4>Large-scale Usage of Open Infrastructure Software</h4>
-                    <p><strong>Virtual Event</strong></p>
                     <p>June 29 - July 1, 2020</p>
                     <p>
                         <a href="https://opendev_largescale.eventbrite.com" target="_blank" class="btn register-btn-lrg " target="_blank">
@@ -27,12 +20,8 @@
             <div class="video-container second col-md-4 col-sm-12 col-xs-12">
                 <div class="item">
                     <div class="video">
-                        <div class="triangle-new">
-                            <p>UPCOMING<p>
-                        </div>
                     </div>
                     <h4>Hardware Automation</h4>
-                    <p><strong>Virtual Event</strong></p>
                     <p>July 20 - 22, 2020</p>
                     <p class="btn register-btn-soon">
                         Registration Coming Soon
@@ -43,14 +32,10 @@
             <div class="video-container last col-md-4 col-sm-12 col-xs-12">
                 <div class="item">
                     <div class="video">
-                        <div class="triangle-new">
-                            <p>UPCOMING<p>
-                        </div>
                     </div>
                     <h4>Containers in Production</h4>
-                    <p><strong>Virtual Event</strong></p>
                     <p>August 10 - 12, 2020</p>
-                    <p>
+                    <p class="btn register-btn-soon">
                         Registration Coming Soon
                     </p>
 

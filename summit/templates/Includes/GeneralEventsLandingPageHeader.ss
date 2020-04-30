@@ -1,4 +1,4 @@
-<div class="summit-hero-landing-short container-fluid about-summit-header">
+<div class="summit-hero-landing-short container-fluid" style="background-image: url('https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/OD-Header-2160x640.png')">
 
     <nav class="navbar navbar-default navbar-fixed-top" id="summit-main-nav">
         <div class="container">
@@ -21,7 +21,7 @@
                         </li>
                     <% end_loop %>
                     <li class="link other-summits">
-                        <a href="/summit" class="drop">Other Summits<i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
+                        <a href="/summit" class="drop">Other OSF Events<i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
                         <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
                             <li><a href="/summit/shanghai-2019/">Shanghai 2019</a></li>
                             <li><a href="/summit/denver-2019/">Denver 2019</a></li>
@@ -36,16 +36,15 @@
             </div>
         </div>
     </nav>
-
-    <div class="container">
-
-        <div class="row text-wrapper">
-            <div class="col-lg-6 col-md-6 col-sm-12">
+    <div class="row text-wrapper">
+        <div class="col-md-12  title-box">
+            <div class="summit-banner">
+                <p><img title="Open Infrastructure Summit Shanghai 2019" alt="" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/opendev-logo-red-white1.svg" style="width: 75%; margin-bottom: 20px; max-width: 700px; padding-top: 80px;"></p>
                 <h4 class="summit-title script">Three part virtual event series:</h4>
-                <h2>OpenDev</h2>
-                <h5>Collaborate directly with the people building and running open source infrastructure using <strong>OpenStack, Kubernetes and 30+ other technologies</strong>.</h5>
+                <h2>Discuss challenges, collaborate, create open source.</h2>
             </div>
-        </div></div>
+        </div>
+    </div>
 </div>
 
 
