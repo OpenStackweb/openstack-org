@@ -12,19 +12,17 @@
                             Register Now!
                             <i class="fa fa-arrow-right"></i>
                         </a>
-
                     </p>
-
                 </div>
             </div>
             <div class="video-container second col-md-4 col-sm-12 col-xs-12">
                 <div class="item">
                     <div class="video">
                     </div>
-                    <h4>Hardware Automation</h4>
+                    <h4>Hardware Automation</h4><br/>
                     <p>July 20 - 22, 2020</p>
-                    <p class="btn register-btn-soon">
-                        Registration Coming Soon
+                    <p>
+                        <span class="btn register-btn-soon">Registration Coming Soon</span>
                     </p>
 
                 </div>
@@ -33,12 +31,11 @@
                 <div class="item">
                     <div class="video">
                     </div>
-                    <h4>Containers in Production</h4>
+                    <h4>Containers in Production</h4><br/>
                     <p>August 10 - 12, 2020</p>
-                    <p class="btn register-btn-soon">
-                        Registration Coming Soon
+                    <p>
+                        <span class="btn register-btn-soon">Registration Coming Soon</span>
                     </p>
-
                 </div>
             </div>
 
@@ -69,7 +66,8 @@
                 </a>
             </div>
             <div class="text-container col-md-6 col-sm-12 col-md-pull-6">
-                <h4 class="title-section">Event 1: Large Scale Usage of Open Infrastructure</h4>
+                <h4 class="title-section">Event #1: Large Scale Usage of Open Infrastructure</h4>
+                <h5>June 29 - July 1, 2020</h5>
                 <p>Operating open infrastructure at scale presents common challenges and constraints. During this event, users will share case studies and architectures, discuss problem areas impacting their environments, and collaborate around open source requirements directly with upstream developers.</p> 
                 <p>Topics include: 
                     <ul>
@@ -87,7 +85,8 @@
                 </a>
             </div>
             <div class="text-container col-md-6 col-sm-12">
-                <h4 class="title-section">Event 2: Hardware Automation topics</h4>
+                <h4 class="title-section">Event #2: Hardware Automation topics</h4>
+                <h5>July 20 - 22, 2020</h5>
                 <p>From hardware acceleration to running applications directly on bare metal, hardware automation enables organizations to save resources and increase productivity. During this OpenDev event, operators will discuss hardware limitations for cloud provisioning, share networking challenges, and collaborate on open source requirements directly with upstream developers.</p>
                 <p>Topics include: 
                     <ul>
@@ -104,7 +103,8 @@
                 </a>
             </div>
             <div class="text-container col-md-6 col-sm-12 col-md-pull-6">
-                <h4 class="title-section">Event 3: Containers in Production topics</h4>
+                <h4 class="title-section">Event #3: Containers in Production topics</h4>
+                <h5>August 10 - 12, 2020</h5>
                 <p>Whether you want to run containerized applications on bare metal or VMs, organizations are developing architectures for a variety of workloads. During this event, users will discuss the infrastructure requirements to support containers, share challenges from their production environments, and collaborate on open source requirements directly with upstream developers. </p>
                 <p>Topics include: 
                     <ul>
@@ -125,7 +125,7 @@
         <div class="row">
             <div class="col-lg-12 timeline">
                 <h3>Next Steps/Outcomes</h3>
-                <p style="font-size: 1.4em;margin-top: 20px;">The collaboration does not stop when OpenDev ends. After the event, participants are encouraged to join the SIG related to the topic to continue the discussions. Successful SIGs would continue to meet, produce relevant content (see the OpenDev Edge example!), and incorporate discussion outcomes into upstream software development.</p>
+                <p style="font-size: 1.4em;margin-top: 20px;">The collaboration does not stop when OpenDev ends. After the event, participants are encouraged to join the SIG related to the topic to continue the discussions. Successful SIGs would continue to meet, produce relevant content, and incorporate discussion outcomes into upstream software development.</p>
             </div>
 
         </div>
@@ -133,7 +133,7 @@
 </div>
 
 
-<div class="diverse what-to-expect">
+<div class="diverse what-to-expect" style="height: 80vh;max-height: 620px;min-height: 620px;">
     <div class="blue-div"></div>
     <div class="image"></div>
     <div class="container">
@@ -424,7 +424,7 @@
                         <div class="col-lg-1 col-md-1 col-sm-2 centered-column space"></div>
                         
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
-                                <img alt="Red Hat" src="{$Top.CloudUrl('assets/companies/main_logo/redhat-sp-lg.jpg')}" class="big-logo-company company-logo"/>
+                                <img alt="Red Hat" src="{$Top.CloudUrl('assets/redhatsm.jpeg')}" class="big-logo-company company-logo"/>
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
                                 <img alt="SUSE" src="{$Top.CloudUrl('assets/companies/main_logo/suse-sp-lg.jpg')}" class="big-logo-company company-logo"/>
@@ -527,17 +527,8 @@
                 <span></span>
                 <h2>Inclusive.<br>Diverse.<br>Open.</h2>
                 <p>
-                    We are a diverse community of professionals, and the OpenStack Foundation is dedicated to
-                    providing an inclusive and safe Summit experience for everyone.
-                    View the <a href="{$CurrentSummit.Link}code-of-conduct/" target="_blank">Summit Code of Conduct</a>
-                    for more information.
-                </p>
-                <p>
-                    Want to support community members who don’t have the resources to attend the Summit?
-                    <a href="https://www.eventbrite.com/e/open-infrastructure-summit-project-teams-gathering-tickets-{$CurrentSummit.ExternalEventId}"
-                       target="_blank">
-                        Donate to the travel support program.
-                    </a>
+                    We are a diverse community of professionals, and the OpenStack Foundation is dedicated to providing an inclusive and safe event experience for everyone. View the <a href="/events/opendev-2020/code-of-conduct/">Community Code of Conduct</a> for more information. 
+
                 </p>
             </div>
         </div>

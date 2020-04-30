@@ -20,6 +20,9 @@
                             <a href="{$Link}">$MenuTitle</a>
                         </li>
                     <% end_loop %>
+                    <li class="link">
+                        <a href="/ptg">June 2020 PTG</a>
+                    </li>
                     <li class="link other-summits">
                         <a href="/summit" class="drop">Other OSF Events<i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
                         <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
@@ -39,7 +42,7 @@
     <div class="row text-wrapper">
         <div class="col-md-12  title-box">
             <div class="summit-banner">
-                <p><img title="OpenDev 2020" alt="" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/opendev-logo-red-white1.svg" style="width: 75%; margin-bottom: 20px; max-width: 700px; padding-top: 80px;"></p>
+                <p><img title="OpenDev 2020" alt="" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/opendev-logo-red-white1.svg" style="width: 50%; margin-bottom: 20px; padding-top: 80px;"></p>
                 <h4 class="summit-title script">Three part virtual event series:</h4>
                 <h2>Discuss challenges, collaborate, create open source.</h2>
             </div>

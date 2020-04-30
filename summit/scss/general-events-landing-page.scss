@@ -75,6 +75,12 @@ button.btn i, a.btn i {
     text-align: left;
 }
 
+h5 {
+    color: #fff;
+    margin-bottom: 1.5em;
+    font-weight: normal;
+}
+
 #wrap {
     margin: 0;
 }
@@ -174,7 +180,7 @@ footer {
 
 .summit-banner h4 {
     color: #fff;
-    font-size: 2.5em;
+    font-size: 2em;
     margin: 0;
     font-family: Open Sans;
     text-transform: uppercase;
@@ -187,7 +193,7 @@ h2 {
     margin-bottom: 80px;
     text-align: center !important;
     font-family: Open Sans !important;
-    font-size: 2.3em;
+    font-size: 1.8em;
 }
 
 .summit-banner h1 {
@@ -979,7 +985,7 @@ a.register-btn-soon, .register-btn-soon {
 .diverse {
     background-color: #00468b;
     display: flex;
-    min-height: 80vh;
+    min-height: 60vh;
 }
 
 .diverse .image {
@@ -1008,7 +1014,7 @@ a.register-btn-soon, .register-btn-soon {
 .diverse .image {
     background: url("../images/inclusive.jpg") center top no-repeat;
     background-size: cover;
-    min-height: 80vh;
+    min-height: 60vh;
 }
 
 @media all and (max-width: 991px) {
@@ -1019,8 +1025,9 @@ a.register-btn-soon, .register-btn-soon {
 
 .diverse .text h2 {
     color: #fff;
-    font-size: 60px;
+    font-size: 4.3em;
     text-align: left;
+    margin-bottom: 50px;
 }
 
 .diverse .text p a {
@@ -1527,9 +1534,9 @@ footer .logo {
 }
 
 footer .logo a {
-    background: url("#{$assets_images_base_url}/Uploads/arrows.svg") center no-repeat;
+    background: url("#{$assets_images_base_url}/OSF-Logo-RGB-Initials.svg") center no-repeat;
     background-size:100%;
-    height: 3.5em;
+    height: 1.5em;
     width: 3.5em;
     position: relative;
     display: inline-block;
@@ -1580,7 +1587,7 @@ ul.navbar-main {
 .all-summit .summit-hero-landing-short {
     padding-bottom: 0;
     background-size: auto;
-    background-position: right top;
+    background-position: left top;
     background-color: #00468b;
 }
 
@@ -1833,23 +1840,26 @@ a.photo-credit {
 .all-summit .diverse {
     background-color: #00468B;
     padding: 0;
-    height: 80vh;
+    height: 60vh;
     text-align: left;
-    max-height: 620px;
-    min-height: 600px;
+    max-height: 520px;
+    min-height: 500px;
 }
 
 .all-summit .diverse .image {
     padding: 0;
-    height: 80vh;
+    height: 60vh;
     background-size: cover;
-    max-height: 620px;
-    min-height: 600px;
+    max-height: 520px;
+    min-height: 500px;
 }
 
 .all-summit .diverse.what-to-expect .image {
     background: url(../images/home/who.jpg) center no-repeat;
     background-size: cover;
+    height: 80vh;
+    min-height: 600px;
+    max-height: 620px;
 }
 
 .all-summit .diverse.what-to-expect .text-container h3 {
