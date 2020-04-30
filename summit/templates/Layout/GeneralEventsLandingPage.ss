@@ -35,7 +35,7 @@
                     <p><strong>Virtual Event</strong></p>
                     <p>July 20 - 22, 2020</p>
                     <p class="btn register-btn-soon">
-                            Registration Coming Soon
+                        Registration Coming Soon
                     </p>
 
                 </div>
@@ -51,9 +51,7 @@
                     <p><strong>Virtual Event</strong></p>
                     <p>August 10 - 12, 2020</p>
                     <p>
-                        <a class="btn register-btn-lrg red eventbrite-register-link" href="/summit/vancouver-2020">
-                            Learn More <i class="fa fa-arrow-right"></i>
-                        </a>
+                        Registration Coming Soon
                     </p>
 
                 </div>
