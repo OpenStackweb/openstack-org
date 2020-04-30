@@ -443,13 +443,13 @@
                     <div class="item" id="sponsorsCarousel-2">
                         <div class="col-lg-1 col-md-1 col-sm-2 centered-column space"></div>
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
-                            <img alt="China Mobile" src="{$Top.CloudUrl('assets/companies/main_logo/ChinaMobile-logo-02-sm.png')}" class="big-logo-company company-logo"/>
+                            <img alt="China Mobile" src="{$Top.CloudUrl('assets/Uploads/_resampled/ScaleWidthWyIxMzgiXQ/ChinaMobile-logo-02-sm.png')}" class="big-logo-company company-logo"/>
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
-                            <img alt="China Telekom" src="{$Top.CloudUrl('assets/companies/main_logo/CT-sm.png')}" class="big-logo-company company-logo"/>
+                            <img alt="China Telekom" src="{$Top.CloudUrl('assets/Uploads/_resampled/ScaleWidthWyIxMzgiXQ/CT-sm.png')}" class="big-logo-company company-logo"/>
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
-                            <img alt="China Unicom" src="{$Top.CloudUrl('assets/companies/main_logo/China-Unicom.png')}" class="big-logo-company company-logo"/>
+                            <img alt="China Unicom" src="{$Top.CloudUrl('assets/Uploads/_resampled/ScaleWidthWyIxMzgiXQ/China-Unicom.png')}" class="big-logo-company company-logo"/>
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
                             <img alt="Cisco" src="{$Top.CloudUrl('assets/companies/main_logo/cisco-new-lg.png')}" class="big-logo-company company-logo"/>
@@ -462,7 +462,7 @@
                     <div class="item" id="sponsorsCarousel-3">
                         <div class="col-lg-1 col-md-1 col-sm-2 centered-column space"></div>
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
-                            <img alt="Dell Technologies" src="{$Top.CloudUrl('assets/companies/main_logo/Dell-Tech-sm.png')}" class="big-logo-company company-logo"/>
+                            <img alt="Dell Technologies" src="{$Top.CloudUrl('assets/Uploads/_resampled/ScaleWidthWyIxMzgiXQ/Dell-Tech-sm.png')}" class="big-logo-company company-logo"/>
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
                             <img alt="Deutsche Telekom" src="{$Top.CloudUrl('assets/companies/main_logo/T-Logo-3c-n-bg.png')}" class="big-logo-company company-logo"/>
@@ -481,7 +481,7 @@
                     <div class="item" id="sponsorsCarousel-4">
                         <div class="col-lg-1 col-md-1 col-sm-2 centered-column space"></div>
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
-                            <img alt="Mirantis" src="{$Top.CloudUrl('assets/companies/main_logo/mirantis-2020-sm.png')}" class="big-logo-company company-logo"/>
+                            <img alt="Mirantis" src="{$Top.CloudUrl('assets/Uploads/_resampled/ScaleWidthWyIxMzgiXQ/mirantis-2020-sm.png')}" class="big-logo-company company-logo"/>
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
                             <img alt="NEC" src="{$Top.CloudUrl('assets/companies/main_logo/nec-headline-large.png')}" class="big-logo-company company-logo"/>
