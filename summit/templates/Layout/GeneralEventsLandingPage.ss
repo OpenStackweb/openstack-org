@@ -525,7 +525,7 @@
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12 text">
                 <span></span>
-                <h2>Inclusive.<br>Diverse.<br>Open.</h2>
+                <h2>Inclusive. Diverse. Open.</h2>
                 <p>
                     We are a diverse community of professionals, and the OpenStack Foundation is dedicated to providing an inclusive and safe event experience for everyone. View the <a href="/events/opendev-2020/code-of-conduct/">Community Code of Conduct</a> for more information. 
 
