@@ -125,7 +125,7 @@
                 <h2>How to Get Started</h2>
                 $Top.GetStartedText
                 <p>
-                    <a href="{$Top.Link(get-started)}" data-show-modal="{$multipleGetStarted()}" class="coa-started-btn coa-link">Get Started <i class="fa fa-angle-right"></i></a>
+                    <a href="{$Top.Link(get-started)}" class="coa-started-btn coa-link">Get Started <i class="fa fa-angle-right"></i></a>
                 </p>
             </div>
         </div>
