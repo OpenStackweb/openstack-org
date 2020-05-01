@@ -302,50 +302,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
-                    <div class="summit-user-section">
-                        <div class="summit-user-image-box">
-                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/Uploads/thierry.jpeg" alt="Thierry Carrez" class="summit-user-image">
-                        </div>
-                        <div class="info">
-                            <div class="name">Thierry Carrez</div>
-                            <div class="title">OpenStack Foundation</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
-                    <div class="summit-user-section">
-                        <div class="summit-user-image-box">
-                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/profile-images/allisonicon128x128.png" alt="Allison Randal" class="summit-user-image">
-                        </div>
-                        <div class="info">
-                            <div class="name">Allison Randal</div>
-                            <div class="title">Software Freedom conservancy</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
-                    <div class="summit-user-section">
-                        <div class="summit-user-image-box">
-                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/Uploads/vmb-helvetica-sm.png" alt="VM Brasseur" class="summit-user-image">
-                        </div>
-                        <div class="info">
-                            <div class="name">VM Brasseur</div>
-                            <div class="title">Juniper</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
-                    <div class="summit-user-section">
-                        <div class="summit-user-image-box">
-                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/joshsimmons.jpg" alt="Josh Simmons" class="summit-user-image">
-                        </div>
-                        <div class="info">
-                            <div class="name">Josh Simmons</div>
-                            <div class="title">Open Source Initiative</div>
-                        </div>
-                    </div>
-                </div>
 
                 <!-- End Speakers -->
                 <!-- <div class="col-xs-12">
