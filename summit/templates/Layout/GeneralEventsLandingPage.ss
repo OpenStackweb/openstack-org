@@ -390,7 +390,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h3>Thank you to the OpenStack Foundation Platinum, Gold, and Corporate sponsors for their ongoing support!</h3>
+                <h3>Thank you to the OpenStack Foundation Platinum and Gold sponsors for their ongoing support!</h3>
             </div>
             <div id="sponsorsCarousel" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
@@ -492,13 +492,6 @@
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
                             <img alt="Troila" src="{$Top.CloudUrl('assets/companies/main_logo/troila-new-lg.jpg')}" class="big-logo-company company-logo"/>
                         </div>
-                        <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
-                            <img alt="Unitedstack" src="{$Top.CloudUrl('assets/companies/main_logo/unitedstack-sp-lg.jpg')}" class="big-logo-company company-logo"/>
-                        </div>
-                        <div class="col-lg-1 col-md-1 col-sm-2 centered-column space"></div>
-                    </div>
-                    <div class="item" id="sponsorsCarousel-5">
-                        <div class="col-lg-1 col-md-1 col-sm-2 centered-column space"></div>
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
                             <img alt="ZTE" src="{$Top.CloudUrl('assets/companies/main_logo/zte-lg.jpg')}" class="big-logo-company company-logo"/>
                         </div>
