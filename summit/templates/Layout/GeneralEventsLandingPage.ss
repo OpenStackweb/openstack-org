@@ -123,9 +123,9 @@
 <div class="summits-wrap odd">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 timeline">
+            <div class="col-lg-8 col-md-offset-2 timeline">
                 <h3>Next Steps/Outcomes</h3>
-                <p style="font-size: 1.4em;margin-top: 20px;">The collaboration does not stop when OpenDev ends. After the event, participants are encouraged to join the SIG related to the topic to continue the discussions. Successful SIGs would continue to meet, produce relevant content, and incorporate discussion outcomes into upstream software development.</p>
+                <p>The collaboration does not stop when OpenDev ends. After the event, participants are encouraged to join the SIG related to the topic to continue the discussions. Successful SIGs would continue to meet, produce relevant content, and incorporate discussion outcomes into upstream software development.</p>
             </div>
 
         </div>

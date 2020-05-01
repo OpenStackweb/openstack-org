@@ -1,4 +1,4 @@
-<div class="summit-hero-landing-short container-fluid" style="background-image: url('{$SummitImage.Image().getURL()}')">
+<div class="summit-hero-landing-short container-fluid" style="background-image: url('https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/OD-Header-2160x640.png')">
 
     <nav class="navbar navbar-default navbar-fixed-top" id="summit-main-nav">
         <div class="container">
@@ -10,53 +10,42 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand summit-hero-logo" href="https://osf.dev"></a>
+                <a class="navbar-brand summit-hero-logo" href="/summit"></a>
             </div>
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-main show">
-                    <li class="{$getAboutPageNavClass}">
-                        <a href="/opendev-ptg-2020" class="drop">About</a>
-                    </li>
-                    <% loop $Menu(3) %>
-                        <li class="{$LinkingMode}">
+                    <% loop $getMenuItems() %>
+                        <li class="link">
                             <a href="{$Link}">$MenuTitle</a>
                         </li>
                     <% end_loop %>
+                    <li class="link">
+                        <a href="/ptg">June 2020 PTG</a>
+                    </li>
                     <li class="link other-summits">
-                        <a href="/summit" class="drop">Past Events<i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
+                        <a href="/summit" class="drop">Other OSF Events<i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
                         <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
-                            <li><a href="http://2018.opendevconf.com/">OpenDev Vancouver 2018</a></li>
-                            <li><a href="http://2017.opendevconf.com/">OpenDev San Francisco 2017</a></li>
-                            <li><a href="https://openstack.org/ptg">PTG</a></li>
-                            <li><a href="/summit/">Open Infrastructure Summits</a></li>
+                            <li><a href="/summit/shanghai-2019/">Shanghai 2019</a></li>
+                            <li><a href="/summit/denver-2019/">Denver 2019</a></li>
+                            <li><a href="/summit/berlin-2018/">Berlin 2018</a></li>
+                            <li><a href="/summit/vancouver-2018/">Vancouver 2018</a></li>
                         </ul>
                     </li>
                     <li class="link button-box">
-                         <% include EventbriteRegisterLink Position='h' %> 
+                        <% include EventbriteRegisterLink Summit=$CurrentSummit(),Position='h' %>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-
     <div class="row text-wrapper">
         <div class="col-md-12  title-box">
             <div class="summit-banner">
-                $Top.getSummitPageText("HeaderText")
-                <!-- <span class="arrow left"></span><span class="arrow right"></span> -->
+                <p><img title="OpenDev 2020" alt="" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/opendev-logo-red-white1.svg" style="width: 50%; margin-bottom: 20px; padding-top: 80px;"></p>
+                <h4 class="summit-title script">Three part virtual event series:</h4>
+                <h2>Discuss challenges, collaborate, create open source.</h2>
             </div>
-        </div>
-    </div>
-
-    <a href="{$SummitImage.OriginalURL}" target="_blank" class="photo-credit" title="{$SummitImage.Attribution}">
-        <!-- <i class="fa fa-info-circle"></i> -->
-    </a>
-
-    <div class="row text-wrapper blue">
-        <div class="highlight">
-            <span class="megaphone"></span>
-            $getSummitPageText(HeaderMessage)
         </div>
     </div>
 </div>
