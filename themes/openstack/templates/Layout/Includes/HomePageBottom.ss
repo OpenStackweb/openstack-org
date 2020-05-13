@@ -15,14 +15,14 @@
                     <p>The software is built by a <a href="/community/">thriving community</a> of developers, in collaboration with users, and is designed in the open at our <a href="/summit/">Summits</a>.</p>
                     
                     <div class="btn-wrapper">
-                        <a href="/software/" class="overview-btn left-btn">How It Works <i class="fa fa-arrow-circle-o-right"></i></a>
-                        <a href="/software/start/" class="overview-btn right-btn">Get The Software <i class="fa fa-arrow-circle-o-down"></i></a>
+                        <a href="/software/" class="overview-btn left-btn">How It Works <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="/software/start/" class="overview-btn right-btn">Get The Software <i class="fa fa-arrow-circle-down"></i></a>
                     </div>
                     <div class="release-text">Latest Release: <a href="/software/train/">Train</a> (October 2019)</div>
                 </div>
                 <div class="col-lg-6 col-sm-12 overview-right">
                     <img class="img-responsive control-cloud-graphic" src="{$Top.CloudUrl("images/control-your-cloud.svg")}" onerror="this.onerror=null; this.src=/images/control-your-cloud.png" alt="OpenStack Cloud Software">
-                    <a href="http://www.youtube.com/watch?v=z6ftW7fUdp4?autoplay=1" target="_blank" class="demo-link">Watch a Demo of the Dashboard <i class="fa fa-play-circle-o"></i></a>
+                    <a href="http://www.youtube.com/watch?v=z6ftW7fUdp4?autoplay=1" target="_blank" class="demo-link">Watch a Demo of the Dashboard <i class="fa fa-play-circle"></i></a>
                 </div>
             </div>
 
