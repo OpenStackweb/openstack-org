@@ -22,7 +22,7 @@
                     <h4>Hardware Automation</h4><br/>
                     <p>July 20 - 22, 2020</p>
                     <p>
-                        <a href="https://www.eventbrite.com/e/opendev-hardware-automation-registration-104569991660" target="_blank" class="btn register-btn-lrg " target="_blank">
+                        <a href="https://opendev_hardwareautomation.eventbrite.com" target="_blank" class="btn register-btn-lrg " target="_blank">
                             Register Now!
                             <i class="fa fa-arrow-right"></i>
                         </a>
@@ -37,7 +37,7 @@
                     <h4>Containers in Production</h4><br/>
                     <p>August 10 - 12, 2020</p>
                     <p>
-                        <a href="https://www.eventbrite.com/e/opendev-containers-in-production-registration-105020424918 " target="_blank" class="btn register-btn-lrg " target="_blank">
+                        <a href="https://opendev_containersinproduction.eventbrite.com" target="_blank" class="btn register-btn-lrg " target="_blank">
                             Register Now!
                             <i class="fa fa-arrow-right"></i>
                         </a>
