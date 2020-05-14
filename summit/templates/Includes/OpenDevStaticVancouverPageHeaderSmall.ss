@@ -42,7 +42,7 @@
     <div class="row text-wrapper">
         <div class="col-md-12  title-box">
             <div class="summit-banner">
-                <p><img title="OpenDev 2020" alt="" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/opendev-logo-red-white1.svg" style="width: 50%; margin-bottom: 20px; padding-top: 80px;"></p>
+                <p><img title="OpenDev 2020" alt="" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/opendev-logo-red-white1.svg" class="opendevlogo"></p>
                 <h4 class="summit-title script">Three part virtual event series:</h4>
                 <h2>Discuss challenges, collaborate, create open source.</h2>
             </div>
