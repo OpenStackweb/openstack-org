@@ -18,6 +18,11 @@
 
 .script {
     font-family: "Open Sans" !important;
+    visibility:hidden;
+}
+
+.summit-banner h2 {
+    visibility:hidden;
 }
 
 .inline {
@@ -204,6 +209,7 @@ button.btn i, a.btn i {
 
 .summit-hero-landing-short .summit-banner {
     margin: 0em auto 0;
+    height: 0px;
 }
 
 
@@ -1595,6 +1601,63 @@ ul.navbar-main{
 
 .navbar-main .drop i{
     margin-left: 0.5em;
+}
+
+.opendevlogo {
+    width: 50%;
+    margin-bottom: 20px;
+    padding-top: 80px;
+    visibility:hidden;
+}
+
+table {
+    border: 0px;
+}
+
+.calendarhead {
+    padding: 20px;
+    color: #fff;
+    background: #000;
+    font-weight: bold;
+    text-align: center;"
+}
+
+.rowdivider {
+    height: 2px;
+    line-height: 1px;
+}
+
+.coldivider {
+    width: 1px;
+    max-width: 2px;
+}
+
+.caltime {
+    vertical-align: top;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 0.2rem;
+    transition: opacity 0.3s ease;
+    background-color: #eaeaea;
+    font-weight: normal;
+}
+
+.calevent {
+    padding: 20px;
+    line-height: 1.4;
+    border-radius: 0.2rem;
+    transition: opacity 0.3s ease;
+    background-color: #00547e;
+    color: #fff;
+    font-weight: bold;
+}
+
+.break {
+    padding: 20px;
+    line-height: 1.4;
+    border-radius: 0.2rem;
+    transition: opacity 0.3s ease;
+    background-color: #eaeaea; text-align: center;
 }
 
 /* WeChat modal */
