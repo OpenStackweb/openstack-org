@@ -2,6 +2,7 @@
 <html lang="en" $OGNS>
 
 <head>
+    <% base_tag %>
     <% include Head %>
     <% include Page_GoogleAnalytics %>
     $FBTrackingCode
@@ -9,7 +10,6 @@
     <!-- GoogleAdWords Start -->
     $GATrackingCode
     <!-- GoogleAdWords End -->
-    <link rel="stylesheet" type="text/css" href="/themes/openstack/css/tooltipster.css" />
     <link rel="stylesheet" type="text/css" href="/themes/openstack/css/tooltipster.css" />
 </head>
 
