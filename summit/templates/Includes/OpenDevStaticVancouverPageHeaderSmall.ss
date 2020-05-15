@@ -27,7 +27,7 @@
                         </ul>
                     </li>
                     <li class="link">
-                        <a href="/code-of-conduct/">Code fo Conduct</a>
+                        <a href="/code-of-conduct/">Code of Conduct</a>
                     </li>
                     <li class="link">
                         <a href="/ptg">June 2020 PTG</a>
