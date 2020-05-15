@@ -29,6 +29,17 @@
     font-family: "GoldanaInline";
 }
 
+h2 {
+    color: #2A4E68;
+    font-weight: normal;
+    margin-bottom: 0px;
+    text-align: left !important;
+}
+
+.summit-hero-landing-short .navbar.scrolled-nav {
+    background-color: #000;
+}
+
 /*some general rules */
 
 button.btn, a.btn {
@@ -134,6 +145,7 @@ button.btn i, a.btn i {
 .summit-hero-landing .navbar .link.button-box, .summit-hero-landing-short .navbar .link.button-box  {
     position: absolute;
     right: 1em;
+    visibility: hidden;
 }
 
 .summit-hero-landing .summit-hero-logo, .summit-hero-landing-short .summit-hero-logo  {
