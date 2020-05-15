@@ -25,11 +25,6 @@
         <div id="push"></div>
     </div>
 
-    <% if not Summit.RegistrationLink %>
-        <% include RegistrationModal %>
-    <% end_if %>
-
-    <% include DownloadAppModal %>
 
     <% include OpenDevStaticVancouverPageFooter %>
 
