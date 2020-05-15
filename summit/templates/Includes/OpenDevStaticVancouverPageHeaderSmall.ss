@@ -10,16 +10,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand summit-hero-logo" href="/summit"></a>
+                <a class="navbar-brand summit-hero-logo" href="/events"></a>
             </div>
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-main show">
-                    <% loop $getMenuItems() %>
-                        <li class="link">
-                            <a href="{$Link}">$MenuTitle</a>
-                        </li>
-                    <% end_loop %>
                     <li class="link other-summits">
                         <a href="/events/opendev-2020/opendev-schedule" class="drop">OpenDev Schedules<i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
                         <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
