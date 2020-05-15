@@ -10,6 +10,7 @@
     $GATrackingCode
     <!-- GoogleAdWords End -->
     <link rel="stylesheet" type="text/css" href="/themes/openstack/css/tooltipster.css" />
+    <link rel="stylesheet" type="text/css" href="/themes/openstack/css/tooltipster.css" />
 </head>
 
 <body>
