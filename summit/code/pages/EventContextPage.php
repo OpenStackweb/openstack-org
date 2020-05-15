@@ -15,7 +15,7 @@ class EventContextPage_Controller extends SummitPage_Controller {
     public function init()
     {
         parent::init();
-s
+
         Requirements::block('summit/css/combined.css');
         Requirements::css('node_modules/@fortawesome/fontawesome-pro/css/all.css');
         Requirements::css('themes/openstack/css/static.combined.css');
