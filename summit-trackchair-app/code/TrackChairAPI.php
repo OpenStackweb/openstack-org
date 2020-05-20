@@ -825,11 +825,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
     public function handleChairExport()
     {
         $activeSummit = Summit::get_active();
-        $filepath = Controller::join_links(
-        	BASE_PATH,
-        	ASSETS_DIR,
-        	'track-chairs.csv'
-        );
+        $filepath = '/tmp/track-chairs.csv';
 
         $fp = fopen($filepath, 'w');
 

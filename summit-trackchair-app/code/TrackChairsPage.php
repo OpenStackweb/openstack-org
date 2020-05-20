@@ -17,7 +17,7 @@ class TrackChairsPage_Controller extends Page_Controller
      */
     public function getPageTitle()
     {
-       return "Track Chairs App | OpenStack.org";
+       return "Track Chairs App";
     }
 
 	private static $url_handlers = [
