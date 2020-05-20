@@ -15,25 +15,25 @@ class NullAbleForeignKey extends ForeignKey
 {
     public function __construct($name, $object = null) {
         parent::__construct($name, $object);
-        $this->defaultVal = 0 ;
+        $this->defaultVal = !is_null($this->object)  && $this->object instanceof Page && $this->name == 'ParentID' ? 0 : null ;
     }
 
     public function nullValue() {
-        return "0";
+        return !is_null($this->object) && $this->object instanceof Page && $this->name == 'ParentID' ? 0 : null ;
     }
 
     public function requireField() {
 
         $parts =
-        [
-            'datatype'   => 'int',
-            'precision'  => 11,
-            'null'       => 'null',
-            'default'    => $this->defaultVal,
-            'arrayValue' => $this->arrayValue
-        ];
+            [
+                'datatype'   => 'int',
+                'precision'  => 11,
+                'null'       => 'null',
+                'default'    => $this->defaultVal,
+                'arrayValue' => $this->arrayValue
+            ];
 
-        $values= ['type'=>'int', 'parts'=> $parts];
+        $values= ['type'=>'int', 'parts' => $parts];
         DB::requireField($this->tableName, $this->name, $values);
     }
 
@@ -57,9 +57,7 @@ class NullAbleForeignKey extends ForeignKey
             } else {
                 $field = NumericField::create($this->name, $title);
             }
-
         }
-
         return $field;
     }
 }
