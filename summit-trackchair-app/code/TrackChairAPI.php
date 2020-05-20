@@ -862,11 +862,8 @@ class TrackChairAPI extends AbstractRestfulJsonApi
     {
         $activeSummit = Summit::get_active();
         $summitID = $activeSummit->ID;
-        $filepath = Controller::join_links(
-        	BASE_PATH,
-        	ASSETS_DIR,
-        	'track-chairs-presentations.csv'
-        );
+        $filepath = '/tmp/track-chairs-presentations.csv';
+
 
         // Get a collection of chair-visible presentation categories
         $presentations = Presentation::get()
