@@ -215,7 +215,7 @@ final class MemberManager implements IMemberManager
            $member = $this->repository->findByExternalId($externalId);
            if(is_null($member)){
                // check by primary email
-               $member = $this->repository->findByEmail($email);
+               $member = $this->repository->findByPrimaryEmail($email);
            }
 
            if(is_null($member)){

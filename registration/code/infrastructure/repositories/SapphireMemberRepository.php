@@ -44,14 +44,14 @@ class SapphireMemberRepository extends SapphireRepository implements IMemberRepo
      */
     public function findByEmail($email)
     {
-        $member = Member::get()->filter('Email', $email )->first();
+        $member = Member::get()->filter('Email', trim($email) )->first();
         if(is_null($member))
         {
-            $member = Member::get()->filter('SecondEmail', $email )->first();
+            $member = Member::get()->filter('SecondEmail', trim($email) )->first();
         }
         if(is_null($member))
         {
-            $member = Member::get()->filter('ThirdEmail', $email )->first();
+            $member = Member::get()->filter('ThirdEmail', trim($email) )->first();
         }
         if(!is_null($member))
             UnitOfWork::getInstance()->scheduleForUpdate($member);
@@ -93,6 +93,17 @@ class SapphireMemberRepository extends SapphireRepository implements IMemberRepo
     {
         $member = Member::get()->filter(['ExternalUserId' => $external_id])->first();
 
+        if(!is_null($member))
+            UnitOfWork::getInstance()->scheduleForUpdate($member);
+        return $member;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function findByPrimaryEmail($email)
+    {
+        $member = Member::get()->filter('Email', trim($email) )->first();
         if(!is_null($member))
             UnitOfWork::getInstance()->scheduleForUpdate($member);
         return $member;
