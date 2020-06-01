@@ -24,6 +24,12 @@ interface IMemberRepository extends IEntityRepository
     public function findByEmail($email);
 
     /**
+     * @param string $email
+     * @return Member|null
+     */
+    public function findByPrimaryEmail($email);
+
+    /**
      * @param string $first_name
      * @param string $last_name
      * @return array
