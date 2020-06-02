@@ -19,6 +19,8 @@
                         <a href="/events/opendev-2020/opendev-schedule" class="drop">OpenDev Schedules<i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
                         <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
                             <li><a href="/events/opendev-2020/opendev-schedule">Virtual Event 1</a></li>
+                            <li><a href="/events/opendev-2020/opendev-schedule-2">Virtual Event 2</a></li>
+                            <li><a href="/events/opendev-2020/opendev-schedule-3">Virtual Event 3</a></li>
                         </ul>
                     </li>
                     <li class="link">
