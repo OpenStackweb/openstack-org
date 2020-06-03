@@ -24,6 +24,6 @@ class PaperParagraphList extends PaperParagraph
     ];
 
     public function getOrderedItems(){
-        return $this->Items()->where('ParentID = 0')->sort('Order','ASC');
+        return $this->Items()->where('ParentID = 0 OR ParentID IS NULL')->sort('Order','ASC');
     }
 }
