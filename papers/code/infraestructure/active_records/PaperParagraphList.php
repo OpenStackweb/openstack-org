@@ -23,6 +23,16 @@ class PaperParagraphList extends PaperParagraph
         'Items' => 'PaperParagraphListItem',
     ];
 
+    public function __construct($record = null, $isSingleton = false, $model = null)
+    {
+        parent::__construct($record, $isSingleton, $model);
+        $this->Type = 'LIST';
+    }
+
+    public function getType(){
+        return 'LIST';
+    }
+
     public function getOrderedItems(){
         return $this->Items()->where('ParentID = 0 OR ParentID IS NULL')->sort('Order','ASC');
     }
