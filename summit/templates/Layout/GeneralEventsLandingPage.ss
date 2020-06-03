@@ -198,11 +198,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/profile-images/MG-5121-1.jpg')}" alt="Julia Kreger"
-                                 class="summit-user-image">
+                            <img alt="Julia Kreger" class="summit-user-image" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/profile-images/MG-5121-1.jpg">
                         </div>
                         <div class="info">
                             <div class="name">Julia Kreger</div>
