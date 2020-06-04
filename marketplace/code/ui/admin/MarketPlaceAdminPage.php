@@ -909,6 +909,7 @@ class MarketPlaceAdminPage_Controller extends AdminController
         $query = new QueryObject(new CompanyService);
         $query_draft = new QueryObject(new CompanyServiceDraft);
         $query_draft->addAndCondition(QueryCriteria::equal('LiveServiceID', 0));
+        $query_draft->addOrCondition(QueryCriteria::isNull('LiveServiceID'));
 
         if (!empty($product_name)) {
             $query->addAndCondition(QueryCriteria::like('Name', $product_name));
