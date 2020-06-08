@@ -65,6 +65,7 @@ class GeneralEventsLandingPage_Controller extends Page_Controller
 
     function getCurrentSummitPageController() {
         $summitPage = $this->getCurrentSummitPage();
+        if(is_null($summitPage)) return null;
         return ModelAsController::controller_for($summitPage);
     }
 
