@@ -14,7 +14,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update --fix-missing
 
 #install required packages
-RUN apt-get install -y apt-utils openssh-server sudo curl wget nfs-common puppet puppet-common && \
+RUN apt-get --no-install-recommends install -y apt-utils openssh-server sudo curl wget nfs-common puppet puppet-common && \
     apt-get clean #cleanup to reduce image size
 
 # Create and configure vagrant user
