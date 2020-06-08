@@ -2,7 +2,7 @@
  
  ```bash
 
- sudo apt-get install python-pip python-dev libmysqlclient-dev;
+ sudo apt-get --no-install-recommends install python-pip python-dev libmysqlclient-dev;
  pip install virtualenv;
  cd survey_builder/code/model/extract_tags;
  virtualenv env;

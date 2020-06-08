@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 sudo apt-get update;
-sudo apt-get install -y nodejs;
+sudo apt-get --no-install-recommends install -y nodejs;
 sudo rm -R vendor;
 sudo rm -R node_modules;
 php -r "readfile('https://getcomposer.org/installer');" > composer-setup.php
