@@ -299,7 +299,9 @@ class SummitSecurity extends SummitPage_Controller {
 
     public function CurrentSummitPage(){
         $activeSummit = Summit::ActiveSummit();
+        if(is_null($activeSummit)) return null;
         $summitPage = SummitPage::get()->filter('SummitID', $activeSummit->ID)->first();
+        if(is_null($summitPage)) return null;
         if (is_a($summitPage->Parent(),'SummitPage')) {
             $summitPage = $summitPage->Parent();
         }
