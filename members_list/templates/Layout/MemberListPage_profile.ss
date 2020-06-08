@@ -18,9 +18,9 @@
                     <% if isUpstreamStudent %>
                         <img width="65px" src="{$Top.CloudUrl("images/oui-logo.jpg")}" title="OpenStack Upstream Institute" alt="OpenStack Upstream Institute">
                     <% end_if %>
-                    <%--<% if getCommunityAwards %>
-                        <img width="65px" src="{$Top.CloudUrl("images/osupstreaminstitute.jpg")}" title="Community Constributor Award" alt="Community Constributor Award">
-                    <% end_if %>--%>
+                    <% if getCommunityAwards %>
+                        <img width="65px" src="{$Top.CloudUrl("images/cca-logo.ppg")}" title="Community Constributor Award" alt="Community Constributor Award">
+                    <% end_if %>
                 </h3>
             </div>
             <hr>
