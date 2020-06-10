@@ -15,6 +15,6 @@
 final class TinyMceDependencies
 {
     public static function renderRequirements(){
-        Requirements::javascript('https://cloud.tinymce.com/4/tinymce.min.js');
+        Requirements::javascript('//cdn.tiny.cloud/1/ncop7i97zmhdkuy5p5vdtdzynfzons0vo5vpzhkyzg3977nf/tinymce/5/tinymce.min.js');
     }
 }
