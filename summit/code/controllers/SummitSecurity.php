@@ -221,7 +221,8 @@ class SummitSecurity extends SummitPage_Controller {
      * @return string
      */
     protected function customiseSummitPage($data = array ()) {
-
+        if(is_null($this->summit_page))
+            return null;
         return ModelAsController::controller_for(
             $this->summit_page
         )->customise($data);
