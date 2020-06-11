@@ -105,13 +105,13 @@
     </p>
     <p>
         Products must comply with one of the two most recent guidelines approved by the OpenStack Foundation Board of Directors.
-        These versions are numbered based on the date when they were approved, such as "2018.11" for the version approved in November, 2018.
+        These versions are numbered based on the date when they were approved, such as "2020.06" for the version approved in June, 2020.
     </p>
     <p>
         The two most recent versions approved by the board are 
-        <a title="2018.11 Interop Capabilities" href="http://git.openstack.org/cgit/openstack/interop/tree/2018.11.json" target="_blank">2018.11</a> 
-        and <a title="2018.02 Interop Capabilities" href="http://git.openstack.org/cgit/openstack/interop/tree/2018.02.json" target="_blank">2018.02</a>.
-         These two guidelines cover six OpenStack releases: Newton, Ocata, Pike, Queens, Rocky, and Stein. The list of required capabilities 
+        <a title="2020.06 Interop Capabilities" href="https://opendev.org/openstack/interop/src/branch/master/2020.06.json" target="_blank">2020.06</a> 
+        and <a title="2019.11 Interop Capabilities" href="https://opendev.org/openstack/interop/src/branch/master/2019.11.json" target="_blank">2019.11</a>.
+         These two guidelines cover five OpenStack releases: Rocky, Stein, Train, Ussuri, and Victoria. The list of required capabilities 
          (with must-pass tests) and designated code sections are published on git.openstack.org  and summarized below. Once a company verifies their 
          products include the appropriate designated sections and submit API test results, they will be asked to sign the license agreements.
     </p>
@@ -134,8 +134,8 @@
     <p>
         OpenStack interoperability tests are part of the Tempest project suite of tests. To run the tests for your license
         application, you will need
-        to install <a href="https://git.openstack.org/cgit/openstack/tempest" target="_blank">Tempest</a> with the
-        <a href="https://git.openstack.org/cgit/openstack/refstack-client" target="_blank">RefStack Client</a>.
+        to install <a href="https://opendev.org/openstack/tempest/" target="_blank">Tempest</a> with the
+        <a href="https://opendev.org/openstack/refstack-client/" target="_blank">RefStack Client</a>.
         You will need to run Tempest inside of the RefStack Client and upload the results to the RefStack server.
         We prefer that you run the complete set of non-admin API tests, however, Tempest can be run with a precompiled
         inventory of tests available from the <a href="https://refstack.openstack.org/#/guidelines">RefStack server guidelines
@@ -144,7 +144,7 @@
     </p>
     <p>
         For more detailed instructions to run the tests, please consult
-        <a title="Procedure for Running Interop Tests" href="http://git.openstack.org/cgit/openstack/interop/tree/2016.08/procedure.rst">this document</a>.
+        <a title="Procedure for Running Interop Tests" href="https://opendev.org/openstack/interop/src/branch/master/2016.08/procedure.rst">this document</a>.
         If you need help getting started, contact Chris Hoge, the Foundation's Interop Engineer, by emailing
         <a href="mailto:interop@openstack.org">interop@openstack.org</a>. The Foundation is looking for feedback from companies
         who are running tests in order to improve the testing process and shape policy in the future.
