@@ -178,13 +178,15 @@ class SummitSecurity extends SummitPage_Controller {
      * @return SS_HTTPResponse
      */
     public function login() {
-        return $this->customiseSummitPage(
-            array(
-                'Title' => 'Login',
-                'ClassName' => 'SummitSecurity',
-                'Form' => $this->LoginForm()
-            )
-        )->renderWith(
+        $summitPage = $this->customiseSummitPage(
+                array(
+                    'Title' => 'Login',
+                    'ClassName' => 'SummitSecurity',
+                    'Form' => $this->LoginForm()
+                )
+            );
+        if(is_null($summitPage)) return '<b>No active Summit.</b>';
+        return $summitPage->renderWith(
             array(
                 'SummitSecurity_login',
                 'SummitPage'
