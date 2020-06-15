@@ -6,29 +6,28 @@
             <div class="row">
                 <div class="col-sm-8">
                     <div class="intro-message"> 
-                        <h1>Open infrastructure operators deliver requirements, use cases for edge computing</h1>
+                        <h1>New: OSF Edge Computing Group defines architectures, open source components, and testing activities for massively distributed systems</h1>
                         <p>
-                            Whitepaper, among the latest deliverables where operators identify fundamental requirements, issues a challenge to the open infra community to create or adapt the tools that are needed to enable broad adoption.
+                            Created by open infrastructure operators, the second white paper delivers the specific ways open infrastructure operators are shaping the future of edge computing by collecting use cases, identifying technology requirements and contributing architectures, open source components and considerations for testing activities.
                         </p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-sm-6" style="margin-top: 20px;">
                     <div class="edge-download-container">
                         <div class="edge-download-text">
-                            <strong><em>Cloud Edge Computing: Beyond the Data Center</em></strong><br/>
-                            Now available in multiple languages!
+                            <strong><em>Edge Computing: Next Steps in Architecture, Design and Testing</em></strong>
                         </div>
-                        <a href="/edge-computing/cloud-edge-computing-beyond-the-data-center?lang=en_US" class="edge-download-btn" target="_blank">
+                        <a href="/edge-computing/edge-computing-next-steps-in-architecture-design-and-testing" class="edge-download-btn" target="_blank">
                             <div><i class="fa fa-arrow-circle-right"></i> Read the whitepaper</div>
                         </a>
                     </div>
                     <div class="edge-hr-line"></div>
                     <div class="edge-download-container">
                         <div class="edge-download-text">
-                            边缘计算：跨越传统数据中心
+                            <strong><em>Cloud Edge Computing: Beyond the Data Center</em></strong>
                         </div>
-                        <a href="{$Top.CloudUrl('assets/edge/EdgeWhitepaper-Chinese.pdf')}" class="edge-download-btn" target="_blank">
-                            <div><i class="fa fa-arrow-circle-down"></i> 阅读白皮书</div>
+                        <a href="/edge-computing/cloud-edge-computing-beyond-the-data-center?lang=en_US" class="edge-download-btn" target="_blank">
+                            <div><i class="fa fa-arrow-circle-right"></i> Read the whitepaper</div>
                         </a>
                     </div>
                 </div>
