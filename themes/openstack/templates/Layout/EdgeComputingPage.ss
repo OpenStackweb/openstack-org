@@ -4,7 +4,7 @@
     <div class="intro-header edge">
         <div class="container">
             <div class="row">
-                <div class="col-sm-8">
+                <div class="col-sm-9">
                     <div class="intro-message"> 
                         <h1>New: OSF Edge Computing Group defines architectures, open source components, and testing activities for massively distributed systems</h1>
                         <p>
@@ -12,7 +12,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-sm-6" style="margin-top: 20px;">
+                <div class="col-lg-3 col-sm-6" style="margin-top: 20px;">
                     <div class="edge-download-container">
                         <div class="edge-download-text">
                             <strong><em>Edge Computing: Next Steps in Architecture, Design and Testing</em></strong>
