@@ -16,10 +16,10 @@
                         <img height="65px" src="{$Top.CloudUrl("images/coa/coa-badge.jpg")}" title="COA Certified" alt="COA Certified">
                     <% end_if %>
                     <% if isUpstreamStudent %>
-                        <img width="65px" src="{$Top.CloudUrl("images/oui-logo.jpg")}" title="OpenStack Upstream Institute" alt="OpenStack Upstream Institute">
+                        <img width="65px" src="{$Top.CloudUrl("assets/oui-logo.jpg")}" title="OpenStack Upstream Institute" alt="OpenStack Upstream Institute">
                     <% end_if %>
                     <% if getCommunityAwards %>
-                        <img width="65px" src="{$Top.CloudUrl("images/cca-logo.ppg")}" title="Community Constributor Award" alt="Community Constributor Award">
+                        <img width="65px" src="{$Top.CloudUrl("assets/cca-logo.png")}" title="Community Constributor Award" alt="Community Constributor Award">
                     <% end_if %>
                 </h3>
             </div>
