@@ -212,10 +212,10 @@
                     <% end_loop %>
                 </div>
             </div>
-
             <div role="tabpanel" class="tab-pane fade in" id="events_tab">
                 <p>If you are interested in sponsoring, speaking or attending any of the events below, please contact <a href="mailto:events@openstack.org">events@openstack.org</a>.</p>
                 <br>
+            <!-- 
                 <div class="inner-osdays">
                     <h2 class="tab-title">OpenStack and OpenInfra Days by Region</h2>
                     <div class="osdays-events">
@@ -254,7 +254,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <br>
+                    <br> -->
                     <h2 class="tab-title">Mark Your Calendars</h2>
                     <div class="osdays-events">
                         <table data-toggle="table" data-classes="table" data-sort-name="dateraw" style="width:100%">
