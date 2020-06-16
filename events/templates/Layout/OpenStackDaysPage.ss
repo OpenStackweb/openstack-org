@@ -215,46 +215,9 @@
             <div role="tabpanel" class="tab-pane fade in" id="events_tab">
                 <p>If you are interested in sponsoring, speaking or attending any of the events below, please contact <a href="mailto:events@openstack.org">events@openstack.org</a>.</p>
                 <br>
-            <!-- 
                 <div class="inner-osdays">
                     <h2 class="tab-title">OpenStack and OpenInfra Days by Region</h2>
-                    <div class="osdays-events">
-                        <table data-toggle="table" data-classes="table" data-sort-name="region" style="width:100%">
-                            <thead>
-                            <tr class="osdays-event">
-                                <th>
-                                    <strong>Date</strong>
-                                </th>
-                                <th>
-                                    <strong>Event Name</strong>
-                                </th>
-                                <th>
-                                    <strong>Location</strong>
-                                </th>
-                                <th data-sortable="true" data-field="region">
-                                    <strong>Region</strong>
-                                </th>
-                                <th>&nbsp;</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                <% loop $EventsWithoutDate() %>
-                                <tr class="osdays-event">
-                                    <td class="col-sm-2 col-xs-2">
-                                        <div class="osd-date">$DateString</div>
-                                    </td>
-                                    <td class="col-sm-4 col-xs-4">
-                                        <strong>$Title</strong>
-                                    </td>
-                                    <td class="col-sm-2 col-xs-2">$Location</td>
-                                    <td class="col-sm-2 col-xs-2">$Continent</td>
-                                    <td class="col-sm-2 col-xs-2"></td>
-                                </tr>
-                                <% end_loop %>
-                            </tbody>
-                        </table>
-                    </div>
-                    <br> -->
+                    <br>
                     <h2 class="tab-title">Mark Your Calendars</h2>
                     <div class="osdays-events">
                         <table data-toggle="table" data-classes="table" data-sort-name="dateraw" style="width:100%">
@@ -294,6 +257,44 @@
                                             <a class="more-img" href="$EventLink"></a>
                                         </div>
                                     </td>
+                                </tr>
+                                <% end_loop %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                    <h2 class="tab-title">OpenStack and OpenInfra Days by Region</h2>
+                    <div class="osdays-events">
+                        <table data-toggle="table" data-classes="table" data-sort-name="region" style="width:100%">
+                            <thead>
+                            <tr class="osdays-event">
+                                <th>
+                                    <strong>Date</strong>
+                                </th>
+                                <th>
+                                    <strong>Event Name</strong>
+                                </th>
+                                <th>
+                                    <strong>Location</strong>
+                                </th>
+                                <th data-sortable="true" data-field="region">
+                                    <strong>Region</strong>
+                                </th>
+                                <th>&nbsp;</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <% loop $EventsWithoutDate() %>
+                                <tr class="osdays-event">
+                                    <td class="col-sm-2 col-xs-2">
+                                        <div class="osd-date">$DateString</div>
+                                    </td>
+                                    <td class="col-sm-4 col-xs-4">
+                                        <strong>$Title</strong>
+                                    </td>
+                                    <td class="col-sm-2 col-xs-2">$Location</td>
+                                    <td class="col-sm-2 col-xs-2">$Continent</td>
+                                    <td class="col-sm-2 col-xs-2"></td>
                                 </tr>
                                 <% end_loop %>
                             </tbody>
