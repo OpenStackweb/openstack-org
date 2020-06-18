@@ -1381,12 +1381,18 @@ a.register-btn-soon, .register-btn-soon {
     border-radius: 100%;
     padding: 0.5em;
     font-size: 1.5em;
-    border: solid 2px #fff;
+    border: solid 3px #fff;
     width: 2em;
     height: 2em;
-    line-height: 0.8em;
+    line-height: 0.5em;
     margin: 0 auto;
     color: #fff;
+    padding-left: .4em;
+}
+
+.fal {
+    font-family: 'Font Awesome 5 Pro';
+    font-weight: 500;
 }
 
 .video-container .play {
