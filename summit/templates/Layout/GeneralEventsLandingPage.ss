@@ -58,7 +58,8 @@
         </div>
         <div class="row row-eq-height">
             <div class="video-container col-md-6 col-sm-12 col-xs-12">
-                <a class="play video first">
+                <a href="https://youtu.be/HC2JB58g4H4" class="play video first">
+                    <i class="fal fa-play"></i>
                 </a>
             </div>
             <div class="text-container col-md-6 col-sm-12">
