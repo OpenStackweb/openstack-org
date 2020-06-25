@@ -86,7 +86,7 @@
                     <p>
                         Start with the first app guide<br/>to learn how to program OpenStack clouds.
                     </p>
-                    <a href="http://developer.openstack.org/firstapp-libcloud/getting_started.html" class="appdev-build-cover">
+                    <a href="https://docs.openstack.org/openstacksdk/latest/user/index.html" class="appdev-build-cover">
                         <img src="{$Top.CloudUrl("images/appdev/guide-cover.png")}" alt="">
                     </a>
                 </div>
