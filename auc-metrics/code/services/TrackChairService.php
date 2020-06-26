@@ -35,6 +35,7 @@ class TrackChairService extends BaseService implements MetricService
     {
         $this->results = ResultList::create();
         $s = Summit::get_most_recent();
+        if(is_null($s) || !$s) return;
         $chairs = $s->Categories()->relation('TrackChairs');
         foreach ($chairs as $chair) {
             $this->results->push(
