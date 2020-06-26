@@ -90,7 +90,8 @@
     "smarcet/silverstripe-cloudassets-swift": "dev-master",
     "markguinn/silverstripe-cloudassets": "dev-master",
     "php-opencloud/openstack": "dev-master",
-    "jumbojett/openid-connect-php": "dev-master"
+    "jumbojett/openid-connect-php": "dev-master",
+    "mikehaertl/phpwkhtmltopdf": "dev-master"
   },
   "require-dev": {
     "phpunit/phpunit": "^7.0",
@@ -99,7 +100,6 @@
   "autoload": {
     "classmap": [
       "geoip/code",
-      "html2pdf_v4.03",
       "summit/code/infrastructure/traits",
       "openstack/code/utils",
       "openstack/code/utils/traits",

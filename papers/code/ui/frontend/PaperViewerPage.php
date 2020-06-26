@@ -11,8 +11,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
+use mikehaertl\wkhtmlto\Pdf;
 
 class PaperViewerPage extends Page
 {
@@ -67,10 +67,108 @@ class PaperViewerPage extends Page
 
         return $output;
     }
+
+
+    public function renderSectionPDF($section)
+    {
+        $output = '';
+
+        if ($section instanceof CaseOfStudySection)
+            return $section->renderWith('CasesOfStudy_Section_PDF');
+        else if ($section instanceof IndexSection)
+            $output = $section->renderWith('Index_Section_PDF');
+        else
+            $output = $section->renderWith('Regular_Section_PDF');
+
+        foreach ($section->getOrderedSubSections() as $subSection) {
+            $output .= $this->renderSection($subSection);
+        }
+
+        return $output;
+    }
+
+    public function toHTMLRender(){
+        $output = '';
+        foreach ($this->Paper()->getOrderedSections() as $section) {
+            $output .= $this->renderSectionPDF($section);
+        }
+        $translators = $this->Paper()->getTranslatorsByCurrentLocale();
+        if($translators->count() > 0){
+            $data = new ArrayData([
+                'Translators' => $translators,
+            ]);
+            $output .= $data->renderWith('Translators_Section');
+        }
+        return $output;
+    }
 }
 
+/**
+ * Class PaperViewerPage_Controller
+ */
 class PaperViewerPage_Controller extends Page_Controller
 {
+    private static $url_handlers = [
+        'GET pdf' => 'getPDFRender',
+    ];
+
+    private static $allowed_actions = [
+        'getPDFRender',
+    ];
+
+    /**
+     * needs
+     * sudo apt install xvfb
+     * sudo apt install wkhtmltopdf
+     * https://github.com/mikehaertl/phpwkhtmltopdf
+     * https://github.com/wkhtmltopdf/wkhtmltopdf/issues/2037
+     */
+    public function getPDFRender(){
+
+        $css = file_get_contents(Director::getAbsFile("papers/css/paper-viewer-page.css"));
+
+        $html = "<html>
+<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">
+<style>"
+.$css.
+"</style>
+<body>".$this->toHTMLRender()."</body></html>";
+
+        $input_html = sprintf("/tmp/HTML2PDF_%s.html", random_string(16));
+        $output_pdf =  sprintf("/tmp/PDF_%s.pdf", random_string(16) );
+
+        file_put_contents($input_html, $html);
+        // execute conversion
+
+        $options = [
+            'encoding' => 'UTF-8',  // option with argument
+            // Explicitly tell wkhtmltopdf that we're using an X environment
+            'use-xserver',
+            // Enable built in Xvfb support in the command
+            'commandOptions' => array(
+                'enableXvfb' => true,
+
+                // Optional: Set your path to xvfb-run. Default is just 'xvfb-run'.
+                // 'xvfbRunBinary' => '/usr/bin/xvfb-run',
+
+                // Optional: Set options for xfvb-run. The following defaults are used.
+                // 'xvfbRunOptions' =>  '--server-args="-screen 0, 1024x768x24"',
+            ),
+        ];
+
+        $pdf = new Pdf($input_html);
+        $pdf->setOptions($options);
+
+        $filename = $this->Paper()->Title.".pdf";
+
+        if (!$pdf->send($filename)) {
+            SS_Log::log($pdf->getError(), SS_Log::ERR);
+            $response = new SS_HTTPResponse();
+            $response->setStatusCode(500);
+            $response->setBody("SERVER ERROR");
+            return $response;
+        }
+    }
 
     function init()
     {

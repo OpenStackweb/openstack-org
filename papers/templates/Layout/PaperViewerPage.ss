@@ -47,7 +47,6 @@
     </div>
     <div class="container content">
         $Top.renderSections
-      
     </div>
     <div class="scroll-top">
         <button class="btn btn-default" id="btn-top" onclick="topFunction()">
