@@ -107,7 +107,8 @@
       "openstack/code/utils/apis",
       "summit/code/pages/summit_entities/traits",
       "openstack/code/utils/DB/traits",
-      "openstack/code/utils/DDD/model/traits"
+      "openstack/code/utils/DDD/model/traits",
+      "html2pdf_v4.03"
     ]
   },
   "config": {
