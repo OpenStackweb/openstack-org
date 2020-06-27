@@ -28,10 +28,10 @@
     <!-- Page Content -->
     $Message
     <div class="row">
-    <div class="col-xs-6 col-md-2">
+    <div class="col-xs-6 col-md-3">
         <div id="language-selector"></div>
     </div>
-    <div class="col-xs-6 col-md-10">
+    <div class="col-xs-6 col-md-9">
         <a target="_blank" title="Download PDF" href="$Top.Link('pdf')"><i class="fa fa-file-pdf-o pdf-export" aria-hidden="true"></i></a>
     </div>
     </div>

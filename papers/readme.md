@@ -14,3 +14,12 @@ sake dev/tasks/CompilePO2MOTask module=papers
 sudo apt install xvfb
 sudo apt install wkhtmltopdf
 
+sudo apt-get install language-pack-ja
+sudo apt-get install japan*
+
+sudo apt-get install language-pack-zh*
+sudo apt-get install chinese*
+
+sudo apt-get install language-pack-ko
+sudo apt-get install korean*
+
