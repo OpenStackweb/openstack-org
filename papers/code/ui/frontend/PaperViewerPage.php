@@ -122,6 +122,7 @@ class PaperViewerPage_Controller extends Page_Controller
      * sudo apt install wkhtmltopdf
      * https://github.com/mikehaertl/phpwkhtmltopdf
      * https://github.com/wkhtmltopdf/wkhtmltopdf/issues/2037
+     * https://help.accusoft.com/PrizmDoc/v12.2/HTML/Installing_Asian_Fonts_on_Ubuntu_and_Debian.html
      */
     public function getPDFRender(){
 
@@ -138,19 +139,19 @@ class PaperViewerPage_Controller extends Page_Controller
         // execute conversion
 
         $options = [
-            'encoding' => 'UTF-8',  // option with argument
+            'encoding' => 'utf-8',  // option with argument
             // Explicitly tell wkhtmltopdf that we're using an X environment
             'use-xserver',
             // Enable built in Xvfb support in the command
-            'commandOptions' => array(
+            'commandOptions' => [
                 'enableXvfb' => true,
-
+                'useExec' => true,
                 // Optional: Set your path to xvfb-run. Default is just 'xvfb-run'.
-                // 'xvfbRunBinary' => '/usr/bin/xvfb-run',
+                'xvfbRunBinary' => '/usr/bin/xvfb-run',
 
                 // Optional: Set options for xfvb-run. The following defaults are used.
                 // 'xvfbRunOptions' =>  '--server-args="-screen 0, 1024x768x24"',
-            ),
+            ],
         ];
 
         $pdf = new Pdf($html);
