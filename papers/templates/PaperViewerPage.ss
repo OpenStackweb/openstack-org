@@ -25,9 +25,16 @@
 <body id="$URLSegment">
     <% include SiteBanner %>
     <% include Navigation %>
-<!-- Page Content -->
+    <!-- Page Content -->
     $Message
-<div id="language-selector"></div>
+    <div class="row">
+    <div class="col-xs-6 col-md-2">
+        <div id="language-selector"></div>
+    </div>
+    <div class="col-xs-6 col-md-10">
+        <a target="_blank" title="Download PDF" href="$Top.Link('pdf')"><i class="fa fa-file-pdf-o pdf-export" aria-hidden="true"></i></a>
+    </div>
+    </div>
     $Layout
     <% include Footer %>
     <% include Quantcast %>
