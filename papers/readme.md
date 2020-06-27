@@ -9,3 +9,8 @@ output pot file should be under
 
 sake dev/tasks/CompilePO2MOTask module=papers
 
+# PDF rendering
+
+sudo apt install xvfb
+sudo apt install wkhtmltopdf
+

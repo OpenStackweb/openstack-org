@@ -134,10 +134,7 @@ class PaperViewerPage_Controller extends Page_Controller
 "</style>
 <body>".$this->toHTMLRender()."</body></html>";
 
-        $input_html = sprintf("/tmp/HTML2PDF_%s.html", random_string(16));
-        $output_pdf =  sprintf("/tmp/PDF_%s.pdf", random_string(16) );
 
-        file_put_contents($input_html, $html);
         // execute conversion
 
         $options = [
@@ -156,7 +153,7 @@ class PaperViewerPage_Controller extends Page_Controller
             ),
         ];
 
-        $pdf = new Pdf($input_html);
+        $pdf = new Pdf($html);
         $pdf->setOptions($options);
 
         $filename = $this->Paper()->Title.".pdf";
