@@ -32,7 +32,7 @@
         <div id="language-selector"></div>
     </div>
     <div class="col-xs-6 col-md-9">
-        <a target="_blank" title="Download PDF" href="$Top.Link('pdf')"><i class="fa fa-file-pdf-o pdf-export" aria-hidden="true"></i></a>
+        <a target="_blank" title="Download as PDF" href="$Top.Link('pdf')"><i class="fa fa-file-pdf-o pdf-export" aria-hidden="true"></i></a>&nbsp;<span>$_T("papers_ui", "Download as PDF")</span>
     </div>
     </div>
     $Layout
