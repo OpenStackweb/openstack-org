@@ -163,7 +163,7 @@ class PaperViewerPage_Controller extends Page_Controller
             SS_Log::log($pdf->getError(), SS_Log::ERR);
             $response = new SS_HTTPResponse();
             $response->setStatusCode(500);
-            $response->setBody("SERVER ERROR");
+            $response->setBody($pdf->getError());
             return $response;
         }
     }
