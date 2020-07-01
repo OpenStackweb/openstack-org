@@ -140,8 +140,9 @@ class PaperViewerPage_Controller extends Page_Controller
 
         $options = [
             'encoding' => 'utf-8',  // option with argument
+            'ignoreWarnings' => true,
             // Explicitly tell wkhtmltopdf that we're using an X environment
-            'use-xserver',
+            //'use-xserver',
             // Enable built in Xvfb support in the command
             'commandOptions' => [
                 'enableXvfb' => true,
