@@ -311,7 +311,7 @@ class Page_Controller extends ContentController
         }
     }
 
-    protected function getCssIncludes(){
+    protected static function getCssIncludes(){
         return [
             "themes/openstack/css/combined.css",
             "themes/openstack/css/navigation_menu.css",
@@ -319,7 +319,7 @@ class Page_Controller extends ContentController
         ];
     }
 
-    public function AddRequirements()
+    public static function AddRequirements()
     {
 
         Requirements::css('//fonts.googleapis.com/css?family=Open+Sans:300,400,700');
@@ -327,13 +327,11 @@ class Page_Controller extends ContentController
         JQueryCoreDependencies::renderRequirements();
         BootstrapDependencies::renderRequirements();
 
-
-
         if (Director::get_current_page()->IncludeShadowBox) {
             array_push($css_files, "themes/openstack/javascript/shadowbox/shadowbox.css");
         }
 
-        foreach($this->getCssIncludes() as $css_file)
+        foreach(static::getCssIncludes() as $css_file)
             Requirements::css($css_file);
 
         $js_files =  [

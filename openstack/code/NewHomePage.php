@@ -19,7 +19,7 @@ class NewHomePage extends Page
 
 class NewHomePage_Controller extends Page_Controller
 {
-    protected function getCssIncludes(){
+    protected static function getCssIncludes(){
         return [
             "themes/openstack/css/home-page.css",
             "themes/openstack/css/navigation_menu.css",
