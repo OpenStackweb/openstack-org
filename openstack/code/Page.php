@@ -311,8 +311,15 @@ class Page_Controller extends ContentController
         }
     }
 
+    protected function getCssIncludes(){
+        return [
+            "themes/openstack/css/combined.css",
+            "themes/openstack/css/navigation_menu.css",
+            "themes/openstack/css/dropdown.css",
+        ];
+    }
 
-    public static function AddRequirements()
+    public function AddRequirements()
     {
 
         Requirements::css('//fonts.googleapis.com/css?family=Open+Sans:300,400,700');
@@ -320,17 +327,13 @@ class Page_Controller extends ContentController
         JQueryCoreDependencies::renderRequirements();
         BootstrapDependencies::renderRequirements();
 
-        $css_files = [
-            "themes/openstack/css/combined.css",
-            "themes/openstack/css/navigation_menu.css",
-            "themes/openstack/css/dropdown.css",
-        ];
+
 
         if (Director::get_current_page()->IncludeShadowBox) {
             array_push($css_files, "themes/openstack/javascript/shadowbox/shadowbox.css");
         }
 
-        foreach($css_files as $css_file)
+        foreach($this->getCssIncludes() as $css_file)
             Requirements::css($css_file);
 
         $js_files =  [
@@ -352,7 +355,7 @@ class Page_Controller extends ContentController
         if (isset($this->request)) $getVars = $this->request->getVars();
         $chineseLangCampaigns = array("o2", "o4", "o6", "o8", "o17", "o18", "o22");
 
-        self::AddRequirements();
+        $this->AddRequirements();
 
         $use_shadow_box = Director::get_current_page()->IncludeShadowBox;
 
