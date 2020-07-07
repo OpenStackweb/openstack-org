@@ -1,5 +1,7 @@
 @import "_cdn.scss";
 
+$body_color : #888888;
+
 html {
   overflow-y: scroll; }
 
@@ -849,16 +851,16 @@ a, a:visited {
 
 /*Hero*/
 .intro-header {
-  padding-top: 0px;
+  padding-top: 0;
   padding-bottom: 0;
   text-align: left;
-  color: #888888;
+  color: $body_color !important;
   background: url('#{$static_images_base_url}/hero-bkgd1.jpg') no-repeat center center;
   background-size: cover;
   position: relative; }
 
 .intro-header h1 {
-  color: #00497B; }
+  color: $body_color !important; }
 
 .intro-message {
   position: relative;
@@ -871,7 +873,7 @@ a, a:visited {
 @media (max-width: 1199px) {
   .intro-message {
     /*padding-bottom: 30px; */
-    padding-bottom: 0px;
+    padding-bottom: 0;
   }
 }
 
@@ -930,7 +932,7 @@ a, a:visited {
 }
 
 .intro-header.featured img {
-  margin-top: -40px;
+  margin-top: -20px;
   margin-right: -70px;
 }
 
@@ -974,7 +976,7 @@ a.promo-btn:hover, a.promo-btn:focus  {
 }
 
 .promo-btn-wrapper {
-  margin-top: 3px;
+  margin-top: 28px;
   margin-bottom: 28px;
 }
 a.promo-btn i.fa-chevron-right {

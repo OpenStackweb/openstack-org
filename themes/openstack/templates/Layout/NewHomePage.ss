@@ -19,11 +19,11 @@ common services for cloud infrastructure.
 
 
 <div class="promo-btn-wrapper">
-<a href="#" class="promo-btn">browse openstack components</a>
+<a href="/software" class="promo-btn">browse openstack components</a>
 </div>
 <p>
-OpenStack is developed by the community. For the community. <a class="intro-header-link" href="#">Learn how
-to contribute &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </a> <i class="fa fa-arrow-right"></i>
+OpenStack is developed by the community. For the community. <a class="intro-header-link" href="/community/">Learn how
+to contribute</a> <i class="fa fa-arrow-right"></i>
 </p>
 </div>
 <div class="col-lg-3 col-lg-offset-1 col-sm-12" style="padding-left: 0px; padding-right: 0px">
@@ -62,8 +62,8 @@ Born from open collaboration, it’s grown to power the most critical infrastruc
 <div class="diagram-section">
 <div class="container">
 <div class="row">
-<div class="col-lg-6 col-sm-12">
-<img src="/themes/openstack/home_images/Diagram/overview-diagram-new.svg">
+<div class="col-lg-6 col-sm-12 col-xs-12">
+<img width="100%" src="/themes/openstack/home_images/Diagram/overview-diagram-new.svg">
 </div>
 <div class="col-lg-6 col-sm-12">
 <h2>Cloud Infrastructure for Virtual Machines, Bare Metal, and Containers</h2>
@@ -83,17 +83,17 @@ applications.
 <div class="col-lg-4 col-sm-12">
 <img src="/themes/openstack/home_images/Icons/SVG/On-Premises-Icon.svg">
 <h2>On-Premises</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec orci enim.</p>
+<p>Host your cloud infrastructure internally or find an OpenStack partner in the Marketplace</p>
 </div>
 <div class="col-lg-4 col-sm-12">
 <img src="/themes/openstack/home_images/Icons/SVG/Public-Cloud-Icon.svg">
 <h2>Public Cloud</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec orci enim.</p>
+<p>Leverage one of the 70+ OpenStack powered public cloud data centers</p>
 </div>
 <div class="col-lg-4 col-sm-12">
 <img src="/themes/openstack/home_images/Icons/SVG/At-theEdge-Icon.svg">
 <h2>At the Edge</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec orci enim.</p>
+<p>Telecoms and retailers rely on OpenStack for their distributed systems</p>
 </div>
 </div>
 </div>
@@ -123,11 +123,11 @@ poster="/themes/openstack/home_images/Ussuri/Ussuri_1920x1080.jpg"></video>
 <div class="section-spotlight">
 <div class="container">
 <div class="row">
-<div class="col-lg-6 col-sm-12">
+<div class="col-lg-6 col-sm-12 col-xs-12">
 <h2>Marketplace Spotlight</h2>
 <p>The OpenStack Marketplace is filled with experts working across industries, use cases, and regions to help
 your organization achieve your goals.</p>
-<img src="/themes/openstack/home_images/Logos/Tcloud-lg.png" alt="">
+<img src="/themes/openstack/home_images/Logos/Tcloud-lg.png" alt="" width="auto">
 <p>Tencent cloud stack is a cloud computing platform based on strong technical capabilities and massive
 operational experience. It provides a comprehensive cloud service solution that integrates IAAS, PAAS, and
 SAAS.</p>
@@ -135,11 +135,11 @@ SAAS.</p>
 <a href="#" class="spotlight-btn">learn more</a>
 </div>
 </div>
-<div class="col-lg-6 col-sm-12">
+<div class="col-lg-6 col-sm-12 col-xs-12">
 <h2>OSF Member Spotlight</h2>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec orci enim, scelerisque in nisi sit amet,
 rhoncus consectetur adipiscing. </p>
-<img src="/themes/openstack/home_images/Logos/RH-summit.svg" alt="">
+<img src="/themes/openstack/home_images/Logos/RH-summit.svg" alt="" width="100%">
 <p>Join OpenStack at the Red Hat Summit, where you can “Immerse yourself in our free virtual event and find
 your inspiration at the intersection of choice and Potential.”</p>
 <div class="spotlight-btn-wrapper">
@@ -152,58 +152,31 @@ your inspiration at the intersection of choice and Potential.”</p>
 
 <!-- /.section-spotlight -->
 
-<!-- Page Content -->
+<!-- User Stories -->
 
 <div class="twros-section">
 <div class="container">
 <h2>The World Runs on OpenStack</h2>
 <p>OpenStack is trusted to manage 20 Million+ cores around the world, across dozens of industries.</p>
 <div class="twros-example">
-<div class="twros-row">
-<img src="/themes/openstack/home_images/TWROS/0504028_01-A4-at-144-dpi.jpg" alt=""
-class="twros-img">
-<div class="twros-text">
-<h2>CERN</h2>
-<p>
-With 300,000+ cores, CERN runs OpenStack at scale to support experiments including the
-Large Hadron Collider. CERN deployed the OpenStack magnum project to manage 500+ clusters
-of Kubernetes in production
-</p>
-<div class="twros-btn-wrapper">
-<a href="#" class="twros-btn">read more</a>
+  <% loop UserStories %>
+    <div class="twros-row">
+      <img src="{$Image.Link}" alt="" class="twros-img"/>
+      <div class="twros-text">
+      <h2>$Name</h2>
+      <p>
+      $Description
+      </p>
+      <div class="twros-btn-wrapper">
+      <a href="{$Link}" class="twros-btn">read more</a>
+      </div>
+      </div>
+    </div>
+  <% end_loop %>
 </div>
+
 </div>
-</div>
-<div class="twros-row">
-<img src="/themes/openstack/home_images/TWROS/1280px-Baidu_headquarters.jpg" alt=""
-class="twros-img">
-<div class="twros-text">
-<h2>Baidu</h2>
-<p>
-Baidu offers ai cloud and edge computing services with reduced costs at assive scale by taking
-advantage of innovative cloud technologies such as OpenStack, Kubernetes and Kata Containers.
-</p>
-<div class="twros-btn-wrapper">
-<a href="#" class="twros-btn">read more</a>
-</div>
-</div>
-</div>
-<div class="twros-row">
-<img src="/themes/openstack/home_images/TWROS/revolt-164_6wVEHfI-unsplash.jpg" alt=""
-class="twros-img">
-<div class="twros-text">
-<h2>Nike</h2>
-<p>
-There were 56 million visits to nike.com, the number 1 sports shopping site, within the last six
-months. For both its online and retail locations, Nike relies on OpenStack for its $8 billion business,
-</p>
-<div class="twros-btn-wrapper">
-<a href="#" class="twros-btn">read more</a>
-</div>
-</div>
-</div>
-</div>
-<p><a href="">SEE MORE CASE STUDIES &nbsp; <i class="fa fa-arrow-right"></i></a></p>
+<p><a href="/user-stories">SEE MORE CASE STUDIES &nbsp; <i class="fa fa-arrow-right"></i></a></p>
 </div>
 </div>
 

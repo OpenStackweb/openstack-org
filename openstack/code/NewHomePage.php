@@ -26,4 +26,8 @@ class NewHomePage_Controller extends Page_Controller
             "themes/openstack/css/dropdown.css",
         ];
     }
+
+    public function getUserStories(){
+        return UserStoryDO::get()->filter(['ShowAtHomePage' => true]);
+    }
 }

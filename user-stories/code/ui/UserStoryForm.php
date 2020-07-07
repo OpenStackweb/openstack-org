@@ -23,9 +23,7 @@ final class UserStoryForm extends BootstrapForm {
             $this->getFields(),
             $this->getActions()
         );
-
     }
-
 
     protected function getFields() {
 
@@ -44,13 +42,21 @@ final class UserStoryForm extends BootstrapForm {
             ->literal('</div><div class="row">')
             ->text('Link')
                 ->configure()
-                    ->addHolderClass('col-md-6')
+                    ->addHolderClass('col-md-12')
                 ->end()
+
+            ->literal('</div>')
+            ->literal('<div class="row">')
             ->checkbox('Active')
-                ->configure()
-                    ->setFieldHolderTemplate('BootstrapAwesomeCheckboxField')
-                    ->addHolderClass('col-md-6')
-                ->end()
+            ->configure()
+            ->setFieldHolderTemplate('BootstrapAwesomeCheckboxField')
+            ->addHolderClass('col-md-6')
+            ->end()
+            ->checkbox('ShowAtHomePage')
+            ->configure()
+            ->setFieldHolderTemplate('BootstrapAwesomeCheckboxField')
+            ->addHolderClass('col-md-6')
+            ->end()
             ->literal('</div>')
             ->tinyMCEEditor('Description')
                 ->configure()
