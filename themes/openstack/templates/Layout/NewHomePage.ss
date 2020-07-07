@@ -66,31 +66,27 @@ Born from open collaboration, it’s grown to power the most critical infrastruc
 <img width="100%" src="/themes/openstack/home_images/Diagram/overview-diagram-new.svg">
 </div>
 <div class="col-lg-6 col-sm-12">
-<h2>Cloud Infrastructure for Virtual Machines, Bare Metal, and Containers</h2>
+<h2>$CloudInfraTitle</h2>
 <p>
-Openstack controls large pools of compute, storage, and networking resources,
-all managed through APIs or a dashboard. Beyond standard infrastructure-as-a-service
-functionality, additional components provide orchestration, fault management and
-service management amongst other services to ensure high availability of user
-applications.
+$CloudInfraContent
 </p>
 <div class="diagram-btn-wrapper">
-<a href="#" class="diagram-btn">read more</a>
+<a href="{$CloudInfraLink}" class="diagram-btn">read more</a>
 </div>
 </div>
 </div>
 <div class="row diagram-icons">
-<div class="col-lg-4 col-sm-12">
+<div class="col-lg-4 col-xs-12 col-md-4 col-sm-4">
 <img src="/themes/openstack/home_images/Icons/SVG/On-Premises-Icon.svg">
 <h2>On-Premises</h2>
 <p>Host your cloud infrastructure internally or find an OpenStack partner in the Marketplace</p>
 </div>
-<div class="col-lg-4 col-sm-12">
+<div class="col-lg-4 col-xs-12 col-md-4 col-sm-4">
 <img src="/themes/openstack/home_images/Icons/SVG/Public-Cloud-Icon.svg">
 <h2>Public Cloud</h2>
 <p>Leverage one of the 70+ OpenStack powered public cloud data centers</p>
 </div>
-<div class="col-lg-4 col-sm-12">
+<div class="col-lg-4 col-xs-12 col-md-4 col-sm-4">
 <img src="/themes/openstack/home_images/Icons/SVG/At-theEdge-Icon.svg">
 <h2>At the Edge</h2>
 <p>Telecoms and retailers rely on OpenStack for their distributed systems</p>
