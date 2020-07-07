@@ -20,7 +20,8 @@ class UserStoryDO extends DataObject implements IUserStory
 		'Description'      => 'HTMLText',
 		'ShortDescription' => 'HTMLText',
         'Link'             => 'Text',
-        'Active'           => 'Boolean(1)'
+        'Active'           => 'Boolean(1)',
+        'ShowAtHomePage'   => 'Boolean',
 	);
 
 	static $has_one = array(
@@ -47,6 +48,5 @@ class UserStoryDO extends DataObject implements IUserStory
         if ($this->Organization()->Exists()) return $this->Organization()->Name;
         return $this->getField('Name');
     }
-
 
 }
