@@ -14,7 +14,59 @@
 
 class NewHomePage extends Page
 {
+    private static $db = [
+        'CloudInfraTitle'   => 'Text',
+        'CloudInfraContent' => 'HTMLText',
+        'CloudInfraLink' => 'Text',
+    ];
 
+    public function getCloudInfraTitle():string{
+        $res = $this->getField('CloudInfraTitle');
+        if(empty($res)){
+            $res = <<<HTML
+Cloud Infrastructure for Virtual Machines, Bare Metal, and Containers
+HTML;
+
+        }
+        return $res;
+    }
+
+    public function getCloudInfraContent():string{
+        $res = $this->getField('CloudInfraContent');
+        if(empty($res)){
+            $res = <<<HTML
+Openstack controls large pools of compute, storage, and networking resources,
+all managed through APIs or a dashboard. Beyond standard infrastructure-as-a-service
+functionality, additional components provide orchestration, fault management and
+service management amongst other services to ensure high availability of user
+applications.
+HTML;
+
+        }
+        return $res;
+    }
+
+    public function getCloudInfraLink(){
+        $res = $this->getField('CloudInfraLink');
+        if(empty($res)){
+            $res = '#';
+        }
+        return $res;
+    }
+
+    function getCMSFields()
+    {
+        $fields = parent::getCMSFields();
+
+        $fields->addFieldToTab('Root.CLOUD INFRASTRUCTURE BLOCK', new TextField ('CloudInfraTitle', 'Title'));
+
+        $fields->addFieldToTab('Root.CLOUD INFRASTRUCTURE BLOCK', new HtmlEditorField ('CloudInfraContent', 'Content'));
+
+        $fields->addFieldToTab('Root.CLOUD INFRASTRUCTURE BLOCK', new TextField ('CloudInfraLink', 'Link (READ MORE)'));
+
+
+        return $fields;
+    }
 }
 
 class NewHomePage_Controller extends Page_Controller
