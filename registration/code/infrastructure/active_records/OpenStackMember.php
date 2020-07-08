@@ -547,16 +547,18 @@ class OpenStackMember
     }
 
     /**
+     * @param int $summit_id
      * @return bool
      */
-    public function isTrackChair() {
-        return Summit::get_active()
+    public function isTrackChair(int $summit_id):bool {
+        $summit = Summit::get()->byID($summit_id);
+        if(is_null($summit)) return false;
+        return $summit
             ->Categories()
             ->relation('TrackChairs')
             ->filter('MemberID', $this->owner->ID)
             ->exists();
     }
-
 
     public function validate(ValidationResult $validationResult) {
         if(empty($this->owner->FirstName))

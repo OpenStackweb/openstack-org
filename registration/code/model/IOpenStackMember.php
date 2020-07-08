@@ -59,10 +59,10 @@ interface IOpenStackMember
     public function isAdmin();
 
     /**
+     * @param int $summit_id
      * @return bool
      */
-    public function isTrackChair();
-
+    public function isTrackChair(int $summit_id):bool;
 
     /**
      * @return string

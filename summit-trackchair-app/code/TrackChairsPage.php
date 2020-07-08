@@ -8,7 +8,6 @@ class TrackChairsPage extends Page
 
 }
 
-
 class TrackChairsPage_Controller extends Page_Controller
 {
 
@@ -20,13 +19,57 @@ class TrackChairsPage_Controller extends Page_Controller
        return "Track Chairs App";
     }
 
+    private static $allowed_actions = [
+        'selectSummit',
+        'handleIndex',
+    ];
+
 	private static $url_handlers = [
-        '$Page/$Action/$ID' => 'handleIndex'
+        'GET summits' => 'selectSummit',
+        '$Page/$Action/$ID' => 'handleIndex',
 	];
 
-	public function index (SS_HTTPRequest $r) {
+	public function handleIndex (SS_HTTPRequest $request) {
+        $summit_id = Session::get("track_chairs_summit_id");
+        if(!$summit_id){
+            return $this->redirect($this->Link('summits'));
+        }
 		return $this;
 	}
+
+	public function selectSummit(SS_HTTPRequest $request){
+
+        Session::clear('track_chairs_summit_id');
+        $summit_id = intval($request->requestVar('current_summit'));
+        if($summit_id > 0){
+            Session::set('track_chairs_summit_id', $summit_id);
+            Session::save();
+            return $this->redirect($this->Link());
+        }
+        JQueryCoreDependencies::renderRequirements();
+	    Requirements::javascript("summit-trackchair-app/javascript/summits.js");
+	    Page_Controller::AddRequirements();
+	    Requirements::css('summit-trackchair-app/css/summits.css');
+        return $this->customise([])->renderWith(
+            [
+                'TrackChairsPage_summits',
+            ],
+            $this
+        );
+    }
+
+    public function getAvailableSummits(){
+        $summits = Summit::get()
+            ->where('SummitBeginDate > DATE(NOW())')
+            ->sort('SummitEndDate DESC');
+
+        $res = new ArrayList();
+        foreach ($summits as $summit){
+            if($summit->isSelectionOpen())
+                $res->push($summit);
+        }
+        return $res;
+    }
 
     public function init()
     {
@@ -38,45 +81,33 @@ class TrackChairsPage_Controller extends Page_Controller
     		);
     	}
 
-        if (!$this->trackChairCheck()) {
-            Security::permissionFailure($this);
+        if(!TrackChairsAuthorization::authorize($this->getCurrentSummitId()))
+        {
+            return Security::permissionFailure($this);
         }
+
         parent::init();
         Requirements::clear();
 
         Requirements::css(Director::protocol() . '://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css?'.time());
         Requirements::css("marketplace/code/ui/frontend/css/star-rating.min.css");
         Requirements::css('node_modules/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
-
     }
 
-    public function trackChairCheck()
-    {
-
-        $member = Member::currentUser();
-        $chair = new SummitTrackChair();
-
-        if ($member) {
-        	$chair = Summit::get_active()
-        		->Categories()
-        		->relation('TrackChairs')
-        		->filter([
-        			'MemberID' => $member->ID
-        		]);
-        }
-
-        if ($chair->exists() || Permission::check('ADMIN')) {
-            return true;
-        }
-
+    public function getCurrentSummitId():int{
+        $summit_id = Session::get("track_chairs_summit_id");
+        return intval($summit_id);
     }
-
 
     public function JSONConfig()
     {
+        $summit = Summit::get()->byID($this->getCurrentSummitId());
+        $plan = $summit->getOpenSelectionPlanForStage();
         return Convert::array2json([
             'baseURL' => $this->Link(),
-            'summitID' => Summit::get_active()->ID,
+            'summitID' => $summit->ID,
+            'summitName' => sprintf("%s - %s", $summit->Title, $plan->Name),
+            'selectionLink' => $this->Link('summits'),
             'pass_order' => SummitSelectedPresentation::config()->pass_order,
             'userinfo' => [
             	'name' => Member::currentUser()->getName(),

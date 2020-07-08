@@ -61,7 +61,6 @@ class TrackChairAPI extends AbstractRestfulJsonApi
     public function init()
     {
         parent::init();
-        $this->checkAuthenticationToken(false);
         $this->tx_manager = SapphireTransactionManager::getInstance();
     }
 
@@ -78,9 +77,14 @@ class TrackChairAPI extends AbstractRestfulJsonApi
      */
     protected function authorize()
     {
-        return !!Member::currentUser();
+        $request = $this->getRequest();
+        return TrackChairsAuthorization::authorize($this->getCurrentSummitId());
     }
 
+    public function getCurrentSummitId():int{
+        $summit_id = Session::get("track_chairs_summit_id");
+        return intval($summit_id);
+    }
 
     /**
      * @return array|void
