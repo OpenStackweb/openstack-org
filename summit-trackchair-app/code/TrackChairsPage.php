@@ -59,14 +59,12 @@ class TrackChairsPage_Controller extends Page_Controller
     }
 
     public function getAvailableSummits(){
-        $summits = Summit::get()
-            ->where('SummitBeginDate > DATE(NOW())')
-            ->sort('SummitEndDate DESC');
-
+        $plans = SelectionPlan::get()
+            ->where('Enabled = 1 AND SelectionBeginDate <= DATE(NOW()) AND SelectionEndDate >= DATE(NOW()) ')
+            ->sort('SelectionBeginDate ASC');
         $res = new ArrayList();
-        foreach ($summits as $summit){
-            if($summit->isSelectionOpen())
-                $res->push($summit);
+        foreach ($plans as $plan){
+            $res->push($plan->Summit());
         }
         return $res;
     }

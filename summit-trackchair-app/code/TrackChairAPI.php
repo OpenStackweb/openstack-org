@@ -93,10 +93,6 @@ class TrackChairAPI extends AbstractRestfulJsonApi
     protected function trackChairDetails()
     {
 
-        if (!Member::currentUser()) {
-            return $this->httpError(403);
-        }
-
         $data = [
             'categories' => null,
         ];
