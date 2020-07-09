@@ -23,6 +23,7 @@ class OSFMember extends DataObject
     static $has_one = [
         'Company'  => 'Company',
         'HomePage' => 'NewHomePage',
+        'Image' => 'CloudImage',
     ];
 
 
@@ -41,6 +42,11 @@ class OSFMember extends DataObject
         $fields->addFieldToTab('Root.Main', new HtmlEditorField('Paragraph1', 'Paragraph1'));
         $fields->addFieldToTab('Root.Main', new HtmlEditorField('Paragraph2', 'Paragraph2'));
         $fields->addFieldToTab('Root.Main', new TextField('Link', 'Link'));
+        $image  = new CustomUploadField('Image', 'Image');
+        $image->setFolderName('osf-members');
+        $image->setAllowedFileCategories('image');
+
+        $fields->addFieldToTab('Root.Main', $image);
         $fields->addFieldToTab('Root.Main', AutoCompleteField::create('CompanyID','Company')
             ->setSourceClass('Company')
             ->setSourceFields([
