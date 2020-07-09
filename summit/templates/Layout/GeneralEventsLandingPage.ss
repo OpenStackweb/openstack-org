@@ -14,7 +14,7 @@
                         </a>
                         <br/>
                         <br/>
-                        <a href="/events/opendev-2020/opendev-schedule">View the Schedule</a>
+                        <a href="https://superuser.openstack.org/articles/takeaways-and-next-steps-from-opendev-large-scale-usage-of-open-infrastructure/">Event Recap</a>
                     </p>
                 </div>
             </div>
