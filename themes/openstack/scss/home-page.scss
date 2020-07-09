@@ -5,6 +5,10 @@ $body_color : #888888;
 html {
   overflow-y: scroll; }
 
+p {
+  color: #888888;
+}
+
 hr {
   height: 1px !important; }
 
@@ -868,6 +872,7 @@ a, a:visited {
   /*padding-bottom: 110px; */
   padding-top: 15px;
   padding-bottom: 0;
+  color: #00497B;
 }
 
 @media (max-width: 1199px) {
@@ -1118,6 +1123,7 @@ a.anniversary-btn:hover, a.anniversary-btn:focus  {
   p {
     font-size: 16px;
     line-height: 22px;
+    color: #888;
   }
 
   a.diagram-btn {
@@ -1142,7 +1148,7 @@ a.anniversary-btn:hover, a.anniversary-btn:focus  {
   }
 
   .diagram-btn-wrapper {
-    margin-top: 140px;
+    margin-top: 40px;
   }
 
   .diagram-icons {
