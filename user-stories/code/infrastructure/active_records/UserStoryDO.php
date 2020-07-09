@@ -21,19 +21,19 @@ class UserStoryDO extends DataObject implements IUserStory
 		'ShortDescription' => 'HTMLText',
         'Link'             => 'Text',
         'Active'           => 'Boolean(1)',
-        'ShowAtHomePage'   => 'Boolean',
-	);
+   );
 
 	static $has_one = array(
 		'Industry'      => 'UserStoriesIndustry',
         'Organization'  => 'Org',
         'Location'      => 'Continent',
-        'Image'         => 'CloudImage'
+        'Image'          => 'CloudImage',
+        'HomePageImage' => 'CloudImage',
 	);
 
     private static $many_many = array
     (
-        'Tags'      => 'Tag',
+        'Tags' => 'Tag',
     );
 
 	static $singular_name = 'User Story';
