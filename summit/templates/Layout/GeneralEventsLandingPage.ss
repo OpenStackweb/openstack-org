@@ -8,10 +8,13 @@
                     <h4>Large-scale Usage of Open Infrastructure Software</h4>
                     <p>June 29 - July 1, 2020</p>
                     <p>
-                        <a href="https://opendev_largescale.eventbrite.com" target="_blank" class="btn register-btn-lrg " target="_blank">
-                            Register Now!
+                        <a href="https://www.youtube.com/playlist?list=PLKqaoAnDyfgocdCkSIPSaXQRdMb5o7nOr" target="_blank" class="btn register-btn-lrg " target="_blank">
+                            Watch the Videos
                             <i class="fa fa-arrow-right"></i>
                         </a>
+                        <br/>
+                        <br/>
+                        <a href="/events/opendev-2020/opendev-schedule">View the Schedule</a>
                     </p>
                 </div>
             </div>
@@ -27,6 +30,9 @@
                             <i class="fa fa-arrow-right"></i>
                         </a>
                     </p>
+                    <br/>
+                    <br/>
+                    <a href="/events/opendev-2020/opendev-schedule-2">View the Schedule</a>
 
                 </div>
             </div>
@@ -42,6 +48,9 @@
                             <i class="fa fa-arrow-right"></i>
                         </a>
                     </p>
+                    <br/>
+                    <br/>
+                    <a href="/events/opendev-2020/opendev-schedule-3">View the Schedule</a>
                 </div>
             </div>
 
