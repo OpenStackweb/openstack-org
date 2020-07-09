@@ -29,11 +29,10 @@
                             Register Now!
                             <i class="fa fa-arrow-right"></i>
                         </a>
-                    </p>
                     <br/>
                     <br/>
                     <a href="/events/opendev-2020/opendev-schedule-2">View the Schedule</a>
-
+                    </p>
                 </div>
             </div>
             <div class="video-container last col-md-4 col-sm-12 col-xs-12">
@@ -47,10 +46,10 @@
                             Register Now!
                             <i class="fa fa-arrow-right"></i>
                         </a>
-                    </p>
                     <br/>
                     <br/>
                     <a href="/events/opendev-2020/opendev-schedule-3">View the Schedule</a>
+                    </p>
                 </div>
             </div>
 
