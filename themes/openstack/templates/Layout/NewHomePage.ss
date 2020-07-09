@@ -141,9 +141,9 @@ $CloudInfraContent
       <% with $RandomOSFMember %>
       $Paragraph1
       <% if $Image %>
-      <img src="{$Image.Link}" alt="" width="100%">
+      <img src="{$Image.Link}" alt="company_logo">
       <% else %>
-      <img src="{$Company.BigLogo.Link}" alt="" width="100%">
+      <img src="{$Company.BigLogo.Link}" alt="company_logo">
       <% end_if %>
       $Paragraph2
       <div class="spotlight-btn-wrapper">
