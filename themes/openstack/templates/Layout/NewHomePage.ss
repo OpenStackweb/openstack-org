@@ -127,7 +127,7 @@ $CloudInfraContent
         your organization achieve your goals.</p>
         <% if $RandomCompanyService %>
         <% with $RandomCompanyService %>
-        <img src="{$Company.Logo.Link}" alt="company_logo" class="spotlight-marketplace-logo"/>
+        <img src="{$Company.BigLogo.Link}" alt="company_logo" class="spotlight-marketplace-logo"/>
         <p>{$Overview}</p>
         <div class="spotlight-btn-wrapper">
             <a href="{$Call2ActionUri}" class="spotlight-btn">learn more</a>
@@ -140,7 +140,11 @@ $CloudInfraContent
       <% if $RandomOSFMember %>
       <% with $RandomOSFMember %>
       $Paragraph1
-      <img src="{$Company.Logo.Link}" alt="" width="100%">
+      <% if $Image %>
+      <img src="{$Image.Link}" alt="" width="100%">
+      <% else %>
+      <img src="{$Company.BigLogo.Link}" alt="" width="100%">
+      <% end_if %>
       $Paragraph2
       <div class="spotlight-btn-wrapper">
           <a href="{$Link}" class="spotlight-btn">learn more</a>
