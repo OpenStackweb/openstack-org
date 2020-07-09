@@ -1263,9 +1263,14 @@ a.anniversary-btn:hover, a.anniversary-btn:focus  {
   }
 
   img {
-    margin-top: 34px;
-    margin-bottom: 54px;
-    height: 160px;
+    width: auto !important;
+    height: auto !important;
+    margin: 0 auto;
+    display: block;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    max-width: 300px;
+    max-height: 160px;
   }
 
   .spotlight-marketplace-logo
