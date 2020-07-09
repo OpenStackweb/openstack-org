@@ -12,7 +12,37 @@
  * limitations under the License.
  **/
 
-class OSFMember
+class OSFMember extends DataObject
 {
+    static $db = [
+        'Paragraph1' => 'HTMLText',
+        'Paragraph2' => 'HTMLText',
+        'Link' => "Text",
+    ];
 
+    static $has_one = [
+        'Company'  => 'Company',
+        'HomePage' => 'NewHomePage',
+    ];
+
+    public function getCMSFields()
+    {
+
+        $fields = new FieldList
+        (
+            $rootTab = new TabSet("Root", $tabMain = new Tab('Main'))
+        );
+
+        $fields->addFieldToTab('Root.Main', new HtmlEditorField('Paragraph1', 'Paragraph1'));
+        $fields->addFieldToTab('Root.Main', new HtmlEditorField('Paragraph2', 'Paragraph2'));
+        $fields->addFieldToTab('Root.Main', new TextField('Link', 'Link'));
+        $fields->addFieldToTab('Root.Main', AutoCompleteField::create('CompanyID','Company')
+            ->setSourceClass('Company')
+            ->setSourceFields([
+                'Name',
+            ])
+            ->setLabelField('Name')
+            ->setLimit(10));
+        return $fields;
+    }
 }

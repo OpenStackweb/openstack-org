@@ -1268,8 +1268,10 @@ a.anniversary-btn:hover, a.anniversary-btn:focus  {
     height: auto !important;
     margin: 0 auto;
     display: block;
-    padding-top: 1em;
-    padding-bottom: 1em;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    max-width: 200px;
+    max-height: 100px;
   }
 
   div.col-lg-6 {
