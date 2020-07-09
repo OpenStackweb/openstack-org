@@ -95,8 +95,8 @@ jobs:
 
   - name: "RevocationNotificationSenderTask"
     params: "batch_size=1000"
-    cron_expression: "*/5 * * * *"
-    enabled: 0
+    cron_expression: "*/10 * * * *"
+    enabled: 1
 
   - name: "RoomMetricsIngestionTask"
     params: "summit_id=7"
