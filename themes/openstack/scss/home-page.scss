@@ -6,7 +6,7 @@ html {
   overflow-y: scroll; }
 
 p {
-  color: #888888;
+  color: $body_color;
 }
 
 hr {
@@ -864,7 +864,7 @@ a, a:visited {
   position: relative; }
 
 .intro-header h1 {
-  color: $body_color !important; }
+  color: #00497B !important; }
 
 .intro-message {
   position: relative;
@@ -3046,6 +3046,10 @@ ul.resource-links li a:hover {
   background-color: #248EC7;
   color: #fff;
   padding-top: 10px;
+}
+
+.top-site-banner p {
+  color:#fff !important;
 }
 
 a.top-site-banner-button {
