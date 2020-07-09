@@ -25,6 +25,11 @@ class OSFMember extends DataObject
         'HomePage' => 'NewHomePage',
     ];
 
+
+    private static $summary_fields = array(
+        'Company.Name' => 'Company',
+    );
+
     public function getCMSFields()
     {
 
