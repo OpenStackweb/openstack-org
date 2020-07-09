@@ -97,56 +97,60 @@ $CloudInfraContent
 
 <!-- /.diagram-section -->
 
-<!-- Page Content -->
+<!-- Latest Release Block -->
 
 <div class="section-ussuri">
-<div class="container">
-<h2>Latest Release: OpenStack Ussuri</h2>
-<video class="ussuri-video" src=""
-poster="/themes/openstack/home_images/Ussuri/Ussuri_1920x1080.jpg"></video>
-<p>Watch the Ussuri Community Meeting</p>
-<div class="ussuri-btn-wrapper">
-<a href="#" class="ussuri-btn">THIS RELEASE: USSURI</a>
-<a href="#" class="ussuri-btn">UP NEXT: VICTORIA</a>
-</div>
-</div>
+  <div class="container">
+    <h2>Latest Release: {$LatestReleaseName}</h2>
+    <div class="video-container">
+      <img class="ussuri-video" src="{$LatestReleaseVideoPosterUrl}"/>
+      <a href="{$LatestReleaseVideoLink}"><i class="fa btn-play fa-play-circle" aria-hidden="true" title="Play it"></i></a>
+    </div>
+    <p>{$LatestReleaseVideoDescription}</p>
+    <div class="ussuri-btn-wrapper">
+    <a href="{$LatestReleaseCurrentButtonLink}" class="ussuri-btn">{$LatestReleaseCurrentButtonText}</a>
+    <a href="{$LatestReleaseUpNextButtonLink}" class="ussuri-btn">{$LatestReleaseUpNextButtonText}</a>
+    </div>
+  </div>
 </div>
 
-<!-- /.section-ussuri -->
+<!-- /.Latest Release Block -->
 
-<!-- Page Content -->
+<!-- SPOTLIGHT-->
 
 <div class="section-spotlight">
 <div class="container">
 <div class="row">
-<div class="col-lg-6 col-sm-12 col-xs-12">
-<h2>Marketplace Spotlight</h2>
-<p>The OpenStack Marketplace is filled with experts working across industries, use cases, and regions to help
-your organization achieve your goals.</p>
-<img src="/themes/openstack/home_images/Logos/Tcloud-lg.png" alt="" width="auto">
-<p>Tencent cloud stack is a cloud computing platform based on strong technical capabilities and massive
-operational experience. It provides a comprehensive cloud service solution that integrates IAAS, PAAS, and
-SAAS.</p>
-<div class="spotlight-btn-wrapper">
-<a href="#" class="spotlight-btn">learn more</a>
-</div>
-</div>
-<div class="col-lg-6 col-sm-12 col-xs-12">
-<h2>OSF Member Spotlight</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec orci enim, scelerisque in nisi sit amet,
-rhoncus consectetur adipiscing. </p>
-<img src="/themes/openstack/home_images/Logos/RH-summit.svg" alt="" width="100%">
-<p>Join OpenStack at the Red Hat Summit, where you can “Immerse yourself in our free virtual event and find
-your inspiration at the intersection of choice and Potential.”</p>
-<div class="spotlight-btn-wrapper">
-<a href="#" class="spotlight-btn">learn more</a>
-</div>
-</div>
+    <div class="col-lg-6 col-sm-12 col-xs-12">
+        <h2>Marketplace Spotlight</h2>
+        <p>The OpenStack Marketplace is filled with experts working across industries, use cases, and regions to help
+        your organization achieve your goals.</p>
+        <% if $RandomCompanyService %>
+        <% with $RandomCompanyService %>
+        <img src="{$Company.Logo.Link}" alt="company_logo" class="spotlight-marketplace-logo"/>
+        <p>{$Overview}</p>
+        <div class="spotlight-btn-wrapper">
+            <a href="{$Call2ActionUri}" class="spotlight-btn">learn more</a>
+        </div>
+        <% end_with %>
+        <% end_if %>
+    </div>
+    <div class="col-lg-6 col-sm-12 col-xs-12">
+      <h2>OSF Member Spotlight</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec orci enim, scelerisque in nisi sit amet,
+      rhoncus consectetur adipiscing. </p>
+      <img src="/themes/openstack/home_images/Logos/RH-summit.svg" alt="" width="100%">
+      <p>Join OpenStack at the Red Hat Summit, where you can “Immerse yourself in our free virtual event and find
+      your inspiration at the intersection of choice and Potential.”</p>
+      <div class="spotlight-btn-wrapper">
+          <a href="#" class="spotlight-btn">learn more</a>
+      </div>
+    </div>
 </div>
 </div>
 </div>
 
-<!-- /.section-spotlight -->
+<!-- /.SPOTLIGHT -->
 
 <!-- User Stories -->
 
@@ -157,14 +161,18 @@ your inspiration at the intersection of choice and Potential.”</p>
 <div class="twros-example">
   <% loop UserStories %>
     <div class="twros-row">
+      <% if $HomePageImage %>
+      <img src="{$HomePageImage.Link}" alt="" class="twros-img"/>
+      <% else %>
       <img src="{$Image.Link}" alt="" class="twros-img"/>
+      <% end_if %>
       <div class="twros-text">
       <h2>$Name</h2>
       <p>
       $Description
       </p>
       <div class="twros-btn-wrapper">
-      <a href="{$Link}" class="twros-btn">read more</a>
+      <a href="{$Link}" class="twros-btn"><% if $ButtonText %>$ButtonText<% else %>read more<% end_if %></a>
       </div>
       </div>
     </div>
