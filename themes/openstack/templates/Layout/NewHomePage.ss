@@ -137,14 +137,16 @@ $CloudInfraContent
     </div>
     <div class="col-lg-6 col-sm-12 col-xs-12">
       <h2>OSF Member Spotlight</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec orci enim, scelerisque in nisi sit amet,
-      rhoncus consectetur adipiscing. </p>
-      <img src="/themes/openstack/home_images/Logos/RH-summit.svg" alt="" width="100%">
-      <p>Join OpenStack at the Red Hat Summit, where you can “Immerse yourself in our free virtual event and find
-      your inspiration at the intersection of choice and Potential.”</p>
+      <% if $RandomOSFMember %>
+      <% with $RandomOSFMember %>
+      $Paragraph1
+      <img src="{$Company.Logo.Link}" alt="" width="100%">
+      $Paragraph2
       <div class="spotlight-btn-wrapper">
-          <a href="#" class="spotlight-btn">learn more</a>
+          <a href="{$Link}" class="spotlight-btn">learn more</a>
       </div>
+      <% end_with %>
+      <% end_if %>
     </div>
 </div>
 </div>

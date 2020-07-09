@@ -33,8 +33,9 @@ class NewHomePage extends Page
         'LatestReleaseVideoPoster' => 'CloudImage',
     ];
 
-    private static $has_many = [];
-
+    private static $has_many = [
+        'OSFMembers' => 'OSFMember',
+    ];
 
     private static $many_many = [
         'MarketplaceSpotLight' => 'CompanyService',
@@ -151,6 +152,13 @@ HTML;
         return $list[$index];
     }
 
+    public function getRandomOSFMember(){
+        $list = $this->OSFMembers()->toArray();
+        if(!count($list)) return null;
+        $index = array_rand ($list);
+        return $list[$index];
+    }
+
     function getCMSFields()
     {
         $fields = parent::getCMSFields();
@@ -244,6 +252,16 @@ HTML;
             'User Stories',
             $this->UserStories(), $config);
         $fields->addFieldToTab('Root.USER STORIES BLOCK', $services);
+
+
+        // OSF MEMBER SPOTLIGHT
+
+        $config = GridFieldConfig_RecordEditor::create(50);
+        $config->addComponent(new GridFieldAjaxRefresh(1000, false));
+        $config->removeComponentsByType('GridFieldDeleteAction');
+        $gridField = new GridField('OSFMembers', 'OSFMembers', $this->OSFMembers(), $config);
+        $config->getComponentByType("GridFieldDataColumns")->setFieldCasting(array("Description" => "HTMLText->BigSummary"));
+        $fields->addFieldToTab('Root.OSF MEMBER SPOTLIGHT', $gridField);
 
         return $fields;
     }
