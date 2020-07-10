@@ -88,11 +88,17 @@ class PaperViewerPage extends Page
     }
 
     public function toHTMLRender(){
-        $output = '';
-        foreach ($this->Paper()->getOrderedSections() as $section) {
+        $paper = $this->Paper();
+        $output = <<<HTML
+        <h1>{$paper->Title}</h1>
+        <h2>{$paper->Subtitle}</h2>
+        <p>{$paper->Abstract}</p>
+HTML;
+
+        foreach ($paper->getOrderedSections() as $section) {
             $output .= $this->renderSectionPDF($section);
         }
-        $translators = $this->Paper()->getTranslatorsByCurrentLocale();
+        $translators = $paper->getTranslatorsByCurrentLocale();
         if($translators->count() > 0){
             $data = new ArrayData([
                 'Translators' => $translators,
