@@ -28,7 +28,7 @@
                 <strong>Date Joined</strong>
             </div>
             <div class="span-6 last">$Created.Month $Created.format(d), $Created.Year <br><br></div>
-            <% if TwitterName || LinkedInProfile || IRCHandle || Bio %>
+            <% if TwitterName || LinkedInProfile || IRCHandle || Bio || GitHubUser %>
                 <hr>
             <% end_if %>
             <% if TwitterName %>
@@ -43,10 +43,16 @@
                 <div class="span-4"><strong>IRC</strong></div>
                 <div class="span-6 last">$IRCHandle<br><p>&nbsp;</p></div>
             <% end_if %>
+            <% if GitHubUser %>
+            <div class="span-4"><strong>GitHub</strong></div>
+            <div class="span-6 last"><a href="https://github.com/{$GitHubUser}" target="_blank">$GitHubUser</a><br><p>&nbsp;</p></div>
+            <% end_if %>
+            <% if StatementOfInterest %>
             <div class="span-4"><strong>Statement of Interest </strong></div>
             <div class="span-6 last">
                 <p>$StatementOfInterest</p>
             </div>
+            <% end_if %>
             <% if Bio %>
                 <div class="span-4"><strong>Bio</strong></div>
                 <div class="span-6 last">$Bio</div>
