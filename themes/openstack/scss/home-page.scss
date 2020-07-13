@@ -1004,12 +1004,21 @@ p.promo-dates {
   letter-spacing: -.4px;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 900px) {
 
   .intro-header.featured {
     [class*="col-"] {
       padding-left: 15px !important;
       padding-right: 15px !important;
+    }
+
+    a.anniversary-btn {
+      margin-left:-30px;
+    }
+
+    .diagram-section img {
+      width: 100%;
+      padding-bottom: 30px;
     }
   }
 
@@ -1024,7 +1033,8 @@ p.promo-dates {
   }
   .promo-btn-wrapper{
     text-align: center;
-  }}
+  }
+}
 
 /*End Hero*/
 

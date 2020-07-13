@@ -6,7 +6,7 @@
 <div class="intro-header featured">
 <div class="container">
 <div class="row">
-<div class="col-lg-8 col-sm-12" style="padding-left: 0px; padding-right: 0px">
+<div class="col-lg-8 col-sm-6" style="padding-left: 0px; padding-right: 0px">
 
 <div class="intro-message">
 <h1>The Most Widely Deployed Open Source Cloud Software in the World</h1>
@@ -26,7 +26,7 @@ OpenStack is developed by the community. For the community. <a class="intro-head
 to contribute</a> <i class="fa fa-arrow-right"></i>
 </p>
 </div>
-<div class="col-lg-3 col-lg-offset-1 col-sm-12" style="padding-left: 0px; padding-right: 0px">
+<div class="col-lg-3 col-lg-offset-1 col-sm-6" style="padding-left: 0px; padding-right: 0px">
 <img src="/themes/openstack/home_images/Hero/OpenStack_SFAs.svg">
 </div>
 
