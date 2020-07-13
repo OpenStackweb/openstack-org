@@ -71,6 +71,7 @@ class TrackChairsPage_Controller extends Page_Controller
 
     public function init()
     {
+        parent::init();
     	$parts = parse_url($_SERVER['REQUEST_URI']);
     	$path = $parts['path'];
     	if($path.'/' == $this->Link()) {
@@ -84,9 +85,7 @@ class TrackChairsPage_Controller extends Page_Controller
             return Security::permissionFailure($this);
         }
 
-        parent::init();
         Requirements::clear();
-
         Requirements::css(Director::protocol() . '://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css?'.time());
         Requirements::css("marketplace/code/ui/frontend/css/star-rating.min.css");
         Requirements::css('node_modules/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
