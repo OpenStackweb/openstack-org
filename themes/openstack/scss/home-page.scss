@@ -1024,7 +1024,7 @@ p.promo-dates {
 
   .intro-header.featured img {
     margin: 0 auto;
-    width: 60%;
+    width: 80%;
     display: block;
   }
 
@@ -1131,10 +1131,6 @@ a.anniversary-btn:hover, a.anniversary-btn:focus  {
     color: #00497B
   }
 
-  img { 
-     width: 80%;
-  }
-
   p {
     font-size: 16px;
     line-height: 22px;
@@ -1167,6 +1163,10 @@ a.anniversary-btn:hover, a.anniversary-btn:focus  {
   }
 
   .diagram-icons {
+    width:80%;
+    margin:auto;
+    margin-top:30px;
+
     img {
       margin-bottom: -80px;
     }
@@ -1187,7 +1187,20 @@ a.anniversary-btn:hover, a.anniversary-btn:focus  {
         width: 50%;
         margin: 0 auto;
         display: block;
-        margin-bottom: -60px;
+        margin-bottom: -40px;
+      }
+      h2 {
+        margin-bottom: 0px;
+      }
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .diagram-section {
+    .diagram-icons {
+      img {
+        margin-bottom: -50px;
       }
     }
   }
@@ -1359,6 +1372,9 @@ a.anniversary-btn:hover, a.anniversary-btn:focus  {
   background-color: #F7F7F7;
   padding-top: 51px;
   padding-bottom: 56px;
+  border-bottom: 1px solid #D8D8D8;
+  border-right: 1px solid #D8D8D8;
+  border-left: 1px solid #D8D8D8;
 
   h2 {
     text-align: center;
@@ -1390,7 +1406,7 @@ a.anniversary-btn:hover, a.anniversary-btn:focus  {
 
   .twros-row {
     display: flex;
-    border: 1px solid #D8D8D8;
+    border-top: 1px solid #D8D8D8;
 
     .twros-img{
       min-height: 245px;

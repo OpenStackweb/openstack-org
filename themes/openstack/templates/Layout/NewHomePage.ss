@@ -77,21 +77,21 @@ $CloudInfraContent
 </div>
 <div class="row diagram-icons">
 <div class="col-lg-4 col-xs-12 col-md-4 col-sm-4">
-<a href="/marketplace/remotely-managed-private-clouds/"><img src="/themes/openstack/home_images/Icons/SVG/On-Premises-Icon.svg">
-<h2>On-Premises</h2>
-<p>Host your cloud infrastructure internally or find an OpenStack partner in the Marketplace</p></a>
+<a href="/marketplace/remotely-managed-private-clouds/"><img src="/themes/openstack/home_images/Icons/SVG/On-Premises-Icon.svg"></a>
+<a href="/marketplace/remotely-managed-private-clouds/" style="text-decoration:none;"><h2>On-Premises</h2></a>
+<a href="/marketplace/remotely-managed-private-clouds/"><p>Host your cloud infrastructure internally or find an OpenStack partner in the Marketplace</p></a>
 </div>
 <div class="col-lg-4 col-xs-12 col-md-4 col-sm-4">
 <a href="/marketplace/public-clouds/">
-<img src="/themes/openstack/home_images/Icons/SVG/Public-Cloud-Icon.svg">
-<h2>Public Cloud</h2>
-<p>Leverage one of the 70+ OpenStack powered public cloud data centers</p></a>
+<img src="/themes/openstack/home_images/Icons/SVG/Public-Cloud-Icon.svg"></a>
+<a href="/marketplace/public-clouds/" style="text-decoration:none;"><h2>Public Cloud</h2></a>
+<a href="/marketplace/public-clouds/"><p>Leverage one of the 70+ OpenStack powered public cloud data centers</p></a>
 </div>
 <div class="col-lg-4 col-xs-12 col-md-4 col-sm-4">
 <a href="/edge-computing/">
-<img src="/themes/openstack/home_images/Icons/SVG/At-theEdge-Icon.svg">
-<h2>At the Edge</h2>
-<p>Telecoms and retailers rely on OpenStack for their distributed systems</p></a>
+<img src="/themes/openstack/home_images/Icons/SVG/At-theEdge-Icon.svg"></a>
+<a href="/edge-computing/" style="text-decoration:none;"><h2>At the Edge</h2></a>
+<a href="/edge-computing/"><p>Telecoms and retailers rely on OpenStack for their distributed systems</p></a>
 </div>
 </div>
 </div>
