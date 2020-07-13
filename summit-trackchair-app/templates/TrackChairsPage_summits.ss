@@ -11,14 +11,10 @@
 </head>
 
 <body id="$URLSegment">
-<% include SiteBanner %>
-<% include Navigation %>
-
 <!-- Page Content -->
 <div class="container">
-$Message
-$Layout
+  $Message
+  $Layout
 </div>
-<% include Footer %>
 </body>
 </html>

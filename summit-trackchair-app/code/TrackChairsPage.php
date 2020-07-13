@@ -53,6 +53,7 @@ class TrackChairsPage_Controller extends Page_Controller
         return $this->customise([])->renderWith(
             [
                 'TrackChairsPage_summits',
+                'TrackChairsPage_summits'
             ],
             $this
         );
