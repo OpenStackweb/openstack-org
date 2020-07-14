@@ -1163,12 +1163,14 @@ a.anniversary-btn:hover, a.anniversary-btn:focus  {
   }
 
   .diagram-icons {
-    width:80%;
+    width:100%;
     margin:auto;
     margin-top:30px;
 
     img {
       margin-bottom: -80px;
+      width: 60%;
+      margin-left: 20%;
     }
     p, h2 {
       text-align: center;
