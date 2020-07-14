@@ -26,7 +26,7 @@ OpenStack is developed by the community. For the community. <a class="intro-head
 to contribute</a> <i class="fa fa-arrow-right"></i>
 </p>
 </div>
-<div class="col-lg-3 col-lg-offset-1 col-sm-6" style="padding-left: 0px; padding-right: 0px">
+<div class="col-lg-3 col-lg col-sm-6" style="padding-left: 0px; padding-right: 0px">
 <img src="/themes/openstack/home_images/Hero/OpenStack_SFAs.svg">
 </div>
 
