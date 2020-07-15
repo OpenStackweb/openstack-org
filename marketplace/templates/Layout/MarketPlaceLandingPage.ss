@@ -119,6 +119,15 @@
 			<p>
 				<a href="/marketplace/drivers/" class="marketplace-consider-btn">Explore Providers</a>
 			</p>
+			<p>&nbsp;</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-8 col-sm-push-2 center">
+			<hr class="marketplace-hr">
+				<p><strong>What's the Marketplace Spotlight and how can I get my company's products featured?</strong></p>
+			<p>The Marketplace Spotlight on the OpenStack homepage highlights the variety of products featured here in the OpenStack Marketplace. If you would like your product(s) in the rotation, please make sure your company and product profiles are updated. Questions? Contact <a href="mailto:ecosystem@openstack.org">ecosystem@openstack.org</a>.</p>
+			<p>&nbsp;</p>
 		</div>
 	</div>
 </div>
