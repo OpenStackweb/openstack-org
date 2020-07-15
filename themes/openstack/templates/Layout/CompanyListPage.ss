@@ -55,7 +55,13 @@
 				<% end_loop %>
 			</div>
 		<% end_if %>
-
+		<div class="row">
+			<div class="col-sm-12">
+				<hr/>
+				<p><strong>What's the OSF Member Spotlight and how can I get my company featured?</strong></p>
+				<p>The OSF Member Spotlight on the OpenStack homepage highlights the OSF Gold and Platinum Members and their products and services. If you don't see your company listed, please complete your company profile and email <a href="mailto:ecosystem@openstack.org">ecosystem@openstack.org</a>.</p>
+			</div>
+		</div>
 		<!-- Infrastructure Donors -->
 		<div class="row">
 			<div class="col-sm-12">
