@@ -19,7 +19,7 @@ common services for cloud infrastructure.
 
 
 <div class="promo-btn-wrapper">
-<a href="/software" class="promo-btn">browse openstack components</a>
+<a href="/software/project-navigator/" class="promo-btn">browse openstack components</a>
 </div>
 <p>
 OpenStack is developed by the community. For the community. <a class="intro-header-link" href="/community/">Learn how
@@ -49,9 +49,9 @@ Born from open collaboration, it’s grown to power the most critical infrastruc
 </p>
 </div>
 
-<div class="anniversary-btn-wrapper">
+<!-- <div class="anniversary-btn-wrapper">
 <a href="#" class="anniversary-btn">celebrate with us</a>
-</div>
+</div> -->
 
 </div>
 
