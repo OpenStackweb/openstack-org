@@ -1471,7 +1471,7 @@ a.anniversary-btn:hover, a.anniversary-btn:focus  {
 @media (max-width: 767px) {
   .twros-section {
     .twros-row {
-      flex-direction: column-reverse;
+      flex-direction: column;
       .twros-img {
         width: 100%;
         object-fit: cover;
