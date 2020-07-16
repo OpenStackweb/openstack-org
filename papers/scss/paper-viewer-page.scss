@@ -34,6 +34,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     font-size: 30px;
 }
 
+
 .containers-page .navigation .dropdown .btn {
     border: none;
     background-color: transparent;
@@ -137,6 +138,22 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     padding: 2em 0 1em;
     border-bottom: solid 1px #666;
     margin: 0;
+    margin-bottom: 2em;
+
+    p {
+        margin-bottom: -.8em;
+    }
+}
+.containers-page .content h4 {
+    font-size: 1.6em;
+    text-align: left !important;
+}
+
+.containers-page .content h5 {
+    color: #888888;
+    margin-bottom: 0;
+    font-size: 1.3em;
+    text-align: left !important;
 }
 
 .containers-page .content .subtitle {
@@ -185,10 +202,11 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 .containers-page .content ul, .containers-page .content li {
     line-height: 2em;
+    font-size: 1.1em;
 }
 
 .containers-page .content ul ul {
-  font-size:.95em;
+  font-size: 1.1em;
 }
 
 .containers-page .content p a {
