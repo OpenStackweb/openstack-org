@@ -238,4 +238,7 @@ final class Consultant
 		AssociationFactory::getInstance()->getMany2ManyAssociation($this,'ServicesOffered')->removeAll();
 	}
 
+    public function MarketplaceLink():?string{
+        return sprintf('/marketplace/consulting/%s/%s/', $this->Company()->Name, $this->Slug);
+    }
 }

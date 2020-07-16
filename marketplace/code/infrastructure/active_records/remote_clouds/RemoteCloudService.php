@@ -84,4 +84,7 @@ class RemoteCloudService
         $this->setField('PublishedSLAs', $slas);
     }
 
+    public function MarketplaceLink():?string{
+        return sprintf('/marketplace/remotely-managed-private-clouds/%s/%s/', $this->Company()->Name, $this->Slug);
+    }
 } 

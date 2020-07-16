@@ -132,7 +132,7 @@ $CloudInfraContent
         <img src="{$Company.BigLogo.Link}" alt="company_logo" class="spotlight-marketplace-logo"/>
         <p>{$Overview}</p>
         <div class="spotlight-btn-wrapper">
-            <a href="{$Call2ActionUri}" class="spotlight-btn">learn more</a>
+            <a href="{$MarketplaceLink}" class="spotlight-btn">learn more</a>
         </div>
         <% end_with %>
         <% end_if %>
