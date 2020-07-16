@@ -36,7 +36,11 @@ class PaperSectionAdminUI extends DataExtension
 
         $f->add($rootTab = new TabSet("Root", $tabMain = new Tab('Main')));
 
+        $f->addFieldToTab('Root.Main', new TextField('MenuTitle', 'Menu Title'));
+
         $f->addFieldToTab('Root.Main', new HtmlEditorField('Title', 'Title'));
+
+        $f->addFieldToTab('Root.Main', new TextField('MenuSubtitle', 'Menu Subtitle'));
 
         $f->addFieldToTab('Root.Main', new HtmlEditorField('Subtitle', 'Subtitle'));
 

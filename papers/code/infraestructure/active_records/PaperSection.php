@@ -18,6 +18,8 @@
 class PaperSection extends DataObject
 {
     private static $db = [
+        'MenuTitle' => 'Text',
+        'MenuSubtitle' => 'Text',
         'Title' => 'HTMLText',
         'Subtitle' => 'HTMLText',
         'Order' => 'Int',
@@ -32,6 +34,21 @@ class PaperSection extends DataObject
         'Contents'    => 'PaperParagraph',
         'SubSections' => 'PaperSection',
     ];
+
+
+    public function getMenuTitle():?string{
+        $res = $this->getField('MenuTitle');
+        if(empty($res))
+            $res = $this->getField('Title');
+        return $res;
+    }
+
+    public function getMenuSubtitle():?string{
+        $res = $this->getField('MenuSubtitle');
+        if(empty($res))
+            $res = $this->getField('Subtitle');
+        return $res;
+    }
 
     public function getSlug(){
         $slug = singleton('SiteTree')->generateURLSegment($this->Title);

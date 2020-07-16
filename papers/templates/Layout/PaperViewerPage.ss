@@ -19,18 +19,18 @@
             </div>
             <div class="dropdown" role="tablist" id="chapters">
                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="true">&nbsp;$_T($Top.Paper.I18nContext,$Top.Paper.FirstSection.Title)
+                        aria-expanded="true">&nbsp;$_T($Top.Paper.I18nContext,$Top.Paper.FirstSection.MenuTitle)
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                     <% loop $Top.Paper.OrderedSections %>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" data-target="{$Slug}">$_T($Top.Paper.I18nContext, $Title)</a>
+                            <a class="nav-link" href="#" data-target="{$Slug}">$_T($Top.Paper.I18nContext, $MenuTitle)</a>
                         </li>
                         <% if $SubSections %>
                             <ul class="sub-dropdown-menu">
                                 <% loop $OrderedSubSections %>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#" data-target="{$Slug}">$_T($Top.Paper.I18nContext, $Title)</a>
+                                        <a class="nav-link" href="#" data-target="{$Slug}">$_T($Top.Paper.I18nContext, $MenuTitle)</a>
                                     </li>
                                 <% end_loop %>
                             </ul>
