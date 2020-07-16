@@ -39,9 +39,10 @@ img.center {
     display: block;
 }
 
+
 /* -- Hero Intro --------- */
 .intro-header.baremetal {
-    background: url(#{$static_images_base_url}/baremetal/baremetal-bg.jpg) no-repeat bottom center;
+    background: url("/assets/baremetal/OS-BareMetal-1314x492-02.png") no-repeat bottom center;
     background-size: cover;
     padding-bottom: 0;
 }
@@ -66,6 +67,44 @@ img.center {
     text-align: left;
     margin-bottom: 0px;
 }
+
+.download-container {
+  background-color: rgba(5, 54, 86, 0.7);
+  border-radius: 2px;
+  width: 100%;
+  margin: 80px auto 0;
+  padding: 30px; }
+
+@media (max-width: 767px) {
+  .download-container {
+    width: 80%;
+    margin: 20px auto; } }
+
+.download-text {
+  font-size: 14px;
+  font-weight: 600; }
+
+.download-btn {
+  display: block;
+  background: #b9301d;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 2px;
+  width: 90%;
+  margin: 10px auto 0;
+  color: #fff;
+  font-weight: 600; }
+
+.download-btn:hover {
+  text-decoration: none;
+  background: #831917; }
+
+.download-btn:focus {
+  outline: none;
+  text-decoration: none; }
+
+i.fa-arrow-circle-down {
+  margin-right: 5px; }
 
 /* -- Testimonial ----- */
 
