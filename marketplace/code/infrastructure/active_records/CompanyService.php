@@ -285,4 +285,8 @@ class CompanyService
         }
         return join('|', $list);
     }
+
+    public function MarketplaceLink():?string{
+        return '#';
+    }
 }

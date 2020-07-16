@@ -22,4 +22,7 @@ final class PublicCloudService
         'PublicCloudPassport' => 'PublicCloudPassport.PublicCloud'
     );
 
+    public function MarketplaceLink():?string{
+        return sprintf('/marketplace/public-clouds/%s/%s/', $this->Company()->Name, $this->Slug);
+    }
 }

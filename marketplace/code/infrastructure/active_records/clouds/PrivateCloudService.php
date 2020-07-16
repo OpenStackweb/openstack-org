@@ -15,5 +15,7 @@ final class PrivateCloudService
 	extends CloudService
 	implements IPrivateCloudService
 {
-
+    public function MarketplaceLink():?string{
+        return sprintf('/marketplace/hosted-private-clouds/%s/%s/', $this->Company()->Name, $this->Slug);
+    }
 }

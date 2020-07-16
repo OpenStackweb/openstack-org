@@ -152,6 +152,10 @@ HTML;
         return $list[$index];
     }
 
+    public function getCompanyServiceMarketplaceLink($id):?string{
+       return '#';
+    }
+
     public function getRandomOSFMember(){
         $list = $this->OSFMembers()->toArray();
         if(!count($list)) return null;

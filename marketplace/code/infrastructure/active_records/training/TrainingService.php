@@ -120,4 +120,8 @@ class TrainingService
 	{
 		AssociationFactory::getInstance()->getOne2ManyAssociation($this,'Courses')->removeAll();
 	}
+
+    public function MarketplaceLink():?string{
+        return sprintf('/marketplace/training/%s/%s/', $this->Company()->Name, $this->ID);
+    }
 }

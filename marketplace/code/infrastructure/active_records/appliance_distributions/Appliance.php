@@ -18,4 +18,7 @@ class Appliance
 	extends OpenStackImplementation
 	implements IAppliance {
 
+    public function MarketplaceLink():?string{
+        return sprintf('/marketplace/distros/appliance/%s/%s/', $this->Company()->Name, $this->Slug);
+    }
 } 
