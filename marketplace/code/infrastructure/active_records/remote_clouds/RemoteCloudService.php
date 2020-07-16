@@ -85,6 +85,6 @@ class RemoteCloudService
     }
 
     public function MarketplaceLink():?string{
-        return sprintf('/marketplace/remotely-managed-private-clouds/%s/%s/', $this->Company()->Name, $this->Slug);
+        return sprintf('/marketplace/remotely-managed-private-clouds/%s/%s', $this->Company()->URLSegment, $this->Slug);
     }
 } 

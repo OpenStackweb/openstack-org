@@ -19,6 +19,6 @@ class Appliance
 	implements IAppliance {
 
     public function MarketplaceLink():?string{
-        return sprintf('/marketplace/distros/appliance/%s/%s/', $this->Company()->Name, $this->Slug);
+        return sprintf('/marketplace/distros/appliance/%s/%s', $this->Company()->URLSegment, $this->Slug);
     }
 } 

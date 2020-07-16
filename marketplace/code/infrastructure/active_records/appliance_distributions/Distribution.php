@@ -19,6 +19,6 @@ class Distribution
 	implements IDistribution {
 
     public function MarketplaceLink():?string{
-        return sprintf('/marketplace/distros/distribution/%s/%s/', $this->Company()->Name, $this->Slug);
+        return sprintf('/marketplace/distros/distribution/%s/%s', $this->Company()->URLSegment, $this->Slug);
     }
 } 
