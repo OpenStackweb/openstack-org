@@ -23,7 +23,7 @@
                 <div class="row ">
                     <div class="col-sm-12">
                         <div class="intro-message"> 
-                            <H2>OpenStack Ironic allows users to manage bare metal infrastructure like they would virtual machines and provides ideal infrastructure to run container orchestration frameworks like Kubernetes to optimize performance. 
+                            <H2>Ironic allows users to manage bare metal infrastructure like they would virtual machines and provides ideal infrastructure to run container orchestration frameworks like Kubernetes to optimize performance. 
                             </H2>
                         </div>
                     </div>
@@ -87,13 +87,13 @@
                     <div class="col-sm-8">
                         <div class="col-sm-5">
                             <h3>Find Help and Expertise</h3>
-                            <p>Visit the OpenStack Marketplace and find a partner who supports OpenStack Ironic</p>
+                            <p>Visit the OpenStack Marketplace and find a partner who supports Ironic</p>
                             <a class="red-button" href="https://www.openstack.org/marketplace" target="_blank">Visit the Marketplace <i class="icon-arrow-right"></i></a>
                         </div>
                         <div class="col-sm-2"></div>
                         <div class="col-sm-5">
                             <h3>How Ironic Works</h3>
-                            <p>Learn more about Ironic, including how it controls hardware and writes an operating system image to bare metal</p>
+                            <p>Ironic controls hardware and writes an operating system image to bare metal</p>
                             <a class="red-button" href="https://github.com/metal3-io/metal3-docs/blob/master/design/how-ironic-works.md" target="_blank">Read on Github <i class="icon-arrow-right"></i></a>
                         </div>
                     </div>
@@ -112,7 +112,7 @@
                     <div class="col-sm-6">
                         <img class="center" src="{$Top.CloudUrl("images/baremetal/ironic-baremetal-logo-program.png")}">
                         <h2>OpenStack Bare Metal in Production</h2>
-                        <p>There is a large ecosystem of commercial providers and users running OpenStack Ironic in production. Find commercial providers who can help you get started with the Ironic Bare Metal icon in the OpenStack Marketplace.</p>
+                        <p>There is a large ecosystem of commercial providers and users running Ironic in production. Find commercial providers who can help you get started with the Ironic Bare Metal icon in the OpenStack Marketplace.</p>
                     </div>
                     <div class="col-sm-3"></div>
                 </div>
@@ -253,10 +253,10 @@
                                     <div class="play-button">
                                         <img src="{$Top.CloudUrl("images/baremetal/play-button.png")}">
                                     </div>
-                                    <img class="video-image" src="{$Top.CloudUrl("images/baremetal/video-thumbnail-1.jpg")}" alt="OpenStack Ironic: Enabling Bare Metal as a Service">
+                                    <img class="video-image" src="{$Top.CloudUrl("images/baremetal/video-thumbnail-1.jpg")}" alt="Ironic: Enabling Bare Metal as a Service">
                                 </div>
                             </a>
-                            <h4 class="video-caption">OpenStack Ironic: Enabling Bare Metal as a Service</h4>
+                            <h4 class="video-caption">Ironic: Enabling Bare Metal as a Service</h4>
                         </div>
                         <div class="col-md-4 col-sm-6 video-wall-item">
                             <a href="https://www.youtube.com/watch?v=d3qzHwhqd9o" target="_blank">
@@ -272,10 +272,10 @@
                         <div class="col-md-4 col-sm-6 video-wall-item">
                             <a href="https://superuser.openstack.org/articles/ironic-bare-metal-case-study-cern/" target="_blank">
                                 <div class="video-wrapper">
-                                    <img class="video-image" src="{$Top.CloudUrl("assets/baremetal/cern2.jpg")}" alt="Managing 2,000 nodes with 10,000 servers using OpenStack Ironic">
+                                    <img class="video-image" src="{$Top.CloudUrl("assets/baremetal/cern2.jpg")}" alt="Managing 2,000 nodes with 10,000 servers using Ironic">
                                 </div>
                             </a>
-                            <h4 class="video-caption">Managing 2,000 nodes with 10,000 servers using OpenStack Ironic at CERN</h4> 
+                            <h4 class="video-caption">Managing 2,000 nodes with 10,000 servers using Ironic at CERN</h4> 
                          </div>
                 <!-- Video Row 2-->
                     <div class="row video-wall-row ">
@@ -309,10 +309,6 @@
                             </a>
                             <h4 class="video-caption">Running Kubernetes on OpenStack and Bare Metal</h4> 
                          </div>
-
-
-
-                   
                 </div>
             </div> <!-- .container -->
         </section>        
@@ -321,14 +317,11 @@
     <section class="baremetal-blue get-involved">
         <div class="container">
             <div class="row info-block">
-                <div class="col-sm-2"></div>
-                <div class="col-sm-8">
-                    <div class="col-sm-12">
-                        <h3>Get Involved</h3>
-                        <p>The community also formed a Bare Metal Special Interest Group (SIG) in February 2019 with the mission to make Ironic easy to operate and evangelize the use cases and utility of the bare metal service. To get involved in the SIG, subscribe to the OpenStack Discuss mailing list or contact <a href="mailto:danny@openstack.org">danny@openstack.org</a></p>
-                    </div>
+                <div class="col-sm-10 col-sm-offset-1">
+                    <h3>Get Involved</h3>
+                    <p>The OpenStack community formed a Bare Metal Special Interest Group (SIG) with the mission to make Ironic easy to operate and evangelize the use cases and utility of the bare metal service. To get involved in the SIG, subscribe to the <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/openstack-discuss" target="_blank">OpenStack Discuss mailing list</a> or contact <a href="mailto:ecosystem@openstack.org">ecosystem@openstack.org</a></p>
+                    <p>&nbsp;</p>
                 </div>
-                <div class="col-sm-2"></div>
             </div>
         </div> <!-- .container -->
     </section>

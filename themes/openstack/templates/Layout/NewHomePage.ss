@@ -50,7 +50,7 @@ Born from open collaboration, it’s grown to power the most critical infrastruc
 </div>
 
 <!-- <div class="anniversary-btn-wrapper">
-<a href="#" class="anniversary-btn">celebrate with us</a>
+<a href="https://www.openstack.org/blog/thank-you-to-the-last-decade-hello-to-the-next" class="anniversary-btn">celebrate with us</a>
 </div> -->
 
 </div>
