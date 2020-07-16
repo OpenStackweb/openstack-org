@@ -239,6 +239,6 @@ final class Consultant
 	}
 
     public function MarketplaceLink():?string{
-        return sprintf('/marketplace/consulting/%s/%s/', $this->Company()->Name, $this->Slug);
+        return sprintf('/marketplace/consulting/%s/%s', $this->Company()->URLSegment, $this->Slug);
     }
 }

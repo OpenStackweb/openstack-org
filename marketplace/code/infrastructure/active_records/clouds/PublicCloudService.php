@@ -23,6 +23,6 @@ final class PublicCloudService
     );
 
     public function MarketplaceLink():?string{
-        return sprintf('/marketplace/public-clouds/%s/%s/', $this->Company()->Name, $this->Slug);
+        return sprintf('/marketplace/public-clouds/%s/%s', $this->Company()->URLSegment, $this->Slug);
     }
 }

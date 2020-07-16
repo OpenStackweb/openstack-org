@@ -122,6 +122,6 @@ class TrainingService
 	}
 
     public function MarketplaceLink():?string{
-        return sprintf('/marketplace/training/%s/%s/', $this->Company()->Name, $this->ID);
+        return sprintf('/marketplace/training/%s/%s', $this->Company()->URLSegment, $this->ID);
     }
 }
