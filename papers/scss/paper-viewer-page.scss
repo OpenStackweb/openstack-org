@@ -147,6 +147,11 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .containers-page .content h4 {
     font-size: 1.6em;
     text-align: left !important;
+
+    p {
+        margin-bottom: -.6em;
+        font-size: inherit;
+    }
 }
 
 .containers-page .content h5 {
