@@ -36,9 +36,9 @@ class PaperSectionAdminUI extends DataExtension
 
         $f->add($rootTab = new TabSet("Root", $tabMain = new Tab('Main')));
 
-        $f->addFieldToTab('Root.Main', new TextField('Title', 'Title'));
+        $f->addFieldToTab('Root.Main', new HtmlEditorField('Title', 'Title'));
 
-        $f->addFieldToTab('Root.Main', new TextField('Subtitle', 'Subtitle'));
+        $f->addFieldToTab('Root.Main', new HtmlEditorField('Subtitle', 'Subtitle'));
 
         if ($this->owner->ID > 0) {
             // contents

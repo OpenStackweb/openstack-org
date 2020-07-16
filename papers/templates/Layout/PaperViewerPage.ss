@@ -26,15 +26,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#" data-target="{$Slug}">$_T($Top.Paper.I18nContext, $Title)</a>
                         </li>
-                        <% if $SubSections %>
-                            <ul class="sub-dropdown-menu">
-                                <% loop $OrderedSubSections %>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#" data-target="{$Slug}">$_T($Top.Paper.I18nContext, $Title)</a>
-                                    </li>
-                                <% end_loop %>
-                            </ul>
-                        <% end_if %>
                     <% end_loop %>
                     <% if $Top.Paper.getTranslatorsByCurrentLocale %>
                     <li class="nav-item">

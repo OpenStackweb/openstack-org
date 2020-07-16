@@ -18,8 +18,8 @@
 class PaperSection extends DataObject
 {
     private static $db = [
-        'Title' => 'Text',
-        'Subtitle' => 'Text',
+        'Title' => 'HTMLText',
+        'Subtitle' => 'HTMLText',
         'Order' => 'Int',
     ];
 

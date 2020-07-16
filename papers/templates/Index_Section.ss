@@ -1,4 +1,4 @@
-<div class="row section" id="{$Slug}">
+<div class="row section index" id="{$Slug}">
     <div class="col-lg-12">
         <h3 class="text-center title">{$_T($Paper.I18nContext, $Title, 1)}</h3>
         <% if $Contents %>
