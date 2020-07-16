@@ -50,7 +50,7 @@ class PaperViewerPage extends Page
         return $output;
     }
 
-    public function renderSection($section)
+    public function renderSection($section, int $level = 3)
     {
         $output = '';
 
@@ -58,18 +58,19 @@ class PaperViewerPage extends Page
             return $section->renderWith('CasesOfStudy_Section');
         else if ($section instanceof IndexSection)
             $output = $section->renderWith('Index_Section');
-        else
-            $output = $section->renderWith('Regular_Section');
+        else {
+            $output = $section->renderWith('Regular_Section', ['Level' => $level, 'SubLevel' => $level + 1]);
+        }
 
         foreach ($section->getOrderedSubSections() as $subSection) {
-            $output .= $this->renderSection($subSection);
+            $output .= $this->renderSection($subSection, $level + 1);
         }
 
         return $output;
     }
 
 
-    public function renderSectionPDF($section)
+    public function renderSectionPDF($section, int $level = 3)
     {
         $output = '';
 
@@ -78,10 +79,10 @@ class PaperViewerPage extends Page
         else if ($section instanceof IndexSection)
             $output = $section->renderWith('Index_Section_PDF');
         else
-            $output = $section->renderWith('Regular_Section_PDF');
+            $output = $section->renderWith('Regular_Section_PDF', ['Level' => $level, 'SubLevel' => $level + 1]);
 
         foreach ($section->getOrderedSubSections() as $subSection) {
-            $output .= $this->renderSection($subSection);
+            $output .= $this->renderSection($subSection, $level + 1);
         }
 
         return $output;
