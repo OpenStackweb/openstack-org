@@ -6,12 +6,23 @@
     <div class="intro-header baremetal">
         <div class="container">
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-lg-6 col-sm-6">
                     <div class="hero-message"> 
                         <h1>OpenStack Bare Metal</h1>
                         <p>Provisioning and automating bare metal machines for containers and high performance computing.</p>
                     </div>
                 </div>
+                <!-- <div class="col-lg-4 col-sm-4 col-sm-offset-2">
+                    <div class="download-container">
+                        <div class="download-text">
+                            Just in: The latest white paper from the OpenStack Bare Metal SIG
+                        </div>
+                        <a class="download-btn" type="button" href="/bare-metal/white-paper">
+                             Read It Now&nbsp;<i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+                -->
             </div>
         </div> 
     </div><!-- /.intro-header -->
