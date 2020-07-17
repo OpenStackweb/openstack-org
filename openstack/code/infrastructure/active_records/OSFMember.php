@@ -26,6 +26,14 @@ class OSFMember extends DataObject
         'Image' => 'CloudImage',
     ];
 
+    public function getParagraph2(){
+        $res = $this->getField("Paragraph2");
+        if(!empty($res)){
+            $res = preg_replace('/<p[^>]*>(.*)<\/p[^>]*>/i', '$1', $res);
+        }
+        return $res;
+    }
+
 
     private static $summary_fields = array(
         'Company.Name' => 'Company',

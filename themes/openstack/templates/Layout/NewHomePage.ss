@@ -123,21 +123,21 @@ $CloudInfraContent
 <div class="section-spotlight">
 <div class="container">
 <div class="row">
-    <div class="col-lg-6 col-sm-12 col-xs-12">
+    <div class="col-lg-6 col-sm-12 col-xs-12 marketplace">
         <h2>Marketplace Spotlight</h2>
         <p>The OpenStack Marketplace is filled with experts working across industries, use cases, and regions to help
         your organization achieve your goals.</p>
         <% if $RandomCompanyService %>
         <% with $RandomCompanyService %>
         <img src="{$Company.BigLogo.Link}" alt="company_logo" class="spotlight-marketplace-logo"/>
-        <p>{$Overview}</p>
+        <p class="clamp1 clamp">{$Overview}</p>
         <div class="spotlight-btn-wrapper">
             <a href="{$MarketplaceLink}" class="spotlight-btn">learn more</a>
         </div>
         <% end_with %>
         <% end_if %>
     </div>
-    <div class="col-lg-6 col-sm-12 col-xs-12">
+    <div class="col-lg-6 col-sm-12 col-xs-12 osf-member">
       <h2>OSF Member Spotlight</h2>
       <% if $RandomOSFMember %>
       <% with $RandomOSFMember %>
@@ -147,7 +147,9 @@ $CloudInfraContent
       <% else %>
       <img src="{$Company.BigLogo.Link}" alt="company_logo">
       <% end_if %>
-      $Paragraph2
+      <p class="clamp2 clamp">
+        {$Paragraph2}
+      </p>
       <div class="spotlight-btn-wrapper">
           <a href="{$Link}" class="spotlight-btn">learn more</a>
       </div>
@@ -208,3 +210,5 @@ $CloudInfraContent
 </div>
 
 <!-- /.osf-section -->
+
+<script src="themes/openstack/javascript/clamp.min.js"></script>
