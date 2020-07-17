@@ -12,7 +12,7 @@
                         <p>Provisioning and automating bare metal machines for containers and high performance computing.</p>
                     </div>
                 </div>
-                <!-- <div class="col-lg-4 col-sm-4 col-sm-offset-2">
+                <div class="col-lg-4 col-sm-4 col-sm-offset-2">
                     <div class="download-container">
                         <div class="download-text">
                             Just in: The latest white paper from the OpenStack Bare Metal SIG
@@ -22,7 +22,6 @@
                         </a>
                     </div>
                 </div>
-                -->
             </div>
         </div> 
     </div><!-- /.intro-header -->
