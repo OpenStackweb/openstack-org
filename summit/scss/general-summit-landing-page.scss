@@ -1613,7 +1613,9 @@ ul.navbar-main {
     background-image: none;
 }
 
-.all-summit .about-summit-header.white .container .session-box {}
+.all-summit .about-summit-header.white .container .session-box {
+  padding-bottom:30px;
+}
 
 .all-summit .about-summit-header.white .container h3 {
     margin: 2em 0 1.5em 0;
@@ -1725,7 +1727,7 @@ ul.navbar-main {
 }
 
 .all-summit .summits-wrap .video-container.last .video {
-    background: url(https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/Uploads/Hero-1280x260.png) right top no-repeat;
+    background: url(https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/summits/Summit-Image-2160x1080-1.jpg) right top no-repeat;
 }
 
 .all-summit .summits-wrap .timeline h3 {
