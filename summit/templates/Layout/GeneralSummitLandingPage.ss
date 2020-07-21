@@ -47,7 +47,7 @@
                         </div>
                     </div>
                     <h4>Open Infrastructure Summit</h4>
-                    <p><strong>Berlin, Germany</strong></p>
+                    <p><strong>Virtual Event</strong></p>
                     <p>Oct 19-23, 2020</p>
                     <p>
                         <a href="/summit/berlin-2020" target="_blank" class="btn register-btn-lrg red eventbrite-register-link">
