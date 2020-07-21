@@ -172,7 +172,8 @@ class SoftwareHomePage_Controller extends Page_Controller
             (
                 'CategoryId'    => $category->ID,
                 'CategorySlug'  => $categorySlug,
-                'CategoryDepth' => $category->getDepth()
+                'CategoryDepth' => $category->getDepth(),
+                'ShowSubnav'    => !$category->HideSubnav
             )
         );
     }

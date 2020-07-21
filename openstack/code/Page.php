@@ -327,11 +327,13 @@ class Page_Controller extends ContentController
         JQueryCoreDependencies::renderRequirements();
         BootstrapDependencies::renderRequirements();
 
+        $css_files = static::getCssIncludes();
+
         if (Director::get_current_page()->IncludeShadowBox) {
             array_push($css_files, "themes/openstack/javascript/shadowbox/shadowbox.css");
         }
 
-        foreach(static::getCssIncludes() as $css_file)
+        foreach($css_files as $css_file)
             Requirements::css($css_file);
 
         $js_files =  [
