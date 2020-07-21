@@ -23,7 +23,7 @@
                 <div class="col-md-12 join-us-text-register">
                     <a class="btn register-btn-lrg red eventbrite-register-link" href="https://openinfrasummit2020.eventbrite.com?aff=landing2020">
                             JOIN US <i class="fa fa-arrow-right"></i>
-                        </a>&nbsp;&nbsp;<a class="btn register-btn-lrg red eventbrite-register-link" href="https://cfp.openstack.org">
+                        </a>&nbsp;&nbsp;<a class="btn register-btn-lrg red" href="https://cfp.openstack.org">
                             CALL FOR PRESENTATIONS <i class="fa fa-arrow-right"></i>
                         </a>
                 </div>
