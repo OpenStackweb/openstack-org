@@ -25,7 +25,8 @@ class OpenStackComponentCategory extends DataObject implements IOpenStackCompone
         'Description'       => 'Text',
         'Slug'              => 'Varchar(255)',
         'Order'             => 'Int',
-        'Enabled'           => 'Boolean(1)'
+        'Enabled'           => 'Boolean(1)',
+        'HideSubnav'        => 'Boolean'
     );
 
     static $has_many = array

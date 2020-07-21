@@ -52,16 +52,16 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
         $this->tx_manager->transaction(function(){
             $releases = OpenStackRelease::get()->where(" Name <> 'Trunk' ")->sort('ReleaseDate', 'DESC');
             DB::query('DELETE FROM OpenStackComponentReleaseCaveat;');
-            $this->processProjects();
+            //$this->processProjects();
             $this->processComponentsAndCategories();
-            $this->processCapabilityList();
+            //$this->processCapabilityList();
 
-            foreach($releases as $release)
+            /*foreach($releases as $release)
             {
                 echo sprintf('processing release %s ...', $release->Name).PHP_EOL;
                 $this->processApiVersionsPerRelease($release);
                 $this->processProjectPerRelease($release);
-            }
+            }*/
         });
         $delta = time() - $start;
         echo sprintf('task took %s seconds to run.',$delta).PHP_EOL;
@@ -292,6 +292,7 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
 
                 // create parent category per file
                 $categoryName = $categoryYaml['name'];
+
                 $category = OpenStackComponentCategory::get()->filter('Name', $categoryName)->first();
                 if (!$category) {
                     $category = new OpenStackComponentCategory();
@@ -299,6 +300,8 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                 }
 
                 $category->Enabled = 1;
+                $category->HideSubnav = array_key_exists('hide-subtabs', $categoryYaml) && !!$categoryYaml['hide-subtabs'];
+
                 $category->write();
                 $subCatOrder = 1;
 

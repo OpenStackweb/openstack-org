@@ -11,10 +11,11 @@
 <% include SoftwareHomePage_MainNavMenu Active=$CategoryId %>
 
 <div class="software-main-wrapper">
-
     <!-- Begin Page Content -->
     <% if $CategoryDepth > 2 %>
-        <openstack-category-nav groups="{ components.subcategories }"></openstack-category-nav>
+        <% if $ShowSubnav == 1 %>
+            <openstack-category-nav groups="{ components.subcategories }"></openstack-category-nav>
+        <% end_if %>
 
         <div class="container inner-software">
             <project-services-with-nav base_url="{$Top.Link}" groups="{ components.subcategories }" release_id="{ releaseId }" ></project-services-with-nav>
