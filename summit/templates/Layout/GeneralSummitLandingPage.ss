@@ -167,7 +167,7 @@
                     strategy, technologies and vendors. Open source infrastructure is flexible, innovative and
                     interoperable. And it’s made up of many different technologies and providers around the world. The
                     Open Infrastructure Summit brings together thousands of people to learn and collaborate. </p>
-                <h5>Join Us</h5>
+                <a href="/summit/2020/"><h5>Join Us</h5></a>
                 <ul class="attends">
                     <li><span class="architecture"></span>Architecture & Ops</li>
                     <li><span class="platform"></span>Platform Developers</li>
@@ -379,15 +379,8 @@
                 <p>
                     We are a diverse community of professionals, and the OpenStack Foundation is dedicated to
                     providing an inclusive and safe Summit experience for everyone.
-                    View the <a href="{$CurrentSummit.Link}code-of-conduct/" target="_blank">Summit Code of Conduct</a>
+                    View the <a href="{$CurrentSummit.Link}/code-of-conduct/" target="_blank">Summit Code of Conduct</a>
                     for more information.
-                </p>
-                <p>
-                    Want to support community members who don’t have the resources to attend the Summit?
-                    <a href="https://www.eventbrite.com/e/open-infrastructure-summit-project-teams-gathering-tickets-{$CurrentSummit.ExternalEventId}"
-                        target="_blank">
-                        Donate to the travel support program.
-                    </a>
                 </p>
             </div>
         </div>
@@ -409,13 +402,13 @@
                     more.
                 </p>
                 <p style="text-align: center;">
-                    <a class="btn register-btn-lrg" href="{$CurrentSummit.Link}sponsors/">Sponsor the Summit <i class="fa fa-arrow-right"></i></a>
+                    <a class="btn register-btn-lrg" href="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/summits/Virtual-Summit-Sponsorship-One-Pager-final.pdf" target="_blank">View the Prospectus <i class="fa fa-arrow-right"></i></a>
                 </p>
             </div>
         </div>
     </div>
 </div>
-
+<!-- 
 <div class="summit-insights">
     <div class="container">
         <div class="row row-eq-height">
@@ -511,8 +504,8 @@
             <div class="col-lg-4 col-md-4 col-sm-12">
                 <div class="box light item  spec">
                     <h4>How are Summit sessions selected?</h4>
-                    <p>What’s new and time-tested tips for the July 17 deadline</p>
-                    <a class="btn" href="{$CurrentSummit.Link}call-for-presentations">
+                    <p>What’s new and time-tested tips for the August 5th deadline</p>
+                    <a class="btn" href="https://cfp.openstack.org/">
                         Learn More <i class="fa fa-arrow-right"></i>
                     </a>
                 </div>
@@ -538,8 +531,8 @@
         </div>
     </div>
 </div>
-
-
+-->
+<!-- 
 <div class="summit-register">
     <div class="container">
         <div class="row">
@@ -556,4 +549,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
