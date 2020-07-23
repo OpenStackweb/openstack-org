@@ -46,7 +46,7 @@
                 <div class="card software-card">
                     <div class="software-card-body card-body">
                         <h5 class="software-card-title card-title has-icon"><img class="card-header-icon" width="100%" src="/software/images/icons/openstack-logo.svg" onerror="this.onerror=null; this.src=/software/images/icons/openstack-logo.png" alt="Openstack white logo icon"> OpenStack Components</h5>
-                <p class="software-card-text card-text">Core OpenStack Components including OpenStack Services, Operations Services, Add-Ons to Services and Bridges for Adjacent Tech.</p>
+                <p class="software-card-text card-text">Core OpenStack Components including OpenStack services, Operations tooling,  Add-Ons to Services and Integration enablers.</p>
                 <p><a href="https://www.openstack.org/software/project-navigator/openstack-components/" class="software-card-link card-link">View these projects <i class="fa fa-chevron-right"></i></a></p>
                     </div>
                 </div>
@@ -54,8 +54,8 @@
             <div class="col-sm-4">
                  <div class="card software-card">
                     <div class="software-card-body card-body">
-                        <h5 class="software-card-title card-title"><img class="card-header-icon" width="100%" src="/software/images/icons/sdk-icon.svg" onerror="this.onerror=null; this.src=/software/images/icons/sdk-icon.png" alt="SDK icon"> SDKs</h5>
-                        <p class="software-card-text card-text">SDKs (software development kits) that extend Openstack through user centric services.<br>&nbsp; </p>
+                        <h5 class="software-card-title card-title"><img class="card-header-icon" width="100%" src="/software/images/icons/sdk-icon.svg" onerror="this.onerror=null; this.src=/software/images/icons/sdk-icon.png" alt="SDK icon"> Client Tools</h5>
+                        <p class="software-card-text card-text">Client-side tools and libraries for interacting with OpenStack APIs.<br>&nbsp; </p>
                         <p><a href="https://www.openstack.org/software/project-navigator/sdks/" class="software-card-link card-link">View these projects <i class="fa fa-chevron-right"></i></a></p>
                     </div>
                 </div>
