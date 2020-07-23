@@ -22,8 +22,8 @@
             <div class="row">
                 <div class="col-md-12 join-us-text-register">
                     <a class="btn register-btn-lrg red eventbrite-register-link" href="https://openinfrasummit2020.eventbrite.com?aff=landing2020">
-                            JOIN US <i class="fa fa-arrow-right"></i>
-                        </a>&nbsp;&nbsp;<a class="btn register-btn-lrg red" href="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/Virtual-Summit-Sponsorship-One-Pager-final.pdf" target="_blank">
+                            REGISTER NOW <i class="fa fa-arrow-right"></i>
+                        </a>&nbsp;&nbsp;<a class="btn register-btn-lrg red" href="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/summits/Virtual-Summit-Sponsorship-One-Pager-final.pdf" target="_blank">
                             SPONSOR PROSPECTUS* <i class="fa fa-arrow-right"></i>
                         </a>&nbsp;&nbsp;<a class="btn register-btn-lrg red" href="https://cfp.openstack.org">
                             CFP <i class="fa fa-arrow-right"></i>
