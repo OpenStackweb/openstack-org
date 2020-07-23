@@ -36,7 +36,7 @@
     </div>
 </div>
 <div class="row future-text-wrapper white">
-    <div class="col-md-8 col-md-offset-2 join-us-text-black"><p>The Open Infrastructure Summit is going virtual!  <a href="https://openinfrasummitberlin.eventbrite.com?aff=berlin2020">Register today</a> to join the people building and operating open infrastructure, with hundreds of sessions and workshops on Container Infrastructure, CI/CD, Telecom + NFV, Public Cloud, Private &amp; Hybrid Cloud, Security and members of open source communities like Airship, Ansible, Ceph, Docker, Kata Containers, Kubernetes, ONAP, OpenStack, Open vSwitch, OPNFV, StarlingX, Zuul and more.</p>
+    <div class="col-md-8 col-md-offset-2 join-us-text-black"><p>The Open Infrastructure Summit is going virtual!  <a href="https://openinfrasummit2020.eventbrite.com?aff=landing2020">Register today</a> to join the people building and operating open infrastructure, with hundreds of sessions and workshops on Container Infrastructure, CI/CD, Telecom + NFV, Public Cloud, Private &amp; Hybrid Cloud, Security and members of open source communities like Airship, Ansible, Ceph, Docker, Kata Containers, Kubernetes, ONAP, OpenStack, Open vSwitch, OPNFV, StarlingX, Zuul and more.</p>
     <p><br/><br/></p>
     <p><img class="tokyo-landing-logos" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/summits/Vancouver2020/project-logos.png" onerror="this.onerror=null; this.src=https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/summits/Vancouver2020/project-logos.png" alt="OpenStack Infrastructure Summit"></p>
     </div>

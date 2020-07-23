@@ -30,14 +30,14 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
-                        <div class="button-wrapper">
+                        <!-- <div class="button-wrapper">
                             <% include EventbriteRegisterLink Summit=$CurrentSummit(),Position='f',RegisterLabel='REGISTER FOR THE SUMMIT' %>
 
                             <div class="links">
                                 $CurrentSummitPageController().getSummitPageText(FooterLinksLeft)
                             </div>
 
-                        </div>
+                        </div> -->
                     </div>
                     <div class="col-md-6 col-sm-12 openstack">
                         <div class="logo">
