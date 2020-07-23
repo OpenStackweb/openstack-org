@@ -21,11 +21,11 @@
             </div>
             <div class="row">
                 <div class="col-md-12 join-us-text-register">
-                    <a class="btn register-btn-lrg red eventbrite-register-link" href="https://openinfrasummit2020.eventbrite.com?aff=landing2020">
+                    <a class="btn register-btn-lrg red eventbrite-register-link" href="https://openinfrasummit2020.eventbrite.com?aff=landing2020" style="margin-bottom:10px;">
                             REGISTER NOW <i class="fa fa-arrow-right"></i>
-                        </a>&nbsp;&nbsp;<a class="btn register-btn-lrg red" href="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/summits/Virtual-Summit-Sponsorship-One-Pager-final.pdf" target="_blank">
+                        </a>&nbsp;&nbsp;<a class="btn register-btn-lrg red" href="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/summits/Virtual-Summit-Sponsorship-One-Pager-final.pdf" target="_blank" style="margin-bottom:10px;>
                             SPONSOR PROSPECTUS* <i class="fa fa-arrow-right"></i>
-                        </a>&nbsp;&nbsp;<a class="btn register-btn-lrg red" href="https://cfp.openstack.org">
+                        </a>&nbsp;&nbsp;<a class="btn register-btn-lrg red" href="https://cfp.openstack.org" style="margin-bottom:10px;>
                             CFP <i class="fa fa-arrow-right"></i>
                         </a><br/><br/><br/>
                         <p>* Executable Sponsorship Contract will be available starting at 10:30am CT on Tuesday, July 28.</p>
