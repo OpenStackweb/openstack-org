@@ -40,16 +40,24 @@
         <p><a name="About"></a>The Open Infrastructure Summit is going virtual!  <a href="https://openinfrasummit2020.eventbrite.com?aff=landing2020">Register today</a> to join the people building and operating open infrastructure, with hundreds of sessions and workshops on Container Infrastructure, CI/CD, Telecom + NFV, Public Cloud, Private &amp; Hybrid Cloud, Security and members of open source communities like Airship, Ansible, Ceph, Docker, Kata Containers, Kubernetes, ONAP, OpenStack, Open vSwitch, OPNFV, StarlingX, Zuul and more.</p>
         <p>&nbsp;</p>
         <p><hr/><p>
+        <p>&nbsp;</p>
         <h3 class="future-header">Call for Presentations</h3>
         <p>Would you like to present at the Open Infrastructure Summit?<a name="CFP"></a></p>
         <p><a href="https://cfp.openstack.org">Submit a proposal</a></p>
         <p>&nbsp;</p>
         <p><hr/></p>
+        <p>&nbsp;</p>
         <h3 class="future-header">Sponsorship Opportunities</h3>
         <p>Interested in sponsoring the summit?<a name="Sponsor"></a></p>
         <p>1. <a href="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/summits/Virtual-Summit-Sponsorship-One-Pager-final.pdf" target="_blank">Download the Prospectus</a></p>
         <p>2. <a href="https://openstack.na1.echosign.com/public/esignWidget?wid=CBFCIBAA3AAABLblqZhDh53oVYqMPudorYaywDlwyEnhPEo57rDjieE_XpCDXXuwgD-3MeQC5JKrTDu4cl7I*" target="_blank">Sign the Master Agreement</a> (new sponsors only)</p>
         <p>3. Coming soon! Executable Sponsorship Contract will be available starting at 10:30am CT on Tuesday, July 28.</p>
+        <p>&nbsp;</p>
+        <p><hr/></p>
+        <p>&nbsp;</p>
+        <h3 class="future-header">Need help?</h3>
+        <p>Have a question? <a name="mailto:summit@openstack.org">Email us</a>.</p>
+        <p>&nbsp;</p>
         <p><br/><br/></p>
         <p><img class="tokyo-landing-logos" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/summits/Vancouver2020/project-logos.png" onerror="this.onerror=null; this.src=https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/summits/Vancouver2020/project-logos.png" alt="OpenStack Infrastructure Summit"></p>
     </div>
