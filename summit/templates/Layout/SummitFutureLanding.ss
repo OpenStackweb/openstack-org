@@ -5,7 +5,7 @@
         <div class="landingintro">
             <div class="row">
                 <div class="col-md-12">
-                    <a href="summit/2020#About" class="future-nav">ABOUT</a><span class="future-divider">|</span><a href="summit/2020#CFP">CFP</a><span class="future-divider">|</span><a href="summit/2020#Sponsor">SPONSORSHIP OPPORTUNITIES</a>
+                    <a href="summit/2020#About" class="future-nav">ABOUT</a><span class="future-divider">|</span><a href="summit/2020#CFP" class="future-nav">CFP</a><span class="future-divider">|</span><a href="summit/2020#Sponsor" class="future-nav">SPONSORSHIP OPPORTUNITIES</a>
                 </div>
             </div>
     	    <div class="row">
