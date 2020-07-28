@@ -2,7 +2,7 @@
     <div class="col-lg-3 col-md-5 col-sm-6">
         <div class="logo-area">
             <span style="background-color: #{$Company.CompanyColor}" class="color-bar"></span>
-            <a href="<% with $MarketPlace  %><% if Name == "Appliance"  %>$ApplianceLink<% end_if %><% if Name == "Distribution"  %>$DistroLink<% end_if %><% end_with %>/{$Company.URLSegment}/{$Slug}">
+            <a href="<% with $MarketPlace  %><% if Name == "Appliance"  %>$Top.ApplianceLink<% end_if %><% if Name == "Distribution"  %>$Top.DistroLink<% end_if %><% end_with %>/{$Company.URLSegment}/{$Slug}">
                 <img alt='{$Company.Name}_small_logo' src='{$Company.Logo().getURL()}' class='small-logo-company company-logo'/>
             </a>
         </div>
