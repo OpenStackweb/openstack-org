@@ -55,7 +55,7 @@
         <p>&nbsp;</p>
         <p><hr/></p>
         <p>&nbsp;</p>
-        <h3 class="future-header">Need help?</h3>
+        <h3 class="future-header">Contact</h3>
         <p>Have a question? <a href="mailto:summit@openstack.org">Email us</a>.</p>
         <p>&nbsp;</p>
         <p><br/><br/></p>
