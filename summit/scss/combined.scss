@@ -186,6 +186,12 @@ a.register-btn-lrg.soon:hover, .register-btn-lrg.soon:hover {
   color: white;
 }
 
+@media (max-width: 767px) {
+  .future-divider {
+    padding: 10px;
+  }
+}
+
 .future-nav {
   text-decoration: none !important;
   color: white !important;
