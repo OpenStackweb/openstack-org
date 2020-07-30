@@ -25,13 +25,13 @@
                     <h4>Hardware Automation</h4><br/>
                     <p>July 20 - 22, 2020</p>
                     <p>
-                        <a href="https://opendev_hardwareautomation.eventbrite.com" target="_blank" class="btn register-btn-lrg " target="_blank">
-                            Register Now!
+                        <a href="https://www.youtube.com/playlist?list=PLKqaoAnDyfgovDN0fasHWrvYHUILUyQ04" target="_blank" class="btn register-btn-lrg " target="_blank">
+                            Watch the Videos
                             <i class="fa fa-arrow-right"></i>
                         </a>
                     <br/>
                     <br/>
-                    <a href="/events/opendev-2020/opendev-schedule-2">View the Schedule</a>
+                    <a href="https://superuser.openstack.org/articles/opendev-hardware-automation-recap-and-next-steps/">Event Recap</a>
                     </p>
                 </div>
             </div>
