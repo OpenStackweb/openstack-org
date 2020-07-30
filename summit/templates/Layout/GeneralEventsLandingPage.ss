@@ -17,7 +17,7 @@
                         <a href="https://superuser.openstack.org/articles/takeaways-and-next-steps-from-opendev-large-scale-usage-of-open-infrastructure/">Event Recap</a>
                     </p>
                 </div>
-            </div>
+            </div> 
             <div class="video-container second col-md-4 col-sm-12 col-xs-12">
                 <div class="item">
                     <div class="video">
