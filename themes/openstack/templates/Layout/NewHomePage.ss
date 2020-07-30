@@ -212,3 +212,4 @@ $CloudInfraContent
 <!-- /.osf-section -->
 
 <script src="themes/openstack/javascript/clamp.min.js"></script>
+<script src="themes/openstack/javascript/new-home-page.js"></script>
