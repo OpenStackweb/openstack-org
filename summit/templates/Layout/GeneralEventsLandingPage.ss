@@ -40,7 +40,7 @@
                     <div class="video">
                     </div>
                     <h4>Containers in Production</h4><br/>
-                    <p>August 10 - 12, 2020</p>
+                    <p>August 10 - 11, 2020</p>
                     <p>
                         <a href="https://opendev_containersinproduction.eventbrite.com" target="_blank" class="btn register-btn-lrg " target="_blank">
                             Register Now!
@@ -119,15 +119,13 @@
             </div>
             <div class="text-container col-md-6 col-sm-12 col-md-pull-6">
                 <h4 class="title-section">Event #3: Containers in Production topics</h4>
-                <h5>August 10 - 12, 2020</h5>
+                <h5>August 10 - 11, 2020</h5>
                 <p>Whether you want to run containerized applications on bare metal or VMs, organizations are developing architectures for a variety of workloads. During this event, users will discuss the infrastructure requirements to support containers, share challenges from their production environments, and collaborate on open source requirements directly with upstream developers. </p>
                 <p>Topics include: 
                     <ul>
                         <li>Using OpenStack and containers together</li>
                         <li>Security and Isolation</li>
                         <li>Telco and Network Functions</li>
-                        <li>Bare metal and containers</li>
-                        <li>Acceleration and optimization</li>
                     </ul>
                 </p>
             </div>
