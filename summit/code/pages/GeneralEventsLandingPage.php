@@ -35,11 +35,6 @@ class GeneralEventsLandingPage_Controller extends Page_Controller
 
     }
 
-    public function getPageTitle()
-    {
-        return SummitPage::PageCustomTitle;
-    }
-
     public function MetaTags()
     {
         $tags = parent::MetaTags();
