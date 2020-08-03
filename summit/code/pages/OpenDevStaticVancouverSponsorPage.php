@@ -26,6 +26,17 @@ class OpenDevStaticVancouverSponsorPage_Controller extends SummitSponsorPage_Con
 {
 
     /**
+     * @return string
+     */
+    public function getPageTitle()
+    {
+        $meta_title = $this->MetaTitle;
+        if(!empty($meta_title))
+            return trim($meta_title);
+        return parent::getTitle(). ' - ' .Page::PageCustomTitle;
+    }
+
+    /**
      * @param SS_HTTPRequest $request
      * @return HTMLText|void
      */

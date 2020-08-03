@@ -26,6 +26,17 @@ class OpenDevStaticVancouverLocationPage_Controller extends SummitLocationPage_C
         return $this->renderWith(['OpenDevStaticVancouverLocationPage','OpenDevStaticVancouverPage']);
     }
 
+    /**
+     * @return string
+     */
+    public function getPageTitle()
+    {
+        $meta_title = $this->MetaTitle;
+        if(!empty($meta_title))
+            return trim($meta_title);
+        return parent::getTitle(). ' - ' .Page::PageCustomTitle;
+    }
+
     public function init()
     {
         parent::init();
