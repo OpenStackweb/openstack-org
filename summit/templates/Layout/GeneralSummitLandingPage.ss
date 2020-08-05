@@ -28,11 +28,11 @@
                             <i class="fa fa-info-circle"></i>
                         </a>
                     </div>
-                    <h4>OpenDev + PTG</h4>
+                    <h4>Virtual OpenDev</h4>
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>
                     <p>
-                        <a class="btn register-btn-lrg red eventbrite-register-link" href="/events/opendev-ptg-2020/">
+                        <a class="btn register-btn-lrg red eventbrite-register-link" href="/events/opendev-2020">
                             Join Us <i class="fa fa-arrow-right"></i>
                         </a>
                     </p>
