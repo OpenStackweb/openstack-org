@@ -86,6 +86,14 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         return intval($summit_id);
     }
 
+    public function getCurrentSummit():?Summit{
+        $summit = Summit::get()->byID($this->getCurrentSummitId());
+        if(!$summit){
+            $summit = Summit::get_active();
+        }
+        return $summit;
+    }
+
     /**
      * @return array|void
      * @throws SS_HTTPResponse_Exception
@@ -97,7 +105,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
             'categories' => null,
         ];
 
-        $summit = Summit::get_active();
+        $summit = $this->getCurrentSummit();
 
         $chair = SummitTrackChair::get()
                         ->filter('MemberID', Member::currentUserID())
@@ -134,7 +142,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
     public function handleSummit(SS_HTTPRequest $r)
     {
         if ($r->param('ID') == "active") {
-            $summit = Summit::get_active();
+            $summit = $this->getCurrentSummit();;
         } else {
             $summit = Summit::get()->byID($r->param('ID'));
         }
@@ -216,7 +224,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         $types = [];
         $cloud_data = [];
         $presentations = [];
-        $summit = Summit::get_active();
+        $summit = $this->getCurrentSummit();
         $summitID = $summit->ID;
 
         if ($summit->isSelectionOpen()) {
@@ -349,7 +357,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         $results['accepted_count'] = $category->SessionCount;
         $results['alternate_count'] = $category->AlternateCount;
 
-        $summitID = (int) Summit::get_active()->ID;
+        $summitID = (int) $this->getCurrentSummit()->ID;
         if (intval($category->SummitID) !== $summitID) {
             return $this->validationError(sprintf('Category id %s does not belong to current summit!', $categoryID));
         }
@@ -523,7 +531,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
      */
     public function handleChangeRequests(SS_HTTPRequest $r)
     {
-        $summit = Summit::get_active();
+        $summit = $this->getCurrentSummit();
         $summitID = $summit->ID;
 
         $page_size = $r->getVar('page_size') ?: $this->config()->default_page_size;
@@ -740,7 +748,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         }
 
         // Make the category change
-        $summit = Summit::get_active();
+        $summit = $this->getCurrentSummit();
         $category = $summit->Categories()->filter('ID', $request->NewCategoryID)->first();
         if (!$category->exists()) {
             return $this->httpError(500, "Category not found in current summit");
@@ -824,7 +832,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
 
     public function handleChairExport()
     {
-        $activeSummit = Summit::get_active();
+        $activeSummit = $this->getCurrentSummit();
         $filepath = '/tmp/track-chairs.csv';
 
         $fp = fopen($filepath, 'w');
@@ -860,7 +868,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
 
     public function handlePresentationsExport(SS_HTTPRequest $r)
     {
-        $activeSummit = Summit::get_active();
+        $activeSummit = $this->getCurrentSummit();
         $summitID = $activeSummit->ID;
         $filepath = '/tmp/track-chairs-presentations.csv';
 
