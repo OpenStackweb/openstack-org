@@ -107,6 +107,7 @@ button.btn i, a.btn i {
 .summit-hero-landing-short {
     height: auto;
     padding-bottom: 100px;
+    padding-top: 140px;
 }
 
 .summit-hero-landing .navbar, .summit-hero-landing-short .navbar  {
@@ -655,10 +656,9 @@ button.btn i, a.btn i {
     display: inline-block;
     color: #fff;
     text-align: center;
-    max-width: 10.5%;
+    max-width: 15.5%;
     min-width: 10.5%;
     margin-top: 2em;
-    float: left;
 }
 
 @media all and (max-width: 767px) {
@@ -1009,6 +1009,7 @@ h3.recap-title {
     background-color: #00468b;
     display: flex;
     min-height: 80vh;
+    margin-bottom: -60px;
 }
 
 .diverse .image {
