@@ -113,8 +113,8 @@
 
                 <!-- <div class="col-xs-12">
                     <a class="btn" href="/summit/denver-2019/summit-schedule/">Full Summit Schedule<i class="fa fa-arrow-right"></i></a>
-                </div> -->
-            </div>
+                </div>
+            </div> -->
         </div>
         <div class="row">
             <div class="col-sm-12">
