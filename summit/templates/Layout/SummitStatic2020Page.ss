@@ -85,36 +85,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="col-xs-12">
-                    <a class="btn" href="/summit/denver-2019/speakers">See all summit speakers <i class="fa fa-arrow-right"></i></a>
-                </div> -->
             </div>
-            <!-- <div class="col-sm-12 col-lg-4 col-md-6 col-xs-12">
-                <h3 class="title-section">Summit Overview</h3>
-                <div class="col-12 col-md-12 col-sm-6 col-xs-12 featured">
-                    <ul class="overview">
-                        <li><a href="https://www.openstack.org/summit/denver-2019/summit-schedule/events/22721/openstack-upstream-institute-sponsored-by-lenovo-day-1-rsvp-required"><h5>OpenStack Upstream Institute</h5>
-                            <p><small>Sunday - Monday</small></p> <i class="fal fa-info-circle"></i></a></li>
-                        <li><a href="https://www.openstack.org/summit/denver-2019/summit-schedule/global-search?t=Keynotes"><h5>Keynotes</h5>
-                            <p><small>Monday</small></p> <i class="fal fa-info-circle"></i></a></li>
-                        <li><a href="https://www.openstack.org/summit/denver-2019/summit-schedule"><h5>Breakout Sessions</h5>
-                            <p><small>Monday-Wednesday</small></p> <i class="fal fa-info-circle"></i></a></li>
-                        <li><a href="https://wiki.openstack.org/wiki/Forum"><h5>The Forum</h5>
-                            <p><small>Monday-Wednesday</small></p> <i class="fal fa-info-circle"></i></a></li>
-                        <li><a href="https://www.openstack.org/summit/denver-2019/summit-schedule/"><h5>Workshops and Trainings</h5>
-                            <p><small>Monday-Wednesday</small></p> <i class="fal fa-info-circle"></i></a></li>
-                        <li><a href="https://www.openstack.org/summit/denver-2019/summit-schedule/global-search?t=Marketplace"><h5>Open Infrastructure Marketplace</h5>
-                            <p><small>Monday-Wednesday</small></p> <i class="fal fa-info-circle"></i></a></li>
-                        <li><a href="https://www.openstack.org/ptg"><h5>Project Teams Gathering (PTG)</h5>
-                            <p><small>Thursday-Saturday</small></p> <i class="fal fa-info-circle"></i></a></li>
-                    </ul>
-
-                </div> -->
-
-                <!-- <div class="col-xs-12">
-                    <a class="btn" href="/summit/denver-2019/summit-schedule/">Full Summit Schedule<i class="fa fa-arrow-right"></i></a>
-                </div>
-            </div> -->
         </div>
         <div class="row">
             <div class="col-sm-12">
@@ -124,10 +95,10 @@
     </div>
 </div>
 
-<!-- <div class="academy-wrapper" id="Sponsors">
+<div class="academy-wrapper" id="Sponsors">
     <div class="container">
         <div class="row">
-            <div class="col-sm-12">
+            <!-- <div class="col-sm-12">
                 <h3 class="recap-title script">Our Virtual Summit 2020 Sponsors!
 
                 </h3>
