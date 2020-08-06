@@ -34,7 +34,7 @@
                             </ul>
                     </li>
                     <li class="link button-box">
-                        <!-- <% include EventbriteRegisterLink Position='h' %> -->
+                        <% include EventbriteRegisterLink Position='h' %>
                     </li>
                 </ul>
             </div>
