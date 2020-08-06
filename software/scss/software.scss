@@ -84,7 +84,7 @@
   display: none; }
 
 @media (max-width: 790px) {
-  .software-tab-dropdown, .software-category-dropdown {
+  .software-tab-dropdown {
     display: block;
     width: 98%;
     margin: 0 1% 15px 1%;
@@ -124,15 +124,30 @@
     color: white;
   }
 
-  .software-tab-wrapper, .outer-project-subnav {
+  .software-tab-wrapper {
     display: none;
   }
 
+  .outer-project-subnav {
+
+    .subpage-slider , .category-slider{
+      height: auto !important;
+
+      ul {
+        white-space: unset !important;
+        text-align: center;
+
+        li {
+          margin: 0 10px 20px 10px;
+        }
+      }
+    }
+  }
 }
 
 .software-main-wrapper {
   background: #edf2f7;
-  padding: 30px 0 65px;
+  padding: 20px 0 65px;
   margin-bottom: -50px; }
 
 .software-main-wrapper .inner-software {
@@ -487,7 +502,7 @@ a.more-configs-link:hover {
   color: #29abe2; }
 
 .outer-project-subnav {
-  margin-top: 10px;
+  margin-bottom: 20px;
   width: 100%; }
 
 .sample-configs-slider, .category-slider, .subpage-slider {
