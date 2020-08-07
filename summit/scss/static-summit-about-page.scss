@@ -806,7 +806,7 @@ div.item{
 
 @media all and (max-width: 569px) {
     .about-summit-users-wrapper .summit-user-section {
-        height: 17em;
+        height: 20em;
     }
 }
 
@@ -865,7 +865,7 @@ div.item{
 
 .about-summit-users-wrapper .summit-user-section img.summit-user-image {
     height: 180px;
-    width: 173px;
+    width: 100%;
     object-fit: cover;
 }
 
