@@ -14,7 +14,7 @@
 
                 <p>Join the people building and operating open infrastructure, with sessions and workshops on Container Infrastructure, CI/CD, 5G, NFV & Edge, Public Cloud, Private & Hybrid Cloud, Security and members of open source communities like Airship, Ansible, Ceph, Docker, Kata Containers, Kubernetes, ONAP, OpenStack, Open vSwitch, OPNFV, StarlingX, Zuul and more.</p>
 
-                <a class="btn btn-default" href="/summit/denver-2019/sponsors/">Sponsor the Summit <i class="fal fa-arrow-right"></i></a>
+                <a class="btn btn-default" href="/summit/2020/sponsors/">Sponsor the Summit <i class="fal fa-arrow-right"></i></a>
 
                <% include EventbriteRegisterLink Position='m',ExtraClass='btn-primary' %> 
             </div>
@@ -76,12 +76,336 @@
                 <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/Uploads/baidu.jpg')}" alt="yu bai" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/summits/virtual/Alexander-Dibbo.jpg')}" alt="yu bai" class="summit-user-image">
                         </div>
                         <div class="info">
-                            <div class="name">Yu Bai</div>
-                            <div class="title">Baidu</div>
-                            <div class="topic">Deploying Kata Containers on the Edge</div>
+                            <div class="name">Alexander Dibbo</div>
+                            <div class="title">Cloud Architect</div>
+                            <div class="topic">STFC</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/Amy-Marrich.JPG')}" alt="Amy Marrich" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Amy Marrich</div>
+                            <div class="title">Principle Technical Marketing Manager</div>
+                            <div class="topic">Red hat</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/Ashish-Kurmi.png')}" alt="Ashish Kurmi" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Ashish Kurmi</div>
+                            <div class="title">Senior Cloud Security Engineer II</div>
+                            <div class="topic">Uber Technologies</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/summits/virtual/belmiro-moreira.png')}" alt="Belmiro Moreira" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Belmiro Moreira</div>
+                            <div class="title">Cloud Architect</div>
+                            <div class="topic">CERN</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/summits/virtual/Chris-MacNaughton.jpg')}" alt="Chris MacNaughton" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Chris MacNaughton</div>
+                            <div class="title">Software Engineer</div>
+                            <div class="topic">Canonical</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/summits/virtual/Danny-Abukalam.jpg')}" alt="Danny Abukalam" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Danny Abukalam</div>
+                            <div class="title">Solutions Architect</div>
+                            <div class="topic">SoftIron</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/David-Paterson.jpg')}" alt="David Paterson" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">David Paterson</div>
+                            <div class="title">Sr. Principal Software Engineer</div>
+                            <div class="topic">Dell Technologies</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/Diane-Mueller-Klingspor.jpg')}" alt="yu bai" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Diane Mueller-Klingspor</div>
+                            <div class="title">Director, Community Development</div>
+                            <div class="topic">Red Hat</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/Foundjem-Armstrong.jpeg')}" alt="Armstrong Foundjem" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Armstrong Foundjem</div>
+                            <div class="title">Researcher</div>
+                            <div class="topic">École  Polytechnique montréal</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/summits/virtual/Frank-Klker.JPG')}" alt="Frank Kloeker" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Frank Kloeker</div>
+                            <div class="title">Technology Manager Cloud Applications</div>
+                            <div class="topic">Deutsche Telekom AG</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/gage-hugo.jpg')}" alt="yu bai" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Gage Hugo</div>
+                            <div class="title">Senior Member of Technical Staff</div>
+                            <div class="topic">AT&T</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/Ghanshyam-Mann.jpg')}" alt="Ghanshyam Mann" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Ghanshyam Mann</div>
+                            <div class="title">Cloud Consultant</div>
+                            <div class="topic">NEC</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/Hector-Augusto-Garcia-Baleon.JPG')}" alt="Hector Augusto Garcia Baleon" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Hector Augusto Garcia Baleon</div>
+                            <div class="title">Sustaining Engineer</div>
+                            <div class="topic">Mirantis</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/summits/virtual/Ian-Jolliffe.jpg')}" alt="Ian Jolliffe" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Ian Jolliffe</div>
+                            <div class="title">VP R&D</div>
+                            <div class="topic">Wind River</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/summits/virtual/Josephine-Seifert.png')}" alt="yu bai" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Josephine Seifert</div>
+                            <div class="title">Innovation Assistant</div>
+                            <div class="topic">secustack GmbH</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/summits/virtual/Keith-Berger.jpg')}" alt="yu bai" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Keith Berger</div>
+                            <div class="title">Senior Software Engineer</div>
+                            <div class="topic">SUSE</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/Kenneth-Tan.jpg')}" alt="yu bai" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Kenneth Tan</div>
+                            <div class="title">Executive</div>
+                            <div class="topic">Sardina Systems</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/summits/virtual/Krishna-Kumar.jpg')}" alt="yu bai" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Krishna Kumar</div>
+                            <div class="title">Cloud Architect Sr.</div>
+                            <div class="topic">Accenture</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/summits/virtual/Matt-Jarvis.jpg')}" alt="yu bai" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Matt Jarvis</div>
+                            <div class="title">Director of Community</div>
+                            <div class="topic">D2iQ</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/Meghan-Heisler.jpg')}" alt="yu bai" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Meghan Heisler</div>
+                            <div class="title">Member Of Technical Staff</div>
+                            <div class="topic">AT&T</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/summits/virtual/Mohamed-Elsakhawy.jpg')}" alt="yu bai" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Mohamed Elsakhawy</div>
+                            <div class="title">Operational Lead / System Administrator III</div>
+                            <div class="topic">Compute Canada / SHARCNET</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/Nate-Johnston.jpg')}" alt="yu bai" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Nate Johnston</div>
+                            <div class="title">Associate Software Development Manager</div>
+                            <div class="topic">Red Hat</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/summits/virtual/Prakash-Ramchandran.png')}" alt="yu bai" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Prakash Ramchandran</div>
+                            <div class="title">Technical Staff</div>
+                            <div class="topic">Dell</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/qihui-Zhao.jpg')}" alt="yu bai" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Qihui Zhao</div>
+                            <div class="title">Project Manager</div>
+                            <div class="topic">China Mobile</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/Shuquan-Huang.JPG')}" alt="yu bai" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Shuquan Huang</div>
+                            <div class="title">Techinical Director</div>
+                            <div class="topic">99Cloud</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/summits/virtual/xiaoguang-zhang.jpg')}" alt="yu bai" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Xiaoguang Zhang</div>
+                            <div class="title">Project Manager</div>
+                            <div class="topic">China Mobile</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/summits/virtual/Xu-Wang.jpg')}" alt="yu bai" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Xu Wang</div>
+                            <div class="title">Senior Staff Engineer</div>
+                            <div class="topic">Ant Financial Services Group</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/ZhiqiangYu.JPG')}" alt="yu bai" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Zhiqiang Yu</div>
+                            <div class="title">Open Source Program Manager</div>
+                            <div class="topic">China Mobile Research Institute</div>
                         </div>
                     </div>
                 </div>
@@ -301,7 +625,7 @@
                     Docker, Kata Containers, Kubernetes, OpenStack, OPNFV, Zuul and more.
                 </p>
                 <p style="text-align: center;">
-                    <a class="btn register-btn-lrg" href="/summit/denver-2019/sponsors/">Sponsor the Summit <i class="fa fa-arrow-right"></i></a>
+                    <a class="btn register-btn-lrg" href="/summit/2020/sponsors/">Sponsor the Summit <i class="fa fa-arrow-right"></i></a>
                 </p>
             </div>
         </div>
