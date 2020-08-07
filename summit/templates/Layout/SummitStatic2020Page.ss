@@ -160,7 +160,7 @@
                 <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/Diane-Mueller-Klingspor.jpg')}" alt="yu bai" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/summits/virtual/Diane-Mueller-Klingspor.jpg')}" alt="Diane Mueller-Klingspor" class="summit-user-image">
                         </div>
                         <div class="info">
                             <div class="name">Diane Mueller-Klingspor</div>
