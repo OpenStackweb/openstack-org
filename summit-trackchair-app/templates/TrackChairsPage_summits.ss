@@ -13,6 +13,9 @@
 <body id="$URLSegment">
 <!-- Page Content -->
 <div class="container">
+  <div class="row">
+    <div class="col-md-6"><a class="btn btn-default" role="button" href="/Security/logout">Logout</a></div>
+  </div>
   $Message
   $Layout
 </div>
