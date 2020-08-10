@@ -92,15 +92,11 @@ export const fetchSummit = (id) => {
 	)(id);
 }
 
-export const fetchPresentations = () => {
-	let { summitID } = window.TrackChairAppConfig;
-
-	return createRequestReceiveAction(
+export const fetchPresentations = createRequestReceiveAction(
 		requestPresentations,
 		receivePresentations,
 		``
-	);
-}
+);
 
 export const fetchChangeRequests = () => {
 	let { summitID } = window.TrackChairAppConfig;
