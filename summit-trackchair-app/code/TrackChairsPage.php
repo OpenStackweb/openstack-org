@@ -39,9 +39,9 @@ class TrackChairsPage_Controller extends Page_Controller
 
 	public function selectSummit(SS_HTTPRequest $request){
 
-        Session::clear('track_chairs_summit_id');
         $summit_id = intval($request->requestVar('current_summit'));
         if($summit_id > 0){
+            Session::start();
             Session::set('track_chairs_summit_id', $summit_id);
             Session::save();
             return $this->redirect($this->Link());
