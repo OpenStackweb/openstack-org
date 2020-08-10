@@ -77,12 +77,11 @@ class TrackChairAPI extends AbstractRestfulJsonApi
      */
     protected function authorize()
     {
-        $request = $this->getRequest();
         return TrackChairsAuthorization::authorize($this->getCurrentSummitId());
     }
 
     public function getCurrentSummitId():int{
-        $summit_id = Session::get("track_chairs_summit_id");
+        $summit_id = intval($this->request->requestVar('summitID'));
         return intval($summit_id);
     }
 

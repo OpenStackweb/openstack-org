@@ -30,7 +30,8 @@ class TrackChairsPage_Controller extends Page_Controller
 	];
 
 	public function handleIndex (SS_HTTPRequest $request) {
-        $summit_id = Session::get("track_chairs_summit_id");
+        $summit_id = intval($request->requestVar('summitID'));
+
         if(!$summit_id){
             return $this->redirect($this->Link('summits'));
         }
@@ -39,13 +40,12 @@ class TrackChairsPage_Controller extends Page_Controller
 
 	public function selectSummit(SS_HTTPRequest $request){
 
-        $summit_id = intval($request->requestVar('current_summit'));
+        $summit_id = intval($request->requestVar('summitID'));
+
         if($summit_id > 0){
-            Session::start();
-            Session::set('track_chairs_summit_id', $summit_id);
-            Session::save();
-            return $this->redirect($this->Link());
+            return $this->redirect(sprintf('%s?summitID=%s', $this->Link(), $summit_id));
         }
+
         JQueryCoreDependencies::renderRequirements();
 	    Requirements::javascript("summit-trackchair-app/javascript/summits.js");
 	    Page_Controller::AddRequirements();
@@ -93,7 +93,7 @@ class TrackChairsPage_Controller extends Page_Controller
     }
 
     public function getCurrentSummitId():int{
-        $summit_id = Session::get("track_chairs_summit_id");
+        $summit_id = intval($this->request->requestVar('summitID'));
         return intval($summit_id);
     }
 

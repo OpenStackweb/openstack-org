@@ -13,9 +13,12 @@
 (function( $ ){
 
     $(document).ready(function(){
-        $('#current_summit').change(function(evt) {
+        $('#summitID').change(function(evt) {
             var val = $( this ).val();
-            if(parseInt(val) == 0 ) return;
+            if(parseInt(val) === 0 ){
+                window.alert("You need to select a valid show.");
+                return;
+            }
             var form = $('#form_current_summit');
             form.submit();
         });

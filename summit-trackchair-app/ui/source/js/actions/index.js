@@ -82,50 +82,66 @@ export const chooseMemberSearchItem = createAction('CHOOSE_MEMBER_SEARCH_ITEM');
 /* Async Actions */
 
 export const fetchSummit = (id) => {
+	debugger;
+	let { summitID } = window.TrackChairAppConfig;
+
 	return createRequestReceiveAction(
     	requestSummit,
     	receiveSummit,
-    	`summit/${id}`
+    	`summit/${summitID}?summitID=${summitID}`
 	)(id);
 }
 
-export const fetchPresentations = createRequestReceiveAction(
-    requestPresentations,
-    receivePresentations,
-    ''
-);
+export const fetchPresentations = () => {
+	let { summitID } = window.TrackChairAppConfig;
 
-export const fetchChangeRequests = createRequestReceiveAction(
-    requestChangeRequests,
-    receiveChangeRequests,
-    'changerequests'
-);
+	return createRequestReceiveAction(
+		requestPresentations,
+		receivePresentations,
+		`?summitID=${summitID}`
+	);
+}
+
+export const fetchChangeRequests = () => {
+	let { summitID } = window.TrackChairAppConfig;
+	return createRequestReceiveAction(
+		requestChangeRequests,
+		receiveChangeRequests,
+		`changerequests?summitID=${summitID}`
+	);
+}
 
 export const fetchLists = (category) => {
+	let { summitID } = window.TrackChairAppConfig;
+
 	return createRequestReceiveAction(
 		requestLists,
 		receiveLists,
-		`selections/${category}`
+		`selections/${category}?summitID=${summitID}`
 	)(category);
 };
 
 export const fetchListsByClass = (category, list_class) => {
+	let { summitID } = window.TrackChairAppConfig;
     return createRequestReceiveAction(
         requestLists,
         receiveLists,
-		`selections/${category}/${list_class}`
+		`selections/${category}/${list_class}?summitID=${summitID}`
 )(category);
 };
 
 export const fetchPresentationDetail = (id) => {
+	let { summitID } = window.TrackChairAppConfig;
 	return createRequestReceiveAction(
     	requestPresentationDetail,
     	receivePresentationDetail,
-    	`presentation/${id}`
+    	`presentation/${id}?summitID=${summitID}`
 	)(id);
 };
 
 export const postMySelection = (presentationID, type, name) => {
+	let { summitID } = window.TrackChairAppConfig;
+
 	return (dispatch) => {
 		const key = `TOGGLE_FOR_ME_${presentationID}`;
 		dispatch(toggleForMe({presentationID, type, name}));
@@ -135,7 +151,7 @@ export const postMySelection = (presentationID, type, name) => {
 
 		const url = URL.create(
 			`presentation/${presentationID}/${selection}`,
-			{type},
+			{type, summitID},
 			'/trackchairs/api/v1'
 		);
 
@@ -147,6 +163,8 @@ export const postMySelection = (presentationID, type, name) => {
 };
 
 export const postGroupSelection = (presentationID, bool) => {
+	let { summitID } = window.TrackChairAppConfig;
+
 	return (dispatch) => {
 		const key = `TOGGLE_FOR_GROUP_${presentationID}`;
 		dispatch(toggleForGroup(bool));
@@ -154,7 +172,7 @@ export const postGroupSelection = (presentationID, bool) => {
 
 		const url = URL.create(
 			`presentation/${presentationID}/group/${bool ? 'select' : 'unselect'}`,
-			{},
+			{summitID},
 			'/trackchairs/api/v1'
 		);
 
@@ -167,6 +185,7 @@ export const postGroupSelection = (presentationID, bool) => {
 
 
 export const postComment = (presentationID, commentData) => {
+	let { summitID } = window.TrackChairAppConfig;
 	return (dispatch) => {
 		
 		const key = `POST_COMMENT__${JSON.stringify(commentData || {})}`;
@@ -179,7 +198,7 @@ export const postComment = (presentationID, commentData) => {
 		
 		const url = URL.create(
 			`presentation/${presentationID}/comment`,
-			{}, 
+			{summitID},
 			'/trackchairs/api/v1'
 		);
 		
@@ -197,6 +216,8 @@ export const postComment = (presentationID, commentData) => {
 }
 
 export const postEmail = (presentationID, emailData) => {
+	let { summitID } = window.TrackChairAppConfig;
+
 	return (dispatch) => {
 		
 		const key = `POST_EMAIL__${JSON.stringify(emailData || {})}`;
@@ -205,7 +226,7 @@ export const postEmail = (presentationID, emailData) => {
 		dispatch(beginEmail());
 		const url = URL.create(
 			`presentation/${presentationID}/emailspeakers`,
-			{}, 
+			{summitID},
 			'/trackchairs/api/v1'
 		);
 		
@@ -221,6 +242,8 @@ export const postEmail = (presentationID, emailData) => {
 }
 
 export const postReorganise = (listID, collection, listHash) => {
+	let { summitID } = window.TrackChairAppConfig;
+
 	return (dispatch, getState) => {
 		const key = `REORDER_${listID}_${collection}`;
 
@@ -241,7 +264,7 @@ export const postReorganise = (listID, collection, listHash) => {
 			collection: collectionMap[collection],
             list_hash: listHash
 		};
-		const req = http.put('/trackchairs/api/v1/reorder')
+		const req = http.put(`/trackchairs/api/v1/reorder?${summitID}`)
 			.send(data)
 			.end(responseHandler(dispatch,
                 json => {
@@ -254,12 +277,15 @@ export const postReorganise = (listID, collection, listHash) => {
 };
 
 export const postResolveRequest = (requestID, approved, rejectReason) => {
+
+	let { summitID } = window.TrackChairAppConfig;
+
 	return (dispatch, getState) => {
 		const key = `RESOLVE_${requestID}`;
 		dispatch(resolveRequest({requestID, approved, rejectReason}));
 		cancel(key);
 
-		const req = http.put(`/trackchairs/api/v1/categorychange/resolve/${requestID}`)
+		const req = http.put(`/trackchairs/api/v1/categorychange/resolve/${requestID}?summitID=${summitID}`)
 			.send({approved: approved, reason: rejectReason})
 			.end(responseHandler(dispatch, json => {
                 dispatch(fetchChangeRequests());
@@ -270,6 +296,8 @@ export const postResolveRequest = (requestID, approved, rejectReason) => {
 };
 
 export const postCategoryChange = (presentationID, newCategory) => {
+	let { summitID } = window.TrackChairAppConfig;
+
 	return (dispatch, getState) => {
 		const key = `REQUEST_CATEGORY_CHANGE_${presentationID}`;
 		dispatch(requestCategoryChange({presentationID, newCategory}));
@@ -280,7 +308,7 @@ export const postCategoryChange = (presentationID, newCategory) => {
 		};
 		const url = URL.create(
 			`presentation/${presentationID}/categorychange/new`,
-			{}, 
+			{summitID},
 			'/trackchairs/api/v1'
 		);
 
@@ -298,6 +326,8 @@ export const postCategoryChange = (presentationID, newCategory) => {
 }
 
 export const postMarkAsRead = (presentationID) => {
+	let { summitID } = window.TrackChairAppConfig;
+
 	return (dispatch) => {
 		const key = `MARK_AS_READ_${presentationID}`;
 		dispatch(markAsRead(presentationID));
@@ -305,7 +335,7 @@ export const postMarkAsRead = (presentationID) => {
 
 		const url = URL.create(
 			`presentation/${presentationID}/markasviewed`,
-			{},
+			{summitID},
 			'/trackchairs/api/v1'
 		);
 
@@ -318,6 +348,8 @@ export const postMarkAsRead = (presentationID) => {
 
 var checkChairTimeout;
 export const checkChair = (search) => {
+	let { summitID } = window.TrackChairAppConfig;
+
 	return (dispatch) => {
 		dispatch(updateAddChairEmail(search));
 		checkChairTimeout && window.clearTimeout(checkChairTimeout);
@@ -327,7 +359,7 @@ export const checkChair = (search) => {
 
 			const url = URL.addQueryParams(
 				'/trackchairs/api/v1/findmember',
-				{search, ajax: 1}
+				{search, ajax: 1, summitID}
 			);
 
 			const req = http.get(url)
@@ -343,6 +375,9 @@ export const checkChair = (search) => {
 };
 
 export const submitAddChair = (params = {}) => {
+
+	let { summitID } = window.TrackChairAppConfig;
+
 	return (dispatch) => {
 		const key = `ADD_CHAIR_${params.email}`;
 		dispatch(toggleAddChairLoading());
@@ -350,7 +385,7 @@ export const submitAddChair = (params = {}) => {
 
 		const url = URL.create(
 			`chair/add`,
-			{},
+			{summitID},
 			'/trackchairs/api/v1'
 		);
 
@@ -381,6 +416,8 @@ export const submitAddChair = (params = {}) => {
 }
 
 export const postDeleteChair = (params) => {
+	let { summitID } = window.TrackChairAppConfig;
+
 	return (dispatch) => {
 		const key = `DELETE_CHAIR_${JSON.stringify(params)}`;
 		dispatch(deleteChair(params));
@@ -388,7 +425,7 @@ export const postDeleteChair = (params) => {
 
 		const url = URL.create(
 			`chair/destroy`,
-			{},
+			{summitID},
 			'/trackchairs/api/v1'			
 		);
 
