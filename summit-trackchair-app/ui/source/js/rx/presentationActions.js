@@ -11,7 +11,9 @@ const presentationsNeedMore$ = state$
 	.filter(state => state.presentations.has_more);
 
 presentationsNeedMore$.subscribe(state => {
+
 	dispatch(fetchPresentations({
+		summitID: window.TrackChairAppConfig.summitID,
 		category: state.routing.locationBeforeTransitions.query.category,
 		page: +state.presentations.page+1
 	}))

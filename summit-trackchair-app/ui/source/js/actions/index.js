@@ -82,7 +82,7 @@ export const chooseMemberSearchItem = createAction('CHOOSE_MEMBER_SEARCH_ITEM');
 /* Async Actions */
 
 export const fetchSummit = (id) => {
-	debugger;
+
 	let { summitID } = window.TrackChairAppConfig;
 
 	return createRequestReceiveAction(
@@ -98,7 +98,7 @@ export const fetchPresentations = () => {
 	return createRequestReceiveAction(
 		requestPresentations,
 		receivePresentations,
-		`?summitID=${summitID}`
+		``
 	);
 }
 

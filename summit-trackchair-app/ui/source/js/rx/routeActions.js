@@ -80,6 +80,7 @@ isDefaultView$
 // Generic handler for query params changing. Refresh the list.
 browseQueryParamsDidChange$.subscribe(state => {
 	dispatch(fetchPresentations({
+		summitID: window.TrackChairAppConfig.summitID,
 		category: q(state, 'category'),
 		keyword: q(state, 'search'),
 		page: 1
