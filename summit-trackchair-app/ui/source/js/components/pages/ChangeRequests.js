@@ -22,7 +22,10 @@ class ChangeRequests extends React.Component {
 	}
 
 	componentDidMount() {
+		let { summitID } = window.TrackChairAppConfig;
+
 		this.props.fetch({
+			summitID: summitID,
 			search: this.props.search,
 			sortDir: this.props.sortDir,
 			sortCol: this.props.sortCol,
@@ -200,7 +203,7 @@ export default connect(
 				 state.changeRequests.results[0].length === 7
 	}),
 	dispatch => ({
-		fetch(params) {			
+		fetch(params) {
 			dispatch(fetchChangeRequests(params))
 		},
 		sortTable(index, key, dir) {
