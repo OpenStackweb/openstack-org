@@ -292,12 +292,36 @@
                 <div class="col-lg-2 col-md-6 col-sm-6 col-xs-6 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/summits/virtual/markkorondi.jpg')}" alt="Mark Korondi" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Mark Korondi</div>
+                            <div class="title">Senior DevOps Consultant</div>
+                            <div class="topic">Knowledge Lab AG</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6 col-xs-6 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
                             <img src="{$Top.CloudUrl('assets/summits/virtual/Matt-Jarvis.jpg')}" alt="Matt Jarvis" class="summit-user-image">
                         </div>
                         <div class="info">
                             <div class="name">Matt Jarvis</div>
                             <div class="title">Director of Community</div>
                             <div class="topic">D2iQ</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6 col-xs-6 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/summits/virtual/Malini.jpeg')}" alt="Malini Bhandaru" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Malini Bhandaru</div>
+                            <div class="title">Technical Staff</div>
+                            <div class="topic">VMWare</div>
                         </div>
                     </div>
                 </div>
@@ -328,6 +352,18 @@
                 <div class="col-lg-2 col-md-6 col-sm-6 col-xs-6 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/Nate-Johnston.jpg')}" alt="Narinder  Gupta" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Narinder  Gupta</div>
+                            <div class="title">Technical Partner Manager</div>
+                            <div class="topic">Canonical</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6 col-xs-6 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
                             <img src="{$Top.CloudUrl('assets/Nate-Johnston.jpg')}" alt="Nate Johnston" class="summit-user-image">
                         </div>
                         <div class="info">
@@ -340,12 +376,36 @@
                 <div class="col-lg-2 col-md-6 col-sm-6 col-xs-6 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/summits/virtual/nickchase.jpg')}" alt="Nick Chase" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Nick Chase</div>
+                            <div class="title">Head of Technical Content</div>
+                            <div class="topic">Mirantis</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6 col-xs-6 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
                             <img src="{$Top.CloudUrl('assets/summits/virtual/Prakash-Ramchandran.png')}" alt="Prakash Ramchandran" class="summit-user-image">
                         </div>
                         <div class="info">
                             <div class="name">Prakash Ramchandran</div>
                             <div class="title">Technical Staff</div>
                             <div class="topic">Dell</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6 col-xs-6 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/summits/virtual/QIAOFU.jpg')}" alt="QIAO FU" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Qiao Fu</div>
+                            <div class="title">Technical Manager</div>
+                            <div class="topic">China Mobile</div>
                         </div>
                     </div>
                 </div>
@@ -370,6 +430,18 @@
                             <div class="name">Shuquan Huang</div>
                             <div class="title">Techinical Director</div>
                             <div class="topic">99Cloud</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6 col-xs-6 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/summits/virtual/tobiasrydberg.jpg')}" alt="Tobias Rydberg" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Tobias Rydberg</div>
+                            <div class="title">Team Lead R&amp;D and Senior Developer</div>
+                            <div class="topic">City Network</div>
                         </div>
                     </div>
                 </div>
