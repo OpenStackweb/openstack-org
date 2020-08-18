@@ -50,7 +50,9 @@ class TrackChairsPage_Controller extends Page_Controller
 	    Requirements::javascript("summit-trackchair-app/javascript/summits.js");
 	    Page_Controller::AddRequirements();
 	    Requirements::css('summit-trackchair-app/css/summits.css');
-        return $this->customise([])->renderWith(
+        return $this->customise([
+            'backURL' => urlencode(sprintf('/track-chairs/summits'))
+        ])->renderWith(
             [
                 'TrackChairsPage_summits',
                 'TrackChairsPage_summits'
@@ -106,6 +108,7 @@ class TrackChairsPage_Controller extends Page_Controller
             'summitID' => $summit->ID,
             'summitName' => sprintf("%s - %s", $summit->Title, $plan->Name),
             'selectionLink' => $this->Link('summits'),
+            'backURL' => urlencode(sprintf('/track-chairs/summits?summitID=%s', $summit->ID)),
             'pass_order' => SummitSelectedPresentation::config()->pass_order,
             'userinfo' => [
             	'name' => Member::currentUser()->getName(),

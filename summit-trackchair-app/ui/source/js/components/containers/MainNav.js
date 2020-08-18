@@ -8,7 +8,8 @@ import {toggleMobileMenu} from '../../actions';
 const MainNav = ({
 	activeLink,
 	onLinkClicked,
-	browseLink
+	browseLink,
+	LogoutLink
 }) => (
 	<LinkBar activeLink={activeLink} onLinkClicked={onLinkClicked} className="nav navbar-nav" component="UL">                     
         <LinkButton link={browseLink}>
@@ -28,7 +29,7 @@ const MainNav = ({
         	<span className="nav-label">Change Requests</span>
         </LinkButton>
 		<li>
-			<a href="/Security/logout?BackURL=/Security/login">
+			<a href={LogoutLink}>
 				<i className="fa fa-sign-out"></i>
 				<span className="nav-label">Log Out</span>
 			</a>
@@ -49,7 +50,8 @@ export default connect (
 			activeLink,
 			browseLink: state.detailPresentation.id ? 
 				`browse/${state.detailPresentation.id}?category=${state.detailPresentation.category_id}` :
-				''
+				'',
+			LogoutLink: `/Security/logout?BackURL=${window.TrackChairAppConfig.backURL}`
 		}
 	},
 	dispatch => ({
