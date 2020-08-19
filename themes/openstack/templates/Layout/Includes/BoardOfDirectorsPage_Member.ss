@@ -6,12 +6,12 @@
         </div>
         <% if $TwitterName %>
             <a class="staff-twitter" target="_blank" href="https://twitter.com/{$TwitterName}">
-                <i class="fa fa-twitter" aria-hidden="true"></i>
+                <i class="fab fa-twitter" aria-hidden="true"></i>
             </a>
         <% end_if %>
         <% if $LinkedInProfile %>
             <a class="staff-linkedin" href="{$LinkedInProfile}">
-                <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                <i class="fab fa-linkedin" aria-hidden="true"></i>
             </a>
         <% end_if %>
         <% if $WeChatUser %>
