@@ -110,13 +110,8 @@ class SurveyDynamicEntityStepTemplate
     {
         $valid = parent::validate();
         if (!$valid->valid()) return $valid;
-        $count = EntitySurveyTemplate::get()->where(" (OwnerID = 0 OR OwnerID = {$this->ID} ) ")->count();
-        if (intval($count) === 0) {
-            return $valid->error('You need to create a valid Entity Survey Template First !');
-        }
         return $valid;
     }
-
 
     /**
      * @return string
