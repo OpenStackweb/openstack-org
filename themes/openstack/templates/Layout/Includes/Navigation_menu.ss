@@ -30,8 +30,7 @@
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}ptg/">Project Teams Gathering</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}events/opendev-2020/">OpenDev</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}events/community-events/">Community Events</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}events/openstackdays">OpenStack Days</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}events/openstackhackathons">OpenStack App Hackathons</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}events/openstackdays">OpenStack & OpenInfra Days</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}videos/">Summit Videos</a></li>
     </ul>
 </li>
