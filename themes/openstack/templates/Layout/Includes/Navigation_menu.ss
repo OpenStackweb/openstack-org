@@ -26,7 +26,7 @@
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}use-cases/">Overview</a></li>
         <li role="presentation" class="divider"></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}use-cases/bare-metal/">OpenStack Bare Metal</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}use-cases/edge/">Edge Computing</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}use-cases/edge-computing/">Edge Computing</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}use-cases/telecoms-and-nfv/">Telecom & NFV</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}use-cases/science/">Science and HPC</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}use-cases/containers/">Containers</a></li>
