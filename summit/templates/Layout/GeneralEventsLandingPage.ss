@@ -42,13 +42,13 @@
                     <h4>Containers in Production</h4><br/>
                     <p>August 10 - 11, 2020</p>
                     <p>
-                        <a href="https://opendev_containersinproduction.eventbrite.com" target="_blank" class="btn register-btn-lrg " target="_blank">
-                            Register Now!
+                        <a href="https://www.youtube.com/playlist?list=PLKqaoAnDyfgpPQePoJ5mIBp9nJnW6N7ZP" target="_blank" class="btn register-btn-lrg " target="_blank">
+                            Watch the Videos
                             <i class="fa fa-arrow-right"></i>
                         </a>
                     <br/>
                     <br/>
-                    <a href="/events/opendev-2020/opendev-schedule-3">View the Schedule</a>
+                    <a href="https://superuser.openstack.org/articles/opendev-containers-in-production-thats-a-wrap/">Event Recap</a>
                     </p>
                 </div>
             </div>

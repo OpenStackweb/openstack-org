@@ -21,8 +21,8 @@
             <div class="video-container second col-md-4 col-sm-12 col-xs-12">
                 <div class="item">
                     <div class="video">
-                        <div class="triangle-new">
-                            <p>New Event!<p>
+                        <div class="triangle">
+                            <p>Complete!<p>
                         </div>
                         <a href="https://www.flickr.com/photos/sgerner/22636377307" target="_blank" class="photo-credit" title="Steven Gerner">
                             <i class="fa fa-info-circle"></i>
@@ -32,8 +32,8 @@
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>
                     <p>
-                        <a class="btn register-btn-lrg red eventbrite-register-link" href="/events/opendev-2020">
-                            Join Us <i class="fa fa-arrow-right"></i>
+                        <a class="btn register-btn-lrg red eventbrite-register-link" href="https://superuser.openstack.org/articles/tag/virtual-opendev/">
+                            See Highlights <i class="fa fa-arrow-right"></i>
                         </a>
                     </p>
 
