@@ -32,6 +32,7 @@
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}events/community-events/">Community Events</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}events/openstackdays">OpenStack Days</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}events/openstackhackathons">OpenStack App Hackathons</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}videos/">Summit Videos</a></li>
     </ul>
 </li>
 
@@ -41,32 +42,30 @@
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/">Welcome! Start Here</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/tech-committee">OpenStack Technical Committee</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/speakers/">Speakers Bureau</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="http://superuser.openstack.org/">Superuser Magazine</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.meetup.com/pro/osf/">User Groups</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="http://wiki.openstack.org">OpenStack Wiki</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}coa/">Get Certified (COA)</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/jobs/">Jobs</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}news/">Community News</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="http://superuser.openstack.org">Superuser Magazine</a></li>
         <li role="presentation" class="divider"></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/supporting-organizations/">OSF Supporting Organizations</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="https://osf.dev">OpenStack Foundation (OSF)</a></li>
-        <li role="presentation" class="divider"></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}join/">Join The Community</a></li>
     </ul>
 </li>
 <li>
     <a href="{$BaseHref}marketplace/">Marketplace</a>
-</li>
-<li>
-    <a href="{$BaseHref}learn/" class="drop" id="dropdownMenuLearn">Learn <i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
     <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}marketplace/training/">Training</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}coa/">Get Certified</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="http://ask.openstack.org">Ask a Technical Question</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="http://superuser.openstack.org">Superuser Magazine</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}videos/">Summit Videos</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}analysts/">Analyst Reports</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}news/">News</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}blog/">Blog</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}marketplace/distros/">Distros & Appliances</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}marketplace/public-clouds/">Public Clouds</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}marketplace/hosted-private-clouds/">Hosted Private Clouds</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}marketplace/remotely-managed-private-clouds/">Remotely Managed Private Clouds</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}marketplace/consulting/">Consulting & Integrators</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}marketplace/drivers/">Drivers</a></li>
     </ul>
+</li>
+<li>
+    <a href="{$BaseHref}blog/">Blog</a>
 </li>
 <li>
     <a href="http://docs.openstack.org/">Docs</a>
