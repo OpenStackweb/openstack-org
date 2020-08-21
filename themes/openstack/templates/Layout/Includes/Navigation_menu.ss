@@ -1,15 +1,4 @@
 <li>
-    <a  class="drop" id="dropdownMenuEvents">OSF Events <i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
-    <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}events/opendev-2020/">OpenDev</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}ptg/">Project Teams Gathering</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}summit/">Open Infrastructure Summits</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/events/">Community Events</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/events/openstackdays">OpenStack Days</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/events/openstackhackathons">OpenStack App Hackathons</a></li>
-    </ul>
-</li>
-<li>
     <a href="{$BaseHref}software/" class="drop" id="dropdownMenuSoftware">Software <i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
     <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuSoftware">
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/">Overview</a></li>
@@ -34,6 +23,18 @@
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}surveys/landing">User Survey</a></li>
     </ul>
 </li>
+<li>
+    <a  class="drop" id="dropdownMenuEvents">Events <i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
+    <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}summit/">Open Infrastructure Summits</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}ptg/">Project Teams Gathering</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}events/opendev-2020/">OpenDev</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}events/community-events/">Community Events</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}events/openstackdays">OpenStack Days</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}events/openstackhackathons">OpenStack App Hackathons</a></li>
+    </ul>
+</li>
+
 <li>
     <a href="{$BaseHref}community/" class="drop" id="dropdownMenuCommunity">Community <i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
     <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuCommunity">
