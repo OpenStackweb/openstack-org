@@ -12,7 +12,7 @@
 <li>
     <a href="{$BaseHref}use-cases/" class="drop" id="dropdownMenuUsers">Use Cases <i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
     <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuUsers">
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}use-cases/">Overview</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}use-cases/">Users in Production</a></li>
         <li role="presentation" class="divider"></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}use-cases/bare-metal/">OpenStack Bare Metal</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}use-cases/edge-computing/">Edge Computing</a></li>
@@ -45,6 +45,7 @@
         <li role="presentation"><a role="menuitem" tabindex="-1" href="http://wiki.openstack.org">OpenStack Wiki</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}coa/">Get Certified (COA)</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/jobs/">Jobs</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}marketing/">Marketing Resources</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}news/">Community News</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="http://superuser.openstack.org">Superuser Magazine</a></li>
         <li role="presentation" class="divider"></li>
@@ -53,7 +54,7 @@
     </ul>
 </li>
 <li>
-    <a href="{$BaseHref}marketplace/">Marketplace</a>
+    <a href="{$BaseHref}marketplace/" class="drop" id="dropdownMenuCommunity">Marketplace <i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
     <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}marketplace/training/">Training</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}marketplace/distros/">Distros & Appliances</a></li>
