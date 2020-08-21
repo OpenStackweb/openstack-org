@@ -28,10 +28,10 @@
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}use-cases/bare-metal/">OpenStack Bare Metal</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}use-cases/edge/">Edge Computing</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}use-cases/telecoms-and-nfv/">Telecom & NFV</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}use-cases/enterprise/">OpenStack in the Enterprise</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}use-cases/science/">OpenStack in Science</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}use-cases/science/">Science and HPC</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}use-cases/containers/">Containers</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}surveys/landing">Share Your Use Case</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}use-cases/enterprise/">Enterprise</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}surveys/landing">User Survey</a></li>
     </ul>
 </li>
 <li>
