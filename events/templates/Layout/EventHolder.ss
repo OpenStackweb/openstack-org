@@ -39,7 +39,7 @@
             </div>
             <% end_if %>
             <% if PastSummits(5) %>
-            <h2>Recent OpenStack Summits &amp; Conferences</h2>
+            <h2>Recent Summits &amp; Events</h2>
             <div id='past-summits' class="eventBlock past hidden">
                 $getEvents(5,past_summits)
             </div>
