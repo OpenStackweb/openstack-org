@@ -14,15 +14,6 @@
                 <li class="nav-item tab-events">
                     <a href="#events" class="nav-link" data-toggle="tab" role="tab">NAVIGATING EVENTS</a>
                 </li>
-                <li class="nav-item tab-collateral">
-                    <a href="#collateral" class="nav-link" data-toggle="tab" role="tab">COLLATERAL</a>
-                </li>
-                <li class="nav-item tab-software">
-                    <a href="#software" class="nav-link" data-toggle="tab" role="tab">SOFTWARE RELEASES</a>
-                </li>
-                <li class="nav-item tab-graphics">
-                    <a href="#graphics" class="nav-link" data-toggle="tab" role="tab">GRAPHICS & VIDEO</a>
-                </li>
                 <li class="nav-item tab-promote_product">
                     <a href="#promote_product" class="nav-link" data-toggle="tab" role="tab">PROMOTE YOUR PRODUCT</a>
                 </li>
