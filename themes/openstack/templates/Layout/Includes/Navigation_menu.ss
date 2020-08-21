@@ -21,18 +21,17 @@
     </ul>
 </li>
 <li>
-    <a href="{$BaseHref}user-stories/" class="drop" id="dropdownMenuUsers">Users <i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
+    <a href="{$BaseHref}use-cases/" class="drop" id="dropdownMenuUsers">Use Cases <i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
     <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuUsers">
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}user-stories/">Overview</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}use-cases/">Overview</a></li>
         <li role="presentation" class="divider"></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}bare-metal/">OpenStack Bare Metal</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}edge/">Edge Computing</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}telecoms-and-nfv/">Telecom & NFV</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}enterprise/">OpenStack in the Enterprise</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}science/">OpenStack in Science</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}containers/">Containers</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="http://superuser.openstack.org/">Superuser Magazine</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}surveys/landing">User Survey</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}use-cases/bare-metal/">OpenStack Bare Metal</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}use-cases/edge/">Edge Computing</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}use-cases/telecoms-and-nfv/">Telecom & NFV</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}use-cases/enterprise/">OpenStack in the Enterprise</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}use-cases/science/">OpenStack in Science</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}use-cases/containers/">Containers</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}surveys/landing">Share Your Use Case</a></li>
     </ul>
 </li>
 <li>
@@ -43,6 +42,7 @@
         <li role="presentation"><a role="menuitem" tabindex="-1" href="http://wiki.openstack.org">OpenStack Wiki</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.meetup.com/pro/osf/">User Groups</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/speakers/">Speakers Bureau</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="http://superuser.openstack.org/">Superuser Magazine</a></li>
         <li role="presentation" class="divider"></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}foundation/companies/">Supporting Companies</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/jobs/">Jobs</a></li>
