@@ -49,7 +49,7 @@
                 <p>
                     Submit your upcoming OpenStack event here.
                 </p>
-                <a href="/community/events/post-an-event/">Post An Event For Free</a>
+                <a href="/events/post-an-event/">Post An Event For Free</a>
             </div>
     </div>
 </div>
