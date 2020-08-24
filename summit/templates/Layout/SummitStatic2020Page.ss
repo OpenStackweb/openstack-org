@@ -352,7 +352,7 @@
                 <div class="col-lg-2 col-md-6 col-sm-6 col-xs-6 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/Nate-Johnston.jpg')}" alt="Narinder  Gupta" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/summits/virtual/narindergupta.jpg')}" alt="Narinder  Gupta" class="summit-user-image">
                         </div>
                         <div class="info">
                             <div class="name">Narinder  Gupta</div>
