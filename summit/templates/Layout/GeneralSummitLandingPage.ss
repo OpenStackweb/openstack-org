@@ -32,7 +32,7 @@
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>
                     <p>
-                        <a class="btn register-btn-lrg red eventbrite-register-link" href="https://superuser.openstack.org/articles/tag/virtual-opendev/">
+                        <a class="btn register-btn-lrg red" href="https://superuser.openstack.org/articles/tag/virtual-opendev/">
                             See Highlights <i class="fa fa-arrow-right"></i>
                         </a>
                     </p>
