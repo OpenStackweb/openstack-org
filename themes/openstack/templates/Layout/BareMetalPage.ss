@@ -17,7 +17,7 @@
                         <div class="download-text">
                             Just in: The latest white paper from the OpenStack Bare Metal SIG
                         </div>
-                        <a class="download-btn" type="button" href="/bare-metal/how-ironic-delivers-abstraction-and-automation-using-open-source-infrastructure">
+                        <a class="download-btn" type="button" href="/use-cases/bare-metal/how-ironic-delivers-abstraction-and-automation-using-open-source-infrastructure">
                              Read It Now&nbsp;<i class="fa fa-arrow-circle-right"></i>
                         </a>
                     </div>
