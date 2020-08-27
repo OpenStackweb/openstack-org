@@ -35,7 +35,8 @@ class CompanyListPage extends Page
     function getCMSFields()
     {
         $fields = parent::getCMSFields();
-        $companiesTable = new GridField('Company', 'Company',$this->Company());
+        $config = GridFieldConfig_RecordEditor::create(20);
+        $companiesTable = new GridField('Company', 'Company',$this->Company(), $config);
         $fields->addFieldToTab('Root.Companies', $companiesTable);
 
         $config = GridFieldConfig_RelationEditor::create(20);
@@ -65,6 +66,7 @@ class CompanyListPage_Controller extends Page_Controller
 
         Requirements::css("themes/openstack/css/jquery.autocomplete.css");
 	    Requirements::css(THIRDPARTY_DIR . '/jquery-ui-themes/smoothness/jquery-ui.css');
+	    Requirements::css("themes/openstack/css/supporting-organizations.css");
 	    Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
         JSChosenDependencies::renderRequirements();
         JQueryValidateDependencies::renderRequirements();

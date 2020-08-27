@@ -22,7 +22,7 @@
 				<div class="col-sm-2 col-xs-6">
 		                <a <% if IsExternalUrl %>rel="nofollow"<% end_if %> href="$ShowLink">
 		                	<div class="img-wrapper">
-								<img src="{$getLogoUrl(138)}" alt="$Name">
+								<img class="small_logo" src="{$getLogoUrl(138)}" alt="$Name">
 							</div>
 							<p class="center">$Name</p>
 						</a>
@@ -47,7 +47,7 @@
 					<div class="col-sm-2 col-xs-6">
 		                <a <% if IsExternalUrl %>rel="nofollow"<% end_if %> href="$ShowLink">
 		                	<div class="img-wrapper">
-                                <img src="{$getLogoUrl(138)}" alt="$Name">
+                                <img class="small_logo" src="{$getLogoUrl(138)}" alt="$Name">
 							</div>
 							<p class="center">$Name</p>
 						</a>
@@ -78,7 +78,7 @@
                 <div class="col-sm-2 col-xs-6">
                     <a <% if IsExternalUrl %>rel="nofollow"<% end_if %> href="$ShowLink">
                         <div class="img-wrapper">
-                            <img src="{$getLogoUrl(138)}" alt="$Name">
+                            <img class="small_logo" src="{$getLogoUrl(138)}" alt="$Name">
                         </div>
                         <p class="center">$Name</p>
                     </a>
@@ -103,7 +103,7 @@
 					<div class="col-sm-2 col-xs-6">
 	                <a <% if IsExternalUrl %>rel="nofollow"<% end_if %> href="$ShowLink">
 	                	<div class="img-wrapper">
-                            <img src="{$getLogoUrl(138)}" alt="$Name">
+                            <img class="small_logo" src="{$getLogoUrl(138)}" alt="$Name">
 						</div>
 						<p class="center">$Name</p>
 					</a>
@@ -131,7 +131,7 @@
 					<div class="col-sm-2 col-xs-4">
 	            		<a <% if IsExternalUrl %>rel="nofollow"<% end_if %> href="$ShowLink">
 	            			<div class="img-wrapper">
-                                <img src="{$getLogoUrl(138)}" alt="$Name">
+                                <img class="small_logo" src="{$getLogoUrl(138)}" alt="$Name">
 							</div>
 						</a>
 					</div>
