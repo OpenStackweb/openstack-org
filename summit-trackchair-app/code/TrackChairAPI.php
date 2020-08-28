@@ -38,12 +38,12 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         'handleChangeRequests',
         'handleResolveCategoryChange',
         'handlePresentationsExport',
-        'handleAddChair' => 'ADMIN',
-        'handleDeleteChair' => 'ADMIN',
-        'handleRestoreOrders' => 'ADMIN',
-        'handleChairExport' => 'ADMIN',
-        'handlePresentationsWithComments' => 'ADMIN',
-        'handleFindMember' => 'ADMIN'
+        'handleAddChair',
+        'handleDeleteChair',
+        'handleRestoreOrders',
+        'handleChairExport',
+        'handlePresentationsWithComments',
+        'handleFindMember',
     ];
 
     /**
@@ -119,7 +119,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
             }
         }
 
-        if (Permission::check('ADMIN')) {
+        if (TrackChairsAuthorization::isAdmin($summit->ID)) {
             $data['is_admin'] = true;
             $data['categories'] = [];
             foreach ($summit->Categories()->filter('ChairVisible', true) as $c) {
@@ -558,7 +558,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
             	'SummitEvent.SummitID' => $summitID            	
             ]);
 
-        if(!Permission::check('ADMIN') && $categories) {
+        if(!TrackChairsAuthorization::isAdmin($summitID) && $categories) {
             $cat_ids_string = implode(',',$categories);
         	$changeRequests = $changeRequests->where(
                 "SummitEvent.CategoryID IN (".$cat_ids_string.") OR SummitCategoryChange.NewCategoryID IN(".$cat_ids_string.")"
@@ -603,7 +603,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         	]);
         }
 
-        $isAdmin = Permission::check('ADMIN');
+        $isAdmin = TrackChairsAuthorization::isAdmin($summitID);
 
         $memID = Member::currentUserID();
 
@@ -660,7 +660,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         if (!$member) {
             return $this->httpError(404, 'Member not found');
         }
-        $id = SummitTrackChair::addChair($member, $catid);
+        $id = SummitTrackChair::addChair($member, $catid, self::getCurrentSummitId());
         $category->MemberList($member->ID);
         $category->GroupList();
 
@@ -709,7 +709,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
     public function handleResolveCategoryChange(SS_HTTPRequest $r)
     {
         $requestId = $r->param('ID');
-
+        $summit = $this->getCurrentSummit();
         if (!is_numeric($requestId)) {
             return $this->httpError(500, "Invalid category change id");
         }
@@ -728,7 +728,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
 
         $new_category = PresentationCategory::get()->byID($request->NewCategoryID);
 
-        if(!$new_category->isTrackChair(Member::currentUserID()) && !Permission::check('ADMIN')) {
+        if(!$new_category->isTrackChair(Member::currentUserID()) && !TrackChairsAuthorization::isAdmin($summit->ID)) {
             return $this->httpError(403);
         }
         
@@ -747,7 +747,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         }
 
         // Make the category change
-        $summit = $this->getCurrentSummit();
+
         $category = $summit->Categories()->filter('ID', $request->NewCategoryID)->first();
         if (!$category->exists()) {
             return $this->httpError(500, "Category not found in current summit");
@@ -831,6 +831,9 @@ class TrackChairAPI extends AbstractRestfulJsonApi
 
     public function handleChairExport()
     {
+        if(!TrackChairsAuthorization::isAdmin(self::getCurrentSummitId()))
+            return $this->httpError(403, 'You are not authorized.');
+
         $activeSummit = $this->getCurrentSummit();
         $filepath = '/tmp/track-chairs.csv';
 
@@ -867,6 +870,9 @@ class TrackChairAPI extends AbstractRestfulJsonApi
 
     public function handlePresentationsExport(SS_HTTPRequest $r)
     {
+        if(!TrackChairsAuthorization::isAdmin(self::getCurrentSummitId()))
+            return $this->httpError(403, 'You are not authorized.');
+
         $activeSummit = $this->getCurrentSummit();
         $summitID = $activeSummit->ID;
         $filepath = '/tmp/track-chairs-presentations.csv';
@@ -936,6 +942,9 @@ class TrackChairAPI extends AbstractRestfulJsonApi
 
     public function handleFindMember(SS_HTTPRequest $r)
     {
+        if(!TrackChairsAuthorization::isAdmin(self::getCurrentSummitId()))
+            return $this->httpError(403, 'You are not authorized.');
+
     	$search = Convert::raw2sql($r->getVar('search'));
     	$results = Member::get()
     				->where(

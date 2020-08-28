@@ -18,7 +18,16 @@ final class TrackChairsAuthorization
         $member = Member::currentUser();
         if(is_null($member)) return false;
         if($member->isAdmin()) return true;
+        if($member->inGroup('track-chairs-admins')) return true;
         if($member->inGroup('track-chairs')) return true;
+        return false;
+    }
+
+    public static function isAdmin(int $summit_id):bool{
+        $member = Member::currentUser();
+        if(is_null($member)) return false;
+        if($member->isAdmin()) return true;
+        if($member->inGroup('track-chairs-admins')) return true;
         return false;
     }
 }

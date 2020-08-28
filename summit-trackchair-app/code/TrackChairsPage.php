@@ -113,7 +113,7 @@ class TrackChairsPage_Controller extends Page_Controller
             'userinfo' => [
             	'name' => Member::currentUser()->getName(),
             	'email' => Member::currentUser()->Email,
-            	'isAdmin' => Permission::check('ADMIN')
+            	'isAdmin' => TrackChairsAuthorization::isAdmin($summit->ID)
             ]
         ]);
     }

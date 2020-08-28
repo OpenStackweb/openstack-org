@@ -40,17 +40,26 @@ class SummitTrackChair extends DataObject
     /**
      * @param $member
      * @param $category_id
+     * @param $summit_id
      * @throws ValidationException
      * @throws null
      */
-    public static function addChair($member, $category_id)
+    public static function addChair($member, $category_id, $summit_id)
     {
 
-        $priorChair = SummitTrackChair::get()->filter('MemberID', $member->ID)->first();
-        $category = PresentationCategory::get()->byID($category_id);
+        $priorChair = SummitTrackChair::get()->filter
+        (
+            [
+                'MemberID' => $member->ID,
+                'SummitID' => $summit_id
+            ]
+        )->first();
 
+        $category = PresentationCategory::get()->byID($category_id);
+        $summit =  Summit::get()->byID(intval($summit_id));
         if (!$priorChair) {
             $chair = new self();
+            $chair->SummitID = $summit->ID;
             $chair->MemberID = $member->ID;
             $chair->write();
             $chair->Categories()->add($category);
