@@ -27,6 +27,10 @@
 							<p class="center">$Name</p>
 						</a>
 				</div>
+		<% if $MultipleOf(6) %>
+		</div>
+		<div class="row logos">
+		<% end_if %>
 			<% end_loop %>
 
 		</div>
@@ -52,6 +56,10 @@
 							<p class="center">$Name</p>
 						</a>
 					</div>
+		<% if $MultipleOf(6) %>
+		</div>
+		<div class="row logos">
+		<% end_if %>
 				<% end_loop %>
 			</div>
 		<% end_if %>
@@ -75,7 +83,7 @@
 
 		<div class="row logos">
 			<% loop getDonorsOrdered() %>
-                <div class="col-sm-2 col-xs-6">
+						    <div class="col-sm-2 col-xs-6">
                     <a <% if IsExternalUrl %>rel="nofollow"<% end_if %> href="$ShowLink">
                         <div class="img-wrapper">
                             <img class="small_logo" src="{$getLogoUrl(138)}" alt="$Name">
@@ -83,6 +91,10 @@
                         <p class="center">$Name</p>
                     </a>
                 </div>
+		<% if $MultipleOf(6) %>
+		</div>
+		<div class="row logos">
+		<% end_if %>
 			<% end_loop %>
 		</div>
 
@@ -108,6 +120,10 @@
 						<p class="center">$Name</p>
 					</a>
 					</div>
+		<% if $MultipleOf(6) %>
+		</div>
+		<div class="row logos">
+		<% end_if %>
 				<% end_loop %>
 			</div>
 		<% end_if %>
@@ -135,6 +151,10 @@
 							</div>
 						</a>
 					</div>
+		<% if $MultipleOf(6) %>
+		</div>
+		<div class="row small-logos">
+		<% end_if %>
 				<% end_loop %>
 			</div>
 		<% end_if %>
