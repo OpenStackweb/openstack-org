@@ -22,12 +22,14 @@ class TrackChairsPage_Controller extends Page_Controller
     private static $allowed_actions = [
         'selectSummit',
         'handleIndex',
+        'handleError',
     ];
 
 	private static $url_handlers = [
+        'GET error' => 'handleError',
         'GET summits' => 'selectSummit',
         '$Page/$Action/$ID' => 'handleIndex',
-	];
+   ];
 
 	public function handleIndex (SS_HTTPRequest $request) {
         $summit_id = intval($request->requestVar('summitID'));
@@ -37,6 +39,22 @@ class TrackChairsPage_Controller extends Page_Controller
         }
 		return $this;
 	}
+
+	public function handleError(SS_HTTPRequest $request){
+        JQueryCoreDependencies::renderRequirements();
+        Page_Controller::AddRequirements();
+        Requirements::css('summit-trackchair-app/css/summits.css');
+
+        return $this->customise([
+            'backURL' => urlencode(sprintf('/track-chairs/summits'))
+        ])->renderWith(
+            [
+                'TrackChairsPage_error',
+                'TrackChairsPage_error'
+            ],
+            $this
+        );
+    }
 
 	public function selectSummit(SS_HTTPRequest $request){
 
@@ -83,9 +101,13 @@ class TrackChairsPage_Controller extends Page_Controller
     		);
     	}
 
-        if(!TrackChairsAuthorization::authorize($this->getCurrentSummitId()))
+    	$currentSummitId = $this->getCurrentSummitId();
+        if(!TrackChairsAuthorization::authorize($currentSummitId))
         {
-            return Security::permissionFailure($this);
+            if(!$currentSummitId) {
+                return Security::permissionFailure($this);
+            }
+            return $this->redirect($this->Link('error'));
         }
 
         Requirements::clear();

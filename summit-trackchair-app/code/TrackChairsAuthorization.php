@@ -14,20 +14,50 @@
 
 final class TrackChairsAuthorization
 {
-    public static function authorize(int $summit_id):bool{
+    public static function authorize(int $summit_id):bool {
         $member = Member::currentUser();
         if(is_null($member)) return false;
         if($member->isAdmin()) return true;
+
+        if($summit_id > 0) {
+            $sql = <<<SQL
+SELECT COUNT(DISTINCT(SummitAdministratorPermissionGroup_Summits.SummitID)) 
+FROM SummitAdministratorPermissionGroup_Members 
+INNER JOIN SummitAdministratorPermissionGroup_Summits ON 
+SummitAdministratorPermissionGroup_Summits.SummitAdministratorPermissionGroupID = SummitAdministratorPermissionGroup_Members.SummitAdministratorPermissionGroupID
+WHERE SummitAdministratorPermissionGroup_Members.MemberID = {$member->ID}
+AND 
+SummitAdministratorPermissionGroup_Summits.SummitID = {$summit_id}
+SQL;
+            $hasPermissionOnSummit = intval(DB::query($sql)->value()) > 0;
+            if($member->inGroup('track-chairs-admins') && $hasPermissionOnSummit) return true;
+            if($member->inGroup('track-chairs') && $hasPermissionOnSummit) return true;
+            return false;
+        }
+
+
         if($member->inGroup('track-chairs-admins')) return true;
         if($member->inGroup('track-chairs')) return true;
         return false;
     }
 
     public static function isAdmin(int $summit_id):bool{
+        if($summit_id == 0) return false;
         $member = Member::currentUser();
         if(is_null($member)) return false;
         if($member->isAdmin()) return true;
-        if($member->inGroup('track-chairs-admins')) return true;
+        $sql = <<<SQL
+SELECT COUNT(DISTINCT(SummitAdministratorPermissionGroup_Summits.SummitID)) 
+FROM SummitAdministratorPermissionGroup_Members 
+INNER JOIN SummitAdministratorPermissionGroup_Summits ON 
+SummitAdministratorPermissionGroup_Summits.SummitAdministratorPermissionGroupID = SummitAdministratorPermissionGroup_Members.SummitAdministratorPermissionGroupID
+WHERE SummitAdministratorPermissionGroup_Members.MemberID = {$member->ID}
+AND 
+SummitAdministratorPermissionGroup_Summits.SummitID = {$summit_id}
+SQL;
+        $hasPermissionOnSummit = intval(DB::query($sql)->value()) > 0;
+
+        if($member->inGroup('track-chairs-admins') && $hasPermissionOnSummit) return true;
         return false;
     }
 }
