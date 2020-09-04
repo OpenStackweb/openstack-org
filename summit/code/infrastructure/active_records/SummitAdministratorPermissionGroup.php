@@ -16,7 +16,7 @@
 class SummitAdministratorPermissionGroup extends DataObject
 {
     private static $db = array (
-        'Title'              => 'Text',
+        'Title'  => 'VarChar(255)',
     );
 
     const ValidGroups = [IGroup::SummitAdministrators, IGroup::TrackChairs, IGroup::TrackChairsAdmins];
