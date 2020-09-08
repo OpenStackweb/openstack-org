@@ -16,10 +16,7 @@ import ShareableLinkModal from './main-filter/shareable_link_modal';
 const CALENDAR_NO_EVENTS_MSG = 'You must select at least one event!';
 
 
-const RSVP_NOTE_TEXT = `Please note that adding an item to "My Schedule"
-    does not guarantee a seat in the presentation. Rooms fill up fast,
-    so get there early. Some events require an RSVP and, in those cases,
-    you will see a link to RSVP to the event.`;
+const RSVP_NOTE_TEXT = `Please note: All times below are listed in Central Time Zone.`;
 
 class MainFilter extends Component {
 
