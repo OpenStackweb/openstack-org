@@ -540,7 +540,7 @@
                         
                     
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="http://wwwen.zte.com.cn/en/"><img alt="ZTE Corporation_big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/zte-lg.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://www.zte.com.cn/global/"><img alt="ZTE Corporation_big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/zte-lg.jpg" class="big-logo-company company-logo"></a>
                         </div> 
                     </div>
                     <div class="item">
