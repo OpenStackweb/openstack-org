@@ -20,7 +20,6 @@ use Symfony\Component\Yaml\Yaml;
 class CustomDatabaseAdmin extends DatabaseAdmin
 {
     public function build() {
-        DB::query("ALTER TABLE `Member` DROP INDEX `ExternalUserId`;");
         $res = DB::query("SHOW KEYS FROM `Member` WHERE Key_name='ExternalUserId'")->first();
         if($res)
             DB::query("ALTER TABLE `Member` DROP INDEX `ExternalUserId`;");
