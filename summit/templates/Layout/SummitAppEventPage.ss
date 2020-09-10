@@ -3,6 +3,7 @@
         <div class="row schedule-title-wrapper">
             <div class="col-sm-6 col-xs-12 col-main-title">
                 <h1 style="text-align:left;">Event Details</h1>
+                <p>Please note: All times listed below are in Central Time Zone</p>
                 <% if $BackURL %>
                     <div class="go-back">
                         <a href="{$BackURL}"><< Go back </a>
