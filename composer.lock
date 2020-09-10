@@ -1656,12 +1656,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/smarcet/silverstripe-cloudassets.git",
-                "reference": "a5862ebebf58e1e3319bda91a74f096f4c33d38d"
+                "reference": "6455472113315f8e318dbb1caa5099d5668200c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smarcet/silverstripe-cloudassets/zipball/a5862ebebf58e1e3319bda91a74f096f4c33d38d",
-                "reference": "a5862ebebf58e1e3319bda91a74f096f4c33d38d",
+                "url": "https://api.github.com/repos/smarcet/silverstripe-cloudassets/zipball/6455472113315f8e318dbb1caa5099d5668200c5",
+                "reference": "6455472113315f8e318dbb1caa5099d5668200c5",
                 "shasum": ""
             },
             "require": {
