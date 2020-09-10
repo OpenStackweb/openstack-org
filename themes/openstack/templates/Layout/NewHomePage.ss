@@ -4,55 +4,42 @@
 
 </div>
 <div class="intro-header featured">
-<div class="container">
-<div class="row">
-<div class="col-lg-8 col-sm-6" style="padding-left: 0px; padding-right: 0px">
-
-<div class="intro-message">
-<h1>The Most Widely Deployed Open Source Cloud Software in the World</h1>
-</div>
-
-<p>
-Deployed by thousands. Proven production at scale. OpenStack is a set of software components that provide
-common services for cloud infrastructure.
-</p>
-
-
-<div class="promo-btn-wrapper">
-<a href="/software/project-navigator/" class="promo-btn">browse openstack components</a>
-</div>
-<p>
-OpenStack is developed by the community. For the community. <a class="intro-header-link" href="/community/">Learn how
-to contribute</a> <i class="fa fa-arrow-right"></i>
-</p>
-</div>
-<div class="col-lg-3 col-lg col-sm-6" style="padding-left: 0px; padding-right: 0px">
-<img src="/themes/openstack/home_images/Hero/OpenStack_SFAs.svg">
-</div>
-
-</div>
-</div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-sm-6" style="padding-left: 0px; padding-right: 0px">
+        <div class="intro-message">
+          <h1>The Most Widely Deployed Open Source Cloud Software in the World</h1>
+        </div>
+        <p>
+          Deployed by thousands. Proven production at scale. OpenStack is a set of software components that provide common services for cloud infrastructure.
+        </p>
+        <div class="promo-btn-wrapper">
+          <a href="/software/project-navigator/" class="promo-btn">browse openstack components</a>
+        </div>
+        <p>
+          OpenStack is developed by the community. For the community. <a class="intro-header-link" href="/community/">Learn how to contribute</a> <i class="fa fa-arrow-right"></i>
+        </p>
+      </div>
+      <div class="col-lg-3 col-lg col-sm-6" style="padding-left: 0px; padding-right: 0px">
+        <img src="/themes/openstack/home_images/Hero/OpenStack_SFAs.svg">
+      </div>
+    </div>
+  </div>
 </div>
 <!-- /.intro-header -->
 
 <!-- Page Content -->
 
 <div class="news-anniversary">
-
-<div class="anniversary-robot">
-<img src="/themes/openstack/home_images/Birthday/OS10_Robot_final.svg">
-</div>
-<div class="anniversary-text">
-<h2>10 Years of OpenStack</h2>
-<p>
-Born from open collaboration, it’s grown to power the most critical infrastructure in the world.
-</p>
-</div>
-
-<div class="anniversary-btn-wrapper">
-<a href="https://www.openstack.org/blog/thank-you-to-the-last-decade-hello-to-the-next/" class="anniversary-btn">celebrate with us</a>
-</div>
-
+  <h3>VIRTUAL</h3>
+  <div class="anniversary-text">
+    <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/Summit-Logo-Web-w.svg">
+    <p>Collaborate with people from 100+ countries building and running open infrastruction in production using OpenStack, Kubernetes and 30+ other open source technologies.</p>
+  </div>
+  <div class="anniversary-btn-wrapper">
+    <p>October 19-23, 2020</p>
+    <a href="https://www.openstack.org/blog/thank-you-to-the-last-decade-hello-to-the-next/" class="anniversary-btn">Register for Free</a>
+  </div>
 </div>
 
 <!-- /.news-anniversary -->
