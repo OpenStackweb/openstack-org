@@ -1052,21 +1052,21 @@ p.promo-dates {
   justify-content: space-evenly;
   border-left: 50px solid #ffd602;
   filter: drop-shadow(2px 2px 1px #000);
-  h3 {
-    font-size: 1.2em;
-    color: #00497b;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    margin-left: -70px;
-    transform: rotate(270deg);
-  }
-  img {
-    margin-bottom: 10px;
-    width:600px;
-  }
+}
+.news-anniversary h3 {
+  font-size: 1.2em;
+  color: #00497b;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin-left: -70px;
+  transform: rotate(270deg);
+}
+.news-anniversary img {
+  margin-bottom: 10px;
+  width:600px;
 }
 
 .anniversary-robot {
@@ -1115,12 +1115,13 @@ a.anniversary-btn:hover, a.anniversary-btn:focus  {
 .anniversary-btn-wrapper {
   width: 50%;
   text-align: center;
-  p {
+}
+
+.anniversary-btn-wrapper p {
     font-size: 18px;
     color: #fff;
-    text-align: center;"
+    text-align: center;
   }
-}
 
 @media (max-width: 767px) {
   .news-anniversary {
