@@ -34,7 +34,7 @@
   <h3>VIRTUAL</h3>
   <div class="anniversary-text">
     <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/Summit-Logo-Web-w.svg">
-    <p>Collaborate with people from 100+ countries building and running open infrastruction in production using OpenStack, Kubernetes and 30+ other open source technologies.</p>
+    <p>Collaborate with people from 100+ countries building and running open infrastructure in production using OpenStack, Kubernetes and 30+ other open source technologies.</p>
   </div>
   <div class="anniversary-btn-wrapper">
     <p>October 19-23, 2020</p>
