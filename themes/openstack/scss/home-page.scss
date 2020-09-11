@@ -1217,25 +1217,19 @@ a.anniversary-btn:hover, a.anniversary-btn:focus {
 
 /*End News Anniversary*/
 
+
 /*Diagram Section*/
-
-  .diagram-section {
-    margin-top: 65px; 
-  }
-
-  h2 {
+.diagram-section {
+  margin-top: 65px; }
+  .diagram-section h2 {
     font-size: 28px;
     color: #00497B;
-    padding-top: 30px;
-  }
-
-  p {
+    padding-top: 30px; }
+  .diagram-section p {
     font-size: 16px;
     line-height: 22px;
-    color: #888;
-  }
-
-  a.diagram-btn {
+    color: #888; }
+  .diagram-section a.diagram-btn {
     white-space: nowrap;
     color: white;
     font-size: 16px;
@@ -1247,68 +1241,43 @@ a.anniversary-btn:hover, a.anniversary-btn:focus {
     text-transform: uppercase;
     min-width: 250px;
     display: inline-block;
-    line-height: 2;
-  }
-
-  a.diagram-btn:hover, a.diagram-btn:focus  {
+    line-height: 2; }
+  .diagram-section a.diagram-btn:hover, .diagram-section a.diagram-btn:focus {
     text-decoration: none;
     /*background: rgba(255, 255, 255, 0.2);*/
-    background: #A51B1B;
-  }
-
-  .diagram-btn-wrapper {
-    margin-top: 40px;
-  }
-
-  .diagram-icons {
-    width:100%;
-    margin:auto;
-    margin-top:30px;
-
-    img {
+    background: #A51B1B; }
+  .diagram-section .diagram-btn-wrapper {
+    margin-top: 40px; }
+  .diagram-section .diagram-icons {
+    width: 100%;
+    margin: auto;
+    margin-top: 30px; }
+    .diagram-section .diagram-icons img {
       margin-bottom: -80px;
       width: 60%;
-      margin-left: 20%;
-    }
-    p, h2 {
-      text-align: center;
-    }
-  }
-}
+      margin-left: 20%; }
+    .diagram-section .diagram-icons p, .diagram-section .diagram-icons h2 {
+      text-align: center; }
 
 @media (max-width: 767px) {
-  .diagram-section {
-    .diagram-btn-wrapper {
-      margin-top: 40px;
-      text-align: center;
-    }
-    .diagram-icons {
-      img {
-        width: 50%;
-        margin: 0 auto;
-        display: block;
-        margin-bottom: -40px;
-      }
-      h2 {
-        margin-bottom: 0px;
-        padding-top: 20px;
-      }
-    }
-  }
-}
+  .diagram-section .diagram-btn-wrapper {
+    margin-top: 40px;
+    text-align: center; }
+  .diagram-section .diagram-icons img {
+    width: 50%;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: -40px; }
+  .diagram-section .diagram-icons h2 {
+    margin-bottom: 0px;
+    padding-top: 20px; } }
 
 @media (max-width: 1000px) {
-  .diagram-section {
-    .diagram-icons {
-      img {
-        margin-bottom: -50px;
-      }
-      h2 {
-        padding-top: 20px;
-      }
-    }
-  }
-}
+  .diagram-section .diagram-icons img {
+    margin-bottom: -50px; }
+  .diagram-section .diagram-icons h2 {
+    padding-top: 20px; } }
+
 /*End Diagram*/
 
 /*Ussuri Section*/
