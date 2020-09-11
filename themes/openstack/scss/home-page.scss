@@ -1052,7 +1052,6 @@ p.promo-dates {
   align-items: center;
   justify-content: space-evenly;
   border-left: 50px solid #ffd602;
-  filter: drop-shadow(2px 2px 1px #000); 
   margin: auto;
 }
 
@@ -1196,7 +1195,7 @@ a.anniversary-btn:hover, a.anniversary-btn:focus {
 
   .news-anniversary h3 {
     font-size: 1.1em;
-    left: 130px;
+    width: 100%;
     top: -35px;
     margin-left:0;
     transform: none; 
