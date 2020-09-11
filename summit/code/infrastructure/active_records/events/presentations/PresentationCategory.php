@@ -170,7 +170,14 @@ class PresentationCategory extends DataObject
      */
     public function isTrackChair($member_id)
     {
-        return $this->exists()? intval($this->TrackChairs()->filter('MemberID', $member_id)->count()):0;
+        if($this->exists()){
+            $res = intval($this->TrackChairs()->filter
+            (
+                'MemberID', $member_id
+            )->count()) > 0;
+            return $res;
+        }
+        return false;
     }
 
     public function MemberList($memberid, $list_class = SummitSelectedPresentationList::Session)

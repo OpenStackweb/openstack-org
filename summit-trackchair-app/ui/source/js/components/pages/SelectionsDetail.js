@@ -89,8 +89,9 @@ class SelectionsDetail extends React.Component {
     	}
 
     	const IndividualListComponent = canEditIndividual ? SelectionsList : StaticSelectionsList;
-    	const TeamListComponent = canEditTeam ? SelectionsList : StaticSelectionsList;
 
+    	const TeamListComponent = canEditTeam ? SelectionsList : StaticSelectionsList;
+		console.log(`canEditIndividual ${canEditIndividual} canEditTeam ${canEditTeam}`);
         return (
         	<div className="row">        	
         		<div className="col-md-4 column-maybe">

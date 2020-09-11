@@ -168,7 +168,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
 
         if ($selectionPlan) {
             foreach ($selectionPlan->getSelectionCategories() as $c) {
-                $isChair = ($c->isTrackChair(Member::currentUserID()) === 1);
+                $isChair = $c->isTrackChair(Member::currentUserID());
                 $categoryDetials = [
                     'id' => $c->ID,
                     'title' => $c->Title,
