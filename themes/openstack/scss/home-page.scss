@@ -1040,6 +1040,7 @@ p.promo-dates {
 
 
 /*News Anniversary*/
+
 .news-anniversary {
   width: 90%;
   background-color: #00497B;
@@ -1082,11 +1083,13 @@ p.promo-dates {
   color: #FFFFFF;
   padding-left: 80px;
   padding-right: 90px;
-  text-align: left; }
+  text-align: left; 
+  }
 
 .anniversary-text p {
   font-size: 16px;
-  color: #fff; }
+  color: #fff; 
+  }
 
 a.anniversary-btn {
   white-space: nowrap;
@@ -1101,21 +1104,25 @@ a.anniversary-btn {
   text-transform: uppercase;
   min-width: 190px;
   display: inline-block;
-  line-height: 22px; }
+  line-height: 22px; 
+  }
 
 a.anniversary-btn:hover, a.anniversary-btn:focus {
   text-decoration: none;
   background: #fff;
-  color: #00497B; }
+  color: #00497B; 
+  }
 
 .anniversary-btn-wrapper {
   width: 50%;
-  text-align: center; }
+  text-align: center; 
+  }
 
 .anniversary-btn-wrapper p {
   font-size: 18px;
   color: #fff;
-  text-align: center; }
+  text-align: center; 
+  }
 
 @media (max-width: 1200px) {
   
@@ -1135,7 +1142,7 @@ a.anniversary-btn:hover, a.anniversary-btn:focus {
   .anniversary-text {
     padding-bottom: 20px;
     text-align:center;
-    padding-left:20px
+    padding-left:20px;
    }
   .anniversary-btn-wrapper {
     padding-bottom:40px; 
@@ -1169,37 +1176,38 @@ a.anniversary-btn:hover, a.anniversary-btn:focus {
       text-align: center;
       margin: 19px 0 29px; 
       padding-bottom: 10px;
-  }
+    }
       .news-anniversary img {
         margin-bottom: 10px;
         width: 400px; 
         padding-top: 40px;
-  }
+    }
 }
 
 @media (max-width: 550px) {
   
-.news-anniversary {
-  border-top: 40px solid #ffd602;
-  border-left: none;
-  magin: auto !important;
-  /*! text-align: center; */
-  width: 90%;
-}
+  .news-anniversary {
+    border-top: 40px solid #ffd602;
+    border-left: none;
+    magin: auto !important;
+    /*! text-align: center; */
+    width: 90%;
+  }
 
-.news-anniversary h3 {
-  font-size: 1.1em;
-  left: 130px;
-  top: -35px;
-  margin-left:0;
-  transform: none; 
-  text-align: center;
-}
+  .news-anniversary h3 {
+    font-size: 1.1em;
+    left: 130px;
+    top: -35px;
+    margin-left:0;
+    transform: none; 
+    text-align: center;
+  }
   
  .news-anniversary img {
         width: 320px; 
         padding-bottom:15px;
   }
+
  .anniversary-text p {
       font-size:14px;
       line-height: 2.2em;
@@ -1212,7 +1220,7 @@ a.anniversary-btn:hover, a.anniversary-btn:focus {
   .diagram-section {
     margin-top: 65px; 
   }
-  
+
   h2 {
     font-size: 28px;
     color: #00497B;
