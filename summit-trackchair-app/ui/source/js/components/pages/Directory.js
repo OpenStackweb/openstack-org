@@ -18,7 +18,8 @@ class Directory extends React.Component {
     		sortCol, 
     		sortDir, 
     		sortTable,
-    		deleteRow
+    		deleteRow,
+			summitID
     	} = this.props;
 
    		const columns =[
@@ -58,7 +59,7 @@ class Directory extends React.Component {
 			            {isAdmin &&
 							<div className="html5buttons">
 								<div className="dt-buttons btn-group">
-									<a href='/trackchairs/api/v1/export/chairs' className="btn btn-default buttons-html5">
+									<a href={`/trackchairs/api/v1/export/chairs?summitID=${summitID}`} className="btn btn-default buttons-html5">
 										<span><i className="fa fa-download" /> Export CSV</span>
 									</a>
 									<a onClick={toggleAddChair} className="btn btn-primary">
@@ -138,6 +139,7 @@ export default connect(
 			sortDir,
 			searchTerm,
 			isAdmin: window.TrackChairAppConfig.userinfo.isAdmin,
+			summitID: window.TrackChairAppConfig.summitID,
 			showAddForm
 		}
 	},

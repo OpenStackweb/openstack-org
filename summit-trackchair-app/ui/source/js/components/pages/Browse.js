@@ -62,7 +62,8 @@ class Browse extends React.Component {
             '/trackchairs/api/v1/export/presentations',
             {
                 category: category,
-                search: search
+                search: search,
+				summitID: summit.data.id,
             },
 			'/'
 		);

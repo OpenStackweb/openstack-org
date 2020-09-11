@@ -870,7 +870,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
 
     public function handlePresentationsExport(SS_HTTPRequest $r)
     {
-        if(!TrackChairsAuthorization::isAdmin(self::getCurrentSummitId()))
+       if(!TrackChairsAuthorization::isAdmin(self::getCurrentSummitId()))
             return $this->httpError(403, 'You are not authorized.');
 
         $activeSummit = $this->getCurrentSummit();
