@@ -1039,8 +1039,8 @@ p.promo-dates {
 /*End Hero*/
 
 
-/*News Anniversary*/
 
+/*News Anniversary*/
 .news-anniversary {
   width: 90%;
   background-color: #00497B;
@@ -1052,19 +1052,16 @@ p.promo-dates {
   align-items: center;
   justify-content: space-evenly;
   border-left: 50px solid #ffd602;
-  margin: auto;
-}
+  margin: auto; }
 
 .news-anniversary h3 {
   font-size: 1.2em;
-  color: #00497b;
+  color: #00497B;
   text-transform: uppercase;
   letter-spacing: 3px;
   position: absolute;
-  left: 0;
-  margin-left: -70px;
-  transform: rotate(270deg); 
-  }
+  left: 50px;
+  transform: rotate(270deg); }
 
 .news-anniversary img {
   margin-bottom: 30px;
@@ -1072,8 +1069,7 @@ p.promo-dates {
 
 .anniversary-robot {
   width: 30%;
-  padding: 19px 0; 
-  }
+  padding: 19px 0; }
 
 .anniversary-text {
   width: 100%;
@@ -1081,13 +1077,11 @@ p.promo-dates {
   color: #FFFFFF;
   padding-left: 80px;
   padding-right: 90px;
-  text-align: left; 
-  }
+  text-align: left; }
 
 .anniversary-text p {
   font-size: 16px;
-  color: #fff; 
-  }
+  color: #fff; }
 
 a.anniversary-btn {
   white-space: nowrap;
@@ -1102,117 +1096,108 @@ a.anniversary-btn {
   text-transform: uppercase;
   min-width: 190px;
   display: inline-block;
-  line-height: 22px; 
-  }
+  line-height: 22px; }
 
 a.anniversary-btn:hover, a.anniversary-btn:focus {
   text-decoration: none;
   background: #fff;
-  color: #00497B; 
-  }
+  color: #00497B; }
 
 .anniversary-btn-wrapper {
   width: 50%;
-  text-align: center; 
-  }
+  text-align: center; }
 
 .anniversary-btn-wrapper p {
   font-size: 18px;
   color: #fff;
-  text-align: center; 
-  }
+  text-align: center; }
 
 @media (max-width: 1200px) {
-  
   .anniversary-text {
-    padding-right: 20px;
-   }
-
+    padding-right: 20px; }
   .anniversary-btn-wrapper {
-    width: 50%; 
-  }
+    width: 50%; } 
+.news-anniversary h3 {
+  position:absolute;
+  left:40px;
 }
+}
+
 
 @media (max-width: 1100px) {
   .news-anniversary {
-      flex-direction: column; 
-    }
+    flex-direction: column; }
   .anniversary-text {
     padding-bottom: 20px;
-    text-align:center;
-    padding-left:20px;
-   }
+    text-align: center;
+    padding-left: 20px; }
   .anniversary-btn-wrapper {
-    padding-bottom:40px; 
+    padding-bottom: 40px; } 
+  .news-anniversary h3 {
+    left:35px;
   }
 }
-    
-
-@media (max-width: 767px) {
-
-    .news-anniversary {
-      flex-direction: column; 
-      text-align:center;
-    }
-  
-    .news-anniversary .anniversary-robot {
-      width: 100%;
-      padding: 19px 0 0; 
-      }
-  
-    .news-anniversary .anniversary-text {
-      width: 100%;
-      padding: 20px; 
-      text-align:center;
-      padding: 0 10px;
-    }
-    .anniversary-text p {
-      font-size:16px;
-      line-height: 2.2em;
-      padding: 0 20px;
-    }
-    .news-anniversary .anniversary-btn-wrapper {
-      width: 100%;
-      text-align: center;
-      margin: 19px 0 29px; 
-      padding-bottom: 10px;
-    }
-      .news-anniversary img {
-        margin-bottom: 10px;
-        width: 400px; 
-        padding-top: 40px;
-    }
+@media (max-width: 1000px) {
+  .news-anniversary h3 {
+    left:30px;
+  }
 }
 
+@media (max-width: 900px) {
+  .news-anniversary h3 {
+    left:25 px;
+  }
+}
+
+@media (max-width: 767px) {
+  .news-anniversary {
+    flex-direction: column;
+    text-align: center; }
+  .news-anniversary .anniversary-robot {
+    width: 100%;
+    padding: 19px 0 0; }
+  .news-anniversary .anniversary-text {
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    padding: 0 10px; }
+  .anniversary-text p {
+    font-size: 16px;
+    line-height: 2.2em;
+    padding: 0 20px; }
+  .news-anniversary .anniversary-btn-wrapper {
+    width: 100%;
+    text-align: center;
+    margin: 19px 0 29px;
+    padding-bottom: 10px; }
+  .news-anniversary img {
+    margin-bottom: 10px;
+    width: 400px;
+    padding-top: 40px; } 
+  .news-anniversary h3 {
+    left:15px;
+  }}
+
 @media (max-width: 550px) {
-  
   .news-anniversary {
     border-top: 40px solid #ffd602;
     border-left: none;
     magin: auto !important;
-    width: 90%;
-  }
-
+    width: 90%; }
   .news-anniversary h3 {
     font-size: 1.1em;
     width: 100%;
-    top: -35px;
-    margin-left:0;
-    transform: none; 
-    text-align: center;
-  }
-  
- .news-anniversary img {
-        width: 320px; 
-        padding-bottom:15px;
-  }
-
- .anniversary-text p {
-      font-size:14px;
-      line-height: 2.2em;
-      padding: 0 20px;
-    }
+    transform: none;
+    text-align: center; 
+    margin-top:-380px;
 }
+  .news-anniversary img {
+    width: 320px;
+    padding-bottom: 15px; }
+  .anniversary-text p {
+    font-size: 14px;
+    line-height: 2.2em;
+    padding: 0 20px; } }
 
 /*End News Anniversary*/
 
