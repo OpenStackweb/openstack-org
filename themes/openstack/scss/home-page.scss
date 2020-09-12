@@ -1188,8 +1188,9 @@ a.anniversary-btn:hover, a.anniversary-btn:focus {
     font-size: 1.1em;
     width: 100%;
     transform: none;
-    text-align: center; 
-    margin-top:-380px;
+    text-align: center;
+    top: -35px;
+    position: relative; 
 }
   .news-anniversary img {
     width: 320px;
