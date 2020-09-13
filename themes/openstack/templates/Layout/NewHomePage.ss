@@ -38,7 +38,7 @@
   </div>
   <div class="anniversary-btn-wrapper">
     <p>October 19-23, 2020</p>
-    <a href="https://www.openstack.org/blog/thank-you-to-the-last-decade-hello-to-the-next/" class="anniversary-btn">Register for Free</a>
+    <a href="https://www.openstack.org/summit/2020/" class="anniversary-btn">Register for Free</a>
   </div>
 </div>
 
