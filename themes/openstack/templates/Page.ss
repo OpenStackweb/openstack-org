@@ -30,6 +30,7 @@
     <![endif]-->
 
     <% include Page_GoogleAnalytics %>
+    <% include Page_MicrosoftAdvertising %>
     <% include Page_LinkedinInsightTracker %>
   </head>
 

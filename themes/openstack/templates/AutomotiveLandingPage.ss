@@ -30,7 +30,7 @@
     <![endif]-->
 
     <% include Page_GoogleAnalytics %>
-
+    <% include Page_MicrosoftAdvertising %>
 </head>
 
 <body>

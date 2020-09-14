@@ -4,6 +4,7 @@
 <head>
     <% include Head %>
     <% include Page_GoogleAnalytics %>
+    <% include Page_MicrosoftAdvertising %>
 </head>
 <body class="summit-landing-body">
     <!-- Begin Page Content -->

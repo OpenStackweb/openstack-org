@@ -34,6 +34,7 @@
 
 
         <% include Page_GoogleAnalytics %>
+        <% include Page_MicrosoftAdvertising %>
         $FBTrackingCode
 
         <!-- GoogleAdWords Start -->
