@@ -4,6 +4,7 @@
 <head>
     <% include Head %>
     <% include Page_GoogleAnalytics %>
+    <% include Page_MicrosoftAdvertising %>
     $CurrentSummitPageController().FBTrackingCode
     $CurrentSummitPageController().TwitterTrackingCode
     <!-- GoogleAdWords Start -->

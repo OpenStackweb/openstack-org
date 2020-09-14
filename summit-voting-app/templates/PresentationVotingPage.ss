@@ -24,6 +24,7 @@
       $ModuleCSS('main')      
       <!-- Page-specific CSS -->
       <% include Page_GoogleAnalytics %>
+      <% include Page_MicrosoftAdvertising %>
    </head>
    <body class="voting-body">
       <div class="outer-wrap">

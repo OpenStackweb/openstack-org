@@ -33,7 +33,7 @@
 
 
     <% include Page_GoogleAnalytics %>
-
+    <% include Page_MicrosoftAdvertising %>
     <!-- GoogleAdWords Start -->
     $GATrackingCode
     <!-- GoogleAdWords End -->

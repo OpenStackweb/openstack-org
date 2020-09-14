@@ -5,6 +5,7 @@
     <% base_tag %>
     <% include Head %>
     <% include Page_GoogleAnalytics %>
+    <% include Page_MicrosoftAdvertising %>
     $FBTrackingCode
     $TwitterTrackingCode
     <!-- GoogleAdWords Start -->

@@ -18,6 +18,7 @@
         <link href='https://fonts.googleapis.com/css?family=PT+Sans&subset=latin' rel='stylesheet' type='text/css'>
 
         <% include Page_GoogleAnalytics %>
+        <% include Page_MicrosoftAdvertising %>
         $FBTrackingCode
 
     </head>

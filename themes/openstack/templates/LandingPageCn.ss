@@ -21,7 +21,7 @@
       // Used to record outbound links before the browser resets to the new site
 
      <% include Page_GoogleAnalytics %>
-
+     <% include Page_MicrosoftAdvertising %>
   </head>
 
   <body class="landing landing_index" data-spy="scroll" data-target=".nav-list">

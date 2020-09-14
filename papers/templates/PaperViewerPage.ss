@@ -19,6 +19,7 @@
     <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <% include Page_GoogleAnalytics %>
+    <% include Page_MicrosoftAdvertising %>
 
 </head>
 
