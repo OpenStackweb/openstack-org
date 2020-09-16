@@ -97,7 +97,7 @@
                     <div id="action-buttons-container"></div>
                 <div class="row info_item">
                     <div class="col-md-2 col-xs-2 info_item_icon"><i class="fa fa-clock-o icon-clock"></i></div>
-                    <div class="col-md-10 col-xs-10 info_item_text">$Event.DateNice()</div>
+                    <div class="col-md-10 col-xs-10 info_item_text">$Event.DateNice()(UTC -5)</div>
                 </div>
                 <% if Event.Summit.ShouldShowVenues %>
                     <div class="row info_item">
