@@ -15,7 +15,7 @@ class PresentationTagCloud extends React.Component {
 
     searchTag(tag) {
     	let {category} = this.props
-        browserHistory.push( URL.create('/browse', {search: tag.value, category: category}) );
+        browserHistory.push( URL.create('/browse', {search: tag.value, category: category, summitID:window.TrackChairAppConfig.summitID }) );
     }
 
     render() {

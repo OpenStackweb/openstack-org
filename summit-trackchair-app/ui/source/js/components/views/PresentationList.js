@@ -15,7 +15,7 @@ const PresentationList = ({
 }) => (
 	<ScrollableFeed onRequestMore={onRequestMore} hasMore={hasMore}>
         {presentations.map(presentation => {        	
-        	let link = URL.addQueryParams(`browse/${presentation.id}`, {category, search});        	
+        	let link = URL.addQueryParams(`browse/${presentation.id}`, {category, search, summitID:window.TrackChairAppConfig.summitID});
         	const notes = <PresentationMetrics presentation={presentation} />
         	return (
 	        	<RouterLink link={link} key={presentation.id}>

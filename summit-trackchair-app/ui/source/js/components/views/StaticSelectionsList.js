@@ -21,7 +21,10 @@ class StaticSelectionsList extends React.Component {
 							showRank={this.props.showRank}
 							canUp={false}							
 							canDown={false}
-							link={URL.create(`browse/${s.id}`, {category: this.props.category})}
+							link={URL.create(`browse/${s.id}`, {
+								category: this.props.category,
+								summitID:window.TrackChairAppConfig.summitID
+							})}
 							notes={<PresentationMetrics presentation={s.presentation} />}
 						>
 							<div className="selection-meta">

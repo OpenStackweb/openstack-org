@@ -49,7 +49,7 @@ export default connect (
 		return {
 			activeLink,
 			browseLink: state.detailPresentation.id ? 
-				`browse/${state.detailPresentation.id}?category=${state.detailPresentation.category_id}` :
+				`browse/${state.detailPresentation.id}?category=${state.detailPresentation.category_id}&summitID=${window.TrackChairAppConfig.summitID}` :
 				'',
 			LogoutLink: `/Security/logout?BackURL=${window.TrackChairAppConfig.backURL}`
 		}

@@ -135,7 +135,10 @@ class SelectionsList extends React.Component {
 					canUp={(s.order > 1 && selections.length > 1)}
 					canDown={(s.order < selections.length)}
 					showRank={this.props.showRank}
-					link={URL.create(`browse/${s.id}`, {category: this.props.category})}
+					link={URL.create(`browse/${s.id}`, {
+						category: this.props.category,
+						summitID:window.TrackChairAppConfig.summitID
+					})}
 					/>	
 				))}
 			</div>
