@@ -1113,13 +1113,16 @@ a.anniversary-btn:hover, a.anniversary-btn:focus {
 
 @media (max-width: 1300px) {
   .anniversary-text {
-    padding-right: 20px; }
+    padding-right: 20px; 
+    padding-left:50px; 
+    }
   .anniversary-btn-wrapper {
-    width: 50%; } 
+    width: 50%; 
+    } 
 .news-anniversary h3 {
   position:absolute;
   left:40px;
-}
+  }
 }
 
 
