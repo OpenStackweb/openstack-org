@@ -38,6 +38,11 @@ class FullScheduleView extends React.Component {
         this.setState({...this.state, showDescription: e.target.checked});
     }
 
+    goBack(ev) {
+        ev.preventDefault();
+        window.history.back();
+    }
+
     render(){
         const { events, base_url, should_show_venues, isLoggedUser, backUrl, pdfUrl, goBack, timeZone } = this.props;
         return (
@@ -48,7 +53,7 @@ class FullScheduleView extends React.Component {
                         <h1 style={{textAlign:'left'}}>Full Schedule</h1>
                         { goBack &&
                             <div className="go-back">
-                                <a href="#" onClick={() => window.history.back()}>&lt;&lt;Go&nbsp;back</a>
+                                <a href="#" onClick={this.goBack}>&lt;&lt;Go&nbsp;back</a>
                             </div>
                         }
                     </div>
