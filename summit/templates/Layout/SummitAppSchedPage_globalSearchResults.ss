@@ -45,7 +45,8 @@
                             presentation_levels: {},
                             presentation_level_ids: [],
                             current_user: null,
-                            should_show_venues: <% if $Summit.ShouldShowVenues %>true<% else %>false<% end_if %>
+                            should_show_venues: <% if $Summit.ShouldShowVenues %>true<% else %>false<% end_if %>,
+                            timezone: "{$Summit.getTimeZoneOffsetFriendly()}"
                         };
 
                     summit.share_info =   {

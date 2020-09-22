@@ -249,6 +249,9 @@ class SummitEvent extends DataObject implements ISummitEvent
     }
 
     public function getDateNice() {
+        $summit_id  = isset($_REQUEST['SummitID']) ?  $_REQUEST['SummitID'] : $this->SummitID;
+        $summit     = Summit::get()->byID($summit_id);
+
         $start_date = $this->getStartDateNice();
         $end_date = $this->getEndDateNice();
         $date_nice = '';
@@ -256,6 +259,11 @@ class SummitEvent extends DataObject implements ISummitEvent
         if ($start_date == 'TBD' || $end_date == 'TBD') return $start_date;
 
         $date_nice = date('l, F j, g:ia',strtotime($start_date)).'-'.date('g:ia',strtotime($end_date));
+
+        if ($summit) {
+            $date_nice = $date_nice . " (" . $summit->getTimeZoneOffsetFriendly() . ")";
+        }
+
         return $date_nice;
     }
 

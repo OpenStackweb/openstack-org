@@ -125,7 +125,7 @@ trait TimeZoneEntity
             $local_time_zone = new DateTimeZone($time_zone_identifier);
             $now = new DateTime("now", $local_time_zone);
             $offset = $local_time_zone->getOffset($now) / 3600;
-            return "GMT" . ($offset < 0 ? $offset : "+" . $offset);
+            return "UTC " . ($offset < 0 ? $offset : "+" . $offset);
         } catch (Exception $ex) {
             return null;
         }
