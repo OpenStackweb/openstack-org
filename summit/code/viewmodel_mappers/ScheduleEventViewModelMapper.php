@@ -40,6 +40,7 @@ final class ScheduleEventViewModelMapper implements IViewModelMapper
                 'start_time'         => $e->StartTime,
                 'end_time'           => $e->EndTime,
                 'date_nice'          => date('D j', $start_epoch->getTimestamp()),
+                'date_utc'           => $e->getUTCDateNice(),
                 'allow_feedback'     => $e->AllowFeedBack,
                 'location_id'        => intval($e->LocationID),
                 'type_id'            => intval($e->TypeID),

@@ -44,7 +44,7 @@ class FullScheduleView extends React.Component {
     }
 
     render(){
-        const { events, base_url, should_show_venues, isLoggedUser, backUrl, pdfUrl, goBack, timeZone } = this.props;
+        const { events, base_url, should_show_venues, isLoggedUser, backUrl, pdfUrl, goBack } = this.props;
         return (
             <div className="row">
                 <AjaxLoader show={ this.props.loading } size={ 120 }/>
@@ -94,7 +94,7 @@ class FullScheduleView extends React.Component {
                                 <tbody>
                                 {events[currentKey].map((event, index) => (
                                     <tr key={event.id} data-id={ event.id }>
-                                        <td>{ event.start_time } - { event.end_time } ({timeZone})</td>
+                                        <td>{ event.start_time } - { event.end_time } ({event.date_utc})</td>
                                         <td>
                                             <a href={ base_url+'events/'+ event.id } target="_blank">{ event.title }</a><br/>
                                             { this.state.showDescription &&
