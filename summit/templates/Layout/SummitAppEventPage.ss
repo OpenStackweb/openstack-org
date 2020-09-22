@@ -65,8 +65,8 @@
                                 has_ended       : <% if Event.hasEnded %>true<% else %>false<% end_if %>,
 
                                 <% if $Event.ClassName == 'Presentation' %>
-                                    to_record       : <% if $Event.ToRecord == 1 %>true<% else %>false<% end_if %>,
-                                    moderator_id: {$Event.ModeratorID},
+                                    to_record   : <% if $Event.ToRecord == 1 %>true<% else %>false<% end_if %>,
+                                    moderator_id: <%if $Event.ModeratorID %> {$Event.ModeratorID} <% else %> 0 <% end_if %>,
                                     speakers_id : [<% loop $Event.Speakers %>{$ID},<% end_loop %>],
                                     level       : '{$Event.Level}',
                                 <% end_if %>
