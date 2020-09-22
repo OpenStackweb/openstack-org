@@ -432,7 +432,7 @@ SQL;
         $img = $this->BigLogo();
         $img = $img->exists() ? $img : $this->Logo();
         if (isset($img) && $img->exists()) {
-            $img = $img->SetWidth(210);
+            $img = $img->SetWidth(207);
 
             return "<img alt='{$this->Name}_medium_logo' src='{$img->getURL()}' class='medium-logo-company company-logo'/>";
         }
@@ -452,7 +452,7 @@ SQL;
         return '#';
     }
 
-    public function getLogoUrl($width=210)
+    public function getLogoUrl($width=207)
     {
         $img = $this->BigLogo();
         $img = $img->exists() ? $img : $this->Logo();
