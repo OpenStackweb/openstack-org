@@ -18,6 +18,7 @@
                     time_zone_id : "{$Summit.TimeZoneName}",
                     start_datetime : "{$StartDate}",
                     end_datetime   : "{$EndDate}",
+                    date_utc: "{$getUTCDateNice()}"
                 };
                 events["{$getDayLabel()}"].push(event_{$ID});
                 events_by_id[event_{$ID}.id] = event_{$ID};
@@ -30,7 +31,6 @@
             var pdfUrl             = "{$Top.Link(/full/pdf)}";
             var backUrl            = "{$Top.Link(/full)}";
             var goBack             =  <%if $goback %>true<% else %>false<% end_if %>;
-            var timeZone           = "{$Summit.getTimeZoneOffsetFriendly()}";
         </script>
         <div id="full-schedule-view-container"></div>
     </div>

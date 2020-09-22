@@ -35,7 +35,7 @@ const EventContent = ({
                 ,&nbsp;
                 <span className="start-time">{event.start_time}</span>
                 &nbsp;-&nbsp;
-                <span className="end-time">{event.end_time} ({summit.timezone})</span>
+                <span className="end-time">{event.end_time} ({event.date_utc})</span>
             </div>
             <div className="col-sm-7 col-md-6 col-location">
                 {summit.should_show_venues &&

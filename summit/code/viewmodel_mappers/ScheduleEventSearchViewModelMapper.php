@@ -37,6 +37,7 @@ final class ScheduleEventSearchViewModelMapper implements IViewModelMapper
                 'end_datetime' => $e->EndDate,
                 'start_time' => $e->StartTime,
                 'end_time' => $e->EndTime,
+                'date_utc' => $e->getUTCDateNice(),
                 'allow_feedback' => $e->AllowFeedBack,
                 'location_id' => $e->LocationID,
                 'type_id' => $e->TypeID,

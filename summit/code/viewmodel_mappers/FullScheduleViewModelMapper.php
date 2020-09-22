@@ -53,6 +53,7 @@ final class FullScheduleViewModelMapper implements IViewModelMapper
                 'summit_id'   => intval($event->Summit->ID),
                 'start_time'  => $event->getStartTime(),
                 'end_time'    => $event->getEndTime(),
+                'date_utc'    => $event->getUTCDateNice(),
                 'title'       => $event->Title,
                 'room'        => $event->getLocationNameNice(),
                 'total'       => $event->Attendees()->Count(),

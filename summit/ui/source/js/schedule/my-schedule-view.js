@@ -12,7 +12,6 @@ ReactDOM.render(
         backUrl={ backUrl }
         pdfUrl={pdfUrl}
         goBack={goBack}
-        timeZone={timeZone}
     />,
     document.getElementById('my-schedule-view-container')
 );

@@ -20,6 +20,7 @@
                     capacity: "{$LocationCapacity}",
                     rsvp: "{$RSVPLink}",
                     summit_id: $Summit.ID,
+                    utcDate: "{$getUTCDateNice()}"
                 };
 
                 events["{$getDayLabel()}"].push(event_{$ID});
@@ -36,7 +37,6 @@
             var pdfUrl             = "{$Top.Link(/mine/pdf)}";
             var backUrl            = "{$Top.Link(/mine)}";
             var goBack             =  <%if $goback %>true<% else %>false<% end_if %>;
-            var timeZone           = "{$Summit.getTimeZoneOffsetFriendly()}";
 
         </script>
         <div id="my-schedule-view-container"></div>

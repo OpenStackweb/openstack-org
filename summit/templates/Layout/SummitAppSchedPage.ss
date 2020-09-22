@@ -30,7 +30,6 @@
                     current_user: null,
                     should_show_venues: <% if $Summit.ShouldShowVenues %>true<% else %>false<% end_if %>,
                     schedule_default_day: '{$Summit.ScheduleDefaultDate}',
-                    timezone: '{$Summit.getTimeZoneOffsetFriendly()}'
                 };
 
             <% if CurrentMember %>
