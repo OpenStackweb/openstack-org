@@ -29,7 +29,17 @@ const store = createStoreWithMiddleware(reducers, {
 
 ReactDOM.render(
     <Provider store={ store }>
-        <FullScheduleView currentView="day" base_url={base_url}  isLoggedUser={is_logged_user} should_show_venues={should_show_venues} summitId={summit_id} backUrl={ backUrl } pdfUrl={pdfUrl} goBack={goBack}/>
+        <FullScheduleView
+            currentView="day"
+            base_url={base_url}
+            isLoggedUser={is_logged_user}
+            should_show_venues={should_show_venues}
+            summitId={summit_id}
+            backUrl={ backUrl }
+            pdfUrl={pdfUrl}
+            goBack={goBack}
+            timeZone={timeZone}
+        />
     </Provider>,
     document.getElementById('full-schedule-view-container')
 );
