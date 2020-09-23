@@ -19,7 +19,7 @@ jobs:
 
   - name: "IngestCOAFilesTask"
     cron_expression: "0 * * * *" # run every hour
-    enabled: 1
+    enabled: 0
 
   - name: "EventRegistrationRequestDigestTask"
     params: "batch_size=15"
