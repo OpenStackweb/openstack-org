@@ -16,7 +16,7 @@ import ShareableLinkModal from './main-filter/shareable_link_modal';
 const CALENDAR_NO_EVENTS_MSG = 'You must select at least one event!';
 
 
-const RSVP_NOTE_TEXT = `Please note: All times below are listed in the Central Time Zone.`;
+const RSVP_NOTE_TEXT = `Please note: All times below are listed in the Central Time Zone. For APAC participants, please tune into OpenInfra TV for keynote highlights at your local time, in your local language.`;
 
 class MainFilter extends Component {
 
