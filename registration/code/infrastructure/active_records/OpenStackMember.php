@@ -550,7 +550,7 @@ class OpenStackMember
      * @param int $summit_id
      * @return bool
      */
-    public function isTrackChair(int $summit_id):bool {
+    public function isTrackChair(int $summit_id = 0):bool {
         $summit = Summit::get()->byID($summit_id);
         if(is_null($summit)) return false;
         return $summit
