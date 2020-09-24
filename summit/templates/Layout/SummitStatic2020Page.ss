@@ -57,7 +57,7 @@
 
                 <p>Thousands of IT decision makers, open source operators and developers will attend the Summit to collaborate across common use cases and solve real problems. At our Virtual Summit, you can meet people from over 110 countries and 750 companies using and contributing to over 30 open source projects.
                 </p>
-                <p>If you live in India, China, Korea, or Japan, watch local coverage from community leaders including commentary on keynote highlights and session recommendations for you to watch on demand. OpenInfra TV will stream on Tuesday, October 20 at 9am India Standard Time / 10am China Standard Time / 11am Japan Standard Time.</p>
+                <p>If you live in India, China, Korea, or Japan, watch local coverage from community leaders including commentary on keynote highlights and session recommendations for you to watch on demand. <a href="https://www.openstack.org/summit/2020/openinfratv/">OpenInfra TV</a> will stream on Tuesday, October 20 at 9am India Standard Time / 10am China Standard Time / 11am Japan Standard Time.</p>
 
                 <ul class="attends">
                     <li><span class="architecture"></span>Architecture & Ops</li>
