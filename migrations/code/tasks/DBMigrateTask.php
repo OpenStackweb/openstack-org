@@ -56,6 +56,8 @@ final class DBMigrateTask extends MigrationTask
 
             DB::query("ALTER TABLE `Member`ADD UNIQUE `ExternalUserId` (`ExternalUserId`) USING BTREE;");
 
+            DB::query("ALTER TABLE `PresentationMaterial` CHANGE `ClassName` `ClassName` ENUM('PresentationMaterial','PresentationLink','PresentationSlide','PresentationVideo', 'PresentationMediaUpload') CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'PresentationMaterial';");
+
             echo "END data fixes PROC".PHP_EOL;
         }
         catch (ParseException $e) {
