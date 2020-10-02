@@ -156,6 +156,7 @@
                             end_datetime    : "{$EndDate}",
                             start_time      : "{$StartTime}",
                             end_time        : "{$EndTime}",
+                            date_utc        : "{$getUTCDateNice()}",
                             allow_feedback  : {$AllowFeedBack},
                             location_id     : {$LocationID},
                             type_id         : {$TypeID},
