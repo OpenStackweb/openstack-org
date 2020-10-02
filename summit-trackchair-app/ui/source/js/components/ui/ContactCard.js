@@ -9,7 +9,8 @@ export default ({
     available_for_bureau,
     profile_link,
     avg_rate_width,
-    is_moderator
+    is_moderator,
+    email
 }) => (
 <div className="contact-box">    
     <div className="col-sm-4">
@@ -25,6 +26,9 @@ export default ({
 	        {twitter &&
 	        	<p><i className="fa fa-twitter"></i> {twitter}</p>
 	    	}
+            {email && email != '' &&
+            <p><a href={`mailto:${email}`}><i className="fa fa-envelope"></i>&nbsp;Send email to this speaker</a></p>
+            }
         </div>
     </div>
     <div className="col-sm-8">
