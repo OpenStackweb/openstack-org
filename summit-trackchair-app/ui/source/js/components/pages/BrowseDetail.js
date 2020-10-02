@@ -49,7 +49,7 @@ class BrowseDetail extends React.Component {
 	}
 
     render () {
-    	const p = this.props.presentation;    	
+    	const p = this.props.presentation;
     	const {selectionsRemaining, myList, isAdmin, index, total} = this.props;
 
     	if(!p.id || p.loading) {
@@ -153,7 +153,14 @@ class BrowseDetail extends React.Component {
 						<PresentationSpeakers speakers={moderators} />
 					</div>
 					}
-
+					{
+						  p.media_uploads_url &&
+						  <div className="row">
+							  <div className="col-sm-12">
+								  <a href={p.media_uploads_url} target="_blank"><i className="fa fa-download" /> Materials</a>
+							  </div>
+						  </div>
+					}
 					<div className="row">
 						<div className="col-sm-12">
 							<a onClick={this.props.toggleEmailSpeakers}><i className="fa fa-envelope" /> Email the speakers</a>							
@@ -162,6 +169,7 @@ class BrowseDetail extends React.Component {
 					{p.showForm &&
 						<PresentationEmailForm />				
 					}
+
 					<PresentationActivity activity={p.comments} />
 			      </div>
 			   </div>

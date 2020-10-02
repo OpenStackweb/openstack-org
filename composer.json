@@ -91,7 +91,8 @@
     "markguinn/silverstripe-cloudassets": "dev-master",
     "php-opencloud/openstack": "dev-master",
     "jumbojett/openid-connect-php": "dev-master",
-    "mikehaertl/phpwkhtmltopdf": "dev-master"
+    "mikehaertl/phpwkhtmltopdf": "dev-master",
+    "spatie/dropbox-api": "dev-master"
   },
   "require-dev": {
     "phpunit/phpunit": "^7.0",

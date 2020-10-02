@@ -1044,6 +1044,7 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
         $data = [];
 
         if ($current_summit->isSelectionOpen()) {
+            $client = new Spatie\Dropbox\Client(DROPBOX_ACCESS_TOKEN);
             foreach ($p->getSpeakersAndModerators() as $s) {
                 // if($s->Bio == NULL) $s->Bio = "&nbsp;";
                 $s->Bio = str_replace(array("\r", "\n"), "", $s->Bio);
@@ -1137,6 +1138,42 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
 
             $data = $p->toJSON();
             $data['title'] = $p->Title;
+            $data['media_uploads_url'] = null;
+            try {
+
+                // default visibility is RequestedVisibility.public.
+                $res = $client->createSharedLinkWithSettings(sprintf("%s/Private/%s-%s/%s-%s",
+                    MEDIA_UPLOAD_MOUNTING_FOLDER,
+                    $p->Summit()->ID,
+                    $p->Summit()->Slug,
+                    $p->ID,
+                    $p->Slug
+                ));
+
+                $data['media_uploads_url'] = $res['url'];
+            }
+            catch (Spatie\Dropbox\Exceptions\BadRequest $ex){
+                if($ex->dropboxCode === 'shared_link_already_exists')
+                {
+                    try {
+                        $res = $client->listSharedLinks(sprintf("%s/Private/%s-%s/%s-%s",
+                            MEDIA_UPLOAD_MOUNTING_FOLDER,
+                            $p->Summit()->ID,
+                            $p->Summit()->Slug,
+                            $p->ID,
+                            $p->Slug
+                        ));
+
+                        $data['media_uploads_url'] = $res[0]['url'];
+                    }
+                    catch (Exception $ex){
+
+                    }
+                }
+            }
+            catch (Exception $ex){
+
+            }
             $data['description'] = ($p->Abstract != null) ? $p->Abstract : '(no description provided)';
             $data['social_desc'] = ($p->SocialSummary != null) ? $p->SocialSummary : '(no description provided)';
             $data['category_name'] = $p->Category()->Title;
