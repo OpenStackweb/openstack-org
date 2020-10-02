@@ -254,7 +254,7 @@ class SelectionPlan extends DataObject implements ISelectionPlan
 
         $start_date = new DateTime($start_date, new DateTimeZone('UTC'));
         $end_date = new DateTime($end_date, new DateTimeZone('UTC'));
-        $now = new \DateTime('now', new DateTimeZone('UTC'));
+        $now = new DateTime('now', new DateTimeZone('UTC'));
 
         if ($now > $end_date) {
             return Summit::STAGE_FINISHED;
