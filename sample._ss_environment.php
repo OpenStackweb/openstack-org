@@ -207,6 +207,8 @@ define('MEETUP_OAUTH_REDIRECT_URL' ,'');
 define('MEETUP_OAUTH_CLIENT_SECRET' ,'');
 define('MEETUP_USER' ,'');
 define('MEETUP_PASSWORD' ,'');
+define('DROPBOX_ACCESS_TOKEN', '');
+define('MEDIA_UPLOAD_MOUNTING_FOLDER', 'PresentationMediaUploads');
 
 global $_FILE_TO_URL_MAPPING;
 $_FILE_TO_URL_MAPPING[''] = '';
