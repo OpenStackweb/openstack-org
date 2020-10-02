@@ -16,6 +16,7 @@ const PresentationSpeakers = ({
 				name={`${s.first_name} ${s.last_name}`}
 				title={s.title}
 				bio={s.bio}
+				email={s.email}
 				imageURL={s.photo_url}
 				twitter={s.twitter_name}
                 available_for_bureau={s.available_for_bureau}
