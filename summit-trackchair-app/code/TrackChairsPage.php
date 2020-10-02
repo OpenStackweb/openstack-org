@@ -81,7 +81,7 @@ class TrackChairsPage_Controller extends Page_Controller
 
     public function getAvailableSummits(){
         $plans = SelectionPlan::get()
-            ->where('Enabled = 1 AND SelectionBeginDate <= DATE(NOW()) AND SelectionEndDate >= DATE(NOW()) ')
+            ->where('Enabled = 1 AND SelectionBeginDate <= UTC_TIMESTAMP() AND SelectionEndDate >= UTC_TIMESTAMP() ')
             ->sort('SelectionBeginDate ASC');
         $res = new ArrayList();
         foreach ($plans as $plan){
