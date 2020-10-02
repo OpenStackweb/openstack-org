@@ -54,9 +54,11 @@ final class SendGridEmailSenderTask extends CronTask
                     else{
                         $attachments = false;
                     }
-                    $customHeaders = false;
                     if(!empty($customHeaders)){
-                        $customHeaders = json_decode($customHeaders);
+                        $customHeaders = json_decode($customHeaders, true);
+                    }
+                    else{
+                        $customHeaders = false;
                     }
                     $res = false;
                     if($is_plain){
