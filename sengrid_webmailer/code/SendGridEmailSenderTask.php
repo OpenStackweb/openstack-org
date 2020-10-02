@@ -40,12 +40,13 @@ final class SendGridEmailSenderTask extends CronTask
 
                 foreach($emails as $email){
 
-                    $is_plain   = $email->IsPlain;
+                    $is_plain    = $email->IsPlain;
                     $to          = $email->To;
                     $from        = $email->From;
                     $subject     = $email->Subject;
                     $body        = $email->Body;
                     $attachments = $email->Attachments;
+                    $customHeaders = $email->CustomHeaders;
 
                     if(!empty($attachments)){
                         $attachments = json_decode($attachments, true);
@@ -53,12 +54,16 @@ final class SendGridEmailSenderTask extends CronTask
                     else{
                         $attachments = false;
                     }
+                    $customHeaders = false;
+                    if(!empty($customHeaders)){
+                        $customHeaders = json_decode($customHeaders);
+                    }
                     $res = false;
                     if($is_plain){
-                        $res = $send_grid_mailer->sendPlain($to, $from, $subject, $body, $attachments);
+                        $res = $send_grid_mailer->sendPlain($to, $from, $subject, $body, $attachments, $customHeaders);
                     }
                     else{
-                        $res = $send_grid_mailer->sendHTML($to, $from, $subject, $body, $attachments);
+                        $res = $send_grid_mailer->sendHTML($to, $from, $subject, $body, $attachments, $customHeaders);
                     }
 
                     if($res) {

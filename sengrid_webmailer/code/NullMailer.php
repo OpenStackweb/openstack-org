@@ -33,6 +33,9 @@ final class NullMailer extends Mailer
         if($attachedFiles && is_array($attachedFiles)){
             $record->Attachments = json_encode($attachedFiles);
         }
+        if($customheaders && is_array($customheaders)){
+            $record->CustomHeaders = json_encode($customheaders);
+        }
         $record->write();
 
         $this->last_email = $record;
@@ -51,6 +54,9 @@ final class NullMailer extends Mailer
         ));
         if($attachedFiles && is_array($attachedFiles)){
             $record->Attachments = json_encode($attachedFiles);
+        }
+        if($customheaders && is_array($customheaders)){
+            $record->CustomHeaders = json_encode($customheaders);
         }
         $record->write();
 
