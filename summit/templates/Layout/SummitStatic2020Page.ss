@@ -515,34 +515,54 @@
 
                         <h3>Headline</h3>
 
-                        <div class="col-lg-4 col-md-4 col-sm-4 centered-column">
+                       <div class="col-lg-4 col-md-4 col-sm-4 centered-column">
                             <a rel="nofollow" href="http://www.huawei.com/en/"><img alt="Huawei_big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/huawei-new-lg.jpg" class="big-logo-company company-logo"></a>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 centered-column">
+                            <a rel="nofollow" href="https://www.canonical.com/"><img alt="Canonical_big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/ubuntu-lg.jpg" class="big-logo-company company-logo"></a>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 centered-column">
+                            <a rel="nofollow" href="http://vexxhost.com"><img alt="VEXXHOST, Inc._big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/vexxhost-lg.jpg" class="big-logo-company company-logo"></a>
                         </div>
 
                     </div>
                     <div class="item">
                         <h3>Premier Sponsors</h3>
-
+                            
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
                             <a rel="nofollow" href="https://www.cisco.com/"><img alt="Cisco_big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/cisco-new-lg.png" class="big-logo-company company-logo"></a>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
+                            <a rel="nofollow" href="https://intl.cloud.tencent.com/"><img alt="Tencent Cloud_big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/Tencent-vert-lg.jpg" class="big-logo-company company-logo"></a>
                         </div>
 
                     </div>
                     <div class="item">
                         <h3>Exhibitor Sponsors</h3>
+                            
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
                             <a rel="nofollow" href="https://www.inmotionhosting.com/"><img alt="InMotion Hosting_big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/inmotionhosting-lg.jpg" class="big-logo-company company-logo"></a>
                         </div>
                         
                     
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="http://www.triliodata.com"><img alt="TrilioData_big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/trilionew-lg2.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://www.mirantis.com/"><img alt="Mirantis_big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/mirantis-lg.jpg" class="big-logo-company company-logo"></a>
+                        </div>
+                        
+                    
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
+                            <a rel="nofollow" href="https://www.redhat.com/openstack/?sc_cid=70160000000bEKkAAM&amp;offer_id=701600000006R7KAAU"><img alt="Red Hat, Inc._big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/Redhat-newlogo-lg.jpg" class="big-logo-company company-logo"></a>
+                        </div>
+                        
+                    
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
+                            <a rel="nofollow" href="http://www.triliodata.com"><img alt="TrilioData_big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/trilio-newlg.jpg" class="big-logo-company company-logo"></a>
                         </div>
                         
                     
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
                             <a rel="nofollow" href="https://www.zte.com.cn/global/"><img alt="ZTE Corporation_big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/zte-lg.jpg" class="big-logo-company company-logo"></a>
-                        </div> 
+                        </div>
                     </div>
                     <div class="item">
                         <h3>Media Partners</h3>
