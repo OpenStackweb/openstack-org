@@ -93,9 +93,9 @@ $CloudInfraContent
     <h2>Latest Release: {$LatestReleaseName}</h2>
     <div class="video-container">
       <img class="ussuri-video" src="{$LatestReleaseVideoPosterUrl}"/>
-      <a href="{$LatestReleaseVideoLink}"><i class="fa btn-play fa-play-circle" aria-hidden="true" title="Play it"></i></a>
+      <!-- <a href="{$LatestReleaseVideoLink}"><i class="fa btn-play fa-play-circle" aria-hidden="true" title="Play it"></i></a> -->
     </div>
-    <p>{$LatestReleaseVideoDescription}</p>
+    <!-- <p>{$LatestReleaseVideoDescription}</p> -->
     <div class="ussuri-btn-wrapper">
     <a href="{$LatestReleaseCurrentButtonLink}" class="ussuri-btn">{$LatestReleaseCurrentButtonText}</a>
     <a href="{$LatestReleaseUpNextButtonLink}" class="ussuri-btn">{$LatestReleaseUpNextButtonText}</a>
