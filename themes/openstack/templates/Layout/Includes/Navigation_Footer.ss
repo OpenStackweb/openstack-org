@@ -5,7 +5,6 @@
                 <ul>
                     <li><a href="//openstack.org/projects/">Projects</a></li>
                     <li><a href="//openstack.org/software/security/">OpenStack Security</a></li>
-                    <li><a href="//openstack.org/projects/openstack-faq/">Common Questions</a></li>
                     <li><a href="http://openstack.org/blog/">Blog</a></li>
                     <li><a href="//openstack.org/news/">News</a></li>
                 </ul>
