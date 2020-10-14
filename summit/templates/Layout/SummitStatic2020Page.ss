@@ -530,10 +530,12 @@
                         <h3>Premier Sponsors</h3>
                             
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="https://www.cisco.com/"><img alt="Cisco_big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/cisco-new-lg.png" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://www.cisco.com/"><img alt="Cisco_big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/cisco-lg2.png" class="big-logo-company company-logo"></a>
                         </div>
+                        
+                    
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="https://intl.cloud.tencent.com/"><img alt="Tencent Cloud_big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/Tencent-vert-lg.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://intl.cloud.tencent.com/"><img alt="Tencent Cloud_big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/tencent-horiz-lg.png" class="big-logo-company company-logo"></a>
                         </div>
 
                     </div>
@@ -557,6 +559,11 @@
                     
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
                             <a rel="nofollow" href="http://www.triliodata.com"><img alt="TrilioData_big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/trilio-newlg.jpg" class="big-logo-company company-logo"></a>
+                        </div>
+                        
+                    
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
+                            <a rel="nofollow" href="https://vanillastack.io"><img alt="VanillaStack_big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/vanillastack-lg.png" class="big-logo-company company-logo"></a>
                         </div>
                         
                     
