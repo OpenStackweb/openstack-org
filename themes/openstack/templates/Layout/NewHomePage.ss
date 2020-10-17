@@ -189,8 +189,8 @@ $CloudInfraContent
 <div class="container">
 <div class="row">
 <div class="col-lg-12 col-sm-12" style="text-align: center;">
-<img src="/themes/openstack/home_images/Logos/OSF_Logo_RGB_Horiz_Badge.svg" alt="" />
-<p>OpenStack is a top-level open infrastructure project supported by the OSF</p>
+<img src="/themes/openstack/home_images/Logos/OpenInfrastructureFoundation-logo-RGB-horiz2.svg" alt="Open Infrastructure Foundation Logo" />
+<p>OpenStack is a top-level open infrastructure project supported by the <a href="https://openinfra.dev" target="_blank">Open Infrastructure Foundation</a> (OIF)</p>
 </div>
 </div>
 </div>
