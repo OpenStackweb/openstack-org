@@ -93,7 +93,7 @@
             <div class="col-sm-12">
                 <h2>Training Partners</h2>
                 <p>
-                    The best path to certification is through one of the OpenStack Foundation training partners. Dozens of companies around the world offer OpenStack training, ranging from 101 to advanced skills. Many of these companies bundle the COA exam with their training courses. Find the best fit for you in the <a href="http://www.openstack.org/training">OpenStack Training Marketplace</a>.
+                    The best path to certification is through one of the Open Infrastructure Foundation training partners. Dozens of companies around the world offer OpenStack training, ranging from 101 to advanced skills. Many of these companies bundle the COA exam with their training courses. Find the best fit for you in the <a href="http://www.openstack.org/training">OpenStack Training Marketplace</a>.
                 </p>
                 <div class="coa-partners-row-wrapper">
                     <div class="row">

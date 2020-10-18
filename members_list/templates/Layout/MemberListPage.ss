@@ -1,7 +1,7 @@
 
 <% require themedCSS(filter) %>
 
-<h1>OpenStack Foundation: Member Directory</h1>
+<h1>Open Infrastructure Foundation: Member Directory</h1>
 
 $HeaderExtensions
 $MemberSearchForm

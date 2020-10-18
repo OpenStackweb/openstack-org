@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2016 OpenStack Foundation
+ * Copyright 2020 Open Infrastructure Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -78,7 +78,7 @@ class COALandingPage extends Page
         if(empty($html)){
             $html = <<<HTML
 <p>OpenStack skills are in high demand as thousands of companies around the world adopt and productize OpenStack.</p>
-<p>Certified OpenStack Administrator (COA) is the first professional certification offered by the OpenStack Foundation. It’s designed to help companies identify top talent in the industry, and help job seekers demonstrate their skills.</p>
+<p>Certified OpenStack Administrator (COA) is the first professional certification offered by the Open Infrastructure Foundation. It’s designed to help companies identify top talent in the industry, and help job seekers demonstrate their skills.</p>
 HTML;
         }
         return $html;
@@ -246,7 +246,7 @@ HTML;
         $html = $this->getField('GetStartedText');
         if(empty($html)){
             $html = <<<HTML
-       <p>The Certified OpenStack Administrator exam is the only professional certification offered by the OpenStack Foundation. It was written for OpenStack professionals with at least six months of experience managing an OpenStack cloud environment. You can learn more details about the exam below, or visit our Training Marketplace to find companies that can help you prepare and often bundle the exam with their training courses. To get started with a new exam purchase or to redeem a code, you'll be prompted to log into the COA portal with an OpenStackID or equivalent.</p>
+       <p>The Certified OpenStack Administrator exam is the only professional certification offered by the Open Infrastructure Foundation. It was written for OpenStack professionals with at least six months of experience managing an OpenStack cloud environment. You can learn more details about the exam below, or visit our Training Marketplace to find companies that can help you prepare and often bundle the exam with their training courses. To get started with a new exam purchase or to redeem a code, you'll be prompted to log into the COA portal with an OpenStackID or equivalent.</p>
 HTML;
         }
         return $html;

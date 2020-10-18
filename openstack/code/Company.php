@@ -204,7 +204,7 @@ SQL;
                 new TextField ('URL', 'Company Web Address (URL)'),
                 $level = new DropDownField(
                     'MemberLevel',
-                    'OpenStack Foundation Member Level',
+                    'Open Infrastructure Foundation Member Level',
                     $this->dbObject('MemberLevel')->enumValues()
                 ),
                 new ColorField("Color", "Company Color"),

@@ -134,7 +134,7 @@
                 <hr>
                 <h3>Media Contacts</h3>
                 <p><strong>Robert Cathey</strong><br/>
-                <a href="http://www.cathey.co/">Cathey.co</a> for the OpenStack Foundation<br/>
+                <a href="http://www.cathey.co/">Cathey.co</a> for the Open Infrastructure Foundation<br/>
                 +1 865-386-6118<br/>
                 <a href="mailto:robert@cathey.co">robert@cathey.co</a>
                 <a href="http://twitter.com/robertcathey">@robertcathey</a>

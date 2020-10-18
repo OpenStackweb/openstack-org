@@ -171,7 +171,7 @@
                     <strong>OpenStack Day Logo and Digital Assets</strong>
                 </p>
                 <p>
-                    The OpenStack Foundation has created an official OpenStack Day logo and digital assets to be used for all OpenStack Days events.
+                    The Open Infrastructure Foundation has created an official OpenStack Day logo and digital assets to be used for all OpenStack Days events.
                     For both trademark and legal reasons, all official OpenStack Day events are required to use these assets in all event
                     communications, printed materials, signage, and website presence.  To request your official OpenStack Day logo and branding
                     kit, please send an email to events@openstack.org

@@ -215,7 +215,7 @@ msgstr ""
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:107
 #:  survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:26
-msgid "Already have an OpenStack Foundation login?"
+msgid "Already have an Open Infrastructure Foundation login?"
 msgstr ""
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:115
@@ -322,7 +322,7 @@ msgstr ""
 #, php-format
 msgid ""
 "This survey provides users an opportunity to influence the community and software direction. "
-"By sharing information about your configuration and requirements, the OpenStack Foundation User Committee "
+"By sharing information about your configuration and requirements, the Open Infrastructure Foundation User Committee "
 "will be able to advocate on your behalf. "
 "The %1$s survey results will be presented at the %2$s Summit, %3$s. Take the OpenStack User Survey by %4$s "
 "to be included in this round of analysis."

@@ -176,7 +176,7 @@
                     <strong>OpenStack Hackathon Logo and Digital Assets</strong>
                 </p>
                 <p>
-                    The OpenStack Foundation has created an official OpenStack Hackathon logo and digital assets to be used for all OpenStack Hackathons.
+                    The Open Infrastructure Foundation has created an official OpenStack Hackathon logo and digital assets to be used for all OpenStack Hackathons.
                     For both trademark and legal reasons, all official OpenStack Hackathons are required to use these assets in all event
                     communications, printed materials, signage, and website presence.  To request your official OpenStack Hackathon logo and branding
                     kit, please send an email to events@openstack.org
