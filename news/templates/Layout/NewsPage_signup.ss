@@ -1,6 +1,6 @@
-<h1>OpenStack Foundation News - Subscribe</h1>
+<h1>Open Infrastructure Foundation News - Subscribe</h1>
 <div style="margin-top: 15px">
-<p>Thank you for your interest in receiving occasional email news updates from the OpenStack Foundation. We simply need your name, organization and email:</p>
+<p>Thank you for your interest in receiving occasional email news updates from the Open Infrastructure Foundation. We simply need your name, organization and email:</p>
 <div class="sendgrid-subscription-widget"
      data-token="z7Bo65p1qIrv%2B9x5PV%2FagmERQbiTGcVClLUVHuIjwh9em8fE1wRZ9ycWSkqvv1fK">
     <label>
@@ -14,7 +14,7 @@
 <p>Thank you for your interest in OpenStack.</p>
 <p><div>Robert Cathey | <a href="mailto:robert@cathey.co">robert@cathey.co</a> | m +1 865-386-6118<div>
 <div>Jennifer Fowler | <a href="mailto:jennifer@cathey.co">jennifer@cathey.co</a> | m +1 865-405-6380<div></p>
-<p>Cathey Communications for the OpenStack Foundation</p>
+<p>Cathey Communications for the Open Infrastructure Foundation</p>
 </div>
 <script type="application/javascript">!function (d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? "http" : "https";

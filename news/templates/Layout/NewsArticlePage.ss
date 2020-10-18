@@ -28,7 +28,7 @@
     <% if $Article.ShowDeclaimer %>
     <div class="row">
         <div class="col-lg-8 col-lg-push-2 col-md-10 col-md-push-1 col-sm-10 col-sm-push-1 declaimer">
-            <i>This content has been submitted by a company in the OpenStack ecosystem, not the OpenStack Foundation.</i>
+            <i>This content has been submitted by a company in the OpenStack ecosystem, not the Open Infrastructure Foundation.</i>
         </div>
     </div>
     <% end_if %>

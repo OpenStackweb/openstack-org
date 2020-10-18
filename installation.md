@@ -1,4 +1,4 @@
-## **OpenStack Foundation Website**
+## **Open Infrastructure Foundation Website**
 
 ### **Setting up the Development Environment - Virtual machine**
 
@@ -46,7 +46,7 @@ You will use Vagrant from the Terminal to create, start, stop and remove your VM
 
 **Clone the OpenStack website repository**
 
-For a clean installation and from the Terminal on OSX you will clone the OpenStack Foundation Website repository from the link below.  
+For a clean installation and from the Terminal on OSX you will clone the Open Infrastructure Foundation Website repository from the link below.  
 
 Create a directory for the Vagrant installation (name it whatever you like and place it wherever you like. "vagrant" in the user’s home directory ~/ is the method shown here.
 

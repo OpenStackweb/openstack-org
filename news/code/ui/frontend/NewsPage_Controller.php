@@ -137,7 +137,7 @@ final class NewsPage_Controller extends Page_Controller {
         $news_update_email_from = defined('NEWS_UPDATE_EMAIL_FROM')?NEWS_UPDATE_EMAIL_FROM : 'openstacknews@openstack.org';
         $user_name              = sprintf('%s %s', $json['first_name'], $json['last_name']);
 
-        $email = EmailFactory::getInstance()->buildEmail('noreply@openstack.org', $to, 'Thank you for subscribing to OpenStack Foundation News updates');
+        $email = EmailFactory::getInstance()->buildEmail('noreply@openstack.org', $to, 'Thank you for subscribing to Open Infrastructure Foundation News updates');
         $email->setTemplate('NewsPageSignupConfirmationEMail');
 
         $email->populateTemplate(array('UserName' => $user_name, 'NewsUpdateEmailFrom' => $news_update_email_from));

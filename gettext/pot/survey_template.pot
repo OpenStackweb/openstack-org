@@ -66,7 +66,7 @@ msgid "Country of Residence*"
 msgstr ""
 
 # step about-you - question OkToContact label
-msgid "The OpenStack Foundation and User Committee may communicate with me in the future about my usage.*"
+msgid "The Open Infrastructure Foundation and User Committee may communicate with me in the future about my usage.*"
 msgstr ""
 
 # survey template 14 - survey step your-organization friendly name
@@ -362,7 +362,7 @@ msgid "What is your primary reason for this rating?"
 msgstr ""
 
 # question SectionBreak literal content
-msgid "<hr><p>We would love to hear how OpenStack and the OpenStack Foundation can better meet your needs. These free-form questions are optional, but will provide valuable insights. Your responses are anonymous, and each of these text fields are independent, so we cannot \"see previous answer.\" We would really appreciate a separate answer to each question.</p>"
+msgid "<hr><p>We would love to hear how OpenStack and the Open Infrastructure Foundation can better meet your needs. These free-form questions are optional, but will provide valuable insights. Your responses are anonymous, and each of these text fields are independent, so we cannot \"see previous answer.\" We would really appreciate a separate answer to each question.</p>"
 msgstr ""
 
 # step your-thoughts - question WhatDoYouLikeMost label

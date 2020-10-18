@@ -90,7 +90,7 @@ final class FoundationMember
         if (!$this->isFoundationMember()) {
             // Assign the member to be part of the foundation group
             $this->owner->addToGroupByCode(IFoundationMember::FoundationMemberGroupSlug);
-            // Set up member with legal agreement for becoming an OpenStack Foundation Member
+            // Set up member with legal agreement for becoming an Open Infrastructure Foundation Member
             $legalAgreement = new LegalAgreement();
             $legalAgreement->MemberID = $this->owner->ID;
             $legalAgreement->LegalDocumentPageID = 422;

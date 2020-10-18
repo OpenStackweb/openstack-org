@@ -24,7 +24,7 @@
 <p>To nominate other members, go to http://www.openstack.org/community/members/</p>
 
 <p>Sincerely<br/>
-The OpenStack Foundation</p> 
+The Open Infrastructure Foundation</p> 
 
 
 
