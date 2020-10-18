@@ -223,12 +223,12 @@
             <div class="col-md-12 help-header">
                 <div class="help-title">Don't worry! We're here to help.</div>
                 <p>
-                    We want you to have a great experience. OpenStack Foundation staff and volunteer ambassadors around
+                    We want you to have a great experience. Open Infrastructure Foundation staff and volunteer ambassadors around
                     the world are here to help you get plugged in and make an impact.
                 </p>
             </div>
             <div class="col-md-12 help-managers">
-                <h4>OpenStack Foundation Community Managers</h4>
+                <h4>Open Infrastructure Foundation Community Managers</h4>
                 <div class="row">
                 <% loop $CommunityManagers.Sort(Order) %>
                     <div class=" col-sm-5ths col-xs-6 community-manager">

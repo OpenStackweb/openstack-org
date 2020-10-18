@@ -2,7 +2,7 @@
     <h1>Get Started</h1>
     <div class="row">
         <div class="col-lg-6">
-            <h3>Already have an OpenStack Foundation login?</h3>
+            <h3>Already have an Open Infrastructure Foundation login?</h3>
             <div class="survey-login-wrapper">
                 <form id="MemberLoginForm_LoginForm" action="Security/login?BackURL={$BackURL}" method="post"
                       enctype="application/x-www-form-urlencoded">

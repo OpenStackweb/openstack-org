@@ -137,7 +137,7 @@
                 </p>
                 <p>Finally, the Qinling project offers "Function as a Service" that aims to provide a platform to support serverless functions, similar to Lambda, Azure Functions, or Google Cloud Functions. It further abstracts the management of containers, and allows users to accelerate development with an event-driven, serverless compute experience that scales on demand. Qinling supports different container orchestration backends like Kubernetes and Docker swarm, a variety of popular function package storage backends like local storage and <a href="https://docs.openstack.org/swift/latest/" target="_blank">OpenStack Swift</a>.</p>
                 <h5 class="highlight">Kata Containers - Secure Applications through Virtualization</h5>
-                <p><a href="https://katacontainers.io/" target="_blank">Kata Containers</a>, a new open source project, is a novel implementation of a lightweight virtual machine that seamlessly integrates within the container ecosystem. Kata Containers are as light and fast as containers and integrate with the container management layers – including popular orchestration tools such as Docker and Kubernetes (k8s) – while also delivering the security advantages of VMs. Kata Containers adhere to the <a href="https://www.opencontainers.org" target="_blank">Open Container Initiative (OCI)</a> standard, which the OpenStack Foundation is an active member of. Kata Containers is hosted at the OpenStack Foundation, but is a separate project from the OpenStack project with its own governance and community.
+                <p><a href="https://katacontainers.io/" target="_blank">Kata Containers</a>, a new open source project, is a novel implementation of a lightweight virtual machine that seamlessly integrates within the container ecosystem. Kata Containers are as light and fast as containers and integrate with the container management layers – including popular orchestration tools such as Docker and Kubernetes (k8s) – while also delivering the security advantages of VMs. Kata Containers adhere to the <a href="https://www.opencontainers.org" target="_blank">Open Container Initiative (OCI)</a> standard, which the Open Infrastructure Foundation is an active member of. Kata Containers is hosted at the Open Infrastructure Foundation, but is a separate project from the OpenStack project with its own governance and community.
                 </p>
                 <p>The industry shift to containers presents unique challenges in securing user workloads within multi-tenant environments with a mix of both trusted and untrusted workloads. Kata Containers uses hardware-backed isolation as the boundary for each container or collection of containers in a pod. This approach addresses the security concerns of a shared kernel in a traditional container architecture. 
                 </p>
@@ -147,7 +147,7 @@
                     <img src="{$Top.CloudUrl("images/containers2/kata-diagram5-r2.svg")}" alt="Intro" class="hover-shadow clickable-image">
                 </p>
                 <h4 class="subtitle">Side-by-Side OpenStack and Kubernetes Integrations</h4>
-                <p>One of the primary benefits of choosing open source platforms is in the stability of interfaces across standard deployments of those platforms. Both the OpenStack Foundation and the Cloud Native Computing Foundation (CNCF) maintain interoperability standards for OpenStack clouds and Kubernetes clusters, guaranteeing that libraries, applications, and drivers will work across all platforms regardless of where they are deployed. This creates opportunities for side-by-side integrations, allowing both OpenStack and Kubernetes to take advantage of the resources provided by the other.
+                <p>One of the primary benefits of choosing open source platforms is in the stability of interfaces across standard deployments of those platforms. Both the Open Infrastructure Foundation and the Cloud Native Computing Foundation (CNCF) maintain interoperability standards for OpenStack clouds and Kubernetes clusters, guaranteeing that libraries, applications, and drivers will work across all platforms regardless of where they are deployed. This creates opportunities for side-by-side integrations, allowing both OpenStack and Kubernetes to take advantage of the resources provided by the other.
                 </p>
                 <p>The OpenStack Special Interest Group (SIG-OpenStack) in the Kubernetes community maintains the Cloud Provider OpenStack plugin. In addition to cloud provider interface for running Kubernetes on OpenStack, it also maintains several drivers that allows Kubernetes to take advantage of individual OpenStack services. These drivers include:</p>
                 <ul><li><p>Two standalone Cinder drivers. A Flex Volume driver uses an exec-based model to interface with drivers, and a Container Storage Interface (CSI) driver which uses a standard interface for container orchestration systems to expose arbitrary storage systems to their container workloads. With support for over 70 storage drivers, these drivers make it possible to interface a wealth of battle tested proprietary and open source storage devices through a single Cinder API.</p></li>
@@ -375,7 +375,7 @@
         <div class="row section" id="conclusion">
             <div class="col-lg-12">
                 <h3 class="text-center title">IV. Conclusion</h3>
-                <p>Over the past few years, as containers have become an important tool for developers and organizations alike, OpenStack has leveraged its modular design and expansive community to integrate container technologies at many levels. This can be seen both by the various organizations bringing containers and OpenStack into production, and the number of projects that work alongside containers to deliver new capabilities. The OpenStack Foundation is committed to ensuring that emerging technologies can be incorporated and utilized within OpenStack, and containers are an important example of that commitment. </p>
+                <p>Over the past few years, as containers have become an important tool for developers and organizations alike, OpenStack has leveraged its modular design and expansive community to integrate container technologies at many levels. This can be seen both by the various organizations bringing containers and OpenStack into production, and the number of projects that work alongside containers to deliver new capabilities. The Open Infrastructure Foundation is committed to ensuring that emerging technologies can be incorporated and utilized within OpenStack, and containers are an important example of that commitment. </p>
                 <p>To learn more, visit the <a href="https://www.openstack.org/containers/"> Containers Landing Page </a>, where you can find a copy of this document as well as links to dozens of videos focused on the integrations of OpenStack and containers. <a href="https://github.com/kubernetes/community/tree/master/sig-openstack">Kubernetes SIG-OpenStack</a> has a Slack channel, mailing list, and weekly meeting if you engage directly with the community that’s building Kubernetes and OpenStack integrations.</p>
             </div>
         </div>
@@ -696,13 +696,13 @@
                         <p>Christian Berendt, Betacloud Solutions GmbH</p>
                     </li>
                     <li>
-                        <p>Anne Bertucio, OpenStack Foundation</p>
+                        <p>Anne Bertucio, Open Infrastructure Foundation</p>
                     </li>
                     <li>
                         <p>Pete Birley, AT&#38;T</p>
                     </li>
                     <li>
-                        <p>Chris Hoge, OpenStack Foundation</p>
+                        <p>Chris Hoge, Open Infrastructure Foundation</p>
                     </li>
                     <li>
                         <p>Lingxian Kong, Catalyst Cloud</p>
@@ -714,7 +714,7 @@
                         <p>Daniel Mellado, Red Hat, Inc.</p>
                     </li>
                     <li>
-                        <p>Allison Price, OpenStack Foundation</p>
+                        <p>Allison Price, Open Infrastructure Foundation</p>
                     </li>
                     <li>
                         <p>David Rabel, B1 Systems GmbH</p>

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2015 OpenStack Foundation
+ * Copyright 2015 Open Infrastructure Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -28,7 +28,7 @@ class SummitEventbriteRegistrationEmailMigration extends AbstractDBMigrationTask
             $email_tpl->Identifier = SUMMIT_ATTENDEE_CREATED_EMAIL_TEMPLATE;
             $email_tpl->Subject    = 'Thank you for registering or the OpenStack Summit';
             $email_tpl->From       = 'noreply@openstack.org';
-            $email_tpl->Content    ='<p>{$Attendee.Member.FirstName} {$Attendee.Member.Surname},</p><p>Thank you for registering for the OpenStack Summit {$Summit.Title}. Your EventBrite registration has now been associated with your OpenStack Foundation Account. We look forward to seeing you in {$Summit.Month}.</p><p>Thank you,</p><p>OpenStack Summit Team</p>';
+            $email_tpl->Content    ='<p>{$Attendee.Member.FirstName} {$Attendee.Member.Surname},</p><p>Thank you for registering for the OpenStack Summit {$Summit.Title}. Your EventBrite registration has now been associated with your Open Infrastructure Foundation Account. We look forward to seeing you in {$Summit.Month}.</p><p>Thank you,</p><p>OpenStack Summit Team</p>';
             $email_tpl->write();
         }
 
@@ -38,7 +38,7 @@ class SummitEventbriteRegistrationEmailMigration extends AbstractDBMigrationTask
             $email_tpl->Identifier = SUMMIT_ATTENDEE_CREATE_MEMBERSHIP_INVITATION_EMAIL_TEMPLATE;
             $email_tpl->Subject    = 'Thank you for registering or the OpenStack Summit';
             $email_tpl->From       = 'noreply@openstack.org';
-            $email_tpl->Content    ='<p>Hello,</p><p>Thank you for registering for the OpenStack Summit {$Summit.Title}! We see you do not currently have an OpenStack Community Account or OpenStack Foundation Membership. In order to make the most of your visit, please proceed to https://www.openstack.org/join/register/ to complete your registration on openstack.org. Without this information, you will not have access to the Summit mobile apps.</p><p>Thank you,</p><p>OpenStack Summit Team</p>';
+            $email_tpl->Content    ='<p>Hello,</p><p>Thank you for registering for the OpenStack Summit {$Summit.Title}! We see you do not currently have an OpenStack Community Account or Open Infrastructure Foundation Membership. In order to make the most of your visit, please proceed to https://www.openstack.org/join/register/ to complete your registration on openstack.org. Without this information, you will not have access to the Summit mobile apps.</p><p>Thank you,</p><p>OpenStack Summit Team</p>';
             $email_tpl->write();
         }
     }

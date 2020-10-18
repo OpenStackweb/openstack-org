@@ -17,7 +17,7 @@
 
             <div class="col-lg-5 col-md-6 col-sm-12 about-buttons">
 
-                <p>OpenDev + PTG is a collaborative event organized by the OpenStack Foundation (OSF) gathering developers, system architects, and operators to address common open source infrastructure challenges.</p>
+                <p>OpenDev + PTG is a collaborative event organized by the Open Infrastructure Foundation (OSF) gathering developers, system architects, and operators to address common open source infrastructure challenges.</p>
 
                 <p>Together, the discussions held at OpenDev + PTG are critical to the open source advancements addressing current challenges around hardware automation, scale, containers, and the overall open source ecosystem. If you want to influence the direction and future of <strong>open source infrastructure</strong>, join the community and participate in this event. </p>
 
@@ -78,7 +78,7 @@
                         </div>
                         <div class="info">
                             <div class="name">Mark Collier</div>
-                            <div class="title">OpenStack Foundation</div>
+                            <div class="title">Open Infrastructure Foundation</div>
                         </div>
                     </div>
                 </div>
@@ -138,7 +138,7 @@
                         </div>
                         <div class="info">
                             <div class="name">Allison Price</div>
-                            <div class="title">OpenStack Foundation</div>
+                            <div class="title">Open Infrastructure Foundation</div>
                         </div>
                     </div>
                 </div>
@@ -198,7 +198,7 @@
                         </div>
                         <div class="info">
                             <div class="name">Kendall Nelson</div>
-                            <div class="title">OpenStack Foundation</div>
+                            <div class="title">Open Infrastructure Foundation</div>
                         </div>
                     </div>
                 </div>
@@ -246,7 +246,7 @@
                         </div>
                         <div class="info">
                             <div class="name">Thierry Carrez</div>
-                            <div class="title">OpenStack Foundation</div>
+                            <div class="title">Open Infrastructure Foundation</div>
                         </div>
                     </div>
                 </div>
@@ -335,7 +335,7 @@
             <div class="col-lg-6 col-md-6 col-sm-6 text">
                 <span></span>
                 <h2>Inclusive.<br>Diverse.<br>Open.</h2>
-                <p>We are a diverse community of professionals, and the OpenStack Foundation is dedicated to providing an inclusive and safe event experience for everyone. <a href="https://www.openstack.org/events/vancouver/code-of-conduct/" target="_blank">View the Community Code of Conduct</a> for more information.</p>
+                <p>We are a diverse community of professionals, and the Open Infrastructure Foundation is dedicated to providing an inclusive and safe event experience for everyone. <a href="https://www.openstack.org/events/vancouver/code-of-conduct/" target="_blank">View the Community Code of Conduct</a> for more information.</p>
                 <p>&nbsp;</p>
                 <p>&nbsp;</p>
                 <p>&nbsp;</p>

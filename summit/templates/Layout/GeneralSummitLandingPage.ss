@@ -377,7 +377,7 @@
                 <span></span>
                 <h2>Inclusive.<br>Diverse.<br>Open.</h2>
                 <p>
-                    We are a diverse community of professionals, and the OpenStack Foundation is dedicated to
+                    We are a diverse community of professionals, and the Open Infrastructure Foundation is dedicated to
                     providing an inclusive and safe Summit experience for everyone.
                     View the <a href="{$CurrentSummit.Link}/code-of-conduct/" target="_blank">Summit Code of Conduct</a>
                     for more information.

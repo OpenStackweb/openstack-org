@@ -15,6 +15,6 @@
 <hr/>
 
 <h2>Edit Your OpenStack Profile</h2>
-<p>You can view and edit your OpenStack Foundation Profile</p><p><a class="roundedButton" href="/profile/">OpenStack Profile</a></p>
+<p>You can view and edit your Open Infrastructure Foundation Profile</p><p><a class="roundedButton" href="/profile/">OpenStack Profile</a></p>
 
 <% end_if %>

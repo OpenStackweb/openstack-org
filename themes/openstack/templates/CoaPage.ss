@@ -47,7 +47,7 @@
                     If you are interested in working in the OpenStack community, training and professional certification can help you stand out.
                 </p>
                 <p>
-                    The OpenStack Foundation will offer its first professional certification for OpenStack administrators starting in Q2 2016.
+                    The Open Infrastructure Foundation will offer its first professional certification for OpenStack administrators starting in Q2 2016.
                     The Certified OpenStack Administrator (COA) test will be virtual and available anywhere in the world.
                 </p>
                 <p>

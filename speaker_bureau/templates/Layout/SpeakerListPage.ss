@@ -1,6 +1,6 @@
 <% require themedCSS(filter) %>
 
-<h1>OpenStack Foundation: Speakers Bureau</h1>
+<h1>Open Infrastructure Foundation: Speakers Bureau</h1>
 
 <form id="search_form" action="/community/speakers/results" method="get" enctype="application/x-www-form-urlencoded">
     <fieldset class="search_box">

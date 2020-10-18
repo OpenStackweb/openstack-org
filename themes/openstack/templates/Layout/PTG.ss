@@ -23,7 +23,7 @@
             <div class="col-sm-12">
                 <h2>Summary</h2>
                 <p>
-                    The Project Teams Gathering (PTG) is a new event organized by the OpenStack Foundation. Every six months (Q1 and Q3), at the beginning of the development phase of a release cycle, project teams will meet in person to discuss priorities for the upcoming cycle, iterate quickly on solutions for complex issues, and make fast progress on critical items. It is part of a reorganization of the event formerly known as the Design Summit, which is now split between our biannual Summit (where feedback listening, requirements gathering and cross-community discussions happen) and the PTG (where the actual development work is being organized.)
+                    The Project Teams Gathering (PTG) is a new event organized by the Open Infrastructure Foundation. Every six months (Q1 and Q3), at the beginning of the development phase of a release cycle, project teams will meet in person to discuss priorities for the upcoming cycle, iterate quickly on solutions for complex issues, and make fast progress on critical items. It is part of a reorganization of the event formerly known as the Design Summit, which is now split between our biannual Summit (where feedback listening, requirements gathering and cross-community discussions happen) and the PTG (where the actual development work is being organized.)
                 </p>
                 <h2>Why the change</h2>
                 <p>

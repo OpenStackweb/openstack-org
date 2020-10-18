@@ -3,7 +3,7 @@ $Content
     <button type="button" class="btn btn-primary foundation-member active">Foundation Member</button>
     <button type="button" class="btn btn-primary community-member">Community Member</button>
 </div>
-<h2 id="terms-title">1. Read over the terms of becoming an OpenStack Foundation Individual Member.</h2>
+<h2 id="terms-title">1. Read over the terms of becoming an Open Infrastructure Foundation Individual Member.</h2>
 <div class="termsBox">
     <% loop LegalTerms %>
         $Content

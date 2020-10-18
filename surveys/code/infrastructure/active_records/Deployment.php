@@ -130,7 +130,7 @@ class Deployment extends DataObject
                     'IsPublic',
                     'Would you like to keep this information confidential or allow the Foundation to share information about this deployment publicly?',
                     array('1' => '<strong>Willing to share:</strong> The information on this page may be shared for this deployment',
-                        '0' => '<strong>Confidential:</strong> All details provided should be kept confidential to the OpenStack Foundation'),
+                        '0' => '<strong>Confidential:</strong> All details provided should be kept confidential to the Open Infrastructure Foundation'),
                     0
                 ),
                 new LiteralField('Break', '<hr/>'),

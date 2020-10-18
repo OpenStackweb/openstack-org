@@ -84,7 +84,7 @@ class SpeakerForm extends BootstrapForm
                 ->end()
             ->bootstrapIgnore('Photo')
             ->literal('DisclaimerTitle','<hr><label>Disclaimer</label>')
-            ->literal('RecordingAndPublishingLegalAgreement',sprintf('<div class="disclaimer">Speakers agree that OpenStack Foundation may record and publish their talks presented during the %s Open Infrastructure Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.</div>',$this->summit->Title))
+            ->literal('RecordingAndPublishingLegalAgreement',sprintf('<div class="disclaimer">Speakers agree that Open Infrastructure Foundation may record and publish their talks presented during the %s Open Infrastructure Summit. If you submit a proposal on behalf of a speaker, you represent to Open Infrastructure Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.</div>',$this->summit->Title))
             ->literal('BureauTitle','<label>Want to be in the Speakers\' Bureau?</label>')
             ->literal('BureauText','<div class="bureau-text">In addition to the OpenStack Infrastructure Summit, we regularly recruit speakers for OpenStack community events around the world. If you would like to be considered for more speaking opportunities, please indicate your interest in being listed in the speaker’s bureau and complete the below questions so event organizers can learn more about you.</div>')
             ->checkbox('AvailableForBureau', "I'd like to be in the speaker bureau")

@@ -9,7 +9,7 @@ ID	Name	Split
 51	Rackspace, Cloudscaling, Korea Telcom	True
 53	Cogent Computer Systems, Inc.	False
 57	CSSCorp	True
-69	OpenStack Foundation, Rackspace	True
+69	Open Infrastructure Foundation, Rackspace	True
 75	Cloudscaling, Quanta QCT	True
 78	MindPool, Inc.	False
 81	Dell, La Honda Research Center	True
@@ -248,7 +248,7 @@ ID	Name	Split
 1775	orange, cloudwatt	True
 1782	Saules spektras, Latvijas talrunis	True
 1783	Exact Marketing Formula, LLC	False
-1789	OpenStack Foundation, HP	True
+1789	Open Infrastructure Foundation, HP	True
 1792	NodePrime, Inc.	False
 1797	Coastside Ventures, LLC	False
 1821	GMO Internet, Inc.	False
@@ -300,7 +300,7 @@ ID	Name	Split
 2265	Azubuike Enterprise Group, Inc.	False
 2271	Nebula, Inc.	False
 2272	Vimeo, LLC	False
-2274	NeCTAR, OpenStack Foundation	True
+2274	NeCTAR, Open Infrastructure Foundation	True
 2291	Alice L. King, P.C.	False
 2293	ServiceMesh, Roffe Technologies	True
 2296	Victory-Tech LLC, Realogic Analytics	True

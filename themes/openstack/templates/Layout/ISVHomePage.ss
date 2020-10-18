@@ -231,9 +231,9 @@
                     <p>
                         <a href="http://www.openstack.org/marketplace/" target="_blank" class="isv-promo-btn">View <i class="fa fa-angle-right"></i></a>
                     </p>
-                    <h5 class="section-title">OpenStack Foundation Members</h5>
+                    <h5 class="section-title">Open Infrastructure Foundation Members</h5>
                     <p>
-                        Join more than 575 OpenStack Foundation members displaying company logos and links to websites
+                        Join more than 575 Open Infrastructure Foundation members displaying company logos and links to websites
                     </p>
                     <p>
                         <a href="http://www.openstack.org/foundation/companies/" target="_blank" class="isv-promo-btn">View <i class="fa fa-angle-right"></i></a>

@@ -29,7 +29,7 @@
             <div class="row">
                 <div class="col-md-9 col-sm-7">
                     <p>
-                       Heavy Reading research consistently shows that OpenStack is playing an important role  in CSPs’ transformation programs. They recently did a survey for the OpenStack Foundation to get a better understanding of CSPs’ experiences with OpenStack and what use cases will drive usage in the future.</p>
+                       Heavy Reading research consistently shows that OpenStack is playing an important role  in CSPs’ transformation programs. They recently did a survey for the Open Infrastructure Foundation to get a better understanding of CSPs’ experiences with OpenStack and what use cases will drive usage in the future.</p>
 
 
                     <p>84% of CSPs say that OpenStack is essential or important to their company’s success. CSPs who are already implementing their NFV and cloud strategies are even more positive, with 96% and 85% respectively saying it is essential or important.  More CSPs have experience with open source software than in last year, with 44% saying they have “a lot” of experience with it, up from 31% last year. Engagement levels with OpenStack also grew, with 84% saying they are actively engaged with or following the project, up from 74% from last year, and the percent contributing directly to the project grew from 17% to 21%. </p>
@@ -103,11 +103,11 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-push-2">
                     <div class="foundation-report-title"> 
-                        OpenStack Foundation Report 
+                        Open Infrastructure Foundation Report 
                     </div> 
                     <h1>Accelerating NFV Delivery with OpenStack</h1>
                     <p>
-                        Read <em>Accelerating NFV Delivery with OpenStack</em>, a report created by the OpenStack Foundation in collaboration with six global communications companies, to learn more about Network Functions Virtualization.
+                        Read <em>Accelerating NFV Delivery with OpenStack</em>, a report created by the Open Infrastructure Foundation in collaboration with six global communications companies, to learn more about Network Functions Virtualization.
                     </p>
                     <a class="appdev-marketplace-btn" href="#" data-toggle="modal" data-target="#downloadModal">Download Now <i class="fa fa-chevron-circle-right"></i></a>
                 </div>
@@ -246,7 +246,7 @@
           <div class="modal-body">
             <p class="download-text">
                 <i class="fa fa-file-pdf-o fa-4x"></i>
-                Read Accelerating NFV Delivery with OpenStack, a report created by the OpenStack Foundation in collaboration with ten global communications companies, to learn more about Network Functions Virtualization.
+                Read Accelerating NFV Delivery with OpenStack, a report created by the Open Infrastructure Foundation in collaboration with ten global communications companies, to learn more about Network Functions Virtualization.
             </p>
                 <a href="{$Top.CloudUrl('assets/telecoms-and-nfv/OpenStack-Foundation-NFV-Report.pdf')}" class="download-btn" download="OpenStack-Foundation-NFV-Report.pdf"><i class="fa fa-arrow-circle-down fa-2x"></i> Download the NFV Foundation Report</a>
             <hr>

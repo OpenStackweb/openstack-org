@@ -82,10 +82,10 @@
                         Review the list of sponsorships to see which ones are still available.
                     </li>
                     <li>
-                        If you have not already done so, you will need to first <a href="https://openstack.na1.echosign.com/public/esignWidget?wid=CBFCIBAA3AAABLblqZhDdkLg6AyOkPJQwlVhJH9R3Q6cK_F4lAbP8Heg5Pvk8mHyIIIHVgVMBi5Nzyy5BUjI*" target="_blank">sign the Master Event Sponsorship Agreement</a> with the OpenStack Foundation. ( Note: If you previously sponsored either the Tokyo, Vancouver, Paris, Atlanta, Hong Kong, or Portland Summits then you've already completed this step.  You'll just need to know the date when you signed it previously, as this information will be required in the Vancouver contract.  If you do not know the date when you previously signed the Master Sponsorship agreement please email <a href="mailto:summit@openstack.org">summit@openstack.org.</a>)
+                        If you have not already done so, you will need to first <a href="https://openstack.na1.echosign.com/public/esignWidget?wid=CBFCIBAA3AAABLblqZhDdkLg6AyOkPJQwlVhJH9R3Q6cK_F4lAbP8Heg5Pvk8mHyIIIHVgVMBi5Nzyy5BUjI*" target="_blank">sign the Master Event Sponsorship Agreement</a> with the Open Infrastructure Foundation. ( Note: If you previously sponsored either the Tokyo, Vancouver, Paris, Atlanta, Hong Kong, or Portland Summits then you've already completed this step.  You'll just need to know the date when you signed it previously, as this information will be required in the Vancouver contract.  If you do not know the date when you previously signed the Master Sponsorship agreement please email <a href="mailto:summit@openstack.org">summit@openstack.org.</a>)
                     </li>
                     <li>
-                        If your company has any past due balances owed to OpenStack Foundation, these invoices will need to be paid in full in order to be eligible to sponsor the Summit. Please contact <a href="mailto:billing@openstack.org">billing@openstack.org</a> if you think you may have any overdue/outstanding invoices.
+                        If your company has any past due balances owed to Open Infrastructure Foundation, these invoices will need to be paid in full in order to be eligible to sponsor the Summit. Please contact <a href="mailto:billing@openstack.org">billing@openstack.org</a> if you think you may have any overdue/outstanding invoices.
                     </li>
                 </ul>
                 <h3>How to Sign the Agreement:</h3>
@@ -103,7 +103,7 @@
                         In order to meet production deadlines, March 8, 2016, is the final day that signed sponsorship agreements will be accepted.
                     </li>
                     <li>
-                        Please note that in recognition of the ongoing support of <a href="//openstack.org/foundation/companies/">companies that are Sponsors or Members</a> of the OpenStack Foundation, their contracts will be considered first, for the initial 24 hours after the executable Austin Contract goes live. All other contracts will be processed starting 24 hours later on December 15 at 11:00am CST. From that point forward all sponsorships will be sold on a first-come, first-serve basis determined by the timestamp on completed agreements. 
+                        Please note that in recognition of the ongoing support of <a href="//openstack.org/foundation/companies/">companies that are Sponsors or Members</a> of the Open Infrastructure Foundation, their contracts will be considered first, for the initial 24 hours after the executable Austin Contract goes live. All other contracts will be processed starting 24 hours later on December 15 at 11:00am CST. From that point forward all sponsorships will be sold on a first-come, first-serve basis determined by the timestamp on completed agreements. 
                     </li>
                 </ul>
                 <h3>Specific to Headline Level Sponsorships</h3>

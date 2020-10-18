@@ -179,7 +179,7 @@
                         </div>
                         <div class="info">
                             <div class="name">Mark Collier</div>
-                            <div class="title">OpenStack Foundation</div>
+                            <div class="title">Open Infrastructure Foundation</div>
                         </div>
                     </div>
                 </div>
@@ -234,7 +234,7 @@
                         </div>
                         <div class="info">
                             <div class="name">Allison Price</div>
-                            <div class="title">OpenStack Foundation</div>
+                            <div class="title">Open Infrastructure Foundation</div>
                         </div>
                     </div>
                 </div>
@@ -289,7 +289,7 @@
                         </div>
                         <div class="info">
                             <div class="name">Kendall Nelson</div>
-                            <div class="title">OpenStack Foundation</div>
+                            <div class="title">Open Infrastructure Foundation</div>
                         </div>
                     </div>
                 </div>
@@ -370,7 +370,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h3>Thank you to the OpenStack Foundation Platinum and Gold sponsors for their ongoing support!</h3>
+                <h3>Thank you to the Open Infrastructure Foundation Platinum and Gold sponsors for their ongoing support!</h3>
             </div>
             <div id="sponsorsCarousel" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
@@ -500,7 +500,7 @@
                 <span></span>
                 <h2>Inclusive. Diverse. Open.</h2>
                 <p>
-                    We are a diverse community of professionals, and the OpenStack Foundation is dedicated to providing an inclusive and safe event experience for everyone. View the <a href="/events/opendev-2020/code-of-conduct/">Community Code of Conduct</a> for more information. 
+                    We are a diverse community of professionals, and the Open Infrastructure Foundation is dedicated to providing an inclusive and safe event experience for everyone. View the <a href="/events/opendev-2020/code-of-conduct/">Community Code of Conduct</a> for more information. 
 
                 </p>
             </div>

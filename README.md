@@ -1,4 +1,4 @@
-# OpenStack Foundation Website
+# Open Infrastructure Foundation Website
 
 ## What is it?
 
@@ -16,7 +16,7 @@ Images - You'll note many missing images throughout the site. This is due to one
 
 ## A reminder on trademarks
 
-In light of the trademarks held by the OpenStack Foundation, it is important that you not use the code to build a website or webpage that could be confused with the openstack.org website, including by building a site or page with the same look and feel of the openstack.org site or by using trademarks that are the same as or similar to marks found on the openstack.org site. For the rules regarding other uses of OpenStack trademarks, see the OpenStack Trademark Policy http://www.openstack.org/brand/openstack-trademark-policy/ and the OpenStack Brand Guide http://www.openstack.org/brand/. Please contact logo@openstack.org with any questions.
+In light of the trademarks held by the Open Infrastructure Foundation, it is important that you not use the code to build a website or webpage that could be confused with the openstack.org website, including by building a site or page with the same look and feel of the openstack.org site or by using trademarks that are the same as or similar to marks found on the openstack.org site. For the rules regarding other uses of OpenStack trademarks, see the OpenStack Trademark Policy http://www.openstack.org/brand/openstack-trademark-policy/ and the OpenStack Brand Guide http://www.openstack.org/brand/. Please contact logo@openstack.org with any questions.
 
 ## License
 

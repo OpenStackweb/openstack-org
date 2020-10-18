@@ -474,7 +474,7 @@
           </div>
           <div class="modal-body">
             <p class="download-text">
-                Software Defined Economy - Jonathan Bryce, OpenStack Foundation - OpenStackSV 2014
+                Software Defined Economy - Jonathan Bryce, Open Infrastructure Foundation - OpenStackSV 2014
             </p>
                 <iframe width="100%" height="315" src="//www.youtube.com/embed/4w0bp5mznb4?showinfo=0" frameborder="0" allowfullscreen></iframe>
           </div>
