@@ -12,7 +12,15 @@
  * limitations under the License.
  **/
 
-class SponsorBadgeScan extends DataObject
+class SponsorUserInfoGrant extends DataObject{
+    private static $has_one =
+        [
+            'Sponsor' => 'Sponsor',
+            'AllowedUser'    => 'Member',
+        ];
+}
+
+class SponsorBadgeScan extends SponsorUserInfoGrant
 {
     private static $db = [
         'QRCode'   => 'Varchar(255)',
@@ -21,7 +29,6 @@ class SponsorBadgeScan extends DataObject
 
     private static $has_one =
     [
-        'Sponsor' => 'Sponsor',
         'User'    => 'Member',
         'Badge'   => 'SummitAttendeeBadge',
     ];
