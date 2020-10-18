@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2016 OpenStack Foundation
+ * Copyright 2016 Open Infrastructure Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -59,7 +59,7 @@ Please click this link to confirm your attendance as a speaker: <a href="{\$Conf
 <p><b>PRESENTATION INFORMATION</b></p>
 <p>We do not have a speaker ready room so please come prepared with your VGA or DVI compatible laptop with your 16:9 presentations loaded and ready to present. If your laptop needs an adapter to connect via VGA or DVI (i.e. Macs require a dongle), please bring that as well. If you require another type of connection, have a demo, or will use more than one connected device, please notify your speaker manager immediately.</p>
 <p>If you have a presentation which requires attendees to download large files to participate in your session, please share your delivery system with the speaker managers so we are able to communicate that information with the attendees.  We suggest you provide a link to files several days prior to the conference.</p>
-<p>We will be video recording sessions from a lockdown camera capturing the screen and presenter, and also a hard drive video recorder 1280x720 final resolution which will capture slides and camera in a two up format.  Recordings will be uploaded to OpenStack’s YouTube page and available on the OpenStack Foundation website post event. If you have not already done so, provide a 450 character abstract for YouTube by replying to this email.</p>
+<p>We will be video recording sessions from a lockdown camera capturing the screen and presenter, and also a hard drive video recorder 1280x720 final resolution which will capture slides and camera in a two up format.  Recordings will be uploaded to OpenStack’s YouTube page and available on the Open Infrastructure Foundation website post event. If you have not already done so, provide a 450 character abstract for YouTube by replying to this email.</p>
 <p>Please include your name, title, company name, and title of your presentation in your introductory slide.</p>
 <p><b>AV / ROOM SET UP</b></p>
 <ul>
@@ -110,7 +110,7 @@ HTML;
 <p><b>PRESENTATION INFORMATION</b></p>
 <p>We do not have a speaker ready room so please come prepared with your VGA or DVI compatible laptop with your 16:9 presentations loaded and ready to present. If your laptop needs an adapter to connect via VGA or DVI (i.e. Macs require a dongle), please bring that as well. If you require another type of connection, have a demo, or will use more than one connected device, please notify your speaker manager immediately.</p>
 <p>If you have a presentation which requires attendees to download large files to participate in your session, please share your delivery system with the speaker managers so we are able to communicate that information with the attendees.  We suggest you provide a link to files several days prior to the conference.</p>
-<p>We will be video recording sessions from a lockdown camera capturing the screen and presenter, and also a hard drive video recorder 1280x720 final resolution which will capture slides and camera in a two up format.  Recordings will be uploaded to OpenStack’s YouTube page and available on the OpenStack Foundation website post event. If you have not already done so, provide a 450 character abstract for YouTube by replying to this email.</p>
+<p>We will be video recording sessions from a lockdown camera capturing the screen and presenter, and also a hard drive video recorder 1280x720 final resolution which will capture slides and camera in a two up format.  Recordings will be uploaded to OpenStack’s YouTube page and available on the Open Infrastructure Foundation website post event. If you have not already done so, provide a 450 character abstract for YouTube by replying to this email.</p>
 <p>Please include your name, title, company name, and title of your presentation in your introductory slide.</p>
 <p><b>AV / ROOM SET UP</b></p>
 <ul>

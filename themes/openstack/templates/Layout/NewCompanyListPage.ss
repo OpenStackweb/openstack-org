@@ -1,5 +1,5 @@
-  				<h1>Companies Supporting The OpenStack Foundation</h1>
-		<p>The OpenStack Foundation would not exist without the support of the Platinum, Gold, and Corporate Sponsors listed below.  Learn more about <a href="/join/#sponsor">how your company can help</a>.</p>
+  				<h1>Companies Supporting The Open Infrastructure Foundation</h1>
+		<p>The Open Infrastructure Foundation would not exist without the support of the Platinum, Gold, and Corporate Sponsors listed below.  Learn more about <a href="/join/#sponsor">how your company can help</a>.</p>
 
 		<!-- Platinum Members -->
 		<hr/>
@@ -245,7 +245,7 @@
 		<hr/>
 		<div class="span-24 last">
 			<h2>More Supporters</h2>
-			<p>The resources provided by the companies listed above are critical to making the OpenStack Foundation a reality, but there are many ways to support the OpenStack Mission, whether you're contributing code, building a product based on OpenStack, promoting the software, hosting a meetup, attending one of our Summits, or showing your support in some other way.  Below we've listed many of the companies that are actively involved in making OpenStack successful.</p>
+			<p>The resources provided by the companies listed above are critical to making the Open Infrastructure Foundation a reality, but there are many ways to support the OpenStack Mission, whether you're contributing code, building a product based on OpenStack, promoting the software, hosting a meetup, attending one of our Summits, or showing your support in some other way.  Below we've listed many of the companies that are actively involved in making OpenStack successful.</p>
 		</div>
 
 		<div class="span-24 small-logos last">

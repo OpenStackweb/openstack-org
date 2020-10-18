@@ -120,7 +120,7 @@ class DeploymentSurvey extends DataObject
 				$os_activity            = new CustomCheckboxSetField('OpenStackActivity', 'Which of the following do you yourself personally do?<BR>Select All That Apply', DeploymentSurveyOptions::$activities_options),
 				$os_relationship        = new TextAreaField('OpenStackRelationship', 'Please describe your relationship with OpenStack'),
 				$email_field            = new ReadonlyField('Member.Email', 'Your Email', $this->Member()->Email),
-				$ok_2_contact           = new CheckboxField('OkToContact', 'The OpenStack Foundation and User Committee may communicate with me in the future about my usage.')
+				$ok_2_contact           = new CheckboxField('OkToContact', 'The Open Infrastructure Foundation and User Committee may communicate with me in the future about my usage.')
 			));
 
 		$fields->addFieldsToTab('Root.YourOrganization', array(
@@ -163,7 +163,7 @@ class DeploymentSurvey extends DataObject
 				'How likely are you to recommend OpenStack to a friend or colleague? (0=Least Likely, 10=Most Likely)',
                 DeploymentSurveyOptions::$openstack_recommendation_rate_options),
 			new LiteralField('Break', '<hr/>'),
-			new LiteralField('Break', '<p>We would love to hear how OpenStack and the OpenStack Foundation can better meet your needs. These free-form questions are optional, but will provide valuable insights.</p>'),
+			new LiteralField('Break', '<p>We would love to hear how OpenStack and the Open Infrastructure Foundation can better meet your needs. These free-form questions are optional, but will provide valuable insights.</p>'),
 			new LiteralField('Break', '<p>Your responses are anonymous, and each of these text fields is independent, so we cannot “See previous answer”. We would really appreciate a separate answer to each question.</p>'),
 			new TextAreaField('WhatDoYouLikeMost', 'What do you like most about OpenStack, besides “free” and “open”?'),
 			new TextAreaField('FurtherEnhancement', 'What areas of OpenStack require further enhancement? '),

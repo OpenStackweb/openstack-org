@@ -2,9 +2,9 @@
 <div class="container logo">
 
     <div class="span-15 last">
-        <h1>OpenStack Foundation Trademarks</h1>
+        <h1>Open Infrastructure Foundation Trademarks</h1>
         <p>
-			Here you’ll find logos of the projects managed by the OpenStack Foundation. Look carefully to make sure you
+			Here you’ll find logos of the projects managed by the Open Infrastructure Foundation. Look carefully to make sure you
             choose the right format for your needs. Generally speaking, it is best use a PNG or JPG format for web content or
             slides and EPS for print projects. Please contact us for any file formats not listed. Each of these
             marks is subject to the <a href="/brand/openstack-logo/">terms and conditions found here</a>.

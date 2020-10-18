@@ -287,7 +287,7 @@ class EditProfilePage_Controller extends Page_Controller
             $current_user->resign();
             // Logout and delete the user
             Session::set('delete_member_id', $current_user->ID);
-            $this->setMessage('Success', 'You have resigned your membership to the OpenStack Foundation.');
+            $this->setMessage('Success', 'You have resigned your membership to the Open Infrastructure Foundation.');
             $this->redirect('/Security/logout' . "?BackURL=" . urlencode('/profile'));
 
         } else if ($current_user) {

@@ -9,10 +9,10 @@
 It's a good idea to promote your presentation to your friends in the OpenStack community. Tell them to view your presentation and vote:
 <a href="http://www.openstack.org/summit/portland-2013/vote-for-speakers/presentation/{$ID}">http://www.openstack.org/summit/portland-2013/vote-for-speakers/presentation/{$ID}</a></p>
 
-<p>(Note: to vote on presentations, you must be a member of the OpenStack Foundation.)</p>
+<p>(Note: to vote on presentations, you must be a member of the Open Infrastructure Foundation.)</p>
 
 <p>VOTE FOR OTHER PRESENTATIONS<br/>
-If you are a member of the OpenStack Foundation, you can vote for your own presentation and others you would like to see at the summit. Please do that here:
+If you are a member of the Open Infrastructure Foundation, you can vote for your own presentation and others you would like to see at the summit. Please do that here:
 http://www.openstack.org/summit/portland-2013/vote-for-speakers/
 
 After voting closes, track chairs will be making the final selections for the agenda with the goal of announcing speakers the week of March 11.

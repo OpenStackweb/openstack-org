@@ -113,7 +113,7 @@ class EditProfileForm extends SafeXSSForm
 
         //Newsletter Field
         $subscribedToNewsletterField = new CheckboxField('SubscribedToNewsletter',
-            'I don\'t mind occasionally receiving updates and communications from the OpenStack Foundation.');
+            'I don\'t mind occasionally receiving updates and communications from the Open Infrastructure Foundation.');
         $subscribedToNewsletterField->addExtraClass('checkbox');
 
 

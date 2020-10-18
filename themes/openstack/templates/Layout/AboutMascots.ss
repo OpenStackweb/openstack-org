@@ -154,7 +154,7 @@
 				What if my mascot candidate is disqualified?
 			</p>
 			<p class="answer">
-				The OpenStack Foundation vets the proposed candidates to ensure uniqueness from other projects and from other companies in the ecosystem, and to abide by the other requirements listed here. If one of your choices is disqualified, we can discuss other options or make recommendations, and work with you to ensure your team selects a mascot they’re proud of.
+				The Open Infrastructure Foundation vets the proposed candidates to ensure uniqueness from other projects and from other companies in the ecosystem, and to abide by the other requirements listed here. If one of your choices is disqualified, we can discuss other options or make recommendations, and work with you to ensure your team selects a mascot they’re proud of.
 			</p>
 			<p class="question">
 				How do we organize voting?

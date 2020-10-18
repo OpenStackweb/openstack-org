@@ -552,7 +552,7 @@
             <div class="col-lg-6 col-md-6 col-sm-6 text">
                 <span></span>
                 <h2>Inclusive.<br>Diverse.<br>Open.</h2>
-                <p>We are a diverse community of professionals, and the OpenStack Foundation is dedicated to providing an
+                <p>We are a diverse community of professionals, and the Open Infrastructure Foundation is dedicated to providing an
                     inclusive and safe Summit experience for everyone. View the <a href="https://www.openstack.org/summit/berlin-2018/code-of-conduct/" target="_blank">Summit Code of Conduct</a> for more information.</p>
 
                 <p>Want to support community members who don’t have the resources to attend the Summit?  <a href="https://www.eventbrite.com/e/openstack-summit-november-2018-berlin-tickets-41880169715" target="_blank">Donate to the travel support program.</a>

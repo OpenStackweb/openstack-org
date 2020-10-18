@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-sm-9">
                     <div class="intro-message"> 
-                        <h1>New: OSF Edge Computing Group defines architectures, open source components, and testing activities for massively distributed systems</h1>
+                        <h1>New: OIF Edge Computing Group defines architectures, open source components, and testing activities for massively distributed systems</h1>
                         <p>
                             Created by open infrastructure operators, the second white paper delivers the specific ways open infrastructure operators are shaping the future of edge computing by collecting use cases, identifying technology requirements and contributing architectures, open source components and considerations for testing activities.
                         </p>
@@ -85,7 +85,7 @@
                         </div>
                     </a>
                     <p class="speaker">Jonathan Bryce</p>
-                    <p class="company">OpenStack Foundation</p>
+                    <p class="company">Open Infrastructure Foundation</p>
                 </div>
                 <div class="col-md-3 col-sm-6 video-wall-item">
                     <a href="https://youtu.be/BdIzryvX7gc" target="_blank">

@@ -26,8 +26,8 @@
                             <h1 style="color: white">See the results from the latest User Survey</h1>
                         </div>
                     </div>
-                    <div title="Photo by the OpenStack Foundation" data-placement="left" data-toggle="tooltip"
-                         class="hero-credit" data-original-title="Photo by the OpenStack Foundation">
+                    <div title="Photo by the Open Infrastructure Foundation" data-placement="left" data-toggle="tooltip"
+                         class="hero-credit" data-original-title="Photo by the Open Infrastructure Foundation">
                         <a target="_blank" href="#"><i class="fa fa-info-circle"></i></a>
                     </div>
                 </div>
@@ -104,7 +104,7 @@
     <h1>Get Started</h1>
     <div class="row">
         <div class="col-lg-6">
-            <h3>Already have an OpenStack Foundation login?</h3>
+            <h3>Already have an Open Infrastructure Foundation login?</h3>
             <div class="survey-login-wrapper">
                 <form id="MemberLoginForm_LoginForm" action="Security/login?BackURL={$BackURL}" method="post"
                       enctype="application/x-www-form-urlencoded">

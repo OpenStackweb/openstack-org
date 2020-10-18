@@ -45,7 +45,7 @@
                         	<img class="learn-coa-icon" src="{$Top.CloudUrl('assets/learn/COA-learn-icon.svg')}" onerror="this.onerror=null; this.src={$Top.CloudUrl('assets/learn/COA-learn-icon.svg')}" alt="Certified OpenStack Administrator">
                             <h2>Get Certified</h2>
                             <p>
-                                Register for the COA exam, the first professional certification offered by the OpenStack Foundation.
+                                Register for the COA exam, the first professional certification offered by the Open Infrastructure Foundation.
                             </p>
                             <a href="/coa" class="learn-btn">
                                 Go to COA <i class="fa fa-chevron-right"></i>
@@ -135,7 +135,7 @@
                             <i class="fa fa-newspaper-o learn-icon"></i>
                             <h2>News</h2>
                             <p>
-                                Read about the latest happenings in the OpenStack ecosystem. The news section features news from around the community and the OpenStack Foundation.
+                                Read about the latest happenings in the OpenStack ecosystem. The news section features news from around the community and the Open Infrastructure Foundation.
                             </p>
                             <a href="/news" class="learn-btn">
                                 Go to the News Page <i class="fa fa-chevron-right"></i>

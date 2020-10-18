@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2018 OpenStack Foundation
+ * Copyright 2018 Open Infrastructure Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -306,7 +306,7 @@ final class CreateEdgeComputingPaperMigration extends AbstractDBMigrationTask
             'h41' => 'CONTRIBUTORS',
             'ul1' => [
                 'li1' => 'Beth Cohen, Distinguished Member of Technical Staff, Verizon',
-                'li2' => 'Gnanavelkandan Kathirvel, Director – Cloud Strategy & Architecture, AT&T and Board of Directors, OpenStack Foundation (OSF)',
+                'li2' => 'Gnanavelkandan Kathirvel, Director – Cloud Strategy & Architecture, AT&T and Board of Directors, Open Infrastructure Foundation (OIF)',
                 'li3' => 'Gregory Katsaros, Senior System Architect, Inmarsat',
                 'li4' => 'Adrien Lebre, Ass. Prof., IMT Atlantique/Inria/LS2N, France',
                 'li5' => 'Andrew Mitry, Sr. Distinguished Engineer, Walmart Labs',
@@ -314,7 +314,7 @@ final class CreateEdgeComputingPaperMigration extends AbstractDBMigrationTask
                 'li7' => 'Paul-André Raymond, SVP Technology, B.Yond',
                 'li8' => 'Alex Reznik, Enterprise Architect, HPE and Chair, ETSI ISG MEC',
                 'li9' => 'Pasi Vaananen, Systems Architect, NFV, Red Hat',
-                'li10' => 'Ildiko Vansca, Ecosystem Technical Lead, OpenStack Foundation (OSF)',
+                'li10' => 'Ildiko Vansca, Ecosystem Technical Lead, Open Infrastructure Foundation (OIF)',
                 'li11' => 'Ian Wells, Distinguished Engineer, Cisco',
             ],
             'h42' => 'TECHNICAL WRITER',

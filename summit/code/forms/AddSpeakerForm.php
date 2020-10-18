@@ -65,7 +65,7 @@ final class AddSpeakerForm extends BootstrapForm
             LiteralField::create('LegalMe', sprintf('
                 <div id="legal-me" style="display: none;">
                  <label>
-                    '.ucfirst($speaker_type).'s agree that OpenStack Foundation may record and publish their talks presented during the %s Open Infrastructure Summit. If you submit a proposal on behalf of a '.$speaker_type.', you represent to OpenStack Foundation that you have the authority to submit the proposal on the '.$speaker_type.'’s behalf and agree to the recording and publication of their presentation.
+                    '.ucfirst($speaker_type).'s agree that Open Infrastructure Foundation may record and publish their talks presented during the %s Open Infrastructure Summit. If you submit a proposal on behalf of a '.$speaker_type.', you represent to Open Infrastructure Foundation that you have the authority to submit the proposal on the '.$speaker_type.'’s behalf and agree to the recording and publication of their presentation.
                 </label>
                 </div>', $this->summit->Title)),
             TextField::create('EmailAddress',
@@ -78,7 +78,7 @@ final class AddSpeakerForm extends BootstrapForm
             LiteralField::create('LegalOther', sprintf('
                 <div id="legal-other" style="display: none;">
                  <label>
-                    Speakers and moderators agree that OpenStack Foundation may record and publish their talks presented during the %s Open Infrastructure Summit. If you submit a proposal on behalf of a '.$speaker_type.', you represent to OpenStack Foundation that you have the authority to submit the proposal on the '.$speaker_type.'’s behalf and agree to the recording and publication of their presentation.
+                    Speakers and moderators agree that Open Infrastructure Foundation may record and publish their talks presented during the %s Open Infrastructure Summit. If you submit a proposal on behalf of a '.$speaker_type.', you represent to Open Infrastructure Foundation that you have the authority to submit the proposal on the '.$speaker_type.'’s behalf and agree to the recording and publication of their presentation.
                 </label>
                 </div>', $this->summit->Title)
             )

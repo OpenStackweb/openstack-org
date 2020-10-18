@@ -25,7 +25,7 @@ class PopulateOrganizationalRoleAndActiveInvolvement extends AbstractDBMigration
         ('Midcycle Meetup organizer',1),('Midcycle Meetup attendee (current or prior)',1),
         ('Active on OpenStack mailing lists (Dev, Ops, Community, Women of OpenStack, App Hackathon, etc)',1),('Superuser publication interviewee',1),
         ('Superuser publication contributor',1),('SuperuserTV video interviewee',1),('Superuser Award nominee',1),
-        ('OpenStack Project Team Lead (PTL)',1),('OpenStack Foundation Board of Directors',1),('OpenStack Foundation Staff',1),
+        ('OpenStack Project Team Lead (PTL)',1),('Open Infrastructure Foundation Board of Directors',1),('Open Infrastructure Foundation Staff',1),
         ('OpenStack Technical Committee (TC)',1),('OpenStack User Committee (UC)',1)");
 
     }

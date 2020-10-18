@@ -28,8 +28,8 @@
 		<div class="row">
 			<div class="col-sm-10 col-sm-push-1" style="text-align:left;">
 				<h2>OpenStack User Momentum Continues to Build</h2>
-				<h3>Updates from the OpenStack Foundation</h3>
-				<p>The OpenStack Foundation highlighted recent market share statistics, new users and updates from the broader open infrastructure community at its recent OpenStack Summit in May 2018. <a href="{$Top.CloudUrl('assets/analysts/Vancouver-Summit-FoundationUpdate.pdf')}" target="_blank">Download the presentation</a>.</p>
+				<h3>Updates from the Open Infrastructure Foundation</h3>
+				<p>The Open Infrastructure Foundation highlighted recent market share statistics, new users and updates from the broader open infrastructure community at its recent OpenStack Summit in May 2018. <a href="{$Top.CloudUrl('assets/analysts/Vancouver-Summit-FoundationUpdate.pdf')}" target="_blank">Download the presentation</a>.</p>
 
 				<h3>According to 451 Research: Voice of the Service Provider</h3>
  
@@ -100,8 +100,8 @@
 		</div>
 		<div class="row">
 			<div class="col-sm-10 col-sm-push-1" style="text-align:left;">
-				<h2>Evolving OpenStack Foundation Is Right On Track</h2>
-				<p>There were more than 30 open source projects represented by Vancouver Summit sessions in May. <a href="http://superuser.openstack.org/articles/recap-vancouver/" target="_blank">This Summit recap</a> highlights the operators who are integrating open infrastructure in production and latest announcements from the OpenStack Foundation and its ecosystem.</p>
+				<h2>Evolving Open Infrastructure Foundation Is Right On Track</h2>
+				<p>There were more than 30 open source projects represented by Vancouver Summit sessions in May. <a href="http://superuser.openstack.org/articles/recap-vancouver/" target="_blank">This Summit recap</a> highlights the operators who are integrating open infrastructure in production and latest announcements from the Open Infrastructure Foundation and its ecosystem.</p>
 				<blockquote>The Vancouver Summit also showed that, in the six months since Sydney, considerable momentum had been achieved with the OpenStack community’s focus on the use cases where individual open source technologies are collectively applied, including containers, edge environments, and continuous integration and continuous delivery (CI/CD).</blockquote>
 				<div class="testimonial-attribute">"OpenStack Vancouver: Deepening Open Source Cooperation and Support for Emerging Technologies," Chris Drake, Global Data, June 2018</div>
 			</div>

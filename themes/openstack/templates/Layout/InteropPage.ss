@@ -8,7 +8,7 @@
     <p>
         OpenStack began with the mission to produce a ubiquitous open source cloud computing platform. A key component
         of that mission is building not only software, but a large OpenStack ecosystem that supports its growth and adds
-        value to the core technology platform. In carrying out that mission, the OpenStack Foundation has created, with
+        value to the core technology platform. In carrying out that mission, the Open Infrastructure Foundation has created, with
         the community, requirements to ensure that the various products and services bearing the OpenStack marks achieve
         a high level of interoperability.     
     </p>
@@ -21,7 +21,7 @@
 
     <h2>Overview of OpenStack Logos</h2>
     <p>
-        The OpenStack Foundation offers two different logos for vendors. 
+        The Open Infrastructure Foundation offers two different logos for vendors. 
         "<a href="http://www.openstack.org/brand/openstack-powered/">OpenStack Powered</a>" is for products that run fully
         functional instances of the OpenStack software. Details on the technical and testing requirements to qualify for
         the "Powered" program are <a href="http://www.openstack.org/brand/interop#openstackpowered">here</a>.
@@ -104,7 +104,7 @@
         Powered marketing programs, which consist of a logo and unique product naming rights.
     </p>
     <p>
-        Products must comply with one of the two most recent guidelines approved by the OpenStack Foundation Board of Directors.
+        Products must comply with one of the two most recent guidelines approved by the Open Infrastructure Foundation Board of Directors.
         These versions are numbered based on the date when they were approved, such as "2020.06" for the version approved in June, 2020.
     </p>
     <p>
@@ -159,7 +159,7 @@
     <p>
     	There are two types of "OpenStack Compatible" products that fall under the unified logo program. The first is software
         applications that interact with "OpenStack Powered" systems. The second is hardware solutions and drivers that run
-        OpenStack software. Starting November 1 2015, The OpenStack Foundation required that new "OpenStack Compatible" logos
+        OpenStack software. Starting November 1 2015, The Open Infrastructure Foundation required that new "OpenStack Compatible" logos
         for storage drivers pass community-defined third-party integration tests. The Cinder team has a
         <a href="https://wiki.openstack.org/wiki/Cinder/tested-3rdParty-drivers">detailed overview of the requirements</a> for
         third-party testing. 

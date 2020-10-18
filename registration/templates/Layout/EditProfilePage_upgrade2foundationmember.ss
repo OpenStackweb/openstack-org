@@ -3,9 +3,9 @@
 
     <h1>Upgrade To Foundation Member</h1>
     <% if CurrentMember %>
-        <h2>1. Read over the terms of becoming an OpenStack Foundation Individual Member.</h2>
+        <h2>1. Read over the terms of becoming an Open Infrastructure Foundation Individual Member.</h2>
         <div class="termsBox">
-            <p>This Individual Member Agreement (“IM Agreement”) between me and the OpenStack Foundation (the “Foundation”) governs my rights and obligations as an Individual Member of the Foundation and is effective on the date that I sign below. I agree that:</p>
+            <p>This Individual Member Agreement (“IM Agreement”) between me and the Open Infrastructure Foundation (the “Foundation”) governs my rights and obligations as an Individual Member of the Foundation and is effective on the date that I sign below. I agree that:</p>
             <p>1. My rights and obligations as an Individual Member are defined in the Certificate of Incorporation and Bylaws (including policies which are exhibits to the bylaws, including the Community Code of Conduct) of the Foundation located at <a href="http://openstack.org/legal/">http://www.openstack.org/legal/</a> on the date that I submitted the Individual Member Application (“IM Application”) , as they may be amended from time to time (the “Certificate”, “Bylaws,” and the “Community Code of Conduct” respectively). The changes to the Certificate, Bylaws and Community Code of Conduct shall be effective when posted at <a href="/legal/">http://www.openstack.org/legal/</a> and I will regularly check the Certificate, Bylaws and Community Code of Conduct to ensure that I understand my obligations. I will become an Individual Member effective on the date provided in the Bylaws;</p>
             <p>2. The information that I provided in the IM Application is complete and accurate on the date of submission and I will continue to update such information to ensure that it remains complete and accurate. In particular, I will promptly update any change in my Affiliate status as defined in the Bylaws and my email contact address;</p>
             <p>3. I will comply with the obligations of Individual Members in the Certificate, Bylaws and the Community Code of Conduct;</p>

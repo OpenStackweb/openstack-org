@@ -209,7 +209,7 @@
         <div class="summit-user-section">
           <img src="{$Top.CloudUrl('assets/boston-summit/speakers/Mark-Collier3.jpg')}" alt="Mark Collier" class="summit-user-image">
           <div class="name">Mark Collier</div>
-          <div class="title">COO, OpenStack Foundation</div>
+          <div class="title">COO, Open Infrastructure Foundation</div>
         </div>
       </div>
       <div class="col-sm-3">
@@ -223,7 +223,7 @@
         <div class="summit-user-section">
           <img src="{$Top.CloudUrl('assets/boston-summit/speakers/Jonathan-Bryce2.jpg')}" alt="Jonathan Bryce" class="summit-user-image">
           <div class="name">Jonathan Bryce</div>
-          <div class="title">Executive Director, OpenStack Foundation</div>
+          <div class="title">Executive Director, Open Infrastructure Foundation</div>
         </div>
       </div>
     </div>
@@ -321,7 +321,7 @@
           <div class="row">
             <div class="col-sm-8 col-sm-push-2">
               <p>
-                Take the Certified OpenStack Administrator exam onsite at the Summit. The Certified OpenStack Administrator exam is the only OpenStack exam offered by the OpenStack Foundation, and is a vendor-neutral, skills-based assessment of OpenStack user fundamentals. Learn more about the COA and register.
+                Take the Certified OpenStack Administrator exam onsite at the Summit. The Certified OpenStack Administrator exam is the only OpenStack exam offered by the Open Infrastructure Foundation, and is a vendor-neutral, skills-based assessment of OpenStack user fundamentals. Learn more about the COA and register.
               </p>
             </div>
           </div>

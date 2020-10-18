@@ -151,7 +151,7 @@
 				</div>
 				<div class="col-sm-8">
 					<p>
-						Women are half of the population in the world, but they are still under represented in the tech world industry nowadays. While there are clear actions in favor of attracting more female developers in order to bring more diversity to the project, the OpenStack Foundation shows a similar trend with this respect.
+						Women are half of the population in the world, but they are still under represented in the tech world industry nowadays. While there are clear actions in favor of attracting more female developers in order to bring more diversity to the project, the Open Infrastructure Foundation shows a similar trend with this respect.
 					</p>
 					<p>
 						Some numbers can be easily extracted from the Women of OpenStack group in Linkedin with more than 600 members and 137 discussion. Specific diversity-focused panels during the summits. Women of OpenStack mailing list with close 380 emails in 2015 and 90 different people commenting and changing ideas [own analysis]

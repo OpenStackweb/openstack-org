@@ -169,7 +169,7 @@ class RegistrationPage_Controller extends Page_Controller
             new LiteralField('break', '<hr/>'),
             $GenderField,
             $GenderSpecifyField,
-            new LiteralField('instructions', '<p>It\'s perfectly acceptable if you choose not to tell us: we appreciate you becoming a member of OpenStack Foundation. The information will remain private and only used to monitor our effort to improve gender diversity in our community.</p>'),
+            new LiteralField('instructions', '<p>It\'s perfectly acceptable if you choose not to tell us: we appreciate you becoming a member of Open Infrastructure Foundation. The information will remain private and only used to monitor our effort to improve gender diversity in our community.</p>'),
             new LiteralField('break', '<hr/>'),
             $affiliations,
             new ReadonlyField('StatementOfInterest', 'Statement of Interest', $currentMember->StatementOfInterest),

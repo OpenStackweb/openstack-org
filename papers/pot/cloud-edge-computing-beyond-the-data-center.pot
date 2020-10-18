@@ -26,7 +26,7 @@ msgstr ""
 msgid "In this paper, we explore this emerging need. It has been called many names: distributed cloud, fog computing, 4th generation data centers, but for the purposes of this document, we will stick with a common, easily understood term—cloud edge computing."
 msgstr ""
 # paper 2 - section 12 paragraph 91
-msgid "The OSF Edge Computing Group sees this evolution of cloud computing as very exciting, though we recognize that OpenStack’s ability to support cloud edge computing is in its early days. Based on initial community interest expressed at the OpenStack Summit Boston, a two-day workshop was held in September 2017 that brought together over 200 users and developers to start the hard work of defining relevant use cases and considering the tools and architectures needed to support them. Proof of concepts have been done and the community has a few early deployments in place. The OSF Edge Computing Group has now taken up the challenge to describe fundamental requirements of a fully functional edge computing cloud infrastructure"
+msgid "The OIF Edge Computing Group sees this evolution of cloud computing as very exciting, though we recognize that OpenStack’s ability to support cloud edge computing is in its early days. Based on initial community interest expressed at the OpenStack Summit Boston, a two-day workshop was held in September 2017 that brought together over 200 users and developers to start the hard work of defining relevant use cases and considering the tools and architectures needed to support them. Proof of concepts have been done and the community has a few early deployments in place. The OIF Edge Computing Group has now taken up the challenge to describe fundamental requirements of a fully functional edge computing cloud infrastructure"
 msgstr ""
 # paper 2 - section 12 paragraph 92
 msgid "In this document, we aim to accomplish several important tasks:"
@@ -398,13 +398,13 @@ msgstr ""
 msgid "Visit <a href=\"https://www.openstack.org\">www.openstack.org</a> to get started with OpenStack or click on these resources for more information:"
 msgstr ""
 # paper 2 - section 19 item 25 title
-msgid "OSF Edge Computing web page"
+msgid "OIF Edge Computing web page"
 msgstr ""
 # 36
 msgid "A central place to find pointers to videos of previous events, articles and further content on edge computing."
 msgstr ""
 # paper 2 - section 19 item 26 title
-msgid "OSF Edge Computing mailing list"
+msgid "OIF Edge Computing mailing list"
 msgstr ""
 # 36
 msgid "A forum for discussions concerning edge and edge computing (not exclusively to OpenStack) and to receive information about ongoing activities and calls for action."
@@ -422,7 +422,7 @@ msgstr ""
 msgid "Fog/Edge/Massively Distributed Clouds (FEMDC) SIG IRC meetings (online) are held every two weeks (odd weeks), 1500 UTC on Wednesday, on the IRC channel #openstack-meeting."
 msgstr ""
 # paper 2 - section 19 item 29 title
-msgid "OSF events"
+msgid "OIF events"
 msgstr ""
 # 36
 msgid "Global schedule of events including the popular OpenStack Summits and regional OpenStack Days."
@@ -461,7 +461,7 @@ msgstr ""
 msgid "Beth Cohen, Distinguished Member of Technical Staff, Verizon"
 msgstr ""
 # paper 2 - section 20 list 158 item 105
-msgid "Gnanavelkandan Kathirvel, Director – Cloud Strategy & Architecture, AT&T and Board of Directors, OpenStack Foundation (OSF)"
+msgid "Gnanavelkandan Kathirvel, Director – Cloud Strategy & Architecture, AT&T and Board of Directors, Open Infrastructure Foundation (OIF)"
 msgstr ""
 # paper 2 - section 20 list 158 item 106
 msgid "Gregory Katsaros, Senior System Architect, Inmarsat"
@@ -485,7 +485,7 @@ msgstr ""
 msgid "Pasi Vaananen, Systems Architect, NFV, Red Hat"
 msgstr ""
 # paper 2 - section 20 list 158 item 113
-msgid "Ildiko Vansca, Ecosystem Technical Lead, OpenStack Foundation (OSF)"
+msgid "Ildiko Vansca, Ecosystem Technical Lead, Open Infrastructure Foundation (OIF)"
 msgstr ""
 # paper 2 - section 20 list 158 item 114
 msgid "Ian Wells, Distinguished Engineer, Cisco"

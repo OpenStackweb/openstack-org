@@ -125,7 +125,7 @@ $CloudInfraContent
         <% end_if %>
     </div>
     <div class="col-lg-6 col-sm-12 col-xs-12 osf-member">
-      <h2>OSF Member Spotlight</h2>
+      <h2>OIF Member Spotlight</h2>
       <% if $RandomOSFMember %>
       <% with $RandomOSFMember %>
       $Paragraph1
