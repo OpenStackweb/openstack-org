@@ -69,7 +69,7 @@
     "sendgrid/sendgrid": "~5.5",
     "guzzlehttp/guzzle": "^6.3",
     "parse/php-sdk" : "1.1.*",
-    "fzaninotto/Faker": "^1.5",
+    "fzaninotto/faker": "^1.5",
     "phpoffice/phpexcel": "1.8.1",
     "google/apiclient": "^2.2",
     "symfony/process": "^3.1",
