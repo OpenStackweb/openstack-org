@@ -43,15 +43,15 @@
                 <div class="item">
                     <div class="video">
                         <div class="triangle-new">
-                            <p>Next Summit!<p>
+                            <p>Complete!<p>
                         </div>
                     </div>
                     <h4>Open Infrastructure Summit</h4>
                     <p><strong>Virtual Event</strong></p>
                     <p>Oct 19-23, 2020</p>
                     <p>
-                        <a href="/summit/berlin-2020" target="_blank" class="btn register-btn-lrg red eventbrite-register-link">
-                            Join Us
+                        <a href="https://www.youtube.com/playlist?list=PLKqaoAnDyfgq5YNWZ3Pk9vXf9Smo-gFxw " target="_blank" class="btn register-btn-lrg red">
+                            Watch Now
                             <i class="fa fa-arrow-right"></i>
                         </a>
 
