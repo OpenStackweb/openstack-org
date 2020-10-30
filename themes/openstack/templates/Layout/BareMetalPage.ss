@@ -235,7 +235,10 @@
 	            </div>
                 <div class="row five-columns row06">
                     <div class="col-md-5th-1 col-sm-4 col-md-offset-0 col-sm-offset-2">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("assets/baremetal/dell-technologies.jpg")}" alt="Platform9 logo">
+                    <img class="ecosystem-logo" src="{$Top.CloudUrl("assets/baremetal/dell-technologies.jpg")}" alt="Dell logo">
+                    </div>
+                    <div class="col-md-5th-1 col-sm-4">
+                    <img class="ecosystem-logo" src="{$Top.CloudUrl("assets/companies/main_logo/_resampled/ScaleWidthWzIwN10/inspur-lg.jpg")}" alt="Inspur">
                     </div>
                 </div>
                 <div class="row info-block">
