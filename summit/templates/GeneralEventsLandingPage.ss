@@ -42,8 +42,8 @@
                 </div>
                 <div class="col-md-6 col-sm-12 openstack">
                     <div class="logo">
-                        <a href="https://www.openstack.org"></a>
-                        <h5>Organized by the openstack foundation</h5>
+                        <a href="https://openinfra.dev"></a>
+                        <h5>Organized by the Open Infrastructure Foundation</h5>
                     </div>
 
                     <div class="links">
