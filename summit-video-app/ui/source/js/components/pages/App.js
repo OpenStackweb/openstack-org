@@ -64,7 +64,7 @@ class App extends React.Component {
 				<div className="container">
 					<div className="row">
 						<div className="col-sm-12">
-							<h1>OpenStack Videos</h1>
+							<h1>Videos from OIF Events</h1>
 						</div>
 					</div>
 					<div className="row">
