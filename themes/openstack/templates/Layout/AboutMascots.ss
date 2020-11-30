@@ -166,7 +166,7 @@
 				Whom should I contact with more questions?
 			</p>
 			<p class="answer">
-				Email anne at openstack.org if you have questions about Project Mascots.
+				Email <a href="mailto:community@openinfra.dev">community@openinfra.dev</a> if you have questions about Project Mascots.
 			</p>
     	</div>
     </div>
