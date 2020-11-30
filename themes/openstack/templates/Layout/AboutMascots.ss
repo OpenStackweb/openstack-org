@@ -160,7 +160,7 @@
 				How do we organize voting?
 			</p>
 			<p class="answer">
-				Depending on the size of your project and the number of contributors interested in giving their opinion, you might want to do it informally at a meeting (+1 on an etherpad list, for example), or more formally using a polling or survey tool (such as Google Forms). <a href="mailto:heidijoy@openstack.org">Contact Heidi Joy</a> at the foundation if you need help.
+				Depending on the size of your project and the number of contributors interested in giving their opinion, you might want to do it informally at a meeting (+1 on an etherpad list, for example), or more formally using a polling or survey tool (such as Google Forms). Contact <a href="mailto:community@openinfra.dev">community@openinfra.dev</a> for assistance.
 			</p>
 			<p class="question">
 				Whom should I contact with more questions?
