@@ -34,7 +34,7 @@
                     <li><a href="//openstack.org/brand/">Logos & Guidelines</a></li>
                     <li><a href="//openstack.org/brand/openstack-trademark-policy/">Trademark Policy</a></li>
                     <li><a href="//openstack.org/privacy/">Privacy Policy</a></li>
-                    <li><a href="https://wiki.openstack.org/wiki/How_To_Contribute#Contributor_License_Agreement">OpenStack CLA</a></li>
+                    <li><a href="https://docs.openstack.org/contributors/common/setup-gerrit.html#individual-contributor-license-agreement">OpenStack CLA</a></li>
                 </ul>
             </div>
             <div class="col-lg-4 col-sm-4">
