@@ -295,7 +295,7 @@
                     <p>From container security to use cases combining Kubernetes or Kata Containers with other technologies, over 100 sessions share how organizations are achieving results with container technologies.  
                     </p>
                     <div class="nfv-summit-register-btn">
-                        <a href="/videos/search?search=Kubernetes (" class="nfv-summit-btn" target="_blank">Watch past Summit Videos&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
+                        <a href="/videos/search?search=Kubernetes" class="nfv-summit-btn" target="_blank">Watch past Summit Videos&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
             </div>
