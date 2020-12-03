@@ -149,15 +149,13 @@ abstract class OpenStackImplementationManager
             //check api version
             $api_version = $this->api_version_repository->getByIdAndComponent($capability->getReleaseSupportedApiVersion()->getApiVersion()->getIdentifier(), $component->getIdentifier());
             if (!$api_version) throw new NotFoundEntityException('', '');
-        } else {
-            $api_version = $capability->getReleaseSupportedApiVersion()->getApiVersion();
-            $api_version->setReleaseComponent($component);
+
+            $release_supported_api = $release->supportsApiVersion($api_version);
+            if (!$release_supported_api)
+                throw new InvalidAggregateRootException('', '', '', '');
+
+            $capability->setReleaseSupportedApiVersion($release_supported_api);
         }
-
-        $release_supported_api = $release->supportsApiVersion($api_version);
-        if (!$release_supported_api) throw new InvalidAggregateRootException('', '', '', '');
-        $capability->setReleaseSupportedApiVersion($release_supported_api);
-
         $implementation->addCapability($capability);
     }
 
@@ -174,7 +172,8 @@ abstract class OpenStackImplementationManager
 
         $release = $this->release_repository->getById(intval($capability_data['release_id']));
         if (!$release) throw new NotFoundEntityException('OpenStackRelease', sprintf('id %', intval($capability_data['release_id'])));
-        if (!$release->supportsComponent($component->getCodeName())) throw new NonSupportedComponent($release, $component);
+        if (!$release->supportsComponent($component->getCodeName()))
+            throw new NonSupportedComponent($release, $component);
 
         $supported_version = null;
 
@@ -184,9 +183,17 @@ abstract class OpenStackImplementationManager
             $supported_version = $release->supportsApiVersion($version);
         } else {
             $supported_version = $this->supported_version_repository->getByReleaseAndComponentAndApiVersion(intval($capability_data['release_id']), intval($capability_data['component_id']), 0);
+            if(!$supported_version){ // if does not exists ... create it bc its does no supports versioning
+                $supported_version = new OpenStackReleaseSupportedApiVersion();
+                $supported_version->ReleaseID = intval($capability_data['release_id']);
+                $supported_version->OpenStackComponentID = intval($capability_data['component_id']);
+                $supported_version->ApiVersionID = 0;
+                $supported_version->write();
+            }
         }
 
-        if (!$supported_version) throw new NotFoundEntityException('OpenStackReleaseSupportedVersion', '');
+        if (!$supported_version)
+            throw new NotFoundEntityException('OpenStackReleaseSupportedVersion', '');
 
         $capability = $this->factory->buildCapability(intval($capability_data['coverage']), $supported_version, $implementation);
         $this->registerCapability($implementation, $capability);
