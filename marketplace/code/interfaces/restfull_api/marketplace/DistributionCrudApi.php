@@ -160,6 +160,10 @@ final class DistributionCrudApi extends CompanyServiceCrudApi {
 		try {
 			return parent::updateCompanyServiceDraft();
 		}
+		catch(NotFoundEntityException $ex){
+            SS_Log::log($ex,SS_Log::WARN);
+            return $this->notFound($ex->getMessage());
+        }
 		catch (Exception $ex) {
 			SS_Log::log($ex,SS_Log::ERR);
 			return $this->serverError();
