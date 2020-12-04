@@ -28,10 +28,10 @@
 								<% else_if NominationsForCurrentMember %>
 
 									<% if CurrentMemberHasAccepted %>
-                                        <p>You have been nominated <strong>$NominationsForCurrentMember.TotalItems</strong> <% if PluralNominations %>times<% else %>time<% end_if %>, and agreed to accept the nomination. You will be listed as a candidate on the ballot when you receive 10 nominations.</p>
+                                        <p>You have been nominated <strong>$NominationsForCurrentMember.Count</strong> <% if PluralNominations %>times<% else %>time<% end_if %>, and agreed to accept the nomination. You will be listed as a candidate on the ballot when you receive 10 nominations.</p>
                                         <p><a href="{$Top.Link}CandidateApplication/" class="roundedButton">Edit Candidate Application</a></p>
 									<% else %>
-                                        <p>You have been nominated <strong>$NominationsForCurrentMember.TotalItems</strong> <% if PluralNominations %>times<% else %>time<% end_if %>, but you have not accepted the nomination. You must accept the nomination and complete a Candidate Profile to be officially listed as a candidate for this election.</p>
+                                        <p>You have been nominated <strong>$NominationsForCurrentMember.Count</strong> <% if PluralNominations %>times<% else %>time<% end_if %>, but you have not accepted the nomination. You must accept the nomination and complete a Candidate Profile to be officially listed as a candidate for this election.</p>
                                         <p><a href="{$Top.Link}CandidateApplication/" class="roundedButton">Accept Nomination</a></p>
 									<% end_if %>
 
