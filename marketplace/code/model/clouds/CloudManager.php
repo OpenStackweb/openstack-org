@@ -194,8 +194,19 @@ abstract class CloudManager extends OpenStackImplementationManager
             }
             $supported_version = $release->supportsApiVersion($version);
         } else {
-            $supported_version = $this->supported_version_repository->getByReleaseAndComponentAndApiVersion(intval($capability_data['release_id']),
-                intval($capability_data['component_id']), 0);
+            $supported_version = $this->supported_version_repository->getByReleaseAndComponentAndApiVersion
+            (
+                intval($capability_data['release_id']),
+                intval($capability_data['component_id']),
+                0
+            );
+            if(!$supported_version){ // if does not exists ... create it bc its does no supports versioning
+                $supported_version = new OpenStackReleaseSupportedApiVersion();
+                $supported_version->ReleaseID = intval($capability_data['release_id']);
+                $supported_version->OpenStackComponentID = intval($capability_data['component_id']);
+                $supported_version->ApiVersionID = 0;
+                $supported_version->write();
+            }
         }
 
         if (!$supported_version) {
