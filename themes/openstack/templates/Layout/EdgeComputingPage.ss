@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-sm-9">
                     <div class="intro-message"> 
-                        <h1>New: OIF Edge Computing Group defines architectures, open source components, and testing activities for massively distributed systems</h1>
+                        <h1>New: OpenInfra Foundation Edge Computing Group defines architectures, open source components, and testing activities for massively distributed systems</h1>
                         <p>
                             Created by open infrastructure operators, the second white paper delivers the specific ways open infrastructure operators are shaping the future of edge computing by collecting use cases, identifying technology requirements and contributing architectures, open source components and considerations for testing activities.
                         </p>
