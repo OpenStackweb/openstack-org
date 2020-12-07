@@ -125,7 +125,7 @@ $CloudInfraContent
         <% end_if %>
     </div>
     <div class="col-lg-6 col-sm-12 col-xs-12 osf-member">
-      <h2>OIF Member Spotlight</h2>
+      <h2>OpenInfra Foundation Member Spotlight</h2>
       <% if $RandomOSFMember %>
       <% with $RandomOSFMember %>
       $Paragraph1
@@ -190,7 +190,7 @@ $CloudInfraContent
 <div class="row">
 <div class="col-lg-12 col-sm-12" style="text-align: center;">
 <img src="/themes/openstack/home_images/Logos/OpenInfrastructureFoundation-logo-RGB-horiz2.svg" alt="Open Infrastructure Foundation Logo" />
-<p>OpenStack is a top-level open infrastructure project supported by the <a href="https://openinfra.dev" target="_blank">Open Infrastructure Foundation</a> (OIF)</p>
+<p>OpenStack is a top-level open infrastructure project supported by the <a href="https://openinfra.dev" target="_blank">Open Infrastructure Foundation</a> (OpenInfra Foundation)</p>
 </div>
 </div>
 </div>

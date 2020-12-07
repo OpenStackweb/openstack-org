@@ -30,7 +30,7 @@
                         <a href="/ptg">June 2020 PTG</a>
                     </li>
                     <li class="link other-summits">
-                        <a href="/events" class="drop">Other OIF Events<i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
+                        <a href="/events" class="drop">Other OpenInfra Foundation Events<i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
                         <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
                             <li><a href="/summit/shanghai-2019/">Shanghai 2019</a></li>
                             <li><a href="/summit/denver-2019/">Denver 2019</a></li>

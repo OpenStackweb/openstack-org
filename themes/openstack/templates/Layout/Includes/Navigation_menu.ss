@@ -48,8 +48,8 @@
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}news/">Community News</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="http://superuser.openstack.org">Superuser Magazine</a></li>
         <li role="presentation" class="divider"></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/supporting-organizations/">OIF Supporting Organizations</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://openinfra.dev">Open Infrastructure Foundation (OIF)</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/supporting-organizations/">OpenInfra Foundation Supporting Organizations</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://openinfra.dev">Open Infrastructure Foundation (OpenInfra Foundation)</a></li>
     </ul>
 </li>
 <li>
