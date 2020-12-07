@@ -32,7 +32,7 @@
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>
                     <p>
-                        <a class="btn register-btn-lrg red" href="https://superuser.openstack.org/articles/tag/virtual-opendev/">
+                        <a class="btn register-btn-lrg" href="https://superuser.openstack.org/articles/tag/virtual-opendev/">
                             See Highlights <i class="fa fa-arrow-right"></i>
                         </a>
                     </p>
@@ -42,7 +42,7 @@
             <div class="video-container last col-md-4 col-sm-12 col-xs-12">
                 <div class="item">
                     <div class="video">
-                        <div class="triangle-new">
+                        <div class="triangle">
                             <p>Complete!<p>
                         </div>
                     </div>
@@ -50,8 +50,8 @@
                     <p><strong>Virtual Event</strong></p>
                     <p>Oct 19-23, 2020</p>
                     <p>
-                        <a href="https://www.youtube.com/playlist?list=PLKqaoAnDyfgq5YNWZ3Pk9vXf9Smo-gFxw " target="_blank" class="btn register-btn-lrg red">
-                            Watch Now
+                        <a class="btn register-btn-lrg" href="https://superuser.openstack.org/articles/virtual-open-infrastructure-summit-recap/" target="_blank">
+                            See Highlights 
                             <i class="fa fa-arrow-right"></i>
                         </a>
 
