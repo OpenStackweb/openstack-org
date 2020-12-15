@@ -4,7 +4,7 @@
 
 	<h1>Please confirm your nomination</h1>
 
-	<p>Are you sure you would officially like to nominate <strong>$Candidate.FirstName $Candidate.Surname</strong> to the OpenStack Board?</p>
+	<p>Are you sure you would officially like to nominate <strong>$Candidate.FirstName $Candidate.Surname</strong> to the Open Infrastructure Foundation Board?</p>
 
 	<p><a class="roundedButton" href="$NominateLink">Yes, Nominate $Candidate.FirstName</a> &nbsp; <a class="roundedButton" href="{$Link}profile/$Candidate.ID/$Candidate.NameSlug">No</a></p>
 
@@ -30,7 +30,7 @@
 
 <% else %>
 	<h1>You are not logged in</h1>
-	<p>In order to nominate a candidate, you will first need to <a href="/Security/login/?BackURL={$Top.EncodedLink}">login as a member</a>. Don't have an account? <a href="/join/">Join The Foundation</a></p>
+	<p>In order to nominate a candidate, you will first need to <a href="/Security/login/?BackURL={$Top.EncodedLink}">login as a member</a>. Don't have an account? <a href="/join/">Join The OpenInfra Foundation</a></p>
 	<p><a class="roundedButton" href="/Security/login/?BackURL={$Top.EncodedLink}">Login</a> <a href="/join/" class="roundedButton">Join The Foundation</a></p>
 <% end_if %>
 
