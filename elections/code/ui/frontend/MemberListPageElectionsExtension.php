@@ -150,7 +150,7 @@ final class MemberListPageElectionsExtension extends Extension
             $this->manager->nominateMemberOnCurrentElection($candidate_id, new NominationEmailSender);
 
             $this->owner->setMessage('Success',
-                "You've just nominated " . $candidate->FullName . ' for the OpenStack Board.');
+                "You've just nominated " . $candidate->FullName . ' for the Open Infrastructure Foundation Board.');
             $this->owner->redirect($this->owner->Link('candidateStats/' . $candidate_id));
         }
         catch (NotFoundEntityException $ex1){
