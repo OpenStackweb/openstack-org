@@ -1,7 +1,7 @@
 
 <p>Hello $Candidate.Member.FirstName --</p>
 
-<p>You were just nominated as an OpenStack Individual Board Member Candidate in the {$Election.Title}.</p>
+<p>You were just nominated as an Open Infrastructure Foundation Individual Board Member Candidate in the {$Election.Title}.</p>
 
 <% loop Candidate %>
 <% if HasAcceptedNomination %>
