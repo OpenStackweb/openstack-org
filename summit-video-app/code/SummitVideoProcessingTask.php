@@ -38,6 +38,7 @@ class SummitVideoProcessingTask extends CronTask
                 ->filter([
                     'Processed' => false
                 ])
+                ->sort("ID", "DESC")
                 ->limit(50);
 
             if (!$unprocessedVideos->exists()) {

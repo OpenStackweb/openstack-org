@@ -81,14 +81,14 @@ final class ScheduleManager implements IScheduleManager
         ITransactionManager $tx_manager
     )
     {
-        $this->summitevent_repository        = $summitevent_repository;
+        $this->summitevent_repository = $summitevent_repository;
         $this->summitpresentation_repository = $summitpresentation_repository;
-        $this->eventfeedback_repository      = $eventfeedback_repository;
-        $this->eventfeedback_factory         = $eventfeedback_factory;
-        $this->attendee_repository           = $attendee_repository;
-        $this->rsvp_repository               = $rsvp_repository;
-        $this->member_repository             = $member_repository;
-        $this->tx_manager                    = $tx_manager;
+        $this->eventfeedback_repository = $eventfeedback_repository;
+        $this->eventfeedback_factory = $eventfeedback_factory;
+        $this->attendee_repository = $attendee_repository;
+        $this->rsvp_repository = $rsvp_repository;
+        $this->member_repository = $member_repository;
+        $this->tx_manager = $tx_manager;
     }
 
 
@@ -120,7 +120,7 @@ final class ScheduleManager implements IScheduleManager
                 throw new EntityValidationException('Event already exist on member schedule');
             }
 
-            if($event->hasRSVPTemplate()){
+            if ($event->hasRSVPTemplate()) {
                 throw new EntityValidationException('Event has RSVP set on it, will be automatically added once you sign in for RSVP.');
             }
 
@@ -204,7 +204,7 @@ final class ScheduleManager implements IScheduleManager
 
             $member_id = intval($data['member_id']);
             $summit_id = intval($data['summit_id']);
-            $member    = $this->member_repository->getById($member_id);
+            $member = $this->member_repository->getById($member_id);
 
             if (!$member) {
                 throw new NotFoundEntityException('Member', '');
@@ -237,13 +237,13 @@ final class ScheduleManager implements IScheduleManager
 
             $member_id = intval($data['member_id']);
             $summit_id = intval($data['summit_id']);
-            $event_id  = intval($data['event_id']);
+            $event_id = intval($data['event_id']);
             $seat_type = $data['seat_type'];
 
             if (empty($seat_type))
                 throw new EntityValidationException("invalid seat type!");
 
-            $event  = $this->summitevent_repository->getById($event_id);
+            $event = $this->summitevent_repository->getById($event_id);
             $member = $this->member_repository->getById($member_id);
 
             if (is_null($member)) {
@@ -276,10 +276,10 @@ final class ScheduleManager implements IScheduleManager
                     )
                 );
 
-            $rsvp                 = new RSVP();
-            $rsvp->EventID        = $event_id;
-            $rsvp->SubmittedByID  = $member->getIdentifier();
-            $rsvp->SeatType       = $event->getCurrentRSVPSubmissionSeatType();
+            $rsvp = new RSVP();
+            $rsvp->EventID = $event_id;
+            $rsvp->SubmittedByID = $member->getIdentifier();
+            $rsvp->SeatType = $event->getCurrentRSVPSubmissionSeatType();
 
             if (!$event->couldAddSeatType($rsvp->SeatType))
                 throw new EntityValidationException("This event is now full and we are no longer adding to the waitlist.");
@@ -302,7 +302,8 @@ final class ScheduleManager implements IScheduleManager
      * @param IRSVP $rsvp
      * @param array $data
      */
-    private function createRSVP(ISummitEvent $event, IRSVP $rsvp , array $data){
+    private function createRSVP(ISummitEvent $event, IRSVP $rsvp, array $data)
+    {
         foreach ($event->RSVPTemplate()->getQuestions() as $q) {
             $question_name = $q->name();
 
@@ -348,14 +349,14 @@ final class ScheduleManager implements IScheduleManager
 
             $member_id = intval($data['member_id']);
             $summit_id = intval($data['summit_id']);
-            $event_id  = intval($data['event_id']);
-            $rsvp_id   = intval($data['rsvp_id']);
+            $event_id = intval($data['event_id']);
+            $rsvp_id = intval($data['rsvp_id']);
             $seat_type = $data['seat_type'];
 
             if (empty($seat_type))
                 throw new EntityValidationException("invalid seat type!");
 
-            $event  = $this->summitevent_repository->getById($event_id);
+            $event = $this->summitevent_repository->getById($event_id);
             $member = $this->member_repository->getByMemberAndSummit($member_id);
 
             if (is_null($member)) {
@@ -401,12 +402,11 @@ final class ScheduleManager implements IScheduleManager
     public function deleteRSVP(array $data)
     {
 
-        return $this->tx_manager->transaction(function () use ($data)
-        {
+        return $this->tx_manager->transaction(function () use ($data) {
 
             $member_id = intval($data['member_id']);
             $summit_id = intval($data['summit_id']);
-            $event_id  = intval($data['event_id']);
+            $event_id = intval($data['event_id']);
 
             $member = $this->member_repository->getById($member_id);
 
@@ -523,6 +523,52 @@ final class ScheduleManager implements IScheduleManager
             $member->removeFromFavorites($event);
 
             return true;
+        });
+    }
+
+    /**
+     * @param string $filename
+     * @param int $summit_id
+     * @return array
+     */
+    public function ingestVideosFromCSV($filename, $summit_id)
+    {
+        return $this->tx_manager->transaction(function () use ($filename, $summit_id) {
+
+            $reader = new CSVReader($filename);
+            $line = false;
+            $header = $reader->getLine();
+            $header = array_map('strtolower', $header);
+            $id_idx = array_search('id', $header);
+            $youtube_idx = array_search('processed', $header);
+            if ($id_idx === false || $youtube_idx === false)
+               throw new EntityValidationException("csv file format is incorrect!");
+
+            while ($line = $reader->getLine()) {
+                $id = (int)@$line[$id_idx];
+                $youtube_link = @$line[$youtube_idx];
+                $event = $this->summitevent_repository->getById($id);
+                if (is_null($event)) {
+                    continue;
+                }
+
+                if(empty($youtube_link)){
+                    continue;
+                }
+
+                if(preg_match('/.*(?:youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/', $youtube_link, $output_array)) {
+
+                    $youtube_id = $output_array[1];
+                    $video = new PresentationVideo();
+                    $video->YouTubeID = $youtube_id;
+                    $video->Name = $event->Title;
+                    $video->Description = $event->SocialSummary;
+                    $video->DisplayOnSite = true;
+                    $video->PresentationID = $event->ID;
+                    $video->write();
+                }
+            }
+
         });
     }
 }
