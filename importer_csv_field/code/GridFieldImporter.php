@@ -36,9 +36,15 @@ final class GridFieldImporter implements GridField_HTMLProvider, GridField_URLHa
      */
     protected $canClearData = true;
 
-    public function __construct($targetFragment = "after")
+    /**
+     * @var string
+     */
+    protected $button_title;
+
+    public function __construct($targetFragment = "after", $button_title = 'Import from CSV')
     {
         $this->targetFragment = $targetFragment;
+        $this->button_title = $button_title;
     }
 
     /**
@@ -49,7 +55,7 @@ final class GridFieldImporter implements GridField_HTMLProvider, GridField_URLHa
         $button = new GridField_FormAction(
             $gridField,
             'import',
-            _t('TableListField.CSVIMPORT', 'Import from CSV'),
+            $this->button_title,
             'import',
             null
         );

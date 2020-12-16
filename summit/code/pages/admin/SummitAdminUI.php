@@ -301,6 +301,11 @@ final class SummitAdminUI extends DataExtension
                     'EndDate'   => 'ASC'
                 )
             ), $config);
+
+            $importer = new GridFieldImporter('before', 'Import YouTube Videos (CSV)');
+            $importer->setHandler(new GridFieldImporterSummitEventVideos_Request($gridField, $importer, Controller::curr()));
+            $config->addComponent($importer);
+
             $config->getComponentByType("GridFieldDataColumns")->setFieldCasting(array("Description" => "HTMLText->BigSummary"));
             $f->addFieldToTab('Root.Schedule', $gridField);
             $config->addComponent(new GridFieldPublishSummitEventAction);
