@@ -31,6 +31,7 @@
             <div class="col-lg-2 col-sm-2">
                 <h3>Branding & Legal</h3>
                 <ul>
+                    <li><a href="//openstack.org/legal/">Legal Docs</a></li>
                     <li><a href="//openstack.org/brand/">Logos & Guidelines</a></li>
                     <li><a href="//openstack.org/brand/openstack-trademark-policy/">Trademark Policy</a></li>
                     <li><a href="//openstack.org/privacy/">Privacy Policy</a></li>
