@@ -24,27 +24,22 @@ class MemberListPage_Controller extends Page_Controller
 
     function init()
     {
+        $this->useJqueryUI(true);
         parent::init();
 
         //CSS
-        Requirements::css("themes/openstack/css/jquery.autocomplete.css");
+       Requirements::css("themes/openstack/css/jquery.autocomplete.css");
 
-        Requirements::javascript("themes/openstack/javascript/jquery.autocomplete.min.js");
+//        Requirements::javascript("themes/openstack/javascript/jquery.autocomplete.min.js");
         Requirements::CustomScript("
 							
 					jQuery(function(){
 
-					  $('#SearchForm_MemberSearchForm_mq').autocomplete('" . $this->Link('results') . "', {
-					        minChars: 3,
-					        selectFirst: true,
-					        autoFill: true,
+					  $('#SearchForm_MemberSearchForm_mq').autocomplete({
+					        source:'" . $this->Link('results') . "',
+					        minLength: 3,
 					   });
-
-						$('#SearchForm_MemberSearchForm_mq').focus();
-
 					});						
-					
-			
 			");
     }
 
@@ -180,13 +175,13 @@ class MemberListPage_Controller extends Page_Controller
             if (Director::is_ajax()) {
 
                 $Members = $Results->map('ID', 'Name');
-                $Suggestions = '';
+                $Suggestions = [];
 
                 foreach ($Members as $Member) {
-                    $Suggestions = $Suggestions . $Member . '|' . '1' . "\n";
+                    $Suggestions[]= ["id" => $Member , "label" => $Member, "value" => $Member];
                 }
 
-                return $Suggestions;
+                return json_encode($Suggestions);
             } // For Results Template
             else {
 
@@ -231,7 +226,7 @@ class MemberListPage_Controller extends Page_Controller
     function getSearchQuery()
     {
         if ($this->request) {
-            $query = $this->request->getVar("mq");
+            $query = $this->request->getVar("term") ?? $this->request->getVar("mq");
             if (!empty($query)) {
                 return Convert::raw2sql($query);
             }
