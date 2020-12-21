@@ -37,10 +37,10 @@
         </div>
         <% loop $OpenStackComponents() %>
             <div class="col-md-4 col-sm-6">
-                <a class="project-button btn btn-success" href="https://docs.openstack.org/{$Slug}" >
+                <a class="project-button btn btn-success" href="{$DocumentationLink}" >
                     <div class="row">
                         <div class="col-xs-3">
-                            <img src="$Top.MascotImage($Slug)" />
+                            <img id="img_{$Slug}" src="$Top.MascotImage($Slug)" onerror="hideImg('img_{$Slug}')" />
                         </div>
                         <div class="col-xs-7">
                             <span class="code-name"> $CodeName </span><br>
@@ -55,3 +55,9 @@
         <% end_loop %>
     </div>
 <% end_loop %>
+<script>
+function hideImg(imageId) {
+document.getElementById(imageId)
+.style.display = "none";
+}
+</script>

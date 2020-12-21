@@ -36,6 +36,7 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
         'VideoTitle'                   => 'Varchar',
         'ShowOnMarketplace'            => 'Boolean(1)',
         'Slug'                         => 'Varchar(255)',
+        'DocumentationSlug'            => 'Varchar(255)',
         'Since'                        => 'Varchar(255)'
     );
 
@@ -355,6 +356,11 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
         $slug = ($this->ProjectTeam) ? $this->generateSlug($this->ProjectTeam) : $this->Slug;
 
         return 'https://governance.openstack.org/tc/reference/projects/'.$slug.'.html';
+    }
+
+    public function getDocumentationLink(){
+        $slug = $this->DocumentationSlug ? $this->DocumentationSlug : $this->Slug;
+        return sprintf("https://docs.openstack.org/%s", $slug);
     }
 
     public function getSortedCapabilityTags() {
