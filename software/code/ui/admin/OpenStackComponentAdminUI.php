@@ -42,6 +42,8 @@ final class OpenStackComponentAdminUI extends DataExtension
         $fields->push(new TextField("Description", "Description"));
         $fields->push(new TextField("YouTubeID", "Video (YouTubeID)"));
         $fields->push(new TextField("VideoTitle", "Video Title"));
+        $fields->push(new ReadonlyField("Slug", "Slug"));
+        $fields->push(new TextField("DocumentationSlug", "Documentation Slug"));
         $fields->push(new TextareaField("VideoDescription", "Video Description"));
         $fields->push(new CheckboxField('SupportsVersioning', 'Supports Versioning?'));
         $fields->push(new CheckboxField('SupportsExtensions', 'Supports Extensions?'));
