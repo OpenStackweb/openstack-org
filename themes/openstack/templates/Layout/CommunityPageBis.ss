@@ -34,7 +34,7 @@
                 </a>
             </div>
             <div class="col-md-5ths col-xs-6 nav-button-box">
-                <a href="https://www.meetup.com/pro/osf" class="nav-button" target="_blank">
+                <a href="https://www.meetup.com/pro/openinfradev" class="nav-button" target="_blank">
                     <div class="nav-button-icon">
                         <img src="{$Top.CloudUrl("images/community/pin.png")}" />
                     </div>
@@ -126,11 +126,11 @@
                     Developer resources
                 </div>
                 <div>
-                    <a href="https://git.openstack.org/" target="_blank">Git repositories</a><br>
+                    <a href="https://opendev.org/" target="_blank">Git repositories</a><br>
                     <a href="https://docs.openstack.org/project-team-guide/" target="_blank">Project team guide</a><br>
                     <a href="https://governance.openstack.org/tc/goals/" target="_blank">Community-wide goals</a><br>
                     <a href="http://specs.openstack.org/" target="_blank">Specs</a> and <a href="https://review.openstack.org/" target="_blank">Code reviews</a><br>
-                    <a href="http://codesearch.openstack.org/" target="_blank">Search all OpenStack code</a>
+                    <a href="https://codesearch.opendev.org" target="_blank">Search all OpenStack code</a>
                 </div>
             </div>
             <div class="col-md-3 col-sm-3 quick-links-item">
@@ -152,7 +152,6 @@
                 <div>
                     <a href="/foundation/board-of-directors/">Board of Directors</a><br>
                     <a href="https://governance.openstack.org/tc/">Technical Committee</a><br>
-                    <a href="https://governance.openstack.org/uc/">User Committee</a><br>
                     <a href="https://governance.openstack.org/election/">Community elections</a>
                 </div>
             </div>
@@ -163,8 +162,7 @@
                 <div>
                     <a href="/marketing">Marketing Portal</a><br>
                     <a href="/brand/">Commercial Logos</a><br>
-                    <a href="/project-mascots/">Project Mascots</a><br>
-                    <a href="/store">Store</a>
+                    <a href="/project-mascots/">Project Mascots</a>
                 </div>
             </div>
             <div class="col-md-3 col-sm-3 quick-links-item">
@@ -183,7 +181,7 @@
                 </div>
                 <div>
                     <a href="/legal/community-code-of-conduct/">Code of Conduct</a><br>
-                    <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/women-of-openstack" target="_blank">Women of OpenStack mailing list</a><br>
+                    <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/openstack-discuss" target="_blank">Use the [diversity] tag on the OpenStack Discuss ML</a><br>
                     <a href="https://www.outreachy.org/" target="_blank">Outreachy</a>
                 </div>
             </div>
@@ -201,7 +199,7 @@
                 </p>
             </div>
             <div class="col-md-5 col-sm-6 start-options">
-                <a href="https://governance.openstack.org/tc/reference/help-most-needed.html" class="start-option btn">
+                <a href="https://governance.openstack.org/tc/reference/upstream-investment-opportunities/" class="start-option btn">
                     <i class="fa fa-chevron-right" aria-hidden="true"></i>
                     <span>Areas where help is most needed</span>
                 </a><br>
@@ -209,9 +207,13 @@
                     <i class="fa fa-chevron-right" aria-hidden="true"></i>
                     <span>Tutorials & Upstream Institute</span>
                 </a><br>
-                <a href="https://groups.openstack.org/" class="start-option btn">
+                <a href="https://www.meetup.com/pro/openinfradev" class="start-option btn">
                     <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                    <span>Find a local user group or attend an event</span>
+                    <span>Find a local user group</span>
+                </a><br>
+                <a href="https://www.openstack.org/events/community-events" class="start-option btn">
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    <span>Attend an event</span>
                 </a>
             </div>
         </div>
@@ -317,18 +319,16 @@
                     <a href="https://wiki.openstack.org/" target="_blank">Wiki</a><br>
                     <a href="https://etherpad.openstack.org/" target="_blank">Etherpad</a><br>
                     <a href="https://ethercalc.openstack.org/" target="_blank">Ethercalc</a><br>
-                    <a href="https://paste.openstack.org/" target="_blank">Pastebin</a><br>
                     <a href="https://wiki.openstack.org/wiki/Infrastructure/Conferencing" target="_blank">Conference call bridge</a>
                 </div>
             </div>
             <div class="col-md-4 col-sm-6 communicate-item">
                 <div class="communicate-item-title">
-                    Info &amp; Forums
-                </div>
+                    Info, News, and Blogs
                 <div>
-                    <a href="https://www.openstack.org/blog/" target="_blank">Planet OpenStack (blog aggregator)</a><br>
-                    <a href="http://superuser.openstack.org/" target="_blank">Superuser Magazine</a><br>
-                    <a href="https://ask.openstack.org/" target="_blank">Q&amp;A Forum</a>
+                    <a href="https://www.openstack.org/blog/" target="_blank">OpenStack Blog</a><br>
+                    <a href="http://planet.openstack.org/" target="_blank">Planet OpenStack (blog aggregator)</a><br>
+                    <a href="http://superuser.openstack.org/" target="_blank">Superuser Magazine</a>
                 </div>
             </div>
             <div class="col-md-4 col-sm-6 communicate-item">
@@ -337,7 +337,7 @@
                 </div>
                 <div>
                     <a href="https://twitter.com/openstack" target="_blank">Twitter</a><br>
-                    <a href="https://www.facebook.com/openstack" target="_blank">Facebook</a><br>
+                    <a href="https://www.facebook.com/openinfradev" target="_blank">Facebook</a><br>
                     <a href="https://www.linkedin.com/groups/3239106" target="_blank">LinkedIn</a><br>
                     <a href="https://www.youtube.com/user/OpenStackFoundation" target="_blank">YouTube Channel</a>
                 </div>

@@ -4,7 +4,7 @@
                 <h3>OpenStack</h3>
                 <ul>
                     <li><a href="//openstack.org/projects/">Projects</a></li>
-                    <li><a href="//openstack.org/software/security/">OpenStack Security</a></li>
+                    <li><a href="//openstack.org/software/">Software</a></li>
                     <li><a href="http://openstack.org/blog/">Blog</a></li>
                     <li><a href="//openstack.org/news/">News</a></li>
                 </ul>
@@ -12,7 +12,7 @@
             <div class="col-lg-2 col-sm-2">
                 <h3>Community</h3>
                 <ul>
-                    <li><a href="//openstack.org/community/">User Groups</a></li>
+                    <li><a href="https://www.meetup.com/pro/openinfradev">User Groups</a></li>
                     <li><a href="//openstack.org/community/events/">Events</a></li>
                     <li><a href="//openstack.org/community/jobs/">Jobs</a></li>
                     <li><a href="//openstack.org/foundation/companies/">Companies</a></li>
