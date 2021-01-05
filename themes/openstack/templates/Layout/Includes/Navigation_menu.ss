@@ -5,7 +5,7 @@
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/project-navigator/openstack-components">OpenStack Components</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/project-navigator/sdks">SDKs</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/project-navigator/deployment-tools">Deployment Tools</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}assets/software/projectmap/openstack-map.pdf" target="_blank">OpenStack Map</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}openstack-map" target="_blank">OpenStack Map</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/sample-configs/">Sample Configs</a></li>
     </ul>
 </li>
