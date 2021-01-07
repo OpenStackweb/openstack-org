@@ -130,7 +130,6 @@ class Presentation extends SummitEvent implements IPresentation
      */
     private static $db = array
     (
-        'Level'                   => "Enum('Beginner,Intermediate,Advanced,N/A')",
         'Status'                  => 'Varchar',
         'OtherTopic'              => 'Varchar',
         'Progress'                => 'Int',
