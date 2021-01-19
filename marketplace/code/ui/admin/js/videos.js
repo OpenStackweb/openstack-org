@@ -57,8 +57,7 @@
                         previous.old = value;
                         var validator = this;
                         this.startRequest(element);
-
-                        $.getJSON('https://www.googleapis.com/youtube/v3/videos?id=' + youtube_id + '&part=contentDetails,snippet&key=AIzaSyBUteMGkhfkT51jz3YHjr-o__hKlf17s8g')
+                        $.getJSON('https://www.googleapis.com/youtube/v3/videos?id=' + youtube_id + '&part=contentDetails,snippet&key='+window.OPENSTACK_YOUTUBE_API_KEY)
                             .done(function(data) {
                                 //check duration (in seconds)
                                 var valid = false;
