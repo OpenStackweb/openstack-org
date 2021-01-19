@@ -160,6 +160,8 @@ class MarketPlaceAdminPage_Controller extends AdminController
 
         Requirements::javascript(Director::protocol() . "code.jquery.com/ui/1.10.4/jquery-ui.min.js");
 
+
+        Requirements::customScript(sprintf("window.OPENSTACK_YOUTUBE_API_KEY = '%s'", OPENSTACK_YOUTUBE_API_KEY));
         $js_files =  array(
             "themes/openstack/javascript/jquery.jsonp-2.4.0.min.js",
             "node_modules/pure/libs/pure.min.js",
