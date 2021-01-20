@@ -34,15 +34,15 @@ class DatePicker extends React.Component {
     }
 }
 
-const OpenStackProgramVersionSelector = ({onChange, className, defaultValue, items}) => {
+const OpenStackProgramVersionSelector = ({id, onChange, className, defaultValue, items}) => {
     let options = [];
     for (let program_version of items) {
-        options.push(<option key={program_version.id} value={program_version.id}>{program_version.name}</option>)
+        options.push(<option key={`${id}_${program_version.id}`} value={program_version.id}>{program_version.name}</option>)
     }
 
     return (
-        <select defaultValue={defaultValue} className={className} onChange={onChange}>
-            <option value="">--SELECT ONE --</option>
+        <select id={`select_program_version_${id}`} defaultValue={defaultValue} className={className} onChange={onChange}>
+            <option value="" key={`${id}_default`}>--SELECT ONE --</option>
             {options}
         </select>
     );
@@ -164,6 +164,7 @@ class SangriaOpenStackPoweredProductsApp extends BaseReport {
                                     onChange={(e) => this.onChangeValueField(e, item, col.name)} />);
             case 'program_version_id':
                 return (<OpenStackProgramVersionSelector className="form-control"
+                                                         id={item.id}
                                                          items={this.props.programVersions}
                                                          defaultValue={item.program_version_id}
                                                          onChange={(e) => this.onChangeValueField(e, item, col.name)}/>);
