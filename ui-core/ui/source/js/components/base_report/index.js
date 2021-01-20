@@ -141,7 +141,7 @@ class BaseReport
         let tr = [];
         reportConfig.columns.map((col, index) => {
             tr.push(
-                <td key={index}>{this.renderColumn(item, col)}</td>
+                <td key={`${item.id}_${index}`}>{this.renderColumn(item, col)}</td>
             )
         });
         return tr;
