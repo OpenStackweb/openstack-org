@@ -3,7 +3,7 @@
             <div class="col-lg-2 col-sm-2">
                 <h3>OpenStack</h3>
                 <ul>
-                    <li><a href="//openstack.org/projects/">Projects</a></li>
+                    <li><a href="//openstack.org/software/project-navigator/">Projects</a></li>
                     <li><a href="//openstack.org/software/">Software</a></li>
                     <li><a href="http://openstack.org/blog/">Blog</a></li>
                     <li><a href="//openstack.org/news/">News</a></li>
