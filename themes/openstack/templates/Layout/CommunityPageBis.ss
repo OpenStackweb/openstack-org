@@ -325,7 +325,7 @@
             <div class="col-md-4 col-sm-6 communicate-item">
                 <div class="communicate-item-title">
                     Info, News, and Blogs
-                <div>
+                </div>
                 <div>
                     <a href="https://www.openstack.org/blog/" target="_blank">OpenStack Blog</a><br>
                     <a href="http://planet.openstack.org/" target="_blank">Planet OpenStack (blog aggregator)</a><br>
@@ -341,15 +341,6 @@
                     <a href="https://www.facebook.com/openinfradev" target="_blank">Facebook</a><br>
                     <a href="https://www.linkedin.com/groups/3239106" target="_blank">LinkedIn</a><br>
                     <a href="https://www.youtube.com/user/OpenStackFoundation" target="_blank">YouTube Channel</a>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6 communicate-item">
-                <div class="communicate-item-title">
-                    Sign up to hear from us
-                </div>
-                <div class="form-inline">
-                    <input class="form-control sign-up-input">
-                    <a href="" class="sign-up-submit btn"> SUBMIT </a>
                 </div>
             </div>
         </div>
