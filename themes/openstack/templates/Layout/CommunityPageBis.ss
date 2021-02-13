@@ -326,6 +326,7 @@
                 <div class="communicate-item-title">
                     Info, News, and Blogs
                 <div>
+                <div>
                     <a href="https://www.openstack.org/blog/" target="_blank">OpenStack Blog</a><br>
                     <a href="http://planet.openstack.org/" target="_blank">Planet OpenStack (blog aggregator)</a><br>
                     <a href="http://superuser.openstack.org/" target="_blank">Superuser Magazine</a>
