@@ -7,6 +7,7 @@
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/project-navigator/deployment-tools">Deployment Tools</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}openstack-map" target="_blank">OpenStack Map</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/sample-configs/">Sample Configs</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://security.openstack.org" target="_blank">Security</a></li>
     </ul>
 </li>
 <li>
