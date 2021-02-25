@@ -35,7 +35,7 @@
                 <p><a href="/openstack-map">Download the map <i class="fa fa-chevron-right"></i></a></p>
                 <p>&nbsp; </p>
                 <p>
-                    <img class="openstack-map" width="100%" src="assets/openstack-map/openstack-map-v20190601.svg" onerror="this.onerror=null; this.src=assets/openstack-map/openstack-map-v20190601.svg" alt="OpenStack Cloud landscape map">
+                    <img class="openstack-map" width="100%" src="assets/openstack-map/openstack-map-v20210201.svg" onerror="this.onerror=null; this.src=assets/openstack-map/openstack-map-v20210201.svg" alt="OpenStack Cloud landscape map">
                 </p>
             </div>
             <p>&nbsp; </p>
