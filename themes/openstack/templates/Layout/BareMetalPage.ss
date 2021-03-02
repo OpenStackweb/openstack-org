@@ -104,7 +104,7 @@
                         <div class="col-sm-5">
                             <h3>How Ironic Works</h3>
                             <p>Ironic controls hardware and writes an operating system image to bare metal</p>
-                            <a class="red-button" href="https://github.com/metal3-io/metal3-docs/blob/master/design/how-ironic-works.md" target="_blank">Read on Github <i class="icon-arrow-right"></i></a>
+                            <a class="red-button" href="https://docs.openstack.org/ironic/latest/user/index.html#understanding-bare-metal-deployment" target="_blank">Read the Docs <i class="icon-arrow-right"></i></a>
                         </div>
                     </div>
                     <div class="col-sm-2"></div>
