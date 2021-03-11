@@ -24,6 +24,8 @@ jQuery(document).ready(function($) {
         e.preventDefault();
         var payload = {
             required_for_compute : $('#required_for_compute').is(':checked'),
+            required_for_dns     : $('#required_for_dns').is(':checked'),
+            required_for_orchestration : $('#required_for_required_for_orchestration').is(':checked'),
             required_for_storage : $('#required_for_storage').is(':checked'),
             federated_identity   : $('#federated_identity').is(':checked'),
             uses_ironic          : $('#uses_ironic').is(':checked'),

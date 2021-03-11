@@ -22,38 +22,42 @@ class OpenStackImplementation
 
     // OpenStack Powered Program attributes
     static $db = [
-        'CompatibleWithCompute'             => 'Boolean',
-        'CompatibleWithStorage'             => 'Boolean',
-        'CompatibleWithFederatedIdentity'   => 'Boolean',
-        'UsesIronic'                        => 'Boolean',
-        'ExpiryDate'                        => 'SS_Datetime',
-        'Notes'                             => 'Text',
+        'CompatibleWithCompute' => 'Boolean',
+        'CompatibleWithStorage' => 'Boolean',
+        'CompatibleWithFederatedIdentity' => 'Boolean',
+        'UsesIronic' => 'Boolean',
+        'ExpiryDate' => 'SS_Datetime',
+        'Notes' => 'Text',
+        'CompatibleWithDNS' => 'Boolean',
+        'CompatibleWithOrchestration' => 'Boolean',
     ];
 
     // OpenStack Powered Program attributes
-    static $has_one   = [
-        'ProgramVersion'  => 'InteropProgramVersion',
+    static $has_one = [
+        'ProgramVersion' => 'InteropProgramVersion',
         'ReportedRelease' => 'OpenStackRelease',
-        'PassedRelease'   => 'OpenStackRelease',
+        'PassedRelease' => 'OpenStackRelease',
     ];
 
     static $many_many = [
-        'HyperVisors'   => 'HyperVisorType',
-        'Guests'        => 'GuestOSType',
+        'HyperVisors' => 'HyperVisorType',
+        'Guests' => 'GuestOSType',
     ];
 
     static $has_many = [
-        'Capabilities'   => 'OpenStackImplementationApiCoverage',
+        'Capabilities' => 'OpenStackImplementationApiCoverage',
         'StateSnapshots' => 'OpenStackPoweredProgramHistory',
-        'ZenDeskLinks'   => 'ZenDeskLink',
-        'RefStackLinks'  => 'RefStackLink',
+        'ZenDeskLinks' => 'ZenDeskLink',
+        'RefStackLinks' => 'RefStackLink',
     ];
 
     private static $defaults = [
-        'CompatibleWithCompute'           => false,
-        'CompatibleWithStorage'           => false,
+        'CompatibleWithCompute' => false,
+        'CompatibleWithStorage' => false,
+        'CompatibleWithDNS' => false,
+        'CompatibleWithOrchestration' => false,
         'CompatibleWithFederatedIdentity' => false,
-        'UsesIronic'                      => false,
+        'UsesIronic' => false,
     ];
 
     /**
@@ -160,6 +164,40 @@ class OpenStackImplementation
     /***
      * @return bool
      */
+    public function isCompatibleWithDNS()
+    {
+        return (bool)$this->getField('CompatibleWithDNS');
+    }
+
+    /**
+     * @param bool $compatible
+     * @return void
+     */
+    public function setCompatibleWithDNS($compatible)
+    {
+        $this->setField('CompatibleWithDNS', $compatible);
+    }
+
+    /***
+     * @return bool
+     */
+    public function isCompatibleWithOrchestration()
+    {
+        return (bool)$this->getField('CompatibleWithOrchestration');
+    }
+
+    /**
+     * @param bool $compatible
+     * @return void
+     */
+    public function setCompatibleWithOrchestration($compatible)
+    {
+        $this->setField('CompatibleWithOrchestration', $compatible);
+    }
+
+    /***
+     * @return bool
+     */
     public function isCompatibleWithPlatform()
     {
         return $this->isCompatibleWithStorage() && $this->isCompatibleWithCompute();
@@ -176,7 +214,7 @@ class OpenStackImplementation
     /**
      * @param bool $compatible
      * @return void
-    */
+     */
     public function setCompatibleWithFederatedIdentity($compatible)
     {
         $this->setField('CompatibleWithFederatedIdentity', $compatible);
@@ -204,10 +242,12 @@ class OpenStackImplementation
      */
     public function isOpenStackPowered()
     {
-        $storage  = $this->isCompatibleWithStorage();
-        $compute  = $this->isCompatibleWithCompute();
+        $storage = $this->isCompatibleWithStorage();
+        $compute = $this->isCompatibleWithCompute();
         $platform = $this->isCompatibleWithPlatform();
-        return ($storage || $compute || $platform) && !$this->isOpenStackPoweredExpired();
+        $dns = $this->isCompatibleWithDNS();
+        $orchestration = $this->isCompatibleWithOrchestration();
+        return ($storage || $compute || $platform || $dns || $orchestration) && !$this->isOpenStackPoweredExpired();
     }
 
     /**
@@ -224,13 +264,33 @@ class OpenStackImplementation
      */
     public function getTestedCapabilityTypeLabel()
     {
+        $label = "";
         if ($this->isCompatibleWithPlatform()) {
-            return 'Platform';
-        } else if ($this->isCompatibleWithCompute()) {
-            return 'Compute';
-        } else if ($this->isCompatibleWithStorage()) {
-            return 'Storage';
+            if(!empty($label))
+                $label .= ', ';
+            $label .= 'Platform';
         }
+        else if ($this->isCompatibleWithCompute()) {
+            if(!empty($label))
+                $label .= ', ';
+            $label .=  'Compute';
+        }
+        else if ($this->isCompatibleWithStorage()) {
+            if(!empty($label))
+                $label .= ', ';
+            $label .=  'Storage';
+        }
+        if ($this->isCompatibleWithDNS()) {
+            if(!empty($label))
+                $label .= ', ';
+            $label .=  'DNS';
+        }
+        if ($this->isCompatibleWithOrchestration()) {
+            if(!empty($label))
+                $label .= ', ';
+            $label .= 'Orchestration';
+        }
+        return $label;
     }
 
     /**
@@ -290,7 +350,7 @@ class OpenStackImplementation
      */
     public function setProgramVersion(IInteropProgramVersion $program_version)
     {
-       $this->ProgramVersionID = $program_version->getIdentifier();
+        $this->ProgramVersionID = $program_version->getIdentifier();
     }
 
     /**
@@ -298,12 +358,13 @@ class OpenStackImplementation
      */
     public function getProgramVersion()
     {
-       $program_version =  $this->ProgramVersion();
-       UnitOfWork::getInstance()->scheduleForUpdate($program_version);
-       return $program_version;
+        $program_version = $this->ProgramVersion();
+        UnitOfWork::getInstance()->scheduleForUpdate($program_version);
+        return $program_version;
     }
 
-    public function getTestedCapabilities() {
+    public function getTestedCapabilities()
+    {
         $program_type = '';
         if ($this->isCompatibleWithPlatform()) {
             $program_type = '';
@@ -312,11 +373,17 @@ class OpenStackImplementation
         } else if ($this->isCompatibleWithStorage()) {
             $program_type = 'OpenStack Powered Object Storage';
         }
-
+        else if ($this->isCompatibleWithDNS()) {
+            $program_type = 'OpenStack Powered DNS';
+        }
+        else if ($this->isCompatibleWithOrchestration()) {
+            $program_type = 'OpenStack Powered Orchestration';
+        }
         return $this->getProgramVersion()->getCapabilitiesByProgramType($program_type);
     }
 
-    public function getDesignatedSections() {
+    public function getDesignatedSections()
+    {
         $program_type = '';
         if ($this->isCompatibleWithPlatform()) {
             $program_type = '';
@@ -324,6 +391,12 @@ class OpenStackImplementation
             $program_type = 'OpenStack Powered Compute';
         } else if ($this->isCompatibleWithStorage()) {
             $program_type = 'OpenStack Powered Object Storage';
+        }
+        else if ($this->isCompatibleWithDNS()) {
+            $program_type = 'OpenStack Powered DNS';
+        }
+        else if ($this->isCompatibleWithOrchestration()) {
+            $program_type = 'OpenStack Powered Orchestration';
         }
 
         return $this->getProgramVersion()->getDesignatedSectionsByProgramType($program_type);
@@ -335,12 +408,12 @@ class OpenStackImplementation
     public function isOpenStackPoweredExpired()
     {
         $res = false;
-        if(!$this->ExpiryDate) return $res;
+        if (!$this->ExpiryDate) return $res;
         $utc_timezone = new \DateTimeZone("UTC");
-        $time_zone    = new \DateTimeZone('America/Chicago');
-        $expiry_date  = new \DateTime($this->ExpiryDate, $time_zone);
-        $expiry_date  = $expiry_date->setTimezone($utc_timezone);
-        $utc_now      = new \DateTime(null, new \DateTimeZone("UTC"));
+        $time_zone = new \DateTimeZone('America/Chicago');
+        $expiry_date = new \DateTime($this->ExpiryDate, $time_zone);
+        $expiry_date = $expiry_date->setTimezone($utc_timezone);
+        $utc_now = new \DateTime(null, new \DateTimeZone("UTC"));
 
         return $utc_now > $expiry_date;
     }
@@ -348,9 +421,10 @@ class OpenStackImplementation
     /**
      * @return string
      */
-    public function getPrintableZenDeskLinks(){
+    public function getPrintableZenDeskLinks()
+    {
         $list = [];
-        foreach ($this->ZenDeskLinks() as $link){
+        foreach ($this->ZenDeskLinks() as $link) {
             $list[] = $link->Link;
         }
 
@@ -360,9 +434,10 @@ class OpenStackImplementation
     /**
      * @return string
      */
-    public function getPrintableRefStackLinks(){
+    public function getPrintableRefStackLinks()
+    {
         $list = [];
-        foreach ($this->RefStackLinks() as $link){
+        foreach ($this->RefStackLinks() as $link) {
             $list[] = $link->Link;
         }
 

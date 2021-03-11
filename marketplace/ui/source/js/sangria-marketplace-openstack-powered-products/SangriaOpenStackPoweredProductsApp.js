@@ -156,6 +156,8 @@ class SangriaOpenStackPoweredProductsApp extends BaseReport {
             case 'uses_ironic':
             case 'federated_identity':
             case 'required_for_storage':
+            case 'required_for_dns':
+            case 'required_for_orchestration':
             case 'required_for_compute':
                 return (<input type="checkbox" defaultChecked={item[col.name]} onChange={(e) => this.onChangeCheckBoxField(e, item, col.name)}/>);
             case 'expiry_date':

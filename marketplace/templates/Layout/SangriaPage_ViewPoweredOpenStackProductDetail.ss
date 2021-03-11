@@ -33,6 +33,16 @@
             <input type="checkbox" id="uses_ironic" <% if $Product.UsesIronic %>checked<% end_if %> name="uses_ironic"> Uses Ironic
         </label>
     </div>
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" id="required_for_dns" <% if $Product.CompatibleWithDNS %>checked<% end_if %> name="required_for_dns"> Required for DNS
+        </label>
+    </div>
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" id="required_for_orchestration" <% if $Product.CompatibleWithOrchestration %>checked<% end_if %> name="required_for_orchestration"> Required for Orchestration
+        </label>
+    </div>
     <div class="form-group">
         <label for="expiry_date">Expiry Date</label>
         <input type="text" class="form-control" value="{$Product.ExpiryDate}" id="expiry_date" name="expiry_date">

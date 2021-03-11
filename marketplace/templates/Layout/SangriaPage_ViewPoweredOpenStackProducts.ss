@@ -19,6 +19,8 @@
             { shouldSort: true, title: 'Sort by Type', label: 'Type', name: 'type'},
             { shouldSort: false, label: 'Company', name: 'company'},
             { shouldSort: false, label: 'Required for Compute', name: 'required_for_compute'},
+            { shouldSort: false, label: 'Required for DNS', name: 'required_for_dns'},
+            { shouldSort: false, label: 'Required for Orchestration', name: 'required_for_orchestration'},
             { shouldSort: false, label: 'Required for Storage', name: 'required_for_storage'},
             { shouldSort: false, label: 'Federated Identity', name: 'federated_identity'},
             { shouldSort: false, label: 'Uses Ironic', name: 'uses_ironic'},

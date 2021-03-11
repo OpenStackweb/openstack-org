@@ -87,7 +87,7 @@ final class SapphireOpenStackPoweredServiceRepository
 
         if(isset($filters['powered']) && $filters['powered']){
             if(!empty($where)) $where .= ' AND ';
-            $where .= " (CompatibleWithStorage = 1 OR CompatibleWithCompute = 1) ";
+            $where .= " (CompatibleWithStorage = 1 OR CompatibleWithCompute = 1 OR CompatibleWithDNS = 1 OR CompatibleWithOrchestration = 1) ";
         }
 
         if(!empty($where)) $where = ' WHERE '.$where;
@@ -97,6 +97,8 @@ CompanyService.ID,
 CompatibleWithStorage,
 CompatibleWithCompute,
 CompatibleWithFederatedIdentity,
+CompatibleWithDNS,
+CompatibleWithOrchestration,
 UsesIronic,
 ProgramVersionID,
 InteropProgramVersion.Name AS ProgramVersionName,
@@ -161,6 +163,8 @@ CompanyService.ID,
 CompatibleWithStorage,
 CompatibleWithCompute,
 CompatibleWithFederatedIdentity,
+CompatibleWithDNS,
+CompatibleWithOrchestration,
 ProgramVersionID,
 InteropProgramVersion.Name AS ProgramVersionName,
 ExpiryDate,
