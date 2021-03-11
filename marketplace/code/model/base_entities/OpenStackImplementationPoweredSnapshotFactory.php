@@ -20,6 +20,8 @@ class OpenStackImplementationPoweredSnapshotFactory
 
         $snapshot->OpenStackImplementationID   = $implementation->getIdentifier();
         $snapshot->CompatibleWithComputeBefore = $implementation->CompatibleWithCompute;
+        $snapshot->CompatibleWithDNSBefore = $implementation->CompatibleWithDNS;
+        $snapshot->CompatibleWithOrchestrationBefore = $implementation->CompatibleWithOrchestration;
         $snapshot->CompatibleWithStorageBefore = $implementation->CompatibleWithStorage;
         $snapshot->ExpiryDateBefore            = $implementation->ExpiryDate;
         $snapshot->ProgramVersionIDBefore      = $implementation->ProgramVersionID;
@@ -40,6 +42,17 @@ class OpenStackImplementationPoweredSnapshotFactory
             $snapshot->CompatibleWithComputeCurrent = boolval($data['required_for_compute']);
         else
             $snapshot->CompatibleWithComputeCurrent = $implementation->CompatibleWithCompute;
+
+        if(isset($data['required_for_dns']))
+            $snapshot->CompatibleWithDNSCurrent = boolval($data['required_for_dns']);
+        else
+            $snapshot->CompatibleWithDNSCurrent = $implementation->CompatibleWithDNS;
+
+        if(isset($data['required_for_orchestration']))
+            $snapshot->CompatibleWithOrchestrationCurrent = boolval($data['required_for_orchestration']);
+        else
+            $snapshot->CompatibleWithOrchestrationCurrent = $implementation->CompatibleWithOrchestration;
+
 
         if(isset($data['required_for_storage']))
             $snapshot->CompatibleWithStorageCurrent = boolval($data['required_for_storage']);

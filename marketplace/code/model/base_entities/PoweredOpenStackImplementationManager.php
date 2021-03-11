@@ -57,6 +57,12 @@ final class PoweredOpenStackImplementationManager implements IPoweredOpenStackIm
             if(isset($data['required_for_compute']))
                 $service->CompatibleWithCompute = boolval($data['required_for_compute']);
 
+            if(isset($data['required_for_dns']))
+                $service->CompatibleWithDNS = boolval($data['required_for_dns']);
+
+            if(isset($data['required_for_orchestration']))
+                $service->CompatibleWithOrchestration = boolval($data['required_for_orchestration']);
+
             if(isset($data['required_for_storage']))
                 $service->CompatibleWithStorage = boolval($data['required_for_storage']);
 
