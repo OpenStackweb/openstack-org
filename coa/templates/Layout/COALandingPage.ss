@@ -146,7 +146,7 @@
                             <div class="title">
                                 OpenStack release being tested
                             </div>
-                            <img src="{$Top.CloudUrl('assets/rocky-release-logo.png')}" alt="OpenStack Rocky Release" class="logo">
+                            <img src="{$Top.CloudUrl('assets/Ussuri-release-logo-web.svg')}" alt="OpenStack Ussuri Release" class="logo">
                         </div>
                     </div>
                 </div>
