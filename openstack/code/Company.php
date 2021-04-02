@@ -31,7 +31,7 @@ class Company extends DataObject implements PermissionProvider,ICompany
         'Products' => 'HTMLText',
         'Contributions' => 'HTMLText',
         'ContactEmail' => 'Text',
-        'MemberLevel' => "Enum('Platinum, Gold, StartUp, Corporate, Mention, None','None')",
+        'MemberLevel' => "Enum('Platinum, Gold, StartUp, Silver, Mention, None','None')",
         'AdminEmail' => 'Text',
         'URLSegment' => 'Text',
         'Color' => 'Text',

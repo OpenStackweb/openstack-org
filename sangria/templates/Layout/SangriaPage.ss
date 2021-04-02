@@ -40,8 +40,8 @@
 			    $GoldMemberCount
 			    </div>
 			    <div>
-			    <strong>Corporate Sponsors:</strong>
-			    $CorporateSponsorCount
+			    <strong>Silver Sponsors:</strong>
+			    $SilverSponsorCount
 			    </div>
 			    <div>
 			    <strong>Startup Sponsors:</strong>

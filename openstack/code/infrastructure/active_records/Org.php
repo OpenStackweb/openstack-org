@@ -19,7 +19,7 @@ class Org extends DataObject implements IOrganization
     (
         'Name'                   => 'Text',
         'IsStandardizedOrg'      => 'Boolean',
-        'FoundationSupportLevel' => "Enum('Platinum Member, Gold Member, Corporate Sponsor, Startup Sponsor, Supporting Organization')",
+        'FoundationSupportLevel' => "Enum('Platinum Member, Gold Member, Silver Sponsor, Startup Sponsor, Supporting Organization')",
     );
 
     static $has_one = array(

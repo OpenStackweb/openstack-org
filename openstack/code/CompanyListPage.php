@@ -84,7 +84,7 @@ class CompanyListPage_Controller extends Page_Controller
     {
         if ($type == 'Combined') {
 
-	        $DisplayedCompanies = Company::get()->filter(array( 'DisplayOnSite' => 1 ))->filterAny( array( 'MemberLevel' => array('Startup','Corporate') ))->sort('Name');
+	        $DisplayedCompanies = Company::get()->filter(array( 'DisplayOnSite' => 1 ))->filterAny( array( 'MemberLevel' => array('Startup','Silver') ))->sort('Name');
 
         } else {
 
