@@ -1,7 +1,7 @@
 		<div class="row">
 			<div class="col-sm-10 col-sm-push-1">
 				<h1>Companies Supporting The Open Infrastructure Foundation</h1>
-				<p class="center">The Open Infrastructure Foundation would not exist without the support of the Platinum, Gold, and Corporate Sponsors listed below.<br>Learn more about <a href="/join/#sponsor">how your company can help</a>.</p>
+				<p class="center">The Open Infrastructure Foundation would not exist without the support of the Platinum, Gold, and Silver Sponsors listed below.<br>Learn more about <a href="/join/#sponsor">how your company can help</a>.</p>
 			</div>
 		</div>
 		
@@ -83,14 +83,14 @@
 			<% end_loop %>
 		</div>
 
-		<!-- Corporate & Startup Members -->
+		<!-- Silver & Startup Members -->
 		<% if DisplayedCompanies(Combined) %>
 			<div class="row">
 				<div class="col-sm-12">
 					<hr/>
-					<h2>Corporate Sponsors</h2>
+					<h2>Silver Sponsors</h2>
 					<p>
-					Corporate Sponsors provide additional funding to support the Foundation's mission of protecting, empowering and promoting OpenStack. If you are interested in becoming a corporate sponsor, read more about <a href="/join">supporting the Foundation</a>. Thank you to the following corporate sponsors for supporting the Open Infrastructure Foundation.
+					Silver Sponsors provide additional funding to support the Foundation's mission of protecting, empowering and promoting OpenStack. If you are interested in becoming a corporate sponsor, read more about <a href="/join">supporting the Foundation</a>. Thank you to the following corporate sponsors for supporting the Open Infrastructure Foundation.
 					</p>
 				</div>
 			</div>

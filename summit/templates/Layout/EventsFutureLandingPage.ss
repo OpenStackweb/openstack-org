@@ -35,7 +35,7 @@
 
         <p>Registration will be live soon! Bookmark this page and <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/openstack-discuss">join the mailing list</a> for the latest updates.</p>
 
-        <p>Thank you to the OpenStack Foundation Platinum, Gold, and Corporate sponsors for their ongoing support and helping make this virtual event successful!</p>
+        <p>Thank you to the OpenStack Foundation Platinum, Gold, and Silver sponsors for their ongoing support and helping make this virtual event successful!</p>
 
         <p>Looking for the 2020 virtual PTG? Visit <a href="https://openstack.org/ptg">openstack.org/ptg</a> for more information and how to get involved.
 </p>

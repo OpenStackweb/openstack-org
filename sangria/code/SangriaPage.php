@@ -154,11 +154,11 @@ final class SangriaPage_Controller extends AdminController implements Permission
         });
     }
 
-    function CorporateSponsorCount()
+    function SilverSponsorCount()
     {
-        return EntityCounterHelper::getInstance()->EntityCount('CorporateOrg', function () {
+        return EntityCounterHelper::getInstance()->EntityCount('SilverOrg', function () {
             $query = new CompanyCountQuery();
-            $res = $query->handle(new CompanyCountQuerySpecification('Corporate'))->getResult();
+            $res = $query->handle(new CompanyCountQuerySpecification('Silver'))->getResult();
 
             return $res[0];
         });
