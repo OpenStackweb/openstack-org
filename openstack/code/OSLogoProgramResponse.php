@@ -26,7 +26,8 @@ class OSLogoProgramResponse extends DataObject {
 		'Regions' => 'Text',
 		'APIExposed' => 'Boolean',
 		'OtherCompany' => 'Text',
-		'Projects' => 'Text'
+		'Projects' => 'Text',
+        'ReferralPage' => 'Text',
 	);
 
 	static $has_one = array ( 

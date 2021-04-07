@@ -83,7 +83,8 @@ class OsLogoProgramForm extends HoneyPotForm {
                 OsLogoProgramResponse::$avialable_regions
             ),
             $projectsField,
-            new CheckboxField('APIExposed','My product exposes the OpenStack API')
+            new CheckboxField('APIExposed','My product exposes the OpenStack API'),
+            new HiddenField("ReferralPage","ReferralPage", $_SERVER['HTTP_REFERER'] ??  "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]")
         );
 
         $actionButton = new FormAction('save', 'Request Information');
