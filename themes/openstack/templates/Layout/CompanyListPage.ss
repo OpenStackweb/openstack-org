@@ -22,7 +22,7 @@
 				<div class="col-sm-3 col-xs-6">
 		                <a <% if IsExternalUrl %>rel="nofollow"<% end_if %> href="$ShowLink">
 		                	<div class="img-wrapper">
-								<img class="small_logo" src="$getLogoUrl" alt="$Name">
+								<img class="big_logo" src="$getLogoUrl" alt="$Name">
 							</div>
 						</a>
 				</div>
