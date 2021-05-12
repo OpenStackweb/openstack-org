@@ -1,16 +1,18 @@
-.small_logo_tiny{
+.img-wrapper {
+  text-align:center;
+  height:120px;
+}
+
+.small_logo_tiny {
   max-width: 120px !important;
   max-height: 107px !important;
-  padding: 10px;
-}
+  padding: 10px; }
 
-.small_logo{
+.small_logo {
   max-height: 107px !important;
-  padding: 10px;
-}
+  padding: 10px; }
 
-.big_logo{
+.big_logo {
   max-width: 300px !important;
-  max-height: 160px !important;
-  padding: 20px;
-}
+  height:170px;
+  padding: 30px; }
