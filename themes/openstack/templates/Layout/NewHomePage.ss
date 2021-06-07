@@ -57,8 +57,10 @@
 
     </div>
   </div>
-  <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-images-prod/homepage/color-bar.svg" class="multi-color-border" alt="">
-  <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-images-prod/homepage/color-bar-mobile.svg" class="multi-color-border-mobile" alt="">
+  <div>
+      <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-images-prod/homepage/color-bar.png" class="multi-color-border" alt="">
+      <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-images-prod/homepage/color-bar-mobile.png" class="multi-color-border-mobile" alt="">
+  </div>
 </div>
 <!-- /.news-anniversary -->
 
