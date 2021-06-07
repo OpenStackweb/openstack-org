@@ -30,18 +30,25 @@
 
 <!-- Page Content -->
 
-<div class="news-anniversary">
-  <h3>VIRTUAL</h3>
-  <div class="anniversary-text">
-    <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/Summit-Logo-Web-w.svg">
-    <p>Learn about the launch of the Open Infrastructure Foundation and its 60+ founding members as well as open source, production use cases from Workday, Ant Group, Volvo Cars, Verizon, and AT&T.</p>
+<div class="banner">
+  <div class="row">
+    <div class="col-md-2">
+      <img class="banner-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-images-prod/homepage/OpenInfra-live-logo-RGB-w.svg" alt="OpenInfra Live"/>
+    </div>
+    <div class="col-md-10">
+      <h2>Join us on OpenInfra Live</h2>
+      <img class="banner-logo-mobile" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-images-prod/homepage/OpenInfra-live-logo-RGB-w.svg" alt="OpenInfra Live"/>
+      <p>OpenInfra Live is a weekly hour-long series sharing production case studies, open source demos, industry conversations, and the latest updates from the global open infrastructure community! Catch every episode on several streaming platforms, airing <b>Thursdays at 14:00 UTC (9am CT)</b></p>
+    </div>
   </div>
-  <div class="anniversary-btn-wrapper">
-    <p>October 19-23, 2020</p>
-    <a href="https://www.youtube.com/playlist?list=PLKqaoAnDyfgq5YNWZ3Pk9vXf9Smo-gFxw" class="anniversary-btn">Watch Now</a>
-  </div>
+  <div>
+    <a href="https://openinfra.dev/live/">Learn More
+      <svg width="21" height="11" viewBox="0 0 21 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15.4828 1L19.6207 5.48M19.6207 5.48L15.4828 9.96M19.6207 5.48L1 5.48" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div><img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-images-prod/homepage/color-bar.svg" class="multi-color-border" alt="">
 </div>
-
 <!-- /.news-anniversary -->
 
 <!-- Page Content -->
