@@ -4,59 +4,61 @@
 */
 /* @group jobs */
 
+$screen-xs-min:760px;
+
 #jobs h1 {
-    margin-top: 0;
-    margin-bottom: 20px;
-    font-size: 34px;
-    overflow: hidden;
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 34px;
+  overflow: hidden;
 }
 
 .jumbotron {
-    background-color: #2A4E68;
-    width: 100%;
-    border-radius: 0;
+  background-color: #2A4E68;
+  width: 100%;
+  border-radius: 0;
 }
 
 .jobHeader h1 {
-    color: #fff;
-    overflow: auto;
-   
+  color: #fff;
+  overflow: auto;
+
 }
 
 .jobheader h2 {
-    color: #fff;
-    text-align: center;
+  color: #fff;
+  text-align: center;
 }
 
 .jumbotron h5 {
-    text-align: center;
-    color: #fff;
-    margin-bottom: 30px;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 30px;
 }
 
 .postButton a {
-    background: #DA422F;
-    padding: 10px 25px;
-    border-radius: 4px;
-    color: #fff;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;    
+  background: #DA422F;
+  padding: 10px 25px;
+  border-radius: 4px;
+  color: #fff;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 div.postButton a:hover {
-    background-color: #A51B1B;
-    text-decoration: none;
+  background-color: #A51B1B;
+  text-decoration: none;
 }
 
 h2 {
-    text-align: center;
-    font-size: 28px;
-    font-weight: 300;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 300;
 }
 
 .postEvent {
-    background: #2A4E68;
+  background: #2A4E68;
 }
 
 .postEvent {
@@ -65,51 +67,51 @@ h2 {
   padding: 30px 5%;
   background: #F4F5F8;
   margin: 20px 0 10px;
-  text-align: center; 
+  text-align: center;
 }
 
 .form-control {
-    border-radius: 0px;
-    border: 1px solid black;    
+  border-radius: 0px;
+  border: 1px solid black;
 }
 
 .form-control-feedback { /* adjust glyphicon to vertical center */
-    line-height: 30px;
+  line-height: 30px;
 }
 
 .form-group {
-    bottom: 20px;
+  bottom: 20px;
 }
 
 .btn {
-    border-radius: 0px;
-    border: 1px solid black;
+  border-radius: 0px;
+  border: 1px solid black;
 }
 
 .col-sm-2, .col-sm-offset-3 {
-    padding-bottom: 0px;
+  padding-bottom: 0px;
 }
 
 ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-    color:    #30739C;
+  color: #30739C;
 }
 
 :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-   color:    #30739C;
-   opacity:  1;
+  color: #30739C;
+  opacity: 1;
 }
 
 ::-moz-placeholder { /* Mozilla Firefox 19+ */
-   color:    #30739C;
-   opacity:  1;
+  color: #30739C;
+  opacity: 1;
 }
 
 :-ms-input-placeholder { /* Internet Explorer 10-11 */
-   color:    #30739C;
+  color: #30739C;
 }
 
 .dropdown {
-    position: static;
+  position: static;
 }
 
 .button1 {
@@ -117,81 +119,81 @@ h2 {
   color: white;
   border: 2px solid white;
   border-radius: 3px;
-  display: inline-block;  
+  display: inline-block;
 }
 
 .button1 + .glyphicon {
   position: absolute;
   right: 0;
   display: inline-block;
-  margin: 15px;  
+  margin: 15px;
 }
 
 .glyphicon-arrow-left {
-    margin-left: 10px;
-    display: inline-block;
-    font-size: 12px;
+  margin-left: 10px;
+  display: inline-block;
+  font-size: 12px;
 }
 
 .button1 h5 {
-    margin: 9px 15px;
-    display: inline-block;
+  margin: 9px 15px;
+  display: inline-block;
 }
 
 div.button1:hover {
-    background-color: #0C1722;
+  background-color: #0C1722;
 }
 
 .backbutton, .button1 {
-    float: right;
+  float: right;
 }
 
 .button2 {
   background-color: #30739C;
   color: white;
   border-radius: 3px;
-  display: inline-block; 
-  height: 40px; 
+  display: inline-block;
+  height: 40px;
 }
 
 .button2 + .glyphicon {
   position: absolute;
   display: inline-block;
-  margin: 15px;  
+  margin: 15px;
 }
 
 .button3 + .glyphicon {
   position: absolute;
   display: inline-block;
-  margin: 15px;  
+  margin: 15px;
 }
 
-.glyphicon-share-alt,  .glyphicon-plus {
-    margin-left: 10px;
-    display: inline-block;
-    font-size: 12px;
+.glyphicon-share-alt, .glyphicon-plus {
+  margin-left: 10px;
+  display: inline-block;
+  font-size: 12px;
 }
 
 .button2 h5 {
-    margin: 12px 20px 15px 5px;
-    display: inline-block;
-    color: white;
+  margin: 12px 20px 15px 5px;
+  display: inline-block;
+  color: white;
 }
 
 .glyphicon-chevron-down {
-    font-size: 8px;
+  font-size: 8px;
 }
 
 .jobBasics-2 .glyphicon-map-marker {
-    padding-left: 10px;
+  padding-left: 10px;
 }
 
 div.button2:hover {
-    background-color: #2A4E68;
+  background-color: #2A4E68;
 }
 
 input:hover {
-    background-color: #E6E6E6;
+  background-color: #E6E6E6;
 }
 
 .button3 {
@@ -199,198 +201,234 @@ input:hover {
   color: #30739C;
   border: 2px solid #30739C;
   border-radius: 3px;
-  display: inline-block; 
+  display: inline-block;
   vertical-align: bottom;
   height: 40px;
 }
 
 .button3 h5 {
-    margin: 10px 20px 15px 5px;
-    display: inline-block;
-    color: #30739C;
+  margin: 10px 20px 15px 5px;
+  display: inline-block;
+  color: #30739C;
 }
 
 div.button3:hover {
-    background-color: #2A4E68;
-    color: white;
+  background-color: #2A4E68;
+  color: white;
 }
 
 div.button3:hover h5 {
-    color: white;
+  color: white;
 }
 
 
 .descriptionButtons {
-    display: inline-block;
-    position: relative;
+  display: inline-block;
+  position: relative;
 }
 
 #apply {
-    padding-bottom: 0;
+  padding-bottom: 0;
 }
 
 .detail_title {
-    margin-bottom: 25px;
-    margin-top: 20px;
-    vertical-align: baseline;
+  margin-bottom: 25px;
+  margin-top: 20px;
+  vertical-align: baseline;
 }
 
 .job_title {
-    color: rgb(42, 78, 104);
-    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-    font-size: 30px;
-    font-style: normal;
-    font-weight: 320;
-    height: 34px;
-    line-height: 34px;
+  color: rgb(42, 78, 104);
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 320;
+  height: 34px;
+  line-height: 34px;
 }
 
 div.newBox h5 {
-    background-color: #DC1722;
-    color: white;
-    font-family: "Open Sans", Helvetica, Arial, sans-serif;
-    font-size: 10px;
-    display: inline-block;
-    padding: 3px 6px;
+  background-color: #DC1722;
+  color: white;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-size: 10px;
+  display: inline-block;
+  padding: 3px 6px;
 }
 
 .dateField {
-    display: inline-block;
+  display: inline-block;
 }
 
 .newBox {
-    display: inline-block;
+  display: inline-block;
 }
 
 .publishedDate {
-    display: inline-block;
+  display: inline-block;
 
-    padding-left: 8px;
-    color: black;
+  padding-left: 8px;
+  color: black;
 }
 
 div.publishedDate h5 {
-    color: black;
+  color: black;
 }
 
 .jobBasics {
-    float: right;
+  float: right;
 }
+
 .jobBasics-2 {
-    float: left;
+  float: left;
 }
 
 #coa { /* OpenStack certified admnistrator logo properties */
-    width:5em;
-    height:5em;
+  width: 5em;
+  height: 5em;
 }
 
 .job_title_hold { /* Job list page job title but has hover issue*/
-    font-size: 25px;
-    pointer-events: none;
+  font-size: 25px;
+  pointer-events: none;
 }
 
-.jobExpand h5{
-    color: #30739C;
+.jobExpand h5 {
+  color: #30739C;
+  padding: 0;
+  margin: 0;
 }
 
 .jobExpand h5:hover {
-    color: #2A4E68;
+  color: #2A4E68;
 }
 
 .jobExpand, .jobExpand:hover {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 /* Original Jobs page CSS rulesets below here */
 
 p.type {
-    display: block;
-    background-color: #c4e0e9;
-    text-align: center;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    color: #254c7c;
+  display: block;
+  background-color: #c4e0e9;
+  text-align: center;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  color: #254c7c;
 }
 
 .jobPosting {
-    border-top: 1px dotted;
-    padding-top: 10px;
-    margin-bottom: 10px;
-    border-color: #c5e2ea;
+  border-top: 1px dotted;
+  padding-top: 10px;
+  margin-bottom: 10px;
+  border-color: #c5e2ea;
+  img.silver {
+    content: url("/jobs/img/OpenInfraFoundation-MemberLogo-RGB-Silver.png");
+
+  }
+  .img-container{
+    padding:0;
+    margin: 0;
+    position: relative;
+  }
+  img.company_member_level{
+    box-sizing: border-box;
+    width: 142px;
+    height: 53px;
+    float: right;
+    position: absolute;
+    left:40px;
+    top:60px;
+    /* XS Small devices (Phones, 600px and up) */
+    @media (min-width: 320px) and (max-width: $screen-xs-min) {
+      top:0px;
+      width: 115px;
+      height: 44px;
+    }
+  }
+  img.Platinum {
+    content: url("/jobs/img/OpenInfraFoundation-MemberLogo-RGB-Platinum.png");
+  }
+  img.Gold {
+    content: url("/jobs/img/OpenInfraFoundation-MemberLogo-RGB-Gold.png");
+  }
+  img.None {
+    display: none;
+  }
 }
 
 .jobPosting ul.details {
-    margin: 0px;
-    padding: 0px;
+  margin: 0px;
+  padding: 0px;
 }
 
 .jobPosting ul.details li {
-    display: block;
-    float: left;
-    margin-right: 10px;
+  display: block;
+  float: left;
+  margin-right: 10px;
 }
 
 .jobPosting li.description, .jobPosting li.link {
-    width: 960px!important;
+  width: 960px !important;
 }
 
 .jobPosting .label {
-    display: none;
+  display: none;
 }
 
 .jobPosting .type {
-    width: 60px;
+  width: 60px;
 }
 
 .jobPosting .postDate {
-    text-align: right;
+  text-align: right;
 }
 
 .jobExpand {
-    margin: 10px 0;
-    /*color: black !important;*/
+  margin: 10px 0;
+  /*color: black !important;*/
 }
 
 ul.location {
-    margin: 0px;
-    padding: 0px;
+  margin: 0px;
+  padding: 0px;
 }
 
-ul.location li{
-    display: block;
-    float: left;
-    margin-right: 10px;
-    font-weight: normal !important ;
+ul.location li {
+  display: block;
+  float: left;
+  margin-right: 10px;
+  font-weight: normal !important;
 }
 
 body.postJobInfo {
-    background-color: white;
-    background-image: none;
-    border: none;
-    padding: 15px;
-    font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;
-    font-size: 75%;
+  background-color: white;
+  background-image: none;
+  border: none;
+  padding: 15px;
+  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font-size: 75%;
 }
 
 .postJobInfo h2 {
-    font-size: 16px;
-    color: #264d69;
-    margin-top: 30px;
-    padding-top: 10px;
-    border-top: 1px dotted #c5e2ea;
+  font-size: 16px;
+  color: #264d69;
+  margin-top: 30px;
+  padding-top: 10px;
+  border-top: 1px dotted #c5e2ea;
 }
 
-div.jobDescription{
-    font-weight: normal !important ;
+div.jobDescription {
+  font-weight: normal !important;
 }
 
-.glyphicon-remove  {
- left: auto;
- right: 20px;
+.glyphicon-remove {
+   left: auto;
+   right: 20px;
 }
 
-.empty-job-list{
+.empty-job-list {
   padding-top: 8%;
   text-align: center;
 }

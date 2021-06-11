@@ -73,6 +73,16 @@ final class Job	extends DataObject implements IJob {
 	    return $this->CompanyID > 0 ?$this->Company()->Name : $this->getField('CompanyName');
     }
 
+    public function getCompanyMemberLevel(){
+        return $this->CompanyID > 0 ? $this->Company()->MemberLevel : "None";
+    }
+
+    public function hasCompanyMemberLevel():bool{
+        if($this->CompanyID > 0)
+            return in_array($this->Company()->MemberLevel, ["Platinum", "Gold", "Silver"]);
+        return false;
+    }
+
 	/**
 	 * @return string
 	 */
