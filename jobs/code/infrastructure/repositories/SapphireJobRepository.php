@@ -11,63 +11,133 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
 /**
  * Class SapphireJobRepository
  */
-final class SapphireJobRepository extends SapphireRepository implements IJobRepository{
+final class SapphireJobRepository extends SapphireRepository implements IJobRepository
+{
 
-	public function __construct(){
-		parent::__construct(new Job);
-	}
+    public function __construct()
+    {
+        parent::__construct(new Job);
+    }
 
-	public function delete($entity){
-		$entity->clearLocations();
-		parent::delete($entity);
-	}
+    public function delete($entity)
+    {
+        $entity->clearLocations();
+        parent::delete($entity);
+    }
 
     /**
      * @param int $offset
      * @param int $limit
      * @return array
      */
-    public function getAllPosted($offset = 0, $limit = 10)	{
+    public function getAllPosted($offset = 0, $limit = 10)
+    {
         $query = new QueryObject();
         $query->addAndCondition(QueryCriteria::equal('IsActive', 1));
         $query->addAndCondition(QueryCriteria::greater('ExpirationDate', date('Y-m-d H:i:s')));
         $query->addOrder(QueryOrder::desc('PostedDate'));
-        return  $this->getAll($query,$offset,$limit);
+        return $this->getAll($query, $offset, $limit);
     }
 
-    public function getDateSortedJobs($foundation = 0){
-        $query   = new QueryObject(new Job);
+    public function getDateSortedJobs($foundation = 0)
+    {
+        $query = new QueryObject(new Job);
 
-        if($foundation)
-            $query->addAndCondition(QueryCriteria::equal('IsFoundationJob',1));
+        if ($foundation)
+            $query->addAndCondition(QueryCriteria::equal('IsFoundationJob', 1));
 
-        $now      = new DateTime();
+        $now = new DateTime();
         $six_months_ago = new DateTime();
-        $query->addAndCondition(QueryCriteria::equal('IsActive',1));
+        $query->addAndCondition(QueryCriteria::equal('IsActive', 1));
         $post_date = $six_months_ago->sub(new DateInterval('P6M'));
-        $query->addAndCondition(QueryCriteria::greaterOrEqual('PostedDate',$post_date->format('Y-m-d H:i:s')));
-        $query->addAndCondition(QueryCriteria::greaterOrEqual('ExpirationDate',$now->format('Y-m-d H:i:s')));
+        $query->addAndCondition(QueryCriteria::greaterOrEqual('PostedDate', $post_date->format('Y-m-d H:i:s')));
+        $query->addAndCondition(QueryCriteria::greaterOrEqual('ExpirationDate', $now->format('Y-m-d H:i:s')));
         $query->addOrder(QueryOrder::desc('PostedDate'));
         $query->addOrder(QueryOrder::desc('ID'));
-        list($jobs,$size) = $this->getAll($query,0,PHP_INT_MAX);
+        list($jobs, $size) = $this->getAll($query, 0, PHP_INT_MAX);
         return new ArrayList($jobs);
     }
 
-    public function getJobsByKeywordTypeAndSortedBy($keywords, $type_id, $sort_by){
+    /**
+     * @return array
+     */
+    private function getJobsByFoundationCompanyMemberLevel(): array
+    {
+        $now = new DateTime();
+        $six_months_ago = new DateTime();
+        $post_date = $six_months_ago->sub(new DateInterval('P6M'))->format('Y-m-d H:i:s');
+        $expiration_date = $now->format('Y-m-d H:i:s');
+        $sql = <<<SQL
+select Job.* from Job inner join
+Company on CompanyID = Company.ID
+WHERE
+    Job.`IsActive` = 1 AND
+      Job.PostedDate >= '{$post_date}' AND
+      Job.`ExpirationDate` >= '{$expiration_date}' AND
+      Company.MemberLevel = 'Platinum'
+UNION
 
-        $query   = new QueryObject(new Job);
-        $now                    = new DateTime();
-        $six_months_ago         = new DateTime();
-        $post_date              = $six_months_ago->sub(new DateInterval('P6M'));
+select Job.* from Job inner join
+Company on CompanyID = Company.ID
+WHERE
+    Job.`IsActive` = 1 AND
+      Job.PostedDate >= '{$post_date}' AND
+      Job.`ExpirationDate` >= '{$expiration_date}' AND
+      Company.MemberLevel = 'Gold'
 
-        $query->addAndCondition(QueryCriteria::equal('IsActive',1));
-        $query->addAndCondition(QueryCriteria::greaterOrEqual('PostedDate',  $post_date->format('Y-m-d H:i:s')));
+UNION
+select Job.* from Job inner join
+Company on CompanyID = Company.ID
+WHERE
+    Job.`IsActive` = 1 AND
+      Job.PostedDate >= '{$post_date}' AND
+      Job.`ExpirationDate` >= '{$expiration_date}' AND
+      Company.MemberLevel = 'Silver';
+SQL;
+
+        $res = DB::query($sql);
+        $list = [];
+        $excluded = [];
+        foreach ($res as $record) {
+            $className = $record['ClassName'];
+            $excluded[] = (int)$record["ID"];
+            $list[] = new $className($record);
+        }
+        $excluded = implode(',', $excluded);
+        $sql = <<<SQL
+select Job.* from Job
+WHERE
+    Job.`IsActive` = 1 AND
+    Job.PostedDate >= '{$post_date}' AND
+    Job.`ExpirationDate` >= '{$expiration_date}' AND
+    Job.ID NOT IN ({$excluded})  
+    ORDER BY Job.PostedDate DESC, Job.ID DESC;
+SQL;
+        $res = DB::query($sql);
+        foreach ($res as $record) {
+            $className = $record['ClassName'];
+            $list[] = new $className($record);
+        }
+        return $list;
+    }
+
+    public function getJobsByKeywordTypeAndSortedBy($keywords, $type_id, $sort_by)
+    {
+
+        $query = new QueryObject(new Job);
+        $now = new DateTime();
+        $six_months_ago = new DateTime();
+        $post_date = $six_months_ago->sub(new DateInterval('P6M'));
+
+        $query->addAndCondition(QueryCriteria::equal('IsActive', 1));
+        $query->addAndCondition(QueryCriteria::greaterOrEqual('PostedDate', $post_date->format('Y-m-d H:i:s')));
         $query->addAndCondition(QueryCriteria::greaterOrEqual('ExpirationDate', $now->format('Y-m-d H:i:s')));
 
-        if(!empty($keywords)){
+        if (!empty($keywords)) {
             $query->addAndCondition(
                 QueryCompoundCriteria::compoundOr(
                     [
@@ -78,14 +148,17 @@ final class SapphireJobRepository extends SapphireRepository implements IJobRepo
             );
         }
 
-        if(intval($type_id) > 0){
+        if (intval($type_id) > 0) {
             $query->addAndCondition(
                 QueryCriteria::equal('TypeID', $type_id)
             );
         }
 
-        if(!empty($sort_by)){
-            switch(strtolower($sort_by)){
+        if (!empty($sort_by)) {
+            switch (strtolower($sort_by)) {
+                case 'foundation_members':
+                    return $this->getJobsByFoundationCompanyMemberLevel();
+                    break;
                 case 'coa':
                     $query = $query->addOrder(QueryOrder::desc('IsCOANeeded'));
                     break;
@@ -105,7 +178,7 @@ final class SapphireJobRepository extends SapphireRepository implements IJobRepo
             }
         }
 
-        list($jobs,$size) = $this->getAll($query,0,PHP_INT_MAX);
+        list($jobs, $size) = $this->getAll($query, 0, PHP_INT_MAX);
         return new ArrayList($jobs);
     }
 } 

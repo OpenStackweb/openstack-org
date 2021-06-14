@@ -63,7 +63,12 @@ final class JobHolder_Controller extends Page_Controller {
 	function rss() {
         $request    = Controller::curr()->getRequest();
         $foundation = ($request->requestVar('foundation'));
-        $jobs = $this->repository->getDateSortedJobs($foundation);
+        $jobs = $this->repository->getJobsByKeywordTypeAndSortedBy
+        (
+            "",
+            0,
+            $foundation ? "foundation": ""
+        );
 		$rss = new RSSFeed($jobs, $this->Link(), "OpenStack Jobs Feed");
 		$rss->outputToBrowser();
 	}
@@ -72,7 +77,12 @@ final class JobHolder_Controller extends Page_Controller {
         $output     = '';
         $request    = Controller::curr()->getRequest();
         $foundation = ($request->requestVar('foundation'));
-        $jobs       = $this->repository->getDateSortedJobs($foundation);
+        $jobs       = $this->repository->getJobsByKeywordTypeAndSortedBy
+        (
+            "",
+            0,
+            $foundation ? "foundation": "foundation_members"
+        );
 
         foreach ($jobs as $job) {
                 $output .= $job->renderWith('JobHolder_job',

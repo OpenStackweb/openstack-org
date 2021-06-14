@@ -44,6 +44,7 @@
 				</button>
 				<ul class="dropdown-menu" id="ddl-menu-sort" aria-labelledby="dropdownMenu1">
                     <li><a data-sort-by="" data-target="#">Sort Results By</a></li>
+					<li><a data-sort-by="foundation_members" data-target="#">Foundation Members</a></li>
 					<li><a data-sort-by="coa" data-target="#">Is COA Needed</a></li>
                     <li><a data-sort-by="foundation" data-target="#">Is Foundation Job</a></li>
 					<li><a data-sort-by="company" data-target="#">Company</a></li>

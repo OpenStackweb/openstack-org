@@ -15,11 +15,11 @@
             </div>
         </div>
         <div class="col-sm-2 col-xs-6 img-container">
-            <% if IsCOANeeded %>
-                <img id="coa" src="{$Top.CloudUrl("images/coa/coa-badge.svg")}">
-            <% end_if %>
             <% if hasCompanyMemberLevel %>
                 <img class="company_member_level $CompanyMemberLevel" id="company_member_level$CompanyID">
+            <% end_if %>
+               <% if IsCOANeeded %>
+                <img id="coa" src="{$Top.CloudUrl("images/coa/coa-badge.svg")}">
             <% end_if %>
         </div>
     </div>
@@ -31,7 +31,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-11 col-xs-9">
+        <div class="col-sm-10 col-xs-9">
             <div class="jobBasics-2">
                     <div class="glyphicon glyphicon-briefcase"></div>
                         $CompanyName
@@ -41,7 +41,7 @@
                     <% end_if %>     
             </div>
         </div>
-        <div class="col-sm-1 col-xs-3">
+        <div class="col-sm-2 col-xs-3">
             <a href="#" class="jobExpand" data-id="{$ID}" >
                 <h5> More info </h5>
             </a>

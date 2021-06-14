@@ -4,7 +4,7 @@
 */
 /* @group jobs */
 
-$screen-xs-min:760px;
+$screen-xs-min:770px;
 
 #jobs h1 {
   margin-top: 0;
@@ -331,18 +331,15 @@ p.type {
     padding:0;
     margin: 0;
     position: relative;
+    padding-right: 10px;
   }
   img.company_member_level{
     box-sizing: border-box;
     width: 142px;
     height: 53px;
     float: right;
-    position: absolute;
-    left:40px;
-    top:60px;
     /* XS Small devices (Phones, 600px and up) */
     @media (min-width: 320px) and (max-width: $screen-xs-min) {
-      top:0px;
       width: 115px;
       height: 44px;
     }
