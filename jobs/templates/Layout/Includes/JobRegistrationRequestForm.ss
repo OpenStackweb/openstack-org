@@ -1,6 +1,10 @@
-<p>Jobs will only be accepted if they are related to services, support, or development for OpenStack. Please be
-    specific in your posting about how the job relates to OpenStack. Expect a delay of up to 72 hours before your
-    job is posted as we will be moderating all posts.</p>
+<p>
+Jobs will only be accepted if they are related to services, support, or development for Open Infrastructure. Please be
+specific in your posting about how the job relates to Open Infrastructure. Expect a delay of up to 72 hours before
+your job is posted as we will be moderating all posts.
+Member companies will receive higher placement on the jobs board. Not a member? <a href="https://openinfra.dev/join">Join us</a>.
+</p>
+
 <% if IncludeFormTag %>
     <form $FormAttributes>
 <% end_if %>
