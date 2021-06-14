@@ -21,15 +21,10 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-11 col-xs-9">
+        <div class="col-sm-12 col-xs-12 col-lg-12">
             <div class="detail_title">
                 <a rel="nofollow" target="_blank" href="/community/jobs/view/$ID/$Slug" class="jobTitle job_title_hold">$Title</a>
             </div>
-        </div>
-        <div class="col-sm-1 col-xs-3">
-            <% if IsCOANeeded %>
-                <img id="coa" src="{$Top.CloudUrl("images/coa/coa-badge.svg")}">
-            <% end_if %>
         </div>
     </div>
     <div class="row">
@@ -40,8 +35,13 @@
                     <div class="glyphicon glyphicon-map-marker"></div>
                     <% if FormattedLocation %>
                         $FormattedLocation
-                    <% end_if %>     
-            </div>
+                    <% end_if %>
+                    <% if IsCOANeeded %>
+                        &nbsp;
+                        <div class="glyphicon glyphicon-ok"></div>
+                        COA Required
+                    <% end_if %>
+           </div>
         </div>
         <div class="col-lg-1 col-sm-1 col-xs-3">
             <a href="#" class="jobExpand" data-id="{$ID}" >
