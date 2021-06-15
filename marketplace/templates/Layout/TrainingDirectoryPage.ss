@@ -48,8 +48,7 @@
         <% end_if %>
         <div class="add-your-course">
             <p>
-                Does your company offer products or services that belong in the marketplace? email us for details
-                <a href="mailto:ecosystem@openstack.org">Email us for details</a>
+                Does your company offer products or services that belong in the marketplace? <a href="mailto:ecosystem@openstack.org">Email us for details</a> or <a href="https://calendar.x.ai/jimmymcarthur-720/default">put some time on our calendar</a> to meet remotely.
             </p>
         </div>
     </div>
