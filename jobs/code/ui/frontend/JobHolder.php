@@ -116,6 +116,7 @@ final class JobHolder_Controller extends Page_Controller {
     }
 
     function JobDetailsPage() {
+        Requirements::block('jobs/js/jobs.js');
         $job_id = intval($this->request->param('JOB_ID'));
         $job    = Job::get()->byID($job_id);
 

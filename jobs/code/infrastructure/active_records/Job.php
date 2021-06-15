@@ -86,18 +86,21 @@ final class Job	extends DataObject implements IJob {
 	/**
 	 * @return string
 	 */
-	public function getFormattedLocation(){
+	public function getFormattedLocation($all = 0){
 		if(!empty($this->LocationType)){
 			switch($this->LocationType){
                 case self::LocationTypeVarious:{
 					$res = '';
+					if($this->Locations()->count() > 1 && $all == 0){
+                        return "Multiple Locations";
+                    }
 					foreach($this->Locations() as $location){
 						$str_location = $location->city();
 						$state = $location->state();
 						if(!empty($state))
 							$str_location .= ', '.$state;
 						$str_location .= ', '.$location->country();
-						$res .= $str_location.'<BR>';
+						$res .= $str_location.' ';
 					}
 					return $res;
 				}
