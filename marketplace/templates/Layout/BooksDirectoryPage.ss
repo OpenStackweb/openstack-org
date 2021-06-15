@@ -12,7 +12,7 @@
         <% include MarketPlaceHelpLinks %>
         <div class="add-your-course">
             <p>
-                Have you written a technical publication about OpenStack? Find out what it takes to be listed here! <a href="mailto:ecosystem@openstack.org">Email us for details</a>.
+                Have you written a technical publication about OpenStack? Find out what it takes to be listed here! <a href="mailto:ecosystem@openstack.org">Email us for details</a> or <a href="https://calendar.x.ai/jimmymcarthur-720/default">put some time on our calendar</a> to meet remotely.
             </p>
         </div>
     </div>
