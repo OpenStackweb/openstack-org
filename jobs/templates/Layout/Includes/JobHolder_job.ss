@@ -15,7 +15,9 @@
         </div>
         <div class="col-sm-2 col-xs-6 col-lg-2 img-container">
             <% if hasCompanyMemberLevel %>
-                <img class="company_member_level $CompanyMemberLevel" id="company_member_level$CompanyID">
+                <img class="company_member_level $CompanyMemberLevel"
+                      id="company_member_level$CompanyID"
+                      src="$BadgeLogo">
             <% end_if %>
         </div>
     </div>
