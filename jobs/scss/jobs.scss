@@ -232,8 +232,8 @@ div.button3:hover h5 {
 }
 
 .detail_title {
-  margin-bottom: 25px;
-  margin-top: 20px;
+  padding-bottom: 25px;
+  padding-top: 20px;
   vertical-align: baseline;
 }
 
@@ -260,15 +260,25 @@ span.newBox h5 {
   display: inline-block;
 }
 
-.publishedDate:only-child {
-  padding-left: 0px;
-}
 
-.publishedDate {
-  display: inline-block;
-  color: black;
-  padding-left: 5px;
-  font-weight: bold;
+.date-container {
+  position: relative;
+
+  .publishedDate:only-child {
+    padding-left: 0px;
+    top: 0px;
+    position: relative;
+  }
+
+  .publishedDate {
+    position: absolute;
+    top:4px;
+    display: inline-block;
+    color: black;
+    padding-left: 5px;
+    margin-top: 0;
+    padding-top: 0px;
+  }
 }
 
 .cta-container{
@@ -323,10 +333,12 @@ p.type {
   padding-top: 10px;
   margin-bottom: 10px;
   border-color: #c5e2ea;
+  .label-danger{
+    font-weight: normal;
+  }
   .img-container{
     padding:0;
     margin: 0;
-    position: relative;
     padding-right: 10px;
   }
   img.company_member_level{
@@ -341,13 +353,16 @@ p.type {
     }
   }
   img.Platinum {
-    content: url("/jobs/img/OpenInfraFoundation-MemberLogo-RGB-Platinum.png");
+    background-image: url("/jobs/img/OpenInfraFoundation-MemberLogo-RGB-Platinum.png");
+    background-size: cover;
   }
   img.Silver {
     content: url("/jobs/img/OpenInfraFoundation-MemberLogo-RGB-Silver.png");
+    background-size: cover;
   }
   img.Gold {
-    content: url("/jobs/img/OpenInfraFoundation-MemberLogo-RGB-Gold.png");
+    background-image: url("/jobs/img/OpenInfraFoundation-MemberLogo-RGB-Gold.png");
+    background-size: cover;
   }
   img.None {
     display: none;

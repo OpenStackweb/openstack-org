@@ -1,6 +1,6 @@
 <div class="container jobPosting" id="{$ID}">
     <div class="row">
-        <div class="col-sm-12 col-xs-12">
+        <div class="col-sm-12 col-xs-12 date-container">
             <% if RecentJob %>
                 <span class="label label-danger">NEW</span>
             <% end_if %>
