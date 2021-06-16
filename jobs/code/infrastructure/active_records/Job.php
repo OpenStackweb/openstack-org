@@ -219,4 +219,16 @@ final class Job	extends DataObject implements IJob {
     {
         return $this->getField('IsCOANeeded');
     }
+
+    public function getBadgeLogo():string{
+        switch($this->getCompanyMemberLevel()){
+            case "Gold":
+            return "/jobs/img/OpenInfraFoundation-MemberLogo-RGB-Gold.png";
+            case "Silver":
+                return "/jobs/img/OpenInfraFoundation-MemberLogo-RGB-Silver.png";
+            case "Platinum":
+                return "/jobs/img/OpenInfraFoundation-MemberLogo-RGB-Platinum.png";
+        }
+        return "";
+    }
 }
