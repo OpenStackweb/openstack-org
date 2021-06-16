@@ -22,7 +22,7 @@
 <% with Job %>
 <div class="container jobPosting" id="{$ID}">
     <div class="row">
-        <div class="col-sm-12 col-xs-12">
+        <div class="col-sm-12 col-xs-12 date-container">
             <% if RecentJob %>
                 <span class="label label-danger">NEW</span>
             <% end_if %>
@@ -30,12 +30,12 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-10 col-xs-6 col-lg-10">
+        <div class="col-sm-10 col-xs-8 col-lg-10">
             <div class="detail_title">
                 <a rel="nofollow" target="_blank" href="/community/jobs/view/$ID/$Slug" class="jobTitle job_title_hold">$Title</a>
             </div>
         </div>
-        <div class="col-sm-2 col-xs-6 col-lg-2 img-container">
+        <div class="col-sm-2 col-xs-4 col-lg-2 img-container">
             <% if hasCompanyMemberLevel %>
                 <img class="company_member_level $CompanyMemberLevel" id="company_member_level$CompanyID">
             <% end_if %>
