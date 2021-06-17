@@ -292,7 +292,7 @@
             </div>
             <div class="col-md-4 col-sm-6 communicate-item">
                 <div class="communicate-item-title">
-                    IRC channels (on Freenode)
+                    IRC channels (on OFTC)
                 </div>
                 <div>
                     <a href="https://docs.openstack.org/contributors/common/irc.html" target="_blank">How to set up IRC</a><br>
