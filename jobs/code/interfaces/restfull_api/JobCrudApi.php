@@ -223,7 +223,7 @@ final class JobCrudApi extends AbstractRestfulJsonApi {
             $output  = '';
             $kw      = $request->getVar('kw');
             $type_id = $request->getVar('type_id');
-            $sort_by = !empty($request->getVar('sort_by'))? $request->getVar('sort_by') : 'posted';
+            $sort_by = !empty($request->getVar('sort_by'))? $request->getVar('sort_by') : 'foundation_members';
 
             $jobs    = $this->repository->getJobsByKeywordTypeAndSortedBy($kw, $type_id, $sort_by);
 
