@@ -34,10 +34,11 @@
     </p>
 	<h3 id="openstackpowered">OpenStack Powered</h3>
     <p>
-        There are three different trademark licensing programs which apply to products that contain the OpenStack software,
-        all under unified "OpenStack Powered" logo. Though the programs share a single logo, each of the licensing
-        programs have a unique list of technical requirements appropriate to their use case, which include required capabilities
-        validated by must-pass tests and designated sections of OpenStack software code.
+       There are three different trademark licensing programs with three add-on which apply to products that contain
+       the OpenStack software, all under unified "OpenStack Powered" logo. Though the programs share a single logo,
+       each of the licensing programs have a unique list of technical requirements appropriate to their use case,
+       which include required capabilities validated by must-pass tests and designated sections of OpenStack software
+       code. There are also three Add-on projects for OpenStack Powered Platform and Compute Logos.
     </p>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 communityBoxes">
@@ -96,24 +97,71 @@
                 <p>Object storage cloud or distribution</p>
             </div>
         </div>
+         <div class="col-lg-12 col-md-12 col-sm-12 communityBoxes">
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <h2>OpenStack Powered Platform with DNS</h2>
+            </div>
+            <div class="events col-lg-3 col-md-3 col-sm-3">
+                <p>Must include all designated sections and pass all capabilities tests for Designate Add-on</p>
+            </div>
+            <div class="partners col-lg-3 col-md-3 col-sm-3">
+                <p>Qualifying products may use the OpenStack Powered logo and use the word "OpenStack" in their product name</p>
+            </div>
+            <div class="members col-lg-3 col-md-3 col-sm-3 last">
+                <p>Public cloud or distribution</p>
+            </div>
+        </div>
+         <div class="col-lg-12 col-md-12 col-sm-12 communityBoxes">
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <h2>OpenStack Powered Platform with Orchestration</h2>
+            </div>
+            <div class="events col-lg-3 col-md-3 col-sm-3">
+                <p>Must include all designated sections and pass all capabilities tests for Heat Add-on</p>
+            </div>
+            <div class="partners col-lg-3 col-md-3 col-sm-3">
+                <p>Qualifying products may use the OpenStack Powered logo and use the word "OpenStack" in their product name</p>
+            </div>
+            <div class="members col-lg-3 col-md-3 col-sm-3 last">
+                <p>Public cloud or distribution</p>
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 communityBoxes">
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <h2>OpenStack Powered Platform with Shared File System</h2>
+            </div>
+            <div class="events col-lg-3 col-md-3 col-sm-3">
+                <p>Must include all designated sections and pass all capabilities tests for Manila Add-on</p>
+            </div>
+            <div class="partners col-lg-3 col-md-3 col-sm-3">
+                <p>Qualifying products may use the OpenStack Powered logo and use the word "OpenStack" in their product name</p>
+            </div>
+            <div class="members col-lg-3 col-md-3 col-sm-3 last">
+                <p>Public cloud or distribution</p>
+            </div>
+        </div>
     </div>
 
     <h4>Qualifying for the OpenStack Powered Marketing Programs</h4>
     <p>
-        OpenStack-based products containing a recent version of the software may qualify for one of the three OpenStack
-        Powered marketing programs, which consist of a logo and unique product naming rights.
+        OpenStack-based products containing a recent version of the software may qualify for one of the three
+        OpenStack Powered marketing programs with or without any or all three Add-on programs, which consist of a
+        logo and unique product naming rights.
     </p>
     <p>
         Products must comply with one of the two most recent guidelines approved by the Open Infrastructure Foundation Board of Directors.
         These versions are numbered based on the date when they were approved, such as "2020.06" for the version approved in June, 2020.
     </p>
     <p>
-        The two most recent versions approved by the board are 
-        <a title="2020.06 Interop Capabilities" href="https://opendev.org/openstack/interop/src/branch/master/2020.06.json" target="_blank">2020.06</a> 
-        and <a title="2019.11 Interop Capabilities" href="https://opendev.org/openstack/interop/src/branch/master/2019.11.json" target="_blank">2019.11</a>.
-         These two guidelines cover five OpenStack releases: Rocky, Stein, Train, Ussuri, and Victoria. The list of required capabilities 
-         (with must-pass tests) and designated code sections are published on git.openstack.org  and summarized below. Once a company verifies their 
-         products include the appropriate designated sections and submit API test results, they will be asked to sign the license agreements.
+         The two most recent versions approved by the board are <a title="2020.11 Interop Capabilities" href="https://opendev.org/osf/interop/src/branch/master/2020.11.json" target="_blank">2020.11</a> and
+         <a title="2020.06 Interop Capabilities" href="https://opendev.org/openstack/interop/src/branch/master/2020.06.json" target="_blank">2020.06</a>. These two guidelines cover five OpenStack releases: Stein,
+         Train, Ussuri, Victoria, and Wallaby. The list of required capabilities (with must-pass tests) and designated
+         code sections are published on <a href="http://git.openstack.org" target="_blank">git.openstack.org</a> and summarized below. Once a
+         company verifies their products include the appropriate designated sections and submit API test results, they
+         will be asked to sign the license agreements.
+        You'll note that the "Platform" program technical requirements are essentially the combination of "Compute" and
+        "Object Storage" requirements.
+        Any combination of the three Add-on programs can be included and offered for Platform and Compute Logo provided
+        that technical requirements for them are met.
     </p>
     <p>
         You'll note that the "Platform" program technical requirements are essentially the combination of "Compute" and "Object Storage" requirements.
@@ -144,7 +192,7 @@
     </p>
     <p>
         For more detailed instructions to run the tests, please consult
-        <a title="Procedure for Running Interop Tests" href="https://opendev.org/openstack/interop/src/branch/master/2016.08/procedure.rst">this document</a>.
+        <a title="Procedure for Running Interop Tests" href="https://opendev.org/osf/interop/src/branch/master/doc/source/process/procedure.rst">this document</a>.
         If you need help getting started, contact Chris Hoge, the Foundation's Interop Engineer, by emailing
         <a href="mailto:interop@openstack.org">interop@openstack.org</a>. The Foundation is looking for feedback from companies
         who are running tests in order to improve the testing process and shape policy in the future.
