@@ -98,7 +98,7 @@ class EventHolder_Controller extends Page_Controller {
 
 	function init() {
 	    parent::init();
-
+        Requirements::css("themes/openstack/css/live-banner.css");
         Requirements::css('events/css/events.css');
         Requirements::css('events/css/events.list.css');
         Requirements::set_force_js_to_bottom(true);

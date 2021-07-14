@@ -6,15 +6,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <a href="{$getBannerLink()}">
-                <div class="event-ad-lrg">
-                    <img src="{$Banner.URL}" alt="Don't miss The Summit">
-                </div>
-            </a>
-        </div>
-    </div>
+    <% include LiveBanner Type=Minimal %>
     <div class="row">
         <div id='upcoming-events-container' class="col-sm-6" style="min-height:500px">
             <div style="float:left;"><h2>Upcoming Events</h2></div>
