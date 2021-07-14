@@ -59,10 +59,10 @@ $screen-xs-min: 600px;
         /* XS Small devices (Phones, 600px and up) */
         @media (min-width: 320px) and (max-width: $screen-xs-min) {
             top: 0;
-            left: 0;
-            margin-left: 200px;
+            left: 74%;
+            margin-left: 0;
             display: block;
-            margin-right: auto;
+            margin-right: 0;
             width: 50%;
             height: 50%;
         }
