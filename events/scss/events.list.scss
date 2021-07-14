@@ -24,8 +24,24 @@ $screen-xs-min: 600px;
 
 }
 
-.banner{
+.banner {
+    .row{
+        width: 100%;
+    }
+
     min-height: 100px;
+    width: 100%;
+
+    @media (min-width: 320px) and (max-width: $screen-xs-min) {
+        padding: 2rem 1rem 2rem;
+    }
+    h2 {
+        margin-top: 28px;
+        @media (min-width: 320px) and (max-width: $screen-xs-min) {
+            width: 70%;
+        }
+    }
+
     h2, p {
         text-align: center;
         @media (max-width: 768px) {
@@ -43,10 +59,20 @@ $screen-xs-min: 600px;
         /* XS Small devices (Phones, 600px and up) */
         @media (min-width: 320px) and (max-width: $screen-xs-min) {
             top: 0;
-            left: 60%;
+            left: 0;
+            margin-left: 200px;
             display: block;
+            margin-right: auto;
             width: 50%;
             height: 50%;
+        }
+    }
+
+    .cta-container {
+        a {
+            @media (min-width: 320px) and (max-width: $screen-xs-min) {
+                margin-left: 0;
+            }
         }
     }
 }
