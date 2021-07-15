@@ -42,6 +42,7 @@
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/">Welcome! Start Here</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/tech-committee">OpenStack Technical Committee</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/speakers/">Speakers Bureau</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/members/">Community Members</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="http://wiki.openstack.org">OpenStack Wiki</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}coa/">Get Certified (COA)</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/jobs/">Jobs</a></li>
