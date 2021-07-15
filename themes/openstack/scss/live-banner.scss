@@ -9,7 +9,7 @@ $black: #222;
 $dark: #161616; // #0c0016
 $screen-xs-min: 600px;
 $screen-sm-min: 768px;
-$screen-md-min: 992px;
+$screen-md-min: 990px;
 $screen-lg-min: 1200px;
 
 .banner {
@@ -17,7 +17,6 @@ $screen-lg-min: 1200px;
   position: relative;
   background-color: $dark;
   color: $white;
-  margin-top: 4rem;
   padding: 2rem 4rem 3rem;
   align-items: center;
   column-gap: 20px;
@@ -27,17 +26,20 @@ $screen-lg-min: 1200px;
   width: 85%;
   margin: auto;
 
-  @media (max-width: 768px) {
+  @media (max-width: $screen-xs-min) {
     flex-direction: column;
     text-align: center;
   }
 
   .banner-logo {
-    max-width: 133px;
+    max-width: 100133px;
     max-height: 133px;
     height: 100%;
     width: 100%;
-    @media (max-width: $screen-md-min) {
+    min-height: 4em;
+    min-width: 4em;
+
+    @media (max-width: $screen-sm-min - 1) {
       display: none;
     }
   }
@@ -50,32 +52,14 @@ $screen-lg-min: 1200px;
     /* No media query since this is the default in Bootstrap */
 
     /* XS Small devices (Phones, 600px and up) */
-    @media (min-width: 320px) and (max-width: $screen-xs-min) {
-      top: 0%;
+    @media (min-width: 320px) and (max-width: $screen-sm-min - 1 ) {
+      top: 0;
       left: 70%;
       display: block;
       width: 30%;
       height: 30%;
     }
 
-    /* Small devices (tablets, 768px and up) */
-    @media (min-width: 601px) and (max-width: $screen-sm-min) {
-      top: -10%;
-      left: 60%;
-      display: block;
-      width: 45%;
-      height: 45%;
-    }
-
-    /* Medium devices (desktops, 992px and up) */
-    @media (min-width: 769px) and (max-width: $screen-md-min) {
-      top: -2%;
-      left: 83%;
-      float: right;
-      display: block;
-      max-width: 90px;
-      max-height: 90px;
-    }
     display: none;
   }
 
@@ -94,8 +78,9 @@ $screen-lg-min: 1200px;
 
   .cta-container {
     margin-top: 30%;
-    @media (max-width: $screen-md-min) {
-      margin-top: 0%;
+
+    @media (max-width: 768px ) {
+      margin-top: 0;
     }
 
     a {
@@ -156,6 +141,7 @@ $screen-lg-min: 1200px;
     left: 0;
     right: 0;
     width: 100%;
+
     @media (min-width: 320px) and (max-width: $screen-xs-min) {
       display: none;
     }
@@ -167,10 +153,11 @@ $screen-lg-min: 1200px;
     left: 0;
     right: 0;
     width: 100%;
+    display: none;
+
     @media (min-width: 320px) and (max-width: $screen-xs-min) {
       display: block;
     }
-    display: none;
   }
 
 }
