@@ -31,7 +31,7 @@
         <% include MarketPlaceHelpLinks %>
         <div class="add-your-course">
             <p>
-                Does your company offer consulting for OpenStack? Be listed here!<a href="mailto:ecosystem@openstack.org">Email us for details</a> or <a href="https://calendar.x.ai/jimmymcarthur-720/default">put some time on our calendar</a> to meet remotely.
+                Does your company offer consulting for OpenStack? Be listed here!<a href="mailto:ecosystem@openstack.org">Email us for details</a> or <a href="https://calendly.com/jimmy-mcarthur">put some time on our calendar</a> to meet remotely.
             </p>
         </div>
     </div>
