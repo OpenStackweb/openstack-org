@@ -99,21 +99,13 @@ class SurveysRestfulApi extends AbstractRestfulJsonApi
     {
         if (!Director::is_ajax()) return $this->forbiddenError();
 
-        $term       = Convert::raw2sql($request->getVar('term'));
-        $split_term = explode(' ', $term);
-
+        $term = Convert::raw2sql($request->getVar('term'));
         if(!Member::currentUser()) return $this->forbiddenError();
 
         $current_user_id = Member::currentUserID();
 
-        $full_name_condition = " FirstName LIKE '%{$term}%' OR Surname LIKE '%{$term}%' ";
-        if(count($split_term) == 2)
-        {
-            $full_name_condition = " (FirstName LIKE '%{$split_term[0]}%' OR Surname LIKE '%{$split_term[1]}%') ";
-        }
-
         $members = Member::get()
-            ->where("ID <> {$current_user_id} AND Email <> '' AND ( {$full_name_condition} )")
+            ->where(sprintf("ID <>  %1\$s AND Email <> '' AND ( UPPER(CONCAT(FirstName,' ', Surname)) LIKE '%%%2\$s%%' OR UPPER(Email) LIKE '%%%2\$s%%')", $current_user_id, strtoupper(trim($term))))
             ->sort
             (
                 array
