@@ -100,7 +100,7 @@
                         <% loop $Top.TrainingPartners.Sort(Order) %>
 
                             <div class="col-sm-2 col-xs-3 coa-partner-logo">
-                                <a href="#">
+                                <a href="/marketplace/training/{$URLSegment}/{$ID}">
                                     <img src="{$MediumLogoUrl}" alt="{$Name}">
                                 </a>
                             </div>
