@@ -169,8 +169,8 @@ a.user-story-square {
     z-index: 150;
     -webkit-transition: all 0.2s;
             transition: all 0.2s; }
-    a.user-story-square .user-story-overlay p {
-      color: white; }
+    a.user-story-square .user-story-overlay p * {
+      color: white !important; }
     a.user-story-square .user-story-overlay .user-story-more-btn {
       border: 1px solid white;
       color: white;
