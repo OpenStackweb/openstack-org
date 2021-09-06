@@ -31,6 +31,53 @@ $screen-lg-min: 1200px;
     text-align: center;
   }
 
+  .logo_ms{
+      width: 165px;
+      height: 42px;
+    @media (min-width: 854px) and (max-width: 954px ) {
+      width: 150px;
+    }
+    @media (min-width: 769px) and (max-width: 853px ) {
+      width: 125px;
+      height: 30px;
+    }
+    @media (max-width: 768px) {
+      width: 100px;
+      height: 30px;
+    }
+  }
+
+  .vl{
+      height: 73px;
+      margin-left: 20px;
+      margin-right: 20px;
+    @media (min-width: 854px) and (max-width: 954px ) {
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+    @media (max-width: 768px) {
+      height: 50px;
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+  }
+
+  .logo_membership {
+      width: 195px;
+      height: 71px;
+    @media (min-width: 854px) and (max-width: 954px ) {
+      width: 190px;
+    }
+    @media (min-width: 769px) and (max-width: 853px ) {
+      width: 125px;
+      height: 50px;
+    }
+    @media (max-width: 768px) {
+      width: 110px;
+      height: 50px;
+    }
+  }
+
   .banner-logo {
     max-width: 133px;
     max-height: 133px;
