@@ -30,7 +30,7 @@
 
 <!-- Page Content -->
 
-<% include LiveBanner %>
+<% include AnnouncementBanner %>
 <!-- /.news-anniversary -->
 
 <!-- Page Content -->
