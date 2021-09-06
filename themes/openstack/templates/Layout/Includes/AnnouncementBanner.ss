@@ -3,9 +3,9 @@
         <div class="col-md-9 col-xs-12 col-sm-9 col-lg-10">
             <div class="row">
                 <div class="col-md-10 col-sm-10">
-                    <img class="logo_ms" src="https://object-storage.public.mtl1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-images-prod/homepage/microsoft_logo.png"/>
+                    <img class="logo_ms" src="https://object-storage.public.mtl1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-images-prod/homepage/Microsoft_logo.svg"/>
                     <img class="vl" src="https://object-storage.public.mtl1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-images-prod/homepage/vl1.png"/>
-                    <img class="logo_membership" src="jobs/img/OpenInfraFoundation-MemberLogo-RGB-Silver.png"/>
+                    <img class="logo_membership" src="https://object-storage.public.mtl1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-images-prod/homepage/OpenInfraFoundation-MemberLogo-RGB-Platinum.svg"/>
                 </div>
             </div>
             <div class="row">
