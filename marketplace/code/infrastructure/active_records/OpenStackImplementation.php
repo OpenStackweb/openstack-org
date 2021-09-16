@@ -30,6 +30,7 @@ class OpenStackImplementation
         'Notes' => 'Text',
         'CompatibleWithDNS' => 'Boolean',
         'CompatibleWithOrchestration' => 'Boolean',
+        'CompatibleWithSharedFileSystem' => 'Boolean',
     ];
 
     // OpenStack Powered Program attributes
@@ -58,6 +59,7 @@ class OpenStackImplementation
         'CompatibleWithOrchestration' => false,
         'CompatibleWithFederatedIdentity' => false,
         'UsesIronic' => false,
+        'CompatibleWithSharedFileSystem' => false,
     ];
 
     /**
@@ -223,6 +225,22 @@ class OpenStackImplementation
     /***
      * @return bool
      */
+    public function isCompatibleWithSharedFileSystem()
+    {
+        return (bool)$this->getField('CompatibleWithSharedFileSystem');
+    }
+
+    /**
+     * @param bool $compatible
+     * @return void
+     */
+    public function setCompatibleWithSharedFileSystem($compatible)
+    {
+        $this->setField('CompatibleWithSharedFileSystem', $compatible);
+    }
+    /***
+     * @return bool
+     */
     public function getUsesIronic()
     {
         return (bool)$this->getField('UsesIronic');
@@ -247,7 +265,8 @@ class OpenStackImplementation
         $platform = $this->isCompatibleWithPlatform();
         $dns = $this->isCompatibleWithDNS();
         $orchestration = $this->isCompatibleWithOrchestration();
-        return ($storage || $compute || $platform || $dns || $orchestration) && !$this->isOpenStackPoweredExpired();
+        $sharedFS = $this->isCompatibleWithSharedFileSystem();
+        return ($storage || $compute || $platform || $dns || $orchestration || $sharedFS) && !$this->isOpenStackPoweredExpired();
     }
 
     /**
@@ -289,6 +308,11 @@ class OpenStackImplementation
             if(!empty($label))
                 $label .= ', ';
             $label .= 'Orchestration';
+        }
+        if ($this->isCompatibleWithSharedFileSystem()) {
+            if(!empty($label))
+                $label .= ', ';
+            $label .= 'Shared File System';
         }
         return $label;
     }
@@ -379,6 +403,9 @@ class OpenStackImplementation
         else if ($this->isCompatibleWithOrchestration()) {
             $program_type = 'OpenStack Powered Orchestration';
         }
+        else if ($this->isCompatibleWithSharedFileSystem()) {
+            $program_type = 'OpenStack Powered Shared File System';
+        }
         return $this->getProgramVersion()->getCapabilitiesByProgramType($program_type);
     }
 
@@ -397,6 +424,9 @@ class OpenStackImplementation
         }
         else if ($this->isCompatibleWithOrchestration()) {
             $program_type = 'OpenStack Powered Orchestration';
+        }
+        else if ($this->isCompatibleWithSharedFileSystem()) {
+            $program_type = 'OpenStack Powered Shared File System';
         }
 
         return $this->getProgramVersion()->getDesignatedSectionsByProgramType($program_type);

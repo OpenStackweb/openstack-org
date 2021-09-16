@@ -43,6 +43,11 @@
             <input type="checkbox" id="required_for_orchestration" <% if $Product.CompatibleWithOrchestration %>checked<% end_if %> name="required_for_orchestration"> Required for Orchestration
         </label>
     </div>
+     <div class="checkbox">
+        <label>
+            <input type="checkbox" id="required_for_shared_file_system" <% if $Product.CompatibleWithSharedFileSystem %>checked<% end_if %> name="required_for_shared_file_system"> Required for Shared File System
+        </label>
+    </div>
     <div class="form-group">
         <label for="expiry_date">Expiry Date</label>
         <input type="text" class="form-control" value="{$Product.ExpiryDate}" id="expiry_date" name="expiry_date">

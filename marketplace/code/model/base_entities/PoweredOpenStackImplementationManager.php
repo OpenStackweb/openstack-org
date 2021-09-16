@@ -66,6 +66,9 @@ final class PoweredOpenStackImplementationManager implements IPoweredOpenStackIm
             if(isset($data['required_for_storage']))
                 $service->CompatibleWithStorage = boolval($data['required_for_storage']);
 
+            if(isset($data['required_for_shared_file_system']))
+                $service->CompatibleWithSharedFileSystem = boolval($data['required_for_shared_file_system']);
+
             if(isset($data['federated_identity']))
                 $service->CompatibleWithFederatedIdentity = boolval($data['federated_identity']);
 
