@@ -9,31 +9,28 @@
                         </div>
                     </div>
                     <h4>Open Infrastructure Summit</h4>
-                    <p><strong>Shanghai, China</strong></p>
-                    <p>Nov 4-6, 2019</p>
+                    <p><strong>Virtual Event</strong></p>
+                    <p>Oct 19-23, 2020</p>
                     <p>
-                        <a class="btn register-btn-lrg" href="/videos/summits/shanghai-2019">
-                            See Highlights <i class="fa fa-arrow-right"></i>
+                        <a class="btn register-btn-lrg" href="https://superuser.openstack.org/articles/virtual-open-infrastructure-summit-recap/" target="_blank">
+                            Learn More
+                            <i class="fa fa-arrow-right"></i>
                         </a>
+
                     </p>
+
                 </div>
             </div>
             <div class="video-container second col-md-4 col-sm-12 col-xs-12">
                 <div class="item">
                     <div class="video">
-                        <div class="triangle">
-                            <p>Complete!<p>
-                        </div>
-                        <a href="https://www.flickr.com/photos/sgerner/22636377307" target="_blank" class="photo-credit" title="Steven Gerner">
-                            <i class="fa fa-info-circle"></i>
-                        </a>
                     </div>
-                    <h4>Virtual OpenDev</h4>
+                    <h4>OpenInfra Live: Keynotes</h4>
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>
                     <p>
-                        <a class="btn register-btn-lrg" href="https://superuser.openstack.org/articles/tag/virtual-opendev/">
-                            See Highlights <i class="fa fa-arrow-right"></i>
+                        <a class="btn register-btn-lrg" href="https://openinfra.dev/live/keynotes">
+                            Learn More <i class="fa fa-arrow-right"></i>
                         </a>
                     </p>
 
@@ -42,16 +39,13 @@
             <div class="video-container last col-md-4 col-sm-12 col-xs-12">
                 <div class="item">
                     <div class="video">
-                        <div class="triangle">
-                            <p>Complete!<p>
-                        </div>
                     </div>
-                    <h4>Open Infrastructure Summit</h4>
-                    <p><strong>Virtual Event</strong></p>
-                    <p>Oct 19-23, 2020</p>
+                    <h4>OpenInfra Summit Berlin</h4>
+                    <p><strong>Berlin Congress Center, Germany</strong></p>
+                    <p>June 7-9, 2022</p>
                     <p>
-                        <a class="btn register-btn-lrg" href="https://superuser.openstack.org/articles/virtual-open-infrastructure-summit-recap/" target="_blank">
-                            See Highlights 
+                        <a class="btn register-btn-lrg" href="https://openinfra.dev/summit" target="_blank">
+                            Learn More
                             <i class="fa fa-arrow-right"></i>
                         </a>
 

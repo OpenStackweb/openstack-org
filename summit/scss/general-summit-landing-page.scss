@@ -1725,15 +1725,15 @@ a.register-btn-lrg, .register-btn-lrg {
 }
 
 .all-summit .summits-wrap .video-container.first .video {
-    background: url(../images/home/shangai.jpg) center top no-repeat;
+    background: url('#{$assets_images_base_url}/summits/Summit-Image-2160x1080-1.jpg') right top no-repeat;
 }
 
 .all-summit .summits-wrap .video-container.second .video {
-    background: url(../images/vancouver/vancouver-wide.jpg) center top no-repeat;
+    background: url('#{$assets_images_base_url}/summits/OI-Live.svg') center top no-repeat;
 }
 
 .all-summit .summits-wrap .video-container.last .video {
-    background: url(https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/summits/Summit-Image-2160x1080-1.jpg) right top no-repeat;
+    background: url('#{$assets_images_base_url}/summits/berlin2022.jpg') right top no-repeat;
 }
 
 .all-summit .summits-wrap .timeline h3 {
