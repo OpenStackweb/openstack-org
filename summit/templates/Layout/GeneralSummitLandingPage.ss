@@ -53,8 +53,6 @@
 
                 </div>
             </div>
-
-
         </div>
     </div>
 </div>
@@ -136,17 +134,6 @@
     </div>
 </div>
 
-<div class="summits-wrap odd">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 timeline">
-                <h3>Timeline</h3>
-                <span></span>
-            </div>
-
-        </div>
-    </div>
-</div>
 
 
 <div class="diverse what-to-expect">
