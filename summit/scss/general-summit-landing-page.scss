@@ -1734,7 +1734,8 @@ a.register-btn-lrg, .register-btn-lrg {
 }
 
 .all-summit .summits-wrap .video-container.second .video {
-    background: url('#{$assets_images_base_url}/summits/OI-Live.svg') center top no-repeat;
+    background: url('#{$assets_images_base_url}/summits/OI-Live.svg') center no-repeat;
+    background-size: cover;
 }
 
 .all-summit .summits-wrap .video-container.last .video {
