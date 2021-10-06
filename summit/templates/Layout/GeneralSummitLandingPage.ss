@@ -13,7 +13,7 @@
                     <p>Oct 19-23, 2020</p>
                     <p>
                         <a class="btn register-btn-lrg" href="https://superuser.openstack.org/articles/virtual-open-infrastructure-summit-recap/" target="_blank">
-                            Learn More
+                            See Highlights
                             <i class="fa fa-arrow-right"></i>
                         </a>
 
@@ -26,8 +26,8 @@
                     <div class="video">
                     </div>
                     <h4>OpenInfra Live: Keynotes</h4>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
+                    <p><strong>Virtual Event</strong></p>
+                    <p>Nov 17-18, 2021</p>
                     <p>
                         <a class="btn register-btn-lrg" href="https://openinfra.dev/live/keynotes">
                             Learn More <i class="fa fa-arrow-right"></i>
@@ -396,7 +396,7 @@
                     more.
                 </p>
                 <p style="text-align: center;">
-                    <a class="btn register-btn-lrg" href="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/summits/Virtual-Summit-Sponsorship-One-Pager-final.pdf" target="_blank">View the Prospectus <i class="fa fa-arrow-right"></i></a>
+                    <a class="btn register-btn-lrg" href="mailto:events@openinfra.dev" target="_blank">Learn More <i class="fa fa-arrow-right"></i></a>
                 </p>
             </div>
         </div>

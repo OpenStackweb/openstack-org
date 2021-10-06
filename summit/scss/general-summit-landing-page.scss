@@ -957,7 +957,12 @@ footer {
     margin-left: 0.5em;
 }
 
-
+.sponsor{
+    padding-bottom: 15%;
+    @media all and (max-width: 600px) {
+        padding-bottom: 30%;
+    }
+}
 
 .diverse {
     background-color: #00468b;
