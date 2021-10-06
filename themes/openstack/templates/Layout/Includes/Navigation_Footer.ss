@@ -54,7 +54,7 @@
                     </div>
                 </form> -->
                 <p class="fine-print">
-                    The OpenStack project is provided under the Apache 2.0 license. The project is supported by the <a href="https://openinfra.dev">Open Infrastructure Foundation (OpenInfra Foundation)</a>. Openstack.org is powered by <a href="https://vexxhost.com" target="_blank">VEXXHOST</a>.
+                    The OpenStack project is provided under the Apache 2.0 license. The project is supported by the <a href="https://openinfra.dev">OpenInfra Foundation</a>. openstack.org is powered by <a href="https://vexxhost.com" target="_blank">VEXXHOST</a>.
                 </p>
             </div>
         </div>
