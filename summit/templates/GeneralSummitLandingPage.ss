@@ -58,7 +58,6 @@
 
     <% include Quantcast %>
     <% include TwitterUniversalWebsiteTagCode %>
-
     <div id="orderModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
