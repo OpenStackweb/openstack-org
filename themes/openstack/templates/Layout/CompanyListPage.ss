@@ -1,7 +1,7 @@
 		<div class="row">
 			<div class="col-sm-10 col-sm-push-1">
-				<h1>Companies Supporting The Open Infrastructure Foundation</h1>
-				<p class="center">The Open Infrastructure Foundation would not exist without the support of the Platinum, Gold, and Silver Sponsors listed below.<br>Learn more about <a href="/join/#sponsor">how your company can help</a>.</p>
+				<h1>Organizations Supporting The OpenInfra Foundation</h1>
+				<p class="center">The Open Infrastructure Foundation would not exist without the support of the Platinum, Gold, and Silver Sponsors listed below.<br>Learn more about <a href="https://openinfra.dev/join/members">how your company can help</a>.</p>
 			</div>
 		</div>
 		
@@ -12,7 +12,7 @@
 				<hr/>
 				<h2>Platinum Members</h2>
 				<p>
-				Open Infrastructure Foundation Platinum Members provide a significant portion of the funding to achieve the Foundation's mission of protecting, empowering and promoting the OpenStack community and software. Each Platinum Member's company strategy aligns with the OpenStack mission and is responsible for committing full-time resources toward the project.  There are eight Platinum Members at any given time, each of which holds a seat on the Board of Directors. Thank you to the following Platinum Members who are committed to OpenStack's success.
+				Open Infrastructure Foundation Platinum Members provide a significant portion of the funding to achieve the Foundation's mission of protecting, empowering and promoting the Open Infrastructure community and open source software projects. Each Platinum Member's company strategy aligns with the OpenInfra Foundation mission and is responsible for committing full-time resources toward the project. Thank you to the following Platinum Members who are committed to OpenStack's success. <a href="https://openinfra.dev/join/members">Learn more about becoming a member</a>.
 				</p>
 			</div>
 		</div>
@@ -36,7 +36,7 @@
 					<hr/>
 					<h2>Gold Members</h2>
 					<p>
-					Open Infrastructure Foundation Gold Members provide funding and pledge strategic alignment to the OpenStack mission. There can be up to twenty-four Gold Members at any given time, subject to board approval. If your organization is highly involved with OpenStack and interested in becoming a Gold Member, read more about <a href="/join">joining the Foundation</a>. Thank you to the following Gold Members who are committed to OpenStack's success.
+					Open Infrastructure Foundation Gold Members provide funding and pledge strategic alignment to the OpenInfra Foundation mission. There can be up to twenty-four Gold Members at any given time, subject to board approval. If your organization is highly involved with the Open Infrastructure community and interested in becoming a Gold Member, read more about joining the Foundation. Thank you to the following Gold Members who are critical to OpenStack's success. <a href="https://openinfra.dev/join/members">Learn more about becoming a member</a>.
 					</p>
 				</div>
 			</div>
@@ -90,7 +90,7 @@
 					<hr/>
 					<h2>Silver Sponsors</h2>
 					<p>
-					Silver Sponsors provide additional funding to support the Foundation's mission of protecting, empowering and promoting OpenStack. If you are interested in becoming a corporate sponsor, read more about <a href="/join">supporting the Foundation</a>. Thank you to the following corporate sponsors for supporting the Open Infrastructure Foundation.
+					Open Infrastructure Foundation Silver Members provide funding and pledge strategic alignment to the OpenInfra Foundation mission. If your organization is highly involved with the Open Infrastructure community and interested in becoming a Silver Member, read more about joining the Foundation. Thank you to the following Silver Members who are critical to OpenStack's success. <a href="https://openinfra.dev/join/members">Learn more about becoming a member</a>.
 					</p>
 				</div>
 			</div>
