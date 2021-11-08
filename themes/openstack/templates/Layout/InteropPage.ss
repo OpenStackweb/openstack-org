@@ -193,7 +193,7 @@
     <p>
         For more detailed instructions to run the tests, please consult
         <a title="Procedure for Running Interop Tests" href="https://opendev.org/osf/interop/src/branch/master/doc/source/process/procedure.rst">this document</a>.
-        If you need help getting started, contact Chris Hoge, the Foundation's Interop Engineer, by emailing
+        If you need help getting started, contact the OpenInfra Foundation by emailing
         <a href="mailto:interop@openstack.org">interop@openstack.org</a>. The Foundation is looking for feedback from companies
         who are running tests in order to improve the testing process and shape policy in the future.
     </p>
