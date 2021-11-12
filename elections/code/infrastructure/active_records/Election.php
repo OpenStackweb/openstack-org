@@ -25,6 +25,12 @@ final class Election extends DataObject implements IElection {
         'ElectionsClose'        => 'SS_Datetime', // The day they close
         // @see http://php.net/manual/en/timezones.php
         'TimeZoneIdentifier'    => 'VarChar(255)',
+        // labels
+        'CandidateApplicationFormBioLabel'                     => 'Text',
+        'CandidateApplicationFormRelationshipToOpenStackLabel' => 'Text',
+        'CandidateApplicationFormExperienceLabel'              => 'Text',
+        'CandidateApplicationFormBoardsRoleLabel'              => 'Text',
+        'CandidateApplicationFormTopPriorityLabel'             => 'Text',
     ];
 
     static $has_one = [
@@ -65,6 +71,35 @@ final class Election extends DataObject implements IElection {
 		return new DateTime($this->getField('ElectionsClose'));
 	}
 
+    public function getCandidateApplicationFormBioLabel(){
+        $res = $this->getField("CandidateApplicationFormBioLabel");
+        if(empty($res)) $res = "Provide Brief Biography of Yourself";
+        return $res;
+    }
+
+    public function getCandidateApplicationFormRelationshipToOpenStackLabel(){
+        $res = $this->getField("CandidateApplicationFormRelationshipToOpenStackLabel");
+        if(empty($res)) $res = "What is your relationship to OpenStack, and why is its success important to you? What would you say is your biggest contribution to OpenStack's success to date?";
+        return $res;
+    }
+
+    public function getCandidateApplicationFormExperienceLabel(){
+        $res = $this->getField("CandidateApplicationFormExperienceLabel");
+        if(empty($res)) $res = "Describe your experience with other non profits or serving as a board member. How does your experience prepare you for the role of a board member?";
+        return $res;
+    }
+
+    public function getCandidateApplicationFormBoardsRoleLabel(){
+        $res = $this->getField("CandidateApplicationFormBoardsRoleLabel");
+        if(empty($res)) $res = "What do you see as the Board's role in OpenStack's success?";
+        return $res;
+    }
+
+    public function getCandidateApplicationFormTopPriorityLabel(){
+        $res = $this->getField("CandidateApplicationFormTopPriorityLabel");
+        if(empty($res)) $res = "What do you think the top priority of the Board should be over the next year?";
+        return $res;
+    }
 
     /**
      * @return string
@@ -120,6 +155,13 @@ final class Election extends DataObject implements IElection {
         $fields->add($rootTab = new TabSet("Root", $tabMain = new Tab('Main')));
 
         $fields->addFieldToTab('Root.Main', new TextField('Name', 'Name'));
+
+        // CandidateApplicationForm Labels
+        $fields->addFieldToTab('Root.CandidateApplicationForm', new TextareaField("CandidateApplicationFormBioLabel","Bio Label"));
+        $fields->addFieldToTab('Root.CandidateApplicationForm', new TextareaField("CandidateApplicationFormRelationshipToOpenStackLabel","Relationship To OpenStack Label"));
+        $fields->addFieldToTab('Root.CandidateApplicationForm', new TextareaField("CandidateApplicationFormExperienceLabel","Experience Label"));
+        $fields->addFieldToTab('Root.CandidateApplicationForm', new TextareaField("CandidateApplicationFormBoardsRoleLabel","Boards Role Label"));
+        $fields->addFieldToTab('Root.CandidateApplicationForm', new TextareaField("CandidateApplicationFormTopPriorityLabel","Top Priority Label"));
 
         // Dates
 
