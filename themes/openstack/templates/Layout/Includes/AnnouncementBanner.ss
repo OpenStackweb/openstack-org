@@ -3,7 +3,7 @@
         <div class="col-md-9 col-xs-12 col-sm-9 col-lg-10">
             <div class="row">
                 <div class="col-md-10 col-sm-10">
-                    <img class="logo_ms" src="https://object-storage.public.mtl1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-images-prod/homepage/Microsoft_logo.svg"/>
+                    <img style="width:200px" src="/themes/openstack/home_images/Hero/oi-live-keynotes-logo-web-dark.svg"/>
                 </div>
             </div>
             <div class="row">
