@@ -3,12 +3,13 @@
         <div class="col-md-9 col-xs-12 col-sm-9 col-lg-10">
             <div class="row">
                 <div class="col-md-10 col-sm-10">
-                    <img style="width:200px" src="/themes/openstack/home_images/Hero/oi-live-keynotes-logo-web-dark.svg"/>
+                    <img style="height:120px" src="/themes/openstack/home_images/Hero/oi-live-keynotes-logo-web-dark.svg"/>
+                    <h2>OpenInfra Live: Kenyotes</h2>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-10 col-sm-10">
-                    <p style="padding-top:15px;">OpenInfra Live: Keynotes: Exclusive Announcements. Live Demos. OpenStack + Kubernetes. Hybrid Cloud Economics.</p>
+                    <p style="padding-top:15px;">Exclusive Announcements. Live Demos. OpenStack + Kubernetes. Hybrid Cloud Economics.</p>
                 </div>
             </div>
         </div>
