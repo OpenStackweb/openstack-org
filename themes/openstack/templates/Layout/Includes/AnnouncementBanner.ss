@@ -6,7 +6,7 @@
                     <img style="height:120px" src="/themes/openstack/home_images/Hero/oi-live-keynotes-logo-web-dark.svg">
                 </div>
                 <div class="col-md-9 col-sm-9">
-                    <h2>OpenInfra Live: Kenyotes</h2>
+                    <h2>OpenInfra Live: Keynotes</h2>
                     <p style="padding-top:15px;">Exclusive Announcements. Live Demos. OpenStack + Kubernetes. Hybrid Cloud Economics.</p>
                 </div>
             </div>
