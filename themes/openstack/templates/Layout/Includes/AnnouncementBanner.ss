@@ -2,19 +2,19 @@
     <div class="row">
         <div class="col-md-9 col-xs-12 col-sm-9 col-lg-10">
             <div class="row">
-                <div class="col-md-3 col-sm-3">
+                <div class="col-md-2 col-sm-2">
                     <img style="height:120px" src="/themes/openstack/home_images/Hero/oi-live-keynotes-logo-web-dark.svg">
                 </div>
-                <div class="col-md-9 col-sm-9">
+                <div class="col-md-10 col-sm-10">
                     <h2>OpenInfra Live: Keynotes</h2>
-                    <p style="padding-top:15px;">Exclusive Announcements. Live Demos. OpenStack + Kubernetes. Hybrid Cloud Economics.</p>
+                    <p style="padding-top:15px;">Rewatch the global event! Exclusive Announcements. Live Demos. OpenStack + Kubernetes. Hybrid Cloud Economics.</p>
                 </div>
             </div>
         </div>
         <div class="col-md-3 col-xs-12 col-sm-3 col-lg-2">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-lg-12 cta-container">
-                    <a href="https://youtu.be/e-SMtkZu3co">Watch Now
+                    <a href="https://youtube.com/playlist?list=PLKqaoAnDyfgqUEj-Yb36T51uAOKYD08Eb">Watch Here
                         <svg width="21" height="11" viewBox="0 0 21 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15.4828 1L19.6207 5.48M19.6207 5.48L15.4828 9.96M19.6207 5.48L1 5.48" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>

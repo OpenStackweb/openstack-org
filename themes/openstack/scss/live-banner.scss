@@ -117,9 +117,9 @@ $screen-lg-min: 1200px;
     vertical-align: middle;
     margin-bottom: 10px;
     @media screen and (max-width: 990px) {
-      width: 60%;
       font-size: 22px;
       line-height: 28px;
+      text-align: center;
     }
   }
 
@@ -172,7 +172,7 @@ $screen-lg-min: 1200px;
     @media (max-width: $screen-md-min) {
       padding-top: 50pt;
       padding-bottom: 25pt;
-      text-align: left;
+      text-align: center;
     }
     /* XS Small devices (Phones, 600px and up) */
     @media (min-width: 320px) and (max-width: $screen-xs-min) {
