@@ -2,10 +2,10 @@
     <div class="row">
         <div class="col-md-9 col-xs-12 col-sm-9 col-lg-10">
             <div class="row">
-                <div class="col-md-3 col-sm-3">
+                <div class="col-md-2 col-sm-2">
                     <img style="height:120px" src="/themes/openstack/home_images/Hero/oi-live-keynotes-logo-web-dark.svg">
                 </div>
-                <div class="col-md-9 col-sm-9">
+                <div class="col-md-10 col-sm-10">
                     <h2>OpenInfra Live: Keynotes</h2>
                     <p style="padding-top:15px;">Rewatch the global event! Exclusive Announcements. Live Demos. OpenStack + Kubernetes. Hybrid Cloud Economics.</p>
                 </div>
