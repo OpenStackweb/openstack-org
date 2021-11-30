@@ -161,6 +161,8 @@ class SangriaOpenStackPoweredProductsApp extends BaseReport {
             case 'required_for_compute':
             case 'required_for_shared_file_system':
                 return (<input type="checkbox" defaultChecked={item[col.name]} onChange={(e) => this.onChangeCheckBoxField(e, item, col.name)}/>);
+            case 'required_for_platform':
+                return (<input type="checkbox" defaultChecked={item[col.name]} onChange={(e) => this.onChangeCheckBoxField(e, item, col.name)}/>);
             case 'expiry_date':
                 return (<DatePicker className="expiry-date-selector form-control"
                                     defaultValue={item.expiry_date}

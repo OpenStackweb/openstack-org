@@ -28,6 +28,7 @@ jQuery(document).ready(function($) {
             required_for_orchestration : $('#required_for_required_for_orchestration').is(':checked'),
             required_for_storage : $('#required_for_storage').is(':checked'),
             required_for_shared_file_system : $('#required_for_shared_file_system').is(':checked'),
+            required_for_platform : $('#required_for_platform').is(':checked'),
             federated_identity   : $('#federated_identity').is(':checked'),
             uses_ironic          : $('#uses_ironic').is(':checked'),
             expiry_date          : $('#expiry_date').val(),

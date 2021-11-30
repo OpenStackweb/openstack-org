@@ -31,6 +31,7 @@ class OpenStackImplementation
         'CompatibleWithDNS' => 'Boolean',
         'CompatibleWithOrchestration' => 'Boolean',
         'CompatibleWithSharedFileSystem' => 'Boolean',
+        'CompatibleWithPlatform' => 'Boolean',
     ];
 
     // OpenStack Powered Program attributes
@@ -60,6 +61,7 @@ class OpenStackImplementation
         'CompatibleWithFederatedIdentity' => false,
         'UsesIronic' => false,
         'CompatibleWithSharedFileSystem' => false,
+        'CompatibleWithPlatform' => false
     ];
 
     /**
@@ -95,7 +97,6 @@ class OpenStackImplementation
     {
         AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'Guests')->add($guest);
     }
-
 
     /**
      * @return array|IOpenStackImplementationApiCoverage[]
@@ -183,7 +184,7 @@ class OpenStackImplementation
     /***
      * @return bool
      */
-    public function isCompatibleWithOrchestration()
+    public function isCompatibleWithOrchestration():bool
     {
         return (bool)$this->getField('CompatibleWithOrchestration');
     }
@@ -202,9 +203,12 @@ class OpenStackImplementation
      */
     public function isCompatibleWithPlatform()
     {
-        return $this->isCompatibleWithStorage() && $this->isCompatibleWithCompute();
+        return (bool)$this->getField('CompatibleWithPlatform');
     }
 
+    public function setCompatibleWithPlatform($compatible){
+        $this->setField('CompatibleWithPlatform', $compatible);
+    }
     /***
      * @return bool
      */
@@ -258,7 +262,7 @@ class OpenStackImplementation
     /***
      * @return bool
      */
-    public function isOpenStackPowered()
+    public function isOpenStackPowered():bool
     {
         $storage = $this->isCompatibleWithStorage();
         $compute = $this->isCompatibleWithCompute();
@@ -272,7 +276,7 @@ class OpenStackImplementation
     /**
      * @return bool
      */
-    public function isOpenStackTested()
+    public function isOpenStackTested():bool
     {
         $program_version = $this->ProgramVersion();
         return !is_null($program_version) && $program_version->ID > 0;
@@ -281,40 +285,28 @@ class OpenStackImplementation
     /**
      * @return string
      */
-    public function getTestedCapabilityTypeLabel()
+    public function getTestedCapabilityTypeLabel():string
     {
-        $label = "";
+        $components = [];
         if ($this->isCompatibleWithPlatform()) {
-            if(!empty($label))
-                $label .= ', ';
-            $label .= 'Platform';
+            $components[]= 'Platform';
         }
-        else if ($this->isCompatibleWithCompute()) {
-            if(!empty($label))
-                $label .= ', ';
-            $label .=  'Compute';
+        if ($this->isCompatibleWithCompute()) {
+            $components[]=  'Compute';
         }
-        else if ($this->isCompatibleWithStorage()) {
-            if(!empty($label))
-                $label .= ', ';
-            $label .=  'Storage';
+        if ($this->isCompatibleWithStorage()) {
+            $components[]=  'Storage';
         }
         if ($this->isCompatibleWithDNS()) {
-            if(!empty($label))
-                $label .= ', ';
-            $label .=  'DNS';
+            $components[]= 'DNS';
         }
         if ($this->isCompatibleWithOrchestration()) {
-            if(!empty($label))
-                $label .= ', ';
-            $label .= 'Orchestration';
+            $components[]= 'Orchestration';
         }
         if ($this->isCompatibleWithSharedFileSystem()) {
-            if(!empty($label))
-                $label .= ', ';
-            $label .= 'Shared File System';
+            $components[]= 'Shared File System';
         }
-        return $label;
+        return implode(", ", $components);
     }
 
     /**
