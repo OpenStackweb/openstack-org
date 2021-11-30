@@ -24,6 +24,7 @@ class OpenStackImplementationPoweredSnapshotFactory
         $snapshot->CompatibleWithOrchestrationBefore = $implementation->CompatibleWithOrchestration;
         $snapshot->CompatibleWithStorageBefore = $implementation->CompatibleWithStorage;
         $snapshot->CompatibleWithSharedFileSystemBefore = $implementation->CompatibleWithSharedFileSystem;
+        $snapshot->CompatibleWithPlatformBefore = $implementation->CompatibleWithPlatform;
         $snapshot->ExpiryDateBefore            = $implementation->ExpiryDate;
         $snapshot->ProgramVersionIDBefore      = $implementation->ProgramVersionID;
         $snapshot->ReportedReleaseIDBefore     = $implementation->ReportedReleaseID;
@@ -63,6 +64,11 @@ class OpenStackImplementationPoweredSnapshotFactory
             $snapshot->CompatibleWithSharedFileSystemCurrent = boolval($data['required_for_shared_file_system']);
         else
             $snapshot->CompatibleWithSharedFileSystemCurrent = $implementation->CompatibleWithSharedFileSystem;
+
+        if(isset($data['required_for_platform']))
+            $snapshot->CompatibleWithPlatform = boolval($data['required_for_platform']);
+        else
+            $snapshot->CompatibleWithPlatform = $implementation->CompatibleWithPlatform;
 
         if(isset($data['expiry_date']))
             $snapshot->ExpiryDateCurrent = $data['expiry_date'];
