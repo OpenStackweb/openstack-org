@@ -729,9 +729,9 @@ APP_LINKS;
             }
         }
         // IOS
-        $tags .= AppLinkIOSMetadataBuilder::buildAppLinksMetaTags($tags, $url_path);
+        //$tags .= AppLinkIOSMetadataBuilder::buildAppLinksMetaTags($tags, $url_path);
         // Android
-        $tags .= AppLinkIAndroidMetadataBuilder::buildAppLinksMetaTags($tags, $url_path);
+        //$tags .= AppLinkIAndroidMetadataBuilder::buildAppLinksMetaTags($tags, $url_path);
         return $tags;
     }
 
