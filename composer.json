@@ -114,7 +114,10 @@
   },
   "config": {
     "process-timeout": 600,
-    "bin-dir": "bin/"
-  },
+    "bin-dir": "bin/",
+    "allow-plugins": {
+      "composer/installers": true
+    }
+},
   "minimum-stability": "dev"
 }
