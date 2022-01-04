@@ -12,7 +12,7 @@
  * limitations under the License.
  **/
 /**
- * Class RssEventsDigestTask
+ * Class RssNewsDigestTask
  */
 
 final class RssNewsDigestTask extends CronTask {

@@ -69,10 +69,6 @@ jobs:
     cron_expression: "00 23 * * *" # run every day at 2300
     enabled: 1
 
-  - name: "AUCMetricTask"
-    cron_expression: "00 02 * * *" # run every day at 0200 AM
-    enabled: 1
-
   - name: "EventbriteSummitOrderConciliation"
     cron_expression: "00 02 * * *" # run every day at 0200 AM
     enabled: 1
