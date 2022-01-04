@@ -18,7 +18,7 @@ use GuzzleHttp\Client;
 final class MeetupApi implements IExternalEventsApi
 {
 
-    const BaseUrl = 'https://api.meetup.com';
+    const BaseUrl = 'https://api.meetup.com/gql';
     const BaseAuthUrl = 'https://secure.meetup.com';
     const Throttle = 1000; // ms
     /**
@@ -64,7 +64,7 @@ final class MeetupApi implements IExternalEventsApi
      */
     private function getAccessToken():string {
 
-        $access_token = $this->loadRAWFromCache("access_token");
+        $access_token = ''; //$this->loadRAWFromCache("access_token");
         if(!empty($access_token)) {
             if(Director::is_cli()){
                 fwrite(STDOUT, sprintf("%s - [MeetupApi::getAccessToken] got access token %s from cache", gmdate('Y-m-d h:i:s \G\M\T', time()), $access_token).PHP_EOL);
@@ -111,7 +111,7 @@ final class MeetupApi implements IExternalEventsApi
                 'client_id'     => MEETUP_OAUTH_CLIENT_ID,
                 'client_secret' => MEETUP_OAUTH_CLIENT_SECRET,
                 'redirect_uri'  => MEETUP_OAUTH_REDIRECT_URL,
-                'grant_type'    => 'anonymous_code',
+                'grant_type'    => 'authorization_code',
                 'code'          => $code,
             ]
         ]);
@@ -131,15 +131,12 @@ final class MeetupApi implements IExternalEventsApi
 
         $access_token  = $json_response['access_token'];
 
-        $response = $this->client->post(self::BaseUrl."/sessions" , [
+        $response = $this->client->post(self::BaseUrl , [
             'headers' => [
                 'Accept' => 'application/json',
                 'Authorization' => sprintf("Bearer %s", $access_token)
             ],
-            'query' => [
-                'email'    => MEETUP_USER,
-                'password' => MEETUP_PASSWORD,
-            ]
+            'query' => 'query { self { id name } }'
         ]);
 
         if($response->getStatusCode() !== 200)
@@ -170,45 +167,47 @@ final class MeetupApi implements IExternalEventsApi
     }
 
     /**
-     * @param int $pageSize
+     * @param int $page
      * @return array
+     * @throws Exception
      */
-    public function getAllUpcomingEvents(int $pageSize): array
-    {
-        $res = [];
-        try {
+    public function getAllUpcomingEvents(int $page = 20):array {
 
-            $groups = $this->getGroups($pageSize);
-            foreach ($groups as $group) {
-                $upcomingEvents = $this->getGroupIncomingEvents($group['urlname'], $pageSize);
-                $res = array_merge($res, $upcomingEvents);
+        $access_token = $this->getAccessToken();
+
+        $headers = [
+            'Authorization' => sprintf("Bearer %s", $access_token),
+            'Accept'        => 'application/json',
+        ];
+
+        $query = "
+            {
+              self {
+                id
+                upcomingEvents {
+                  count
+                  pageInfo {
+                    endCursor
+                  }
+                  edges {
+                    node {
+                      id
+                      title
+                      description
+                    }
+                  }
+                }
+              }
             }
-        }
-        catch (Exception $ex){
-            SS_Log::log($ex->getMessage(), SS_Log::WARN);
-        }
-        return $res;
-    }
+        ";
 
-    /**
-     * @param int $page
-     * @return array
-     * @throws Exception
-     */
-    public function getGroups(int $page = 20):array{
-
-        $query = [
-            'page' => $page,
-            'access_token' => $this->getAccessToken()
-        ];
-
-        $api_url = sprintf("%s/self/groups", self::BaseUrl);
         // to avoid error http 429 Credentials have been throttled
         usleep(self::Throttle);
 
-        $response = $this->client->get($api_url, array
+        $response = $this->client->get(self::BaseUrl, array
             (
-                'query' => $query
+                'query' => $query,
+                'headers' => $headers
             )
         );
 
@@ -220,72 +219,16 @@ final class MeetupApi implements IExternalEventsApi
         if(!strstr($content_type,'application/json'))
             throw new Exception('invalid content type!');
         $json = $response->getBody()->getContents();
-        return json_decode($json, true);
-    }
+        $json_content = json_decode($json, true);
 
-
-    /**
-     * @param string $groupSlug
-     * @param int $page
-     * @return array
-     * @throws Exception
-     */
-    public function getGroupIncomingEvents(string $groupSlug, int $page = 20):array {
-
-        $query = [
-            'page'         => $page,
-            'access_token' => $this->getAccessToken(),
-            'status'       => 'upcoming'
-        ];
-        $api_url = sprintf("%s/%s/events", self::BaseUrl, $groupSlug);
-        // to avoid error http 429 Credentials have been throttled
-        usleep(self::Throttle);
-
-        $response = $this->client->get($api_url, array
-            (
-                'query' => $query
-            )
+        $events = array_map(
+            function ($event) {
+                return $event['node'];
+            },
+            $json_content['data']['self']['upcomingEvents']['edges']
         );
 
-        if($response->getStatusCode() !== 200)
-            throw new Exception('invalid status code!');
-        $content_type = $response->getHeaderLine('content-type');
-        if(empty($content_type))
-            throw new Exception('invalid content type!');
-        if(!strstr($content_type,'application/json'))
-            throw new Exception('invalid content type!');
-        $json = $response->getBody()->getContents();
-        return json_decode($json, true);
+        return $events;
     }
 
-    /**
-     * @param string $groupSlug
-     * @param int $page
-     * @return array
-     * @throws Exception
-     */
-    public function getGroupMembers(string $groupSlug, int $page = 20): array {
-        $query = [
-            'page'         => $page,
-            'access_token' => $this->getAccessToken(),
-        ];
-        $api_url = sprintf("%s/%s/members", self::BaseUrl, $groupSlug);
-        // to avoid error http 429 Credentials have been throttled
-        usleep(self::Throttle);
-        $response = $this->client->get($api_url, array
-            (
-                'query' => $query
-            )
-        );
-
-        if($response->getStatusCode() !== 200)
-            throw new Exception('invalid status code!');
-        $content_type = $response->getHeaderLine('content-type');
-        if(empty($content_type))
-            throw new Exception('invalid content type!');
-        if(!strstr($content_type,'application/json'))
-            throw new Exception('invalid content type!');
-        $json = $response->getBody()->getContents();
-        return json_decode($json, true);
-    }
 }
