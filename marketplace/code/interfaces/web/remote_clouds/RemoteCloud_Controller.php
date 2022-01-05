@@ -125,9 +125,8 @@ class RemoteCloud_Controller extends AbstractController
             list($implementations, $size1) = $this->remote_cloud_repository->getAll($query1, 0, 1000);
 
             foreach ($implementations as $implementation) {
-                $type    = $implementation->getMarketPlace()->getName() == 'remote_cloud';
                 $output .= $implementation->renderWith('RemoteCloudsDirectoryPage_ImplementationBox', array(
-                    'Link'     => $this->Link("remote_cloud")));
+                    'Link'     => $this->Link()));
             }
         } catch (Exception $ex) {
             return $this->httpError(500, 'Server Error');
