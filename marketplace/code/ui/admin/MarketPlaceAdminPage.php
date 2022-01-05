@@ -1212,6 +1212,14 @@ class MarketPlaceAdminPage_Controller extends AdminController
                 return $render->draw();
             }
                 break;
+            case 'remote_cloud': {
+                $remote_cloud = $this->remote_clouds_repository->getBy($query);
+                $remote_cloud->IsPreview = true;
+                $render = new RemoteCloudSapphireRender($remote_cloud);
+                return $render->draw();
+
+            }
+                break;
             default:
                 $this->httpError(404);
                 break;

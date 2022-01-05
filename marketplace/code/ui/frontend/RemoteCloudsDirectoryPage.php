@@ -60,7 +60,7 @@ class RemoteCloudsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Cont
 
         Requirements::combine_files('marketplace_remote_clouds_landing.js',
             array(
-                "marketplace/code/ui/frontend/js/implementation.directory.page.js"
+                "marketplace/code/ui/frontend/js/remote_clouds.directory.page.js"
             ));
 
         Requirements::customScript($this->GATrackingCode());
@@ -110,7 +110,6 @@ class RemoteCloudsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Cont
         $keyword_val = ($keyword == 'a') ? '' : $keyword;
         return $this->getViewer('')->process($this->customise(array('Keyword' => $keyword_val)));
     }
-
 
     public function getImplementations()
     {
