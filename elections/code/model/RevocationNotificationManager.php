@@ -86,15 +86,41 @@ final class RevocationNotificationManager {
 
 			$last_election = $this->election_repository->getLatestNElections(1);
 			$last_election = $last_election[0];
-
+            if(Director::is_cli()){
+                fwrite
+                (
+                    STDOUT,
+                    sprintf
+                    (
+                        "%s - [RevocationNotificationManager::sendOutNotifications] batch size %s last election %s count %s",
+                        gmdate('Y-m-d h:i:s \G\M\T', time()),
+                        $batch_size,
+                        $last_election->getIdentifier(),
+                        count($res)
+                    ).PHP_EOL
+                );
+            }
 			foreach($res as $foundation_member_id){
 
 				$foundation_member = $this->foundation_member_repository->getById($foundation_member_id);
 				$notification      = $this->notification_factory->build($foundation_member, $last_election);
-
+                if(Director::is_cli()){
+                    fwrite
+                    (
+                        STDOUT,
+                        sprintf
+                        (
+                            "%s - [RevocationNotificationManager::sendOutNotifications] sending notification to member %s (%s)",
+                            gmdate('Y-m-d h:i:s \G\M\T', time()),
+                            $foundation_member->getIdentifier(),
+                            $foundation_member->getEmail()
+                        ).PHP_EOL
+                    );
+                }
 				$sender->send($foundation_member, $notification, $this->notification_repository);
 				$notification->write();
 			}
+
 			return count($res);
 		});
 	}

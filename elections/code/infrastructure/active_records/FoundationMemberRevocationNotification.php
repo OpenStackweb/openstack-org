@@ -95,7 +95,7 @@ final class FoundationMemberRevocationNotification
 	public function sentDate()
 	{
 		$date = $this->getField('SentDate');
-		return new DateTime($date);
+		return new DateTime($date, new DateTimeZone('UTC'));
 	}
 
 	/**
