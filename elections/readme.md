@@ -12,4 +12,8 @@ where ELECTIONID should be a valid election that exists on table election. once 
 added its name to table VoterFile to avoid to ingest it again.
 *RevocationNotificationSenderTask: this task sends all foundation membership revocation notifications to all user that 
  does not voted on 2 of the 3 elections
+ex:
+````bash
+sudo sake RevocationNotificationSenderTask batch_size=2500
+````
 *RevocationExecutorTask: this tasks automatically revoke any voided notification                                                                                                                                                                                    
