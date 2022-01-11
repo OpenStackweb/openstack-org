@@ -52,7 +52,7 @@
                 <div class="col-sm-4 col-sm-offset-2">
                   <div class="plane"><img src="{$Top.CloudUrl('assets/summits/logos/red-circle.png')}"></div>
                   <p>Add the <strong>Weekly Edge Computing Group Meetings</strong> to your calendar.</p>
-                  <a href="{$Top.CloudUrl('assets/edge/OSF-Edge-Computing-Group-Weekly-Calls2.ics')}" class="download-ml1"><em>WG Weekly Calls</em>&nbsp;<i class="fa fa-calendar"></i></a>
+                  <a href="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/edge/OpenInfra-Edge-Computing-Group-Weekly-Calls.ics" class="download-ml1"><em>WG Weekly Calls</em>&nbsp;<i class="fa fa-calendar"></i></a>
                 </div>
             </div>
         </div>
