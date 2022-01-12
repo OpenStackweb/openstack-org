@@ -39,7 +39,7 @@
                         <td>Ongoing</td>
                         <td>Ongoing</td>
                         <td>&nbsp;</td>
-                        <td><a style="background-color: #{$CompanyColor}" href="$Link" class="outbound-link">Register</a></td>
+                        <td><a style="background-color: #{$Top.CompanyColor}" href="$Link" class="outbound-link">Register</a></td>
                     </tr>
                 <% else %>
                     <% loop CurrentLocations %>
@@ -48,7 +48,7 @@
                         <td>$StartDateMonth $StartDateDay, $StartDateYear</td>
                         <td>$EndDateMonth $EndDateDay, $EndDateYear</td>
                         <td>$Days Days</td>
-                        <td><a style="background-color: #{$CompanyColor}" href="$Link"  class="outbound-link">Register</a></td>
+                        <td><a style="background-color: #{$Top.CompanyColor}" href="$Link"  class="outbound-link">Register</a></td>
                     </tr>
                     <% end_loop %>
                 <% end_if %>
