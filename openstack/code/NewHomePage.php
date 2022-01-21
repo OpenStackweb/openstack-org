@@ -278,7 +278,7 @@ class NewHomePage_Controller extends Page_Controller
             "themes/openstack/css/home-page.css",
             "themes/openstack/css/navigation_menu.css",
             "themes/openstack/css/dropdown.css",
-            "themes/openstack/css/live-banner.css",
+            "themes/openstack/css/announcement-banner.css",
         ];
     }
 
