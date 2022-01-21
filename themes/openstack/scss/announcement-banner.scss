@@ -18,7 +18,7 @@ $cta_color: #EA2046;
   position: relative;
   background-color: $dark;
   color: $white;
-  padding: 2rem 4rem 3rem;
+  padding: 4rem 4rem 3rem;
   align-items: center;
   column-gap: 20px;
   border-radius: 4px;
@@ -125,14 +125,13 @@ $cta_color: #EA2046;
   }
 
   .cta-container {
-    margin-top: 30%;
+    margin-top: 10%;
 
     @media (max-width: 768px ) {
       margin-top: 0;
     }
 
     a {
-      border: 1px solid $white;
       color: $white;
       width: 165px;
       min-width: 155px;
