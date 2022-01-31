@@ -113,10 +113,18 @@ select Job.* from Job
 WHERE
     Job.`IsActive` = 1 AND
     Job.PostedDate >= '{$post_date}' AND
-    Job.`ExpirationDate` >= '{$expiration_date}' AND
-    Job.ID NOT IN ({$excluded})  
-    ORDER BY Job.PostedDate DESC, Job.ID DESC;
+    Job.`ExpirationDate` >= '{$expiration_date}' 
 SQL;
+        if(!empty($excluded)){
+            $sql .= <<<SQL
+ AND Job.ID NOT IN ({$excluded}) 
+SQL;
+        }
+
+        $sql .= <<<SQL
+ORDER BY Job.PostedDate DESC, Job.ID DESC;
+SQL;
+
         $res = DB::query($sql);
         foreach ($res as $record) {
             $className = $record['ClassName'];
