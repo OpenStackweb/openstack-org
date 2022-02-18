@@ -110,7 +110,6 @@ final class UserStoriesResfullApi extends AbstractRestfulJsonApi
                     'location'      => $item->Location()->Name,
                     'tags'          => array_keys($item->Tags()->map('Tag')->toArray()),
                 ];
-
             }
 
             return $this->ok(array('stories' => $items, 'total' => $total, 'has_more' => $has_more));

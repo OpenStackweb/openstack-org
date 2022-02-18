@@ -29,6 +29,7 @@ export default ({
     }
 
     const sortStories = function(stories, compareProp) {
+        debugger;
         compareProp = (compareProp == 'search') ? 'date' : compareProp;
 
         let sorted_stories = stories.sort((a,b) => {
