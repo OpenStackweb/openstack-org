@@ -64,7 +64,10 @@ class AboutMascots_Controller extends Page_Controller {
                         $image_array = [];
                         $body = (string)$response->getBody();
                         foreach (explode("\n", $body) as $file_url) {
-                            $image_array[] = sprintf("%s%s", $bucket->getBaseURL(), $file_url);
+                            $parts = explode("/", $file_url);
+                            if (strpos($parts[count($parts) - 1], ".") !== false) {
+                                $image_array[] = sprintf("%s%s", $bucket->getBaseURL(), $file_url);
+                            }
                         }
                         $mascot->MascotFiles = implode(',', $image_array);
                         $mascot->EPSThumbFileUrl = sprintf("%s%s/eps_thumb.png", $bucket->getBaseURL(), Mascot::$mascots_folder);
