@@ -46,6 +46,7 @@ $screen-xs-min: 600px;
             padding-top: 5pt;
             padding-bottom: 0;
             text-align: left;
+            width: 90%;
         }
     }
 
@@ -74,6 +75,7 @@ $screen-xs-min: 600px;
     }
 
     .banner-logo {
+
         @media (max-width: 990px) {
             min-height: 6em;
             min-width: 6em;
@@ -93,25 +95,35 @@ $screen-xs-min: 600px;
         /* No media query since this is the default in Bootstrap */
 
         /* XS Small devices (Phones, 600px and up) */
-        @media (min-width: 501px) and (max-width: 768px) {
+        @media (min-width: 601px) and (max-width: 768px) {
             top: 0;
-            left: 72%;
+            left: 97%;
             margin-left: 0;
             display: block;
             margin-right: 0;
-            width: 9em;
-            height: 9em;
+            width: 6em;
+            height: 6em;
+        }
+
+        @media (min-width: 502px) and (max-width: 600px) {
+            top: 0;
+            left: 87%;
+            margin-left: 0;
+            display: block;
+            margin-right: 0;
+            width: 6em;
+            height: 6em;
         }
 
         /* XS Small devices (Phones, 600px and up) */
         @media (min-width: 416px) and (max-width: 500px) {
             top: 0;
-            left: 78%;
+            left: 88%;
             margin-left: 0;
             display: block;
             margin-right: 0;
-            width: 7em;
-            height: 7em;
+            width: 5.5em;
+            height: 5.5em;
         }
 
         /* XS Small devices (Phones, 600px and up) */
@@ -121,8 +133,8 @@ $screen-xs-min: 600px;
             margin-left: 0;
             display: block;
             margin-right: 0;
-            width: 5em;
-            height: 5em;
+            width: 4em;
+            height: 4em;
         }
     }
 
