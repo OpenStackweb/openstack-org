@@ -187,10 +187,10 @@ interface IPresentationSpeaker extends IEntity
     public function hasHadPublishedPresentations($role = IPresentationSpeaker::RoleSpeaker);
 
     /**
-     * @param ISpeakerSummitRegistrationPromoCode $promo_code
+     * @param $promo_code
      * @return $this
      */
-    public function registerSummitPromoCode(ISpeakerSummitRegistrationPromoCode $promo_code);
+    public function registerSummitPromoCode($promo_code);
 
     /**
      * @param int $summit_id

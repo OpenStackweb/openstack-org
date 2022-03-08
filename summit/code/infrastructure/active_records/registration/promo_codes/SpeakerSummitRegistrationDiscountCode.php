@@ -23,4 +23,14 @@ class SpeakerSummitRegistrationDiscountCode extends SummitRegistrationDiscountCo
     (
         'Speaker' => 'PresentationSpeaker',
     );
+
+    /**
+     * @param IPresentationSpeaker $speaker
+     * @return $this
+     */
+    public function assignSpeaker(IPresentationSpeaker $speaker)
+    {
+        $this->SpeakerID = $speaker->getIdentifier();
+        AssociationFactory::getInstance()->getMany2OneAssociation($this,'Speaker')->setTarget($speaker);
+    }
 }

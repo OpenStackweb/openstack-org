@@ -37,6 +37,7 @@ class SapphireSpeakerSummitRegistrationPromoCodeRepository
             case ISpeakerSummitRegistrationPromoCode::TypeAccepted:
                 {
                     if (count($this->promo_code_speaker_session_pool) === 0) {
+                        $this->entity_class = new SpeakerSummitRegistrationPromoCode();
                         $query = new QueryObject(new SpeakerSummitRegistrationPromoCode);
                         $query->addAndCondition(QueryCriteria::equal('Type', $promo_code_type));
                         $query->addAndCondition(
@@ -49,6 +50,23 @@ class SapphireSpeakerSummitRegistrationPromoCodeRepository
                         $query->addAndCondition(QueryCriteria::equal('SummitID', $summit->getIdentifier()));
                         $query->addOrder(QueryOrder::asc('ID'));
                         list($this->promo_code_speaker_session_pool, $count) = $this->getAll($query, 0, $batch_size);
+
+                        if (count($this->promo_code_speaker_session_pool) === 0){
+                            $this->entity_class = new SpeakerSummitRegistrationDiscountCode();
+                            $query = new QueryObject(new SpeakerSummitRegistrationDiscountCode());
+                            $query->addAndCondition(QueryCriteria::equal('Type', $promo_code_type));
+                            $query->addAndCondition(
+                                QueryCompoundCriteria::compoundOr([
+                                        QueryCriteria::isNull('SpeakerID'),
+                                        QueryCriteria::equal('SpeakerID', 0)
+                                    ]
+                                )
+                            );
+                            $query->addAndCondition(QueryCriteria::equal('SummitID', $summit->getIdentifier()));
+                            $query->addOrder(QueryOrder::asc('ID'));
+                            list($this->promo_code_speaker_session_pool, $count) = $this->getAll($query, 0, $batch_size);
+                        }
+
                     }
                     return array_shift($this->promo_code_speaker_session_pool);
                 }
@@ -56,6 +74,7 @@ class SapphireSpeakerSummitRegistrationPromoCodeRepository
             case ISpeakerSummitRegistrationPromoCode::TypeAlternate:
                 {
                     if (count($this->promo_code_alternate_speaker_session_pool) === 0) {
+                        $this->entity_class = new SpeakerSummitRegistrationPromoCode();
                         $query = new QueryObject(new SpeakerSummitRegistrationPromoCode);
                         $query->addAndCondition(QueryCriteria::equal('Type', $promo_code_type));
                         $query->addAndCondition(
@@ -68,6 +87,22 @@ class SapphireSpeakerSummitRegistrationPromoCodeRepository
                         $query->addAndCondition(QueryCriteria::equal('SummitID', $summit->getIdentifier()));
                         $query->addOrder(QueryOrder::asc('ID'));
                         list($this->promo_code_alternate_speaker_session_pool, $count) = $this->getAll($query, 0, $batch_size);
+
+                        if (count($this->promo_code_alternate_speaker_session_pool) === 0) {
+                            $this->entity_class = new SpeakerSummitRegistrationDiscountCode();
+                            $query = new QueryObject(new SpeakerSummitRegistrationDiscountCode());
+                            $query->addAndCondition(QueryCriteria::equal('Type', $promo_code_type));
+                            $query->addAndCondition(
+                                QueryCompoundCriteria::compoundOr([
+                                        QueryCriteria::isNull('SpeakerID'),
+                                        QueryCriteria::equal('SpeakerID', 0)
+                                    ]
+                                )
+                            );
+                            $query->addAndCondition(QueryCriteria::equal('SummitID', $summit->getIdentifier()));
+                            $query->addOrder(QueryOrder::asc('ID'));
+                            list($this->promo_code_alternate_speaker_session_pool, $count) = $this->getAll($query, 0, $batch_size);
+                        }
                     }
                     return array_shift($this->promo_code_alternate_speaker_session_pool);
                 }
