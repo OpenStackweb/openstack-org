@@ -35,6 +35,8 @@
   </head>
 
   <body id="$URLSegment">
+      <% include SiteBanner %>
+      <% include Navigation %>
 
       <!-- Page Content -->
       <div class="container">
@@ -42,6 +44,7 @@
         $Layout
       </div>
 
+    <% include Footer %>
     <% include Quantcast %>
     <% include TwitterUniversalWebsiteTagCode %>
     <% include OpenstackSearchWidget %>
