@@ -1114,10 +1114,10 @@ class PresentationSpeaker extends DataObject
     }
 
     /**
-     * @param ISpeakerSummitRegistrationPromoCode $promo_code
+     * @param  $promo_code
      * @return $this
      */
-    public function registerSummitPromoCode(ISpeakerSummitRegistrationPromoCode $promo_code)
+    public function registerSummitPromoCode($promo_code)
     {
         $promo_code->assignSpeaker($this);
         $promo_code->write();

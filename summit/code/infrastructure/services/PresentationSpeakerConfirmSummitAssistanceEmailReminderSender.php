@@ -43,8 +43,8 @@ final class PresentationSpeakerConfirmSummitAssistanceEmailReminderSender
         $email = PermamailTemplate::get()->filter('Identifier', PRESENTATION_SPEAKER_CONFIRM_SUMMIT_ASSISTANCE_EMAIL)->first();
         if(is_null($email)) throw new NotFoundEntityException(sprintf('Email Template %s does not exists on DB!', PRESENTATION_SPEAKER_CONFIRM_SUMMIT_ASSISTANCE_EMAIL));
 
-        $schedule_page = SummitAppSchedPage::getBy($summit);
-        if(is_null($schedule_page)) throw new NotFoundEntityException('Summit Schedule page does not exists!');
+        //$schedule_page = SummitAppSchedPage::getBy($summit);
+        //if(is_null($schedule_page)) throw new NotFoundEntityException('Summit Schedule page does not exists!');
 
         $confirmation_link = $speaker->hasAssistanceFor($summit->getIdentifier())?
             $speaker->resetConfirmationLink($summit->getIdentifier()):
@@ -61,7 +61,7 @@ final class PresentationSpeakerConfirmSummitAssistanceEmailReminderSender
                 'ConfirmationLink'       => $confirmation_link,
                 'PromoCode'              => $promo_code->getCode(),
                 'Summit'                 => $summit,
-                'ScheduleMainPageLink'   => $schedule_page->getAbsoluteLiveLink(false),
+                //'ScheduleMainPageLink'   => $schedule_page->getAbsoluteLiveLink(false),
                 'PublishedPresentations' => $published_presentations,
             )
         )->send();

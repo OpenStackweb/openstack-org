@@ -126,7 +126,15 @@ final class SpeakerEmailAnnouncementSenderManager
                         $current_summit,
                         ISpeakerSummitRegistrationPromoCode::TypeAlternate
                     );
-                    if (is_null($code)) throw new Exception('not available alternate promo code!!!');
+                    if (is_null($code)){
+                        $code = $this->promo_code_repository->getNextAvailableByType
+                        (
+                            $current_summit,
+                            ISpeakerSummitRegistrationPromoCode::TypeAccepted
+                        );
+                        if (is_null($code))
+                            throw new Exception('not available alternate promo code!!!');
+                    }
                 }
             }
             else{

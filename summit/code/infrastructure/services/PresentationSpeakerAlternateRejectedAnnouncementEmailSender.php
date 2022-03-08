@@ -29,7 +29,7 @@ final class PresentationSpeakerAlternateRejectedAnnouncementEmailSender implemen
         $promo_code = $subject['PromoCode'];
         if(!$speaker instanceof IPresentationSpeaker) return;
         if(!$summit instanceof ISummit) return;
-        if(!$promo_code instanceof SpeakerSummitRegistrationPromoCode) return;
+
         $check_email_existance = isset($subject['CheckMailExistance'])? boolval($subject['CheckMailExistance']) : true;
 
         $email = PermamailTemplate::get()->filter('Identifier', PRESENTATION_SPEAKER_ALTERNATE_REJECTED_EMAIL)->first();
@@ -39,8 +39,8 @@ final class PresentationSpeakerAlternateRejectedAnnouncementEmailSender implemen
 
         $email = EmailFactory::getInstance()->buildEmail(PRESENTATION_SPEAKER_NOTIFICATION_ACCEPTANCE_EMAIL_FROM, $speaker->getEmail());
 
-        $schedule_page = SummitAppSchedPage::getBy($summit);
-        if(is_null($schedule_page)) throw new Exception('Summit Schedule page does not exists!');
+        //$schedule_page = SummitAppSchedPage::getBy($summit);
+        //if(is_null($schedule_page)) throw new Exception('Summit Schedule page does not exists!');
 
         $alternates_presentations = $speaker->AlternatePresentations($summit->getIdentifier(), $role,true, $summit->getExcludedTracksForAlternatePresentations(), true);
 
@@ -52,7 +52,7 @@ final class PresentationSpeakerAlternateRejectedAnnouncementEmailSender implemen
                 'ConfirmationLink'       => $speaker->getSpeakerConfirmationLink($summit->ID),
                 'PromoCode'              => $promo_code->getCode(),
                 'Summit'                 => $summit,
-                'ScheduleMainPageLink'   => $schedule_page->getAbsoluteLiveLink(false),
+                //'ScheduleMainPageLink'   => $schedule_page->getAbsoluteLiveLink(false),
                 'AlternatePresentations' => $alternates_presentations,
                 'RejectedPresentations'  => $speaker->RejectedPresentations($summit->getIdentifier(), $role, true, $summit->getExcludedTracksForRejectedPresentations())
             )
