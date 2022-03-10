@@ -501,7 +501,7 @@ define('PRESENTATION_SPEAKER_ALTERNATE_REJECTED_EMAIL', 'presentation-speaker-al
 define('PRESENTATION_SPEAKER_ACCEPTED_ALTERNATE_EMAIL','presentation-speaker-accepted-alternate');
 
 
-define('PRESENTATION_SPEAKER_NOTIFICATION_ACCEPTANCE_EMAIL_FROM', 'speakersupport@openstack.org');
+define('PRESENTATION_SPEAKER_NOTIFICATION_ACCEPTANCE_EMAIL_FROM', 'speakersupport@openinfra.dev');
 define('PRESENTATION_SPEAKER_NOTIFICATION_ACCEPTANCE_SUMMIT_SUPPORT', 'summit@openstack.org');
 
 define('MEMBER_PROMO_CODE_EMAIL', 'member-promo-code');
