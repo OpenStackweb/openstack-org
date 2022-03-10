@@ -55,6 +55,7 @@ final class SpeakerSelectionAnnouncementEmailSenderFactory implements ISpeakerSe
             return new PresentationSpeakerAlternateAnnouncementEmailSender();
         }
 
+        /*
         if(!$has_published && $has_rejected && !$has_alternate) {
             echo sprintf(
                 "speaker %s (%s) will get a presentation-speaker-rejected-only email",
@@ -63,6 +64,7 @@ final class SpeakerSelectionAnnouncementEmailSenderFactory implements ISpeakerSe
             ).PHP_EOL;
             return new PresentationSpeakerRejectedAnnouncementEmailSender();
         }
+        */
 
         if($has_published && !$has_rejected && $has_alternate) {
             echo sprintf(
