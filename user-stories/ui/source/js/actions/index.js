@@ -55,6 +55,7 @@ export const loadStories = () => (dispatch) => {
             case 'search':
                 dispatch(fetchSearchStories(url_hash_value));
                 break;
+            case 'scale':
             case 'location':
             case 'industry':
                 dispatch(changeActiveView(url_hash_view, url_hash_value, true));

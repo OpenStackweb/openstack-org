@@ -88,6 +88,7 @@ final class UserStoriesResfullApi extends AbstractRestfulJsonApi
                 $list = $this->repository->getAllActive();
             }
 
+
             $total = $list->count();
             $has_more = false;
             //$has_more = ($start + $this->story_limit) < $total;
@@ -98,17 +99,18 @@ final class UserStoriesResfullApi extends AbstractRestfulJsonApi
             foreach ($list as $item){
                 $items[] =
                 [
-                    'id'            => intval($item->ID),
-                    'name'          => trim($item->Name),
-                    'description'   => trim($item->Description),
-                    'short_desc'    => trim($item->ShortDescription),
-                    'date'          => $item->LastEdited,
-                    'industry'      => $item->Industry()->IndustryName,
-                    'link'          => $item->Link,
-                    'organization'  => $item->Organization()->Name,
-                    'image'         => $item->Image()->getURL(),
-                    'location'      => $item->Location()->Name,
-                    'tags'          => array_keys($item->Tags()->map('Tag')->toArray()),
+                    'id'                => intval($item->ID),
+                    'name'              => trim($item->Name),
+                    'description'       => trim($item->Description),
+                    'short_desc'        => trim($item->ShortDescription),
+                    'date'              => $item->LastEdited,
+                    'industry'          => $item->Industry()->IndustryName,
+                    'million_core_club' => $item->MillionCoreClub,
+                    'link'              => $item->Link,
+                    'organization'      => $item->Organization()->Name,
+                    'image'             => $item->Image()->getURL(),
+                    'location'          => $item->Location()->Name,
+                    'tags'              => array_keys($item->Tags()->map('Tag')->toArray()),
                 ];
             }
 
