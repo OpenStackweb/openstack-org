@@ -21,6 +21,7 @@ class UserStoryDO extends DataObject implements IUserStory
 		'ShortDescription' => 'HTMLText',
         'Link'             => 'Text',
         'Active'           => 'Boolean(1)',
+        'MillionCoreClub'  => 'Boolean(0)',
    );
 
 	static $has_one = array(

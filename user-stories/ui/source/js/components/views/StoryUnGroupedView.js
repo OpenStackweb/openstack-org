@@ -29,6 +29,7 @@ export default ({
     }
 
     const sortStories = function(stories, compareProp) {
+        debugger;
         compareProp = (compareProp == 'search') ? 'date' : compareProp;
 
         let sorted_stories = stories.sort((a,b) => {
@@ -45,10 +46,13 @@ export default ({
         return sorted_stories;
     }
 
+    const allStories = group_by === 'scale' ? stories.filter(s => s.million_core_club) : stories;
+    const groupBy = group_by === 'scale' ? 'name' : group_by;
+
 	return (
 		<div>
             <StoryPanel
-                stories={sortStories(stories,group_by)}
+                stories={sortStories(allStories,groupBy)}
                 distribution={distribution}
                 title={getTitle(group_by)}
             />
