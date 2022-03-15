@@ -25,7 +25,7 @@ export default ({
     const getTitle = function(group_by, group) {
         return group[0][group_by];
     }
-	debugger;
+
 	const groupedStories = groupedList(stories, group_by);
 
 	return (		

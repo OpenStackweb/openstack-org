@@ -13,6 +13,7 @@
 
 import { getRequest, putRequest, createAction } from "~core-utils/actions";
 import URI from "urijs";
+import FragmentParser from '../fragment-parser';
 
 export const REQUEST_ALL_STORIES = 'REQUEST_ALL_STORIES';
 export const RECEIVE_ALL_STORIES = 'RECEIVE_ALL_STORIES';
@@ -31,7 +32,7 @@ export const updateSearchText = createAction(UPDATE_SEARCH_TEXT);
 let hash_tags = ['date','name','tag','search','industry','location','scale'];
 
 export const loadStories = () => (dispatch) => {
-    debugger;
+
     if(!window.location.hash){
         dispatch(fetchAllStories({start:0, view:'date'}));
         return;
@@ -91,7 +92,6 @@ export const fetchSearchTagStories = (tag) => {
 };
 
 export const changeActiveView = (view, section, fetch_stories) => (dispatch) => {
-    debugger;
     dispatch(changeStateView({view, section}));
     if (fetch_stories) {
         dispatch(fetchAllStories({start:0, view:view}));
@@ -100,13 +100,14 @@ export const changeActiveView = (view, section, fetch_stories) => (dispatch) => 
 
 export const setUrlParams = (params) => {
 
-    hash_tags.forEach((hash) => $(window).url_fragment('setParam', hash, ''));
+    const fp = new FragmentParser();
+    hash_tags.forEach((hash) => fp.setParam(hash, ''));
 
     Object.keys(params).forEach(param => {
-        $(window).url_fragment('setParam', param, params[param]);
+       fp.setParam(param, params[param]);
     });
 
-    window.location.hash = $(window).url_fragment('serialize');
+    window.location.hash = fp.serialize();
 }
 
 export const formatTextForHash = (text) => {

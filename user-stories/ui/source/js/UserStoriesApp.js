@@ -52,8 +52,7 @@ class UserStoriesApp extends React.Component {
             hasMore,
             views
             } = this.props;
-
-		return (
+       return (
 		<div>
             <Message />
             <div className="container">

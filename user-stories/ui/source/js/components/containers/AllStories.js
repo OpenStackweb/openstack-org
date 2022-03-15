@@ -33,11 +33,14 @@ class AllStories extends React.Component {
 		if(!this.props.stories.length) {
             this.props.loadStories();
 		}
-
         window.addEventListener('scroll', this.handleScroll);
 	}
 
-    componentDidUpdate(prevProps, prevState) {
+	componentWillUnmount() {
+		window.removeEventListener('scroll', this.handleScroll);
+	}
+
+	componentDidUpdate(prevProps, prevState) {
         // if is first load and is tab location or industry
         if (this.props.section && this.props.section != 'first' && this.props.stories.length > 0) {
             $('html, body').animate({
