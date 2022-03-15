@@ -28,10 +28,10 @@ export const changeStateView = createAction(CHANGE_ACTIVE_VIEW);
 export const changeActiveDist = createAction(CHANGE_ACTIVE_DIST);
 export const updateSearchText = createAction(UPDATE_SEARCH_TEXT);
 
-let hash_tags = ['date','name','tag','search','industry','location'];
+let hash_tags = ['date','name','tag','search','industry','location','scale'];
 
 export const loadStories = () => (dispatch) => {
-
+    debugger;
     if(!window.location.hash){
         dispatch(fetchAllStories({start:0, view:'date'}));
         return;
@@ -55,6 +55,7 @@ export const loadStories = () => (dispatch) => {
             case 'search':
                 dispatch(fetchSearchStories(url_hash_value));
                 break;
+            case 'scale':
             case 'location':
             case 'industry':
                 dispatch(changeActiveView(url_hash_view, url_hash_value, true));
@@ -90,6 +91,7 @@ export const fetchSearchTagStories = (tag) => {
 };
 
 export const changeActiveView = (view, section, fetch_stories) => (dispatch) => {
+    debugger;
     dispatch(changeStateView({view, section}));
     if (fetch_stories) {
         dispatch(fetchAllStories({start:0, view:view}));
@@ -97,6 +99,7 @@ export const changeActiveView = (view, section, fetch_stories) => (dispatch) => 
 }
 
 export const setUrlParams = (params) => {
+
     hash_tags.forEach((hash) => $(window).url_fragment('setParam', hash, ''));
 
     Object.keys(params).forEach(param => {
