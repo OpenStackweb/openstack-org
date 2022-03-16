@@ -76,7 +76,7 @@ class UserStoriesPage_Controller extends Page_Controller
                 ['label' => 'alphabetical', 'view' => 'name', 'grouped' => false, 'show' => true],
                 ['label' => 'location', 'view' => 'location', 'grouped' => true, 'show' => true],
                 ['label' => 'industry', 'view' => 'industry', 'grouped' => true, 'show' => true],
-                ['label' => 'scale', 'view' => 'scale', 'grouped' => false, 'show' => true],
+                ['label' => 'large scale', 'view' => 'scale', 'grouped' => false, 'show' => true],
                 ['label' => 'search', 'view' => 'search', 'grouped' => false, 'show' => false],
             ]
         ];
