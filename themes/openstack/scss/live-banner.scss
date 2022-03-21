@@ -28,7 +28,7 @@ $screen-lg-min: 1200px;
 
   @media (max-width: $screen-xs-min) {
     flex-direction: column;
-    text-align: center;
+    //text-align: center;
   }
 
   .logo_ms{
@@ -79,19 +79,17 @@ $screen-lg-min: 1200px;
   }
 
   .banner-logo {
-
-    max-width: 135px;
-    max-height: 135px;
+    max-width: 85px;
+   // max-height: 135px;
     height: 135px;
     width: 85px;
     min-height: 4em;
     min-width: 4em;
-    position: absolute;
-    top: 1em;
-    left: 1em;
-
+    //position: absolute;
+   // top: 1em;
+   // left: 1em;
     @media (max-width: 768px) {
-      display: none;
+    //  display: none;
     }
   }
 
@@ -105,12 +103,10 @@ $screen-lg-min: 1200px;
     /* XS Small devices (Phones, 600px and up) */
     @media (min-width: 320px) and (max-width: 768px) {
       top: 0;
-      left: 97%;
-      margin-left: 0;
+      left: 70%;
       display: block;
-      margin-right: 0;
-      width: 6em;
-      height: 6em;
+      width: 30%;
+      height: 30%;
     }
 
     display: none;
@@ -126,6 +122,9 @@ $screen-lg-min: 1200px;
       font-size: 22px;
       line-height: 28px;
       text-align: center;
+    }
+    @media (min-width: 768px) and (max-width: 991px) {
+      padding-left: 2em;
     }
   }
 
@@ -179,6 +178,9 @@ $screen-lg-min: 1200px;
       padding-top: 50pt;
       padding-bottom: 25pt;
       text-align: center;
+    }
+    @media (min-width: 768px) and (max-width: 991px) {
+      padding-left: 2em;
     }
     /* XS Small devices (Phones, 600px and up) */
     @media (min-width: 320px) and (max-width: $screen-xs-min) {
