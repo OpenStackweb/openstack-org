@@ -7,7 +7,6 @@
                 </div>
                 <div class="col-md-10 col-sm-10">
                     <h2>OpenInfra Summit Berlin</h2>
-                    <img class="banner-logo-mobile" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-images-prod/OpenInfrastructureFoundation-icon-RGB.svg" alt="OpenInfra Live"/>
                     <p>Join the global community in Berlin from June 7–9, 2022 to collaborate directly with the people building and running open source infrastructure using OpenStack, Kubernetes and 30+ other technologies</p>
                 </div>
             </div>
