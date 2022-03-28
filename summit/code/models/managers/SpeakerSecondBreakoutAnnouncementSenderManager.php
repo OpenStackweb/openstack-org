@@ -243,10 +243,12 @@ final class SpeakerSecondBreakoutAnnouncementSenderManager
                         continue;
                     }
 
+                    /*
                     if ($speaker->hasConfirmedAssistanceFor($current_summit->getIdentifier())) {
                         echo sprintf("skipping speaker %s (%s) - already confirmed", $speaker->getName(), $speaker->getEmail()) . PHP_EOL;
                         continue;
                     }
+                    */
 
                     $sender_service = $this->sender_breakout_factory->build($current_summit, $speaker);
 
