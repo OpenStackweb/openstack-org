@@ -36,7 +36,6 @@ final class PresentationSpeakerConfirmSummitAssistanceEmailReminderSender
 
         if(!$speaker instanceof IPresentationSpeaker) return;
         if(!$summit instanceof ISummit) return;
-        if(!$promo_code instanceof SpeakerSummitRegistrationPromoCode) return;
 
         if($speaker->hasConfirmedAssistanceFor($summit->getIdentifier())) throw new EntityValidationException('Speaker Already confirmed Assistance!');
         //if($speaker->breakoutEmailAlreadySent($summit->getIdentifier()))  throw new EntityValidationException('Speaker Email already Sent!');
