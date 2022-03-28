@@ -56,6 +56,7 @@ class PresentationSpeaker extends DataObject
         'OtherPresentationLinks'   => 'SpeakerPresentationLink',
         'TravelPreferences'        => 'SpeakerTravelPreference',
         'PromoCodes'               => 'SpeakerSummitRegistrationPromoCode',
+        'DiscountCodes'            => 'SpeakerSummitRegistrationDiscountCode',
         'AnnouncementSummitEmails' => 'SpeakerAnnouncementSummitEmail',
         'SummitAssistances'        => 'PresentationSpeakerSummitAssistanceConfirmationRequest',
         'ModeratedPresentations'   => 'Presentation.Moderator'
@@ -1202,7 +1203,14 @@ class PresentationSpeaker extends DataObject
      */
     public function getSummitPromoCode($summit_id)
     {
-        return $this->PromoCodes()->filter('SummitID', $summit_id)->first();
+        $code = $this->PromoCodes()->filter('SummitID', $summit_id)->first();
+        if(is_null($code))
+            return $this->getSummitDiscountCode($summit_id);
+        return $code;
+    }
+
+    public function getSummitDiscountCode($summit_id){
+        return $this->DiscountCodes()->filter('SummitID', $summit_id)->first();
     }
 
     public function ProfilePhoto($width = 100)
