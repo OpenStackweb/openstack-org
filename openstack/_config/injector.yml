@@ -34,3 +34,5 @@ Injector:
       connector: %$MySQLiConnector
       schemaManager: %$MySQLSchemaManager
       queryBuilder: %$MySQLQueryBuilder
+  AssetAdmin:
+    class: 'CustomAssetAdmin'
