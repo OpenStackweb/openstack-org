@@ -10,7 +10,7 @@
             Join the global OpenStack community to meet around best practices, user stories, integrations, collaboration and more June 6-8 in Berlin!
         </div>
         <div class="button">
-            <a href="" class="btn btn-default">JOIN US!</a>
+            <a href="https://openinfra.dev/summit/" class="btn btn-default">JOIN US!</a>
         </div>
     </div>
 </div>
