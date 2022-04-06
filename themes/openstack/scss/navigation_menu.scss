@@ -22,7 +22,7 @@ a.navbar-brand {
 }
 
 @media (min-width: 768px) {
-    .global-nav .navbar-header {
+    .global-nav {
         margin-top: 74px; /* account for fixed SiteBanner height */
     }
 
