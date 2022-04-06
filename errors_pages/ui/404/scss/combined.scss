@@ -2942,23 +2942,108 @@ img.summit-landing-logo {
 /*End Vancouver Summit Landing Page*/
 /* site banner */
 .top-site-banner {
-  background-color: #F0F9FE;
-  color: #4D96C7;
-  padding-top: 10px; }
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  width: 100vw;
+  background-color: black;
+  height: 174px;
+}
 
-.top-site-banner-button {
-  border-radius: 5px;
-  border: 1px solid #C6E5FC;
-  font-size: 90%;
-  padding: 0px 10px;
-  background-color: white;
-  display: inline-block;
-  color: #4D96C7;
-  text-transform: uppercase; }
+.top-site-banner .container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  margin: 0 auto;
+  text-align: center;
+  max-width: 400px;
+}
 
-.top-site-banner-button:hover {
-  text-decoration: none;
-  background-color: #F0F9FE; }
+.top-site-banner .container:before {
+  content: none;
+}
+
+.top-site-banner .container:after {
+  content: none;
+}
+
+.top-site-banner .logo {
+  width: 180px;
+  margin: 0 auto;
+}
+
+.top-site-banner .btn {
+  background: #FF091C;
+  border-color: #FF091C;
+  border-radius: 4px;
+  color: white;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 26px;
+  padding: 2px 20px;
+  margin-top: 5px;
+  width: 100%;
+}
+
+.top-site-banner .btn:hover {
+  background-color: #9a0c28;
+  border-color: #9a0c28;
+}
+
+.top-site-banner .text {
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  line-height: 22px;
+  max-width: 734px;
+  color: white;
+  margin: 10px 0;
+}
+
+@media (min-width: 767px) {
+  .top-site-banner {
+    height: 78px;
+    position: fixed;
+  }
+
+  .top-site-banner .container {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+    max-width: unset;
+    padding: 14px 0;
+  }
+
+  .top-site-banner .logo {
+    margin: 5px 0 0;
+  }
+
+  .top-site-banner .text {
+    margin: 0;
+    max-width: 400px;
+  }
+
+  .top-site-banner .btn {
+    width: unset;
+  }
+}
+
+@media (min-width: 991px) {
+  .top-site-banner .logo {
+    width: 246px;
+  }
+
+  .top-site-banner .btn {
+    font-size: 19px;
+    padding: 5px 25px;
+  }
+
+  .top-site-banner .text {
+    font-size: 16px;
+    max-width: 525px;
+  }
+}
 
 /* end of site banner */
 /*Paris Summit Page*/
