@@ -1,7 +1,7 @@
 @import "_cdn.scss";
 
 .brand-wrapper {
-    margin: 10px 0;
+    margin: 10px 0 10px 15px;
     padding-right: 20px;
     float: left;
     border-right: 1px solid #eee;
@@ -21,6 +21,16 @@ a.navbar-brand {
     display: none;
 }
 
+@media (min-width: 768px) {
+    .global-nav .navbar-header {
+        margin-top: 74px; /* account for fixed SiteBanner height */
+    }
+
+    .brand-wrapper {
+        margin: 10px 0;
+    }
+}
+
 @media (min-width: 768px) and (max-width: 1310px) {
     .brand-wrapper {
         width: 75px;
@@ -38,7 +48,6 @@ a.navbar-brand {
 
 @media only screen and (max-device-width: 1024px) {
     .brand-wrapper {
-        margin: 10px 0;
         padding-right: 20px;
         float: left;
         border-right: 0;
