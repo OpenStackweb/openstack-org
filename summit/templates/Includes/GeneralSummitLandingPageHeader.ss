@@ -1,6 +1,7 @@
 <div class="summit-hero-landing-short container-fluid about-summit-header">
 
-    <nav class="navbar navbar-default navbar-fixed-top" id="summit-main-nav">
+
+    <nav class="navbar navbar-default" id="summit-main-nav">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
@@ -50,22 +51,3 @@
             </div>
         </div></div>
 </div>
-
-
-<script>
-    $(document).ready(function () {
-        var scrollTop = 0;
-        $(window).scroll(function () {
-            scrollTop = $(window).scrollTop();
-            $('.counter').html(scrollTop);
-
-            if (scrollTop >= 50) {
-                $('#summit-main-nav').addClass('scrolled-nav');
-            } else if (scrollTop < 100) {
-                $('#summit-main-nav').removeClass('scrolled-nav');
-            }
-
-        });
-
-    });
-</script>
