@@ -14,6 +14,7 @@
 </head>
 
 <body>
+    <% include SiteBanner %>
     <div class="main-body static-summit-about-page all-summit">
         <% include GeneralSummitLandingPageHeader %>
 
