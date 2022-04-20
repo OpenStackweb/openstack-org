@@ -84,7 +84,7 @@
 		<div class="col-sm-6">
 			<ul>
 				<li id="consulting">
-					<h5>Consulting & Integrators</h5>
+					<h5>Infra Solutions & Consulting</h5>
 					<p>
 						It can really help to get expert help from partners who have designed and built cloud infrastructure for companies of all sizes. OpenStack consultants can help you decide where to start and how to meet your unique cloud needs.
 					</p>

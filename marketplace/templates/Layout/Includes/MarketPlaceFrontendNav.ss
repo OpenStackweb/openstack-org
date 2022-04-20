@@ -59,8 +59,7 @@
                         <li id="consulting">
                             <a href="{$getMarketPlaceTypeLink(4)}">
                                 <span></span>
-                                Consulting &
-                                Integrators
+                                Infra Solutions & Consulting
                             </a>
                         </li>
                     <% end_if %>
