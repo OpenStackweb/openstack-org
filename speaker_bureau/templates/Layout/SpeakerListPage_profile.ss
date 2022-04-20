@@ -96,7 +96,7 @@
                 <% if PastAcceptedOrPublishedPresentations() %>
                     <hr>
                     <div class="span-4">
-                        <strong>Presentations from previous OpenStack Summits:</strong>
+                        <strong>Presentations from previous and upcoming OpenInfra Summits:</strong>
                     </div>
                     <div class="span-6 last">
                         <% loop PastAcceptedOrPublishedPresentations(25).GroupedBy(SummitTitle) %>
