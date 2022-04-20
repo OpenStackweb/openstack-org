@@ -13,7 +13,7 @@
             <a href="{$Link}remote_clouds" <% if CurrentTab=5 %>class="active"<% end_if %>>Remotely Managed Private Clouds</a>
         <% end_if %>
         <% if canAdmin(consultants) %>
-            <a href="{$Link}consultants"  <% if CurrentTab=3 %>class="active"<% end_if %> >Consultants</a>
+            <a href="{$Link}consultants"  <% if CurrentTab=3 %>class="active"<% end_if %> >Infra Solutions & Consulting</a>
         <% end_if %>
         <% if canAdmin(books) %>
             <a href="{$Link}books"  <% if CurrentTab=6 %>class="active"<% end_if %> >Books</a>
