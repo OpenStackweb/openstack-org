@@ -7,7 +7,7 @@ jobs:
   - name: "EventbriteSummitTicketTypeConciliation"
     params: "summit_external_id=52606153421"
     cron_expression: "00 01 * * *"
-    enabled: 1
+    enabled: 0
 
   - name: "PullCommitsFromGerritTask"
     cron_expression: "00 01 * * *"
@@ -47,7 +47,7 @@ jobs:
   - name: "EventbriteEventConsumerTask"
     params: "batch_size=1000"
     cron_expression: "*/15 * * * *" # run every 15 minutes
-    enabled: 1
+    enabled: 0
 
   - name: "RssEventsDigestTask"
     cron_expression: "0 0/12 * * *" # run every 12 hours
@@ -71,7 +71,7 @@ jobs:
 
   - name: "EventbriteSummitOrderConciliation"
     cron_expression: "00 02 * * *" # run every day at 0200 AM
-    enabled: 1
+    enabled: 0
 
   - name: "SummitVideoViewTask"
     cron_expression: "05 * * * *"
