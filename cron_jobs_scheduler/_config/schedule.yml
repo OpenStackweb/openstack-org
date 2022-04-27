@@ -7,7 +7,7 @@ jobs:
   - name: "EventbriteSummitTicketTypeConciliation"
     params: "summit_external_id=52606153421"
     cron_expression: "00 01 * * *"
-    enabled: 1
+    enabled: 0
 
   - name: "PullCommitsFromGerritTask"
     cron_expression: "00 01 * * *"
