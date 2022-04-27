@@ -47,7 +47,7 @@ jobs:
   - name: "EventbriteEventConsumerTask"
     params: "batch_size=1000"
     cron_expression: "*/15 * * * *" # run every 15 minutes
-    enabled: 1
+    enabled: 0
 
   - name: "RssEventsDigestTask"
     cron_expression: "0 0/12 * * *" # run every 12 hours
