@@ -71,7 +71,7 @@ jobs:
 
   - name: "EventbriteSummitOrderConciliation"
     cron_expression: "00 02 * * *" # run every day at 0200 AM
-    enabled: 1
+    enabled: 0
 
   - name: "SummitVideoViewTask"
     cron_expression: "05 * * * *"
