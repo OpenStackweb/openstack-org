@@ -7,10 +7,10 @@
             <img src="/themes/openstack/home_images/Logos/OpenInfra-Berlin2022.svg" />
         </div>
         <div class="text">
-            Join the global OpenStack community to meet around best practices, user stories, integrations, collaboration and more June 7-9 in Berlin!
+            Registration prices for the OpenInfra Summit Berlin increase on May 16 at 11:59pm PT!
         </div>
         <div class="button">
-            <a href="https://openinfra.dev/summit/" class="btn btn-default">JOIN US!</a>
+            <a href="https://openinfra.dev/summit/" class="btn btn-default">REGISTER NOW!</a>
         </div>
     </div>
 </div>
