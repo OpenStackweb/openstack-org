@@ -47,7 +47,7 @@ class SummitOrder extends DataObject
     private static $has_one = [
         'Summit' => 'Summit',
         'Owner' => 'Member',
-        'Company' => 'Company',
+        'OwnerCompany' => 'Company',
     ];
 
     private static $summary_fields = [
