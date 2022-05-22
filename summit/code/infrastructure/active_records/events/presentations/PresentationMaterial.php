@@ -20,7 +20,7 @@ class PresentationMaterial extends DataObject
         'Description'   => 'HTMLText',
         'DisplayOnSite' => 'Boolean',
         'Featured'      => 'Boolean',
-        'Order'         => 'Int',
+        'CustomOrder'   => 'Int',
     );
 
     private static $has_many = array

@@ -69,7 +69,7 @@
                 <div class="col-sm-12">
                     <hr style="margin-top:60px;">
                     <h3 class="recap-title">{$Title}</h3>
-                    <% loop $Videos().Sort('Order')  %>
+                    <% loop $Videos().Sort('CustomOrder')  %>
                         <div class="about-video-wrapper">
                             <iframe src="//www.youtube.com/embed/{$YoutubeID}?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe>
                             <p class='video-catpion'>{$Caption}</p>

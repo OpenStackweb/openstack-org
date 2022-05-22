@@ -30,7 +30,7 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
         'SupportsExtensions'           => 'Boolean',
         'IsCoreService'                => 'Boolean',
         'WikiUrl'                      => 'Text',
-        'Order'                        => 'Int',
+        'CustomOrder'                  => 'Int',
         'YouTubeID'                    => 'Varchar',
         'VideoDescription'             => 'Text',
         'VideoTitle'                   => 'Varchar',
