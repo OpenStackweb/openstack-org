@@ -216,7 +216,7 @@ class OpenStackComponentCategory extends DataObject implements IOpenStackCompone
             if ($category->getActiveSubCategories()->count() > 0) {
                 $subcategories = OpenStackComponentCategory::getFilteredCategoryMap($category->getActiveSubCategories(), $componentIds, $serializer);
             } else if ($category->OpenStackComponents()->count() > 0) {
-                foreach ($category->OpenStackComponents()->filter('ID', $componentIds)->sort('Order') as $component) {
+                foreach ($category->OpenStackComponents()->filter('ID', $componentIds)->sort('CustomOrder') as $component) {
                     $components[] = $serializer->serialize($component);
                 }
             }
