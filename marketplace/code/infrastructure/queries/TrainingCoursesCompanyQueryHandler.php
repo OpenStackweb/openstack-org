@@ -24,7 +24,7 @@ final class TrainingCoursesCompanyQueryHandler implements IQueryHandler {
 
         $params = $specification->getSpecificationParams();
         $current_date   = @$params['name_pattern'];
-        $date_filter = "";
+        $date_filter = "AND ( TrainingCourse.Online=1 )";
         if ($current_date) {
             $current_date   = Convert::raw2sql($current_date);
             $date_filter = "AND (
@@ -42,7 +42,7 @@ final class TrainingCoursesCompanyQueryHandler implements IQueryHandler {
         FROM TrainingCourse
         INNER JOIN CompanyService ON CompanyService.ID  = TrainingCourse.TrainingServiceID AND CompanyService.ClassName='TrainingService'
         INNER JOIN Company C on C.ID = CompanyService.CompanyID
-        INNER JOIN TrainingCourseSchedule ON TrainingCourseSchedule.CourseID = TrainingCourse.ID
+        LEFT JOIN TrainingCourseSchedule ON TrainingCourseSchedule.CourseID = TrainingCourse.ID
         LEFT JOIN TrainingCourseScheduleTime ON TrainingCourseScheduleTime.LocationID = TrainingCourseSchedule.ID
         WHERE CompanyService.Active = 1
         {$date_filter}
