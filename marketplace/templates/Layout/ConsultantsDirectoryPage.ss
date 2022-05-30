@@ -1,6 +1,6 @@
 <div class="grey-bar">
     <div class="container">
-        <p class="filter-label">Filter Consultants</p>
+        <p class="filter-label">Filter Providers</p>
         <input type="text" placeholder="ANY NAME" name="name-term" id="name-term" value="{$Keyword}">
         $ServicesCombo
         $LocationCombo
