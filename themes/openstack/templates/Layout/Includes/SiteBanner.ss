@@ -7,10 +7,10 @@
             <img src="/themes/openstack/home_images/Logos/OpenInfra-Berlin2022.svg" />
         </div>
         <div class="text">
-            Join the global OpenStack community to meet around best practices, user stories, integrations, collaboration and more June 7-9 in Berlin!
+            Now you can watch the keynotes that took place during the OpenInfra Summit in Berlin!
         </div>
         <div class="button">
-            <a href="https://openinfra.dev/summit/" class="btn btn-default">REGISTER NOW!</a>
+            <a href="https://youtu.be/ZlPLGmBfaVc" class="btn btn-default">WATCH NOW!</a>
         </div>
     </div>
 </div>
