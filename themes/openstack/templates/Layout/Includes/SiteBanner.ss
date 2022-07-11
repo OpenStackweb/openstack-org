@@ -10,7 +10,7 @@
             Now you can watch the keynotes that took place during the OpenInfra Summit in Berlin!
         </div>
         <div class="button">
-            <a href="https://youtu.be/ZlPLGmBfaVc" class="btn btn-default">WATCH NOW!</a>
+            <a href="https://www.openstack.org/videos/summits/berlin-2022" class="btn btn-default">WATCH NOW!</a>
         </div>
     </div>
 </div>
