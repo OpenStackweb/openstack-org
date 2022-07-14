@@ -26,6 +26,7 @@ class App extends React.Component {
         const widgetProps = {
             projects: projects,
             currentProject: window.navBarConfig.currentProject,
+            containerClass: "nav-bar-inner-container",
         };
 
         return (
