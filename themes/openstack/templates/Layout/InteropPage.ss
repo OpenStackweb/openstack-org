@@ -152,9 +152,9 @@
         These versions are numbered based on the date when they were approved, such as "2020.06" for the version approved in June, 2020.
     </p>
     <p>
-         The two most recent versions approved by the board are <a title="2020.11 Interop Capabilities" href="https://opendev.org/osf/interop/src/branch/master/2020.11.json" target="_blank">2020.11</a> and
-         <a title="2020.06 Interop Capabilities" href="https://opendev.org/openstack/interop/src/branch/master/2020.06.json" target="_blank">2020.06</a>. These two guidelines cover five OpenStack releases: Stein,
-         Train, Ussuri, Victoria, and Wallaby. The list of required capabilities (with must-pass tests) and designated
+         The two most recent versions approved by the board are <a title="2021.11 Interop Capabilities" href="https://opendev.org/openinfra/interop/raw/branch/master/guidelines/2021.11.json" target="_blank">2021.11</a> and
+         <a title="2020.06 Interop Capabilities" href="https://opendev.org/openinfra/interop/raw/branch/master/guidelines/2020.11.json" target="_blank">2020.11</a>. These two guidelines cover five OpenStack releases: 
+         Train, Ussuri, Victoria, Wallaby, Xena, and Yoga. The list of required capabilities (with must-pass tests) and designated
          code sections are published on <a href="http://git.openstack.org" target="_blank">git.openstack.org</a> and summarized below. Once a
          company verifies their products include the appropriate designated sections and submit API test results, they
          will be asked to sign the license agreements.
