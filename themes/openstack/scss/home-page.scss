@@ -3670,12 +3670,15 @@ ul.resource-links li a:hover {
 
 .top-site-banner {
   position: relative;
-  top: 0;
   left: 0;
+  top:40px;
   z-index: 20;
   width: 100vw;
   background-color: black;
   height: 174px;
+  @media (max-width: 768px) {
+    top:0;
+  }
 }
 
 .top-site-banner .container {

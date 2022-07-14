@@ -21,13 +21,35 @@ a.navbar-brand {
     display: none;
 }
 
-@media (min-width: 768px) {
-    .global-nav {
-        margin-top: 74px; /* account for fixed SiteBanner height */
+.global-nav {
+    margin-top: 118px; /* account for fixed SiteBanner height */
+    @media (max-width: 768px) {
+        margin-top:0px;
     }
+}
 
+.nav-bar-inner-container{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+@media (min-width: 768px) {
     .brand-wrapper {
         margin: 10px 0;
+    }
+}
+
+#nav_container{
+}
+
+@media (min-width: 768px) {
+    #nav_container {
+        height: 40px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 30;
     }
 }
 
