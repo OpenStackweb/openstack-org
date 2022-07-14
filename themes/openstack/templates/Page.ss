@@ -18,7 +18,7 @@
     <link rel="icon" type="image/png" href="/favicon/favicon-16x16.png" sizes="16x16"> 
     <link rel="manifest" href="/favicon/manifest.json"> 
     <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5">
-
+    <link rel="stylesheet" type="text/css" href="navbar/ui/production/css/main.css">
     <!-- Cookie Bot -->
     <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="e11e4375-71b9-426d-a76d-61eae3ddc08f" type="text/javascript" async></script>
     <!-- End Cookie Bot -->
@@ -32,15 +32,15 @@
     <% include Page_GoogleAnalytics %>
     <% include Page_MicrosoftAdvertising %>
     <% include Page_LinkedinInsightTracker %>
-  </head>
 
+  </head>
   <body id="$URLSegment">
+      <div id="nav_container"></div>
       <% include SiteBanner %>
       <% include Navigation %>
-      
       <!-- Page Content -->
       <div class="container">
-        $Message        
+        $Message
         $Layout
       </div>
 
@@ -49,5 +49,12 @@
     <% include TwitterUniversalWebsiteTagCode %>
     <% include OpenstackSearchWidget %>
   </body>
-    <% include Page_LinkedinInsightTracker %>
+   <% include Page_LinkedinInsightTracker %>
+  <script type="text/javascript">
+    window.navBarConfig = {
+      currentProject : $CurrentSponsoredProject,
+      baseApiUrl: '$ApiUrl',
+    };
+  </script>
+  <script src="navbar/ui/production/js/main.js"></script>
 </html>

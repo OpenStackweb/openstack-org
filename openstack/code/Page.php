@@ -587,4 +587,12 @@ class Page_Controller extends ContentController
         return (Member::currentUser() && Session::get("Member.showUpdateProfileModal"));
     }
 
+    public function getApiUrl() {
+        return OPENSTACK_RESOURCE_API_BASE_URL;
+    }
+
+    public function getCurrentSponsoredProject() {
+        return OPENSTACK_CURRENT_SPONSORED_PROJECT;
+    }
+
 }
