@@ -36,7 +36,7 @@
   </head>
   <body id="$URLSegment">
       <% include SiteBanner %>
-      <div id="nav_container" style="min-height: 78px;padding-top: 78px;"></div>
+      <div id="nav_container"></div>
       <% include Navigation %>
       <!-- Page Content -->
       <div class="container">

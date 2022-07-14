@@ -23,11 +23,17 @@ a.navbar-brand {
 
 @media (min-width: 768px) {
     .global-nav {
-        margin-top: 74px; /* account for fixed SiteBanner height */
     }
-
     .brand-wrapper {
         margin: 10px 0;
+    }
+}
+
+#nav_container{
+}
+@media (min-width: 768px) {
+    #nav_container {
+        margin-top: 74px; /* account for fixed SiteBanner height */
     }
 }
 
