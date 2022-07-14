@@ -35,8 +35,8 @@
 
   </head>
   <body id="$URLSegment">
-      <% include SiteBanner %>
       <div id="nav_container"></div>
+      <% include SiteBanner %>
       <% include Navigation %>
       <!-- Page Content -->
       <div class="container">
