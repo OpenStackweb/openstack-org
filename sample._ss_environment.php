@@ -209,6 +209,8 @@ define('MEETUP_USER' ,'');
 define('MEETUP_PASSWORD' ,'');
 define('DROPBOX_ACCESS_TOKEN', '');
 define('MEDIA_UPLOAD_MOUNTING_FOLDER', 'PresentationMediaUploads');
+// currrent sponsored project for nav bar
+define('OPENSTACK_CURRENT_SPONSORED_PROJECT', 4);
 
 global $_FILE_TO_URL_MAPPING;
 $_FILE_TO_URL_MAPPING[''] = '';

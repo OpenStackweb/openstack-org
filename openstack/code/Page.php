@@ -592,7 +592,7 @@ class Page_Controller extends ContentController
     }
 
     public function getCurrentSponsoredProject() {
-        return 4;
+        return OPENSTACK_CURRENT_SPONSORED_PROJECT;
     }
 
 }
