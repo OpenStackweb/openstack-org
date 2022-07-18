@@ -22,7 +22,11 @@ a.navbar-brand {
 }
 
 .global-nav {
+<<<<<<< HEAD
     margin-top: 118px; /* account for fixed SiteBanner height */
+=======
+    margin-top: 40px;
+>>>>>>> 6faa0da4a (Adjusted navigation menu css)
     @media (max-width: 768px) {
         margin-top:0px;
     }
