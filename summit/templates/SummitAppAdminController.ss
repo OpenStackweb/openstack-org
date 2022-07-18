@@ -26,7 +26,7 @@
 </head>
 
 <body id="$URLSegment">
-    <!-- <% include SiteBanner %> -->
+    <% include SiteBanner %>
 
 <!-- Page Content -->
 <div class="container">
