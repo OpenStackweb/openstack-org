@@ -27,7 +27,7 @@
     </head>
 
     <body id="$URLSegment" lang="$CurrentLocale">
-        <% include SiteBanner %>
+        <!-- <% include SiteBanner %> -->
         <% include Navigation %>
         <!-- Page Content -->
         $Message
