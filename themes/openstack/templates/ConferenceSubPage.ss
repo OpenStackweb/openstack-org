@@ -41,7 +41,7 @@
     </head>
 
     <body id="$URLSegment">
-        <!-- <% include SiteBanner %> -->
+        <% include SiteBanner %>
         <% include Navigation %>
 
         <!-- Page Content -->
