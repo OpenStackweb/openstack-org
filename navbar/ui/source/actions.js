@@ -58,6 +58,7 @@ export const fetchAll = () => (dispatch) => {
     let params = {
         page: 1,
         per_page: 100,
+        order: 'name',
     };
 
     const baseUrl = window.navBarConfig.baseApiUrl;
@@ -66,7 +67,8 @@ export const fetchAll = () => (dispatch) => {
         null,
         createAction(RECEIVE_SPONSORED_PROJECTS),
         `${baseUrl}/api/public/v1/sponsored-projects`,
-        errorHandler
+        errorHandler,
+        params
     )({})(dispatch).then(() => {
             dispatch(stopLoading());
         }
