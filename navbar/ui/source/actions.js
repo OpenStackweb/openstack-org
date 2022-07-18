@@ -67,9 +67,8 @@ export const fetchAll = () => (dispatch) => {
         null,
         createAction(RECEIVE_SPONSORED_PROJECTS),
         `${baseUrl}/api/public/v1/sponsored-projects`,
-        errorHandler,
-        params
-    )({})(dispatch).then(() => {
+        errorHandler
+    )(params)(dispatch).then(() => {
             dispatch(stopLoading());
         }
     );
