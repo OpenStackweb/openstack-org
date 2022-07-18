@@ -35,15 +35,15 @@ class CompanyListPage extends Page
     function getCMSFields()
     {
         $fields = parent::getCMSFields();
-        $config = GridFieldConfig_RecordEditor::create(20);
-        $companiesTable = new GridField('Company', 'Company',$this->Company(), $config);
+        $config = GridFieldConfig_RelationEditor::create(20);
+        $companiesTable = new GridField('Company', 'Company', $this->Company()->sort('Name'), $config);
         $fields->addFieldToTab('Root.Companies', $companiesTable);
 
         $config = GridFieldConfig_RelationEditor::create(20);
         $config->addComponent($sort = new GridFieldSortableRows('SortOrder'));
         $config->removeComponentsByType('GridFieldEditButton');
         $config->removeComponentsByType('GridFieldAddNewButton');
-        $donorsTable = new GridField('Donors', 'Donors', $this->Donors(), $config);
+        $donorsTable = new GridField('Donors', 'Donors', $this->Donors('Name'), $config);
         $fields->addFieldToTab('Root.Companies', $donorsTable);
 
         return $fields;
