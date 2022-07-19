@@ -21,13 +21,6 @@ a.navbar-brand {
     display: none;
 }
 
-.global-nav {
-    margin-top: 40px;
-    @media (max-width: 768px) {
-        margin-top:0px;
-    }
-}
-
 .nav-bar-inner-container{
     padding-left: 15px;
     padding-right: 15px;
@@ -45,7 +38,6 @@ a.navbar-brand {
 @media (min-width: 768px) {
     #nav_container {
         height: 40px;
-        position: fixed;
         top: 0;
         left: 0;
         width: 100%;
