@@ -82,3 +82,16 @@ jQuery(window).on("resize",function () {
         $("li").removeClass("open");
     }
 });
+
+// Global Nav UI Tracking
+
+jQuery(document).ready(function($) {
+    $(document).on("click", ".project___1BAp9", function(){
+        var href  = $(this).attr('href');
+        ga('send', 'event', {
+            eventCategory: 'Global UI Navigation',
+            eventAction: 'Click',
+            eventLabel: href
+        });
+    });
+});
