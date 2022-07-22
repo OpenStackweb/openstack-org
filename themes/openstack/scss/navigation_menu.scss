@@ -436,6 +436,12 @@ nav[class^="navbar"] {
                 width: auto;
             }
 		}
+        div[class^="popup"] {
+			hr {
+                border: none;
+                border-top: 1px solid #a7a9ac;
+            }
+		}
 	}
 }
 
