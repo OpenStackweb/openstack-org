@@ -425,4 +425,14 @@ i.fa-caret-right {
     }
 }
 
+nav[class^="navbar"] {
+	div[class^="container"] {
+		div[class^="project"] {
+			p {
+                margin: 0;
+            }
+		}
+	}
+}
+
 /*End Header Navigation*/
