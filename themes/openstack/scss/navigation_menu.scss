@@ -445,4 +445,20 @@ nav[class^="navbar"] {
 	}
 }
 
+@media screen and (max-width: 768px) {
+    nav[class^="navbar"] {
+        div[class^="container"] {
+            div[class^="popup"] {
+                right: 0;
+                margin-left: 0;
+            }
+            div[class^="outerTriangle"] {
+                right: 10px;
+            }
+            img[class^="menuIcon"] {
+                margin-right: 20px;
+            }
+        }
+    }
+}
 /*End Header Navigation*/
