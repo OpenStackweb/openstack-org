@@ -427,13 +427,6 @@ i.fa-caret-right {
 
 nav[class^="navbar"] {
 	div[class^="container"] {
-        div[class^="brand"] {
-			img {
-                @media screen and (max-width: 768px) {
-                    margin-right: 20px;
-                }
-            }
-		}
 		div[class^="project"] {
 			p {
                 margin: 0;
