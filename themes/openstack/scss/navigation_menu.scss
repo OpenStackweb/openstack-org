@@ -427,6 +427,13 @@ i.fa-caret-right {
 
 nav[class^="navbar"] {
 	div[class^="container"] {
+        div[class^="brand"] {
+			img {
+                @media screen and (max-width: 768px) {
+                    margin-right: 20px;
+                }
+            }
+		}
 		div[class^="project"] {
 			p {
                 margin: 0;
@@ -437,6 +444,15 @@ nav[class^="navbar"] {
             }
 		}
         div[class^="popup"] {
+            @media screen and (max-width: 768px) {
+                right: 0;
+                margin-left: 0;
+            }
+            div[class^="outerTriangle"] {
+                @media screen and (max-width: 768px) {
+                    right: 10px;
+                }
+            }
 			hr {
                 border: none;
                 border-top: 1px solid #a7a9ac;
