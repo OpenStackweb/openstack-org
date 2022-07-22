@@ -455,7 +455,7 @@ nav[class^="navbar"] {
             div[class^="outerTriangle"] {
                 right: 10px;
             }
-            div[class^="menu"] img {
+            div[class^="menu"] > img {
                 margin-right: 20px;
             }
         }
