@@ -75,7 +75,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         $HostIntro
-                        <a href="mailto:events@openstack.org" class="dark-blue">Contact Us For More Details</a>
+                        <a href="mailto:events@openinfra.dev" class="dark-blue">Contact Us For More Details</a>
                         <span class="hr"></span>
                         $HostFAQs
                     </div>
