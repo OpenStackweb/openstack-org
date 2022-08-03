@@ -17,7 +17,7 @@
     <link rel="icon" type="image/png" href="/favicon/favicon-32x32.png" sizes="32x32"> 
     <link rel="icon" type="image/png" href="/favicon/favicon-16x16.png" sizes="16x16"> 
     <link rel="manifest" href="/favicon/manifest.json"> 
-    <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#da1a32">
     <link rel="stylesheet" type="text/css" href="navbar/ui/production/css/main.css">
     <!-- Cookie Bot -->
     <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="e11e4375-71b9-426d-a76d-61eae3ddc08f" type="text/javascript" async></script>
