@@ -18,13 +18,15 @@
     <!--[if lt IE 9]>
         <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->    
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="navbar/ui/production/css/main.css">
     <% include Page_GoogleAnalytics %>
     <% include Page_MicrosoftAdvertising %>
 
   </head>
 
   <body id="$URLSegment">
+      <div id="nav_container"></div>
       <% include SiteBanner %>
       <% include Navigation %>
       
@@ -43,4 +45,12 @@
     <% include OpenstackSearchWidget %>
   </body>
   <% include Page_LinkedinInsightTracker %>
+    <% include Page_LinkedinInsightTracker %>
+  <script type="text/javascript">
+    window.navBarConfig = {
+      currentProject : $CurrentSponsoredProject,
+      baseApiUrl: '$ApiUrl',
+    };
+  </script>
+  <script src="navbar/ui/production/js/main.js"></script>
 </html>

@@ -21,8 +21,6 @@ class App extends React.Component {
 
         let {projects} = this.props;
 
-        if(!projects.length) return null;
-
         const widgetProps = {
             projects: projects,
             currentProject: window.navBarConfig.currentProject,
