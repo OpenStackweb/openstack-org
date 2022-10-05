@@ -80,9 +80,6 @@ $CloudInfraContent
 <div class="section-ussuri">
   <div class="container">
     <h2>Latest Release: {$LatestReleaseName}</h2>
-    <div class="video-container">
-      <a href="{$LatestReleaseVideoLink}"><img class="ussuri-video" src="{$LatestReleaseVideoPosterUrl}"/></a>
-    </div>
     <!-- <p>{$LatestReleaseVideoDescription}</p> -->
     <div class="ussuri-btn-wrapper">
     <a href="{$LatestReleaseCurrentButtonLink}" class="ussuri-btn">{$LatestReleaseCurrentButtonText}</a>
