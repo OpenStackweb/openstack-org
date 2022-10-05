@@ -1553,8 +1553,19 @@ a.anniversary-btn:hover, a.anniversary-btn:focus {
       flex-direction: column;
 
       .ussuri-btn {
-        width: 50%;
+        width: 385px;
         margin: 0 auto 15px;
+      }
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  .section-ussuri {
+
+    .ussuri-btn-wrapper {
+      .ussuri-btn {
+        width: 320px;
       }
     }
   }
