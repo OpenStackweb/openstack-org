@@ -58,3 +58,7 @@
 .lang-dropdown>button>.caret{
     margin-top: 6px;
 }
+
+#TranslationPriorityRanking {
+    display: none;
+}
