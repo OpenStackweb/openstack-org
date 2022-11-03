@@ -61,7 +61,7 @@ $CloudInfraContent
 <a href="/marketplace/public-clouds/">
 <img src="/themes/openstack/home_images/Icons/SVG/Public-Cloud-Icon.svg"></a>
 <a href="/marketplace/public-clouds/" style="text-decoration:none;"><h2>Public Cloud</h2></a>
-<a href="/marketplace/public-clouds/"><p>Leverage one of the 70+ OpenStack powered public cloud data centers</p></a>
+<a href="/marketplace/public-clouds/"><p>Leverage one of the 180+ OpenStack powered public cloud data centers</p></a>
 </div>
 <div class="col-lg-4 col-xs-12 col-md-4 col-sm-4">
 <a href="/edge-computing/">
