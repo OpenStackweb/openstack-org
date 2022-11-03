@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "expect": "^1.14.0",
-    "mocha": "^2.4.5",
+    "mocha": "^10.1.0",
     "redux-mock-store": "^1.0.2",
     "superagent-mock": "^1.10.0"
   }
