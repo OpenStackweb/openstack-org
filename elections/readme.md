@@ -14,6 +14,15 @@ added its name to table VoterFile to avoid to ingest it again.
  does not voted on 2 of the 3 elections
 ex:
 ````bash
-sudo sake RevocationNotificationSenderTask batch_size=2500
+sudo sake RevocationNotificationSenderTask batch_size=2500 > election_purge.txt
 ````
-*RevocationExecutorTask: this tasks automatically revoke any voided notification                                                                                                                                                                                    
+*RevocationExecutorTask: this tasks automatically revoke any voided notification 
+
+EMAIL TEMPLATE ID
+
+RevocationNotificationEmail
+
+ENV VARS
+
+REVOCATION_NOTIFICATION_EMAIL_FROM
+REVOCATION_NOTIFICATION_EMAIL_SUBJECT
