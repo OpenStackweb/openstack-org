@@ -7,7 +7,7 @@
                 </div>
                 <div class="col-md-10 col-sm-10">
                     <h2>OpenInfra Summit Vancouver</h2>
-                    <p>Join the global community in Vancouver from June 13–15, 2023 to collaborate directly with the people building and running open source infrastructure using OpenStack, Kubernetes and 30+ other technologies</p>
+                    <p>Submit your open source demos and production use cases across categories ranging from private, hybrid and public cloud to containers, hardware enablement, and 5G</p>
                 </div>
             </div>
         </div>
