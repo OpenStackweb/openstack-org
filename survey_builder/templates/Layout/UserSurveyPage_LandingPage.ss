@@ -117,7 +117,7 @@
                 $_T("survey_ui", "Read more from the tenth survey of OpenStack users since April 2013, with a goal of better understanding user perspectives, organizational profiles, use cases, and technology choices across the community’s deployments. This cycle, the survey was translated into seven additional languages and includes analysis comparisons between both the previous cycle and year over year.")
             </p>
             <p>
-                <a class="roundedButton" href="https://www.openstack.org/user-survey/2018-user-survey-report" target="_blank">$_T("survey_ui", "Read the 2018 Full Report")</a>
+                <a class="roundedButton" href="https://www.openstack.org/user-survey/2022-user-survey-report" target="_blank">$_T("survey_ui", "Read the 2022 Full Report")</a>
             </p>
             <h3><a href="/analytics">$_T("survey_ui", "Analyze the User Survey")</a></h3>
             <p>
