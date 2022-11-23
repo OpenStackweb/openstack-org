@@ -23,7 +23,7 @@ final class EventValidatorFactory
 	public function buildValidatorForEventRegistration(array $data)
 	{
 		$rules = array(
-			'title'                  => 'required|text|max:35',
+			'title'                  => 'required|text|max:60',
 			'url'                    => 'required|url',
             'category'               => 'required|text',
 			'city'                   => 'required|text',
@@ -38,7 +38,7 @@ final class EventValidatorFactory
 		$messages = array(
 			'title.required'                  => ':attribute is required',
 			'title.text'                      => ':attribute should be valid text.',
-			'title.max'                       => ':attribute should have less than 35 chars.',
+			'title.max'                       => ':attribute should have less than 60 chars.',
 			'url.required'                    => ':attribute is required',
 			'url.url'                         => ':attribute should be valid url.',
             'category.required'               => ':attribute is required',
@@ -69,7 +69,7 @@ final class EventValidatorFactory
     public function buildValidatorForEvent(array $data)
     {
         $rules = array(
-            'title'                  => 'required|text|max:35',
+            'title'                  => 'required|text|max:60',
             'url'                    => 'url',
             'category'               => 'required|text',
             'location'               => 'required|text',
@@ -80,7 +80,7 @@ final class EventValidatorFactory
         $messages = array(
             'title.required'                  => ':attribute is required',
             'title.text'                      => ':attribute should be valid text.',
-            'title.max'                       => ':attribute should have less than 35 chars.',
+            'title.max'                       => ':attribute should have less than 60 chars.',
             'url.url'                         => ':attribute should be valid url.',
             'category.required'               => ':attribute is required',
             'category.text'                   => ':attribute should be valid text.',
