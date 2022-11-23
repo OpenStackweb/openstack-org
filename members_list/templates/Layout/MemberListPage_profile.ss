@@ -19,7 +19,7 @@
                         <img width="65px" src="{$Top.CloudUrl("assets/oui-logo.jpg")}" title="OpenStack Upstream Institute" alt="OpenStack Upstream Institute">
                     <% end_if %>
                     <% if getCommunityAwards %>
-                        <img width="65px" src="{$Top.CloudUrl("assets/cca-logo.png")}" title="Community Constributor Award" alt="Community Constributor Award">
+                        <img width="65px" src="{$Top.CloudUrl("assets/cca-logo.png")}" title="Community Contributor Award" alt="Community Contributor Award">
                     <% end_if %>
                 </h3>
             </div>
