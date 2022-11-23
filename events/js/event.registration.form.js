@@ -36,7 +36,7 @@ jQuery(document).ready(function($) {
             rules: {
                 point_of_contact_name    : { required: true , ValidPlainText:true, maxlength: 100 },
                 point_of_contact_email   : { required: true , email:true, maxlength: 100 },
-                title      : { required: true , ValidPlainText:true, maxlength: 35 },
+                title      : { required: true , ValidPlainText:true, maxlength: 60 },
                 url        : {required: true, complete_url: true, maxlength: 255},
                 category   : {required: true},
                 city       : {required: true, ValidPlainText: true, maxlength: 255},
@@ -104,7 +104,7 @@ jQuery(document).ready(function($) {
             onfocusout: false,
             focusCleanup: true,
             rules: {
-                title           : { required: true , ValidPlainText:true, maxlength: 35 },
+                title           : { required: true , ValidPlainText:true, maxlength: 60 },
                 url             : {url: true, maxlength: 255},
                 event_category  : {required: true},
                 location        : {required: true, ValidPlainText: true, maxlength: 255},
