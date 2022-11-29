@@ -116,7 +116,7 @@
 					<hr/>
 					<h2>Supporting Organizations</h2>
 					<p>
-					The resources provided by the Members and Sponsors are critical to making the OpenInfra Foundation successful, but there are many ways to support the OpenStack mission, whether you're contributing code, building an OpenStack product or helping build the community. Below are companies who are actively involved in making OpenStack successful. If you would like your company listed here, please complete the <a href="https://openstack.na1.echosign.com/public/esignWidget?wid=CBFCIBAA3AAABLblqZhAwCNf4bl-p05NMZiwtG6R9VEvPsqRKfyPpVy47b7apdl09bEht3qU8O6SYXQKA5Ww*" target="_new">logo authorization form</a>.
+					The resources provided by the Members and Sponsors are critical to making the Open Infrastructure Foundation successful, but there are many ways to support the OpenStack mission, whether you're contributing code, building an OpenStack product or helping build the community. Below are companies who are actively involved in making OpenStack successful. If you would like your company listed here, please complete the <a href="https://openstack.echosign.com/public/hostedForm?formid=4TBJIEXJ4M7X2Q" target="_new">logo authorization form</a> and <a href="mailto:supporterlogos@openstack.org">send your logo</a>.
 					</p>
 				</div>
 			</div>
