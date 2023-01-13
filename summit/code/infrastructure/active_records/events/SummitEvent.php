@@ -20,7 +20,7 @@ class SummitEvent extends DataObject implements ISummitEvent
     (
         'Title'                     => 'Text',
         'Abstract'                  => 'HTMLText',
-        'SocialSummary'             => 'VarChar(100)',
+        'SocialSummary'             => 'VarChar(500)',
         'StartDate'                 => 'SS_Datetime',
         'EndDate'                   => 'SS_Datetime',
         'Published'                 => 'Boolean',
