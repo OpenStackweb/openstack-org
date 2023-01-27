@@ -570,13 +570,17 @@ div.termsBox {
 #openstack-compatible,
 #brand,
 #openstack-powered,
-#openstack-training {
+#openstack-training,
+#event-policy {
   .container .row ul {
     list-style-type: disc;
-    padding-left: 15px;
+    padding-left: 20px;
     li {
-      margin-bottom: 10px;
+      margin-bottom: 20px;
       font-size: 14px;
+      ul {
+        list-style-type: circle;
+      }
     }
   }
 }
