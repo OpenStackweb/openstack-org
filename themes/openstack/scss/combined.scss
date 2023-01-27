@@ -572,16 +572,21 @@ div.termsBox {
 #openstack-powered,
 #openstack-training,
 #event-policy {
-  .container .row ul {
-    list-style-type: disc;
-    padding-left: 20px;
-    li {
-      margin-bottom: 20px;
-      font-size: 14px;
-      ul {
-        list-style-type: circle;
+  .container .row {
+    ul {
+      list-style-type: disc;
+      padding-left: 20px;
+      li {
+        margin-bottom: 20px;
+        font-size: 14px;
+        ul {
+          list-style-type: circle;
+        }
       }
     }
+  }
+  .termsBox {
+    margin: 20px 0;
   }
 }
 
