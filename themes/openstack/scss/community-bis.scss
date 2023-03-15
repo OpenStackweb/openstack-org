@@ -878,4 +878,11 @@ a.staff-openstack{background:url(#{$static_images_base_url}/foundation-staff/ico
     }
 }
 
+#community .contribute-panel .row.nav {
+    @media screen and (max-width: 600px) {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+}
+
 

@@ -1758,3 +1758,10 @@ a.software-link-button {
   margin-bottom: 20px;
   padding: 25px 0px;
 }
+
+#software .software-main-wrapper img.header-bullet {
+  @media screen and (max-width: 769px) {
+    position: relative;
+    bottom: 10px;
+  }
+}
