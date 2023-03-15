@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-10 col-xs-6 col-lg-10">
+        <div class="col-sm-10 col-xs-10 col-lg-10">
             <div class="detail_title">
                 <a rel="nofollow" target="_blank" href="/community/jobs/view/$ID/$Slug" class="jobTitle job_title_hold">$Title</a>
             </div>

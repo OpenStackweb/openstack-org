@@ -1,7 +1,7 @@
 @import "_cdn.scss";
 
 .learn-hero {
-	background: url("#{$static_images_base_url}/learn/learn-hero.jpg") no-repeat top right;
+	background: url("https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/learn-hero.jpg") no-repeat top right;
 	background-size: cover;
 }
 
@@ -63,4 +63,55 @@ a.learn-btn i {
 a.learn-btn:hover {
 	background: #30739C;
 	text-decoration: none;
+}
+
+.learn-icon {
+	&.analyst-icon {
+		background-image: url('https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/Analyst-learn-icon.svg');
+	}
+}
+.learn-icon {
+	&.ask-analyst-icon {
+		background-image: url('https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/Ask-learn-icon.svg');
+	}
+}
+.learn-icon {
+	&.blog-icon {
+		background-image: url('https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/Blog-learn-icon.svg');
+	}
+}
+.learn-icon {
+	&.coa-icon {
+		background-image: url('https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/COA-learn-icon2.svg');
+	}
+}
+.learn-icon {
+	&.news-icon {
+		background-image: url('https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/News-learn-icon.svg');
+	}
+}
+.learn-icon {
+	&.superuser-learn-icon {
+		background-image: url('https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/Superuser-learn-icon.svg');
+	}
+}
+.learn-icon {
+	&.learn-analyst-icon {
+		background-image: url('https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/Analyst-learn-icon.svg');
+	}
+}
+.learn-icon {
+	&.training-icon {
+		background-image: url('https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/traning-learn-icon.svg');
+	}
+}
+.learn-icon {
+	&.video-icon {
+		background-image: url('https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/Video-learn-icon.svg');
+	}
+}
+.learn-icon {
+	&.superuser-icon {
+		background-image: url('https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/superuser-icon.svg');
+	}
 }

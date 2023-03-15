@@ -20,7 +20,7 @@
             <div class="col-md-5ths col-xs-6 nav-button-box">
                 <a class="nav-button" data-toggle="collapse" data-target="#code" data-parent="#accordion-parent">
                     <div class="nav-button-icon">
-                        <img src="{$Top.CloudUrl("images/community/pencil.png")}" />
+                        <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/community-pencil.png" />
                     </div>
                     <div>Code & Documentation</div>
                 </a>
@@ -28,7 +28,7 @@
             <div class="col-md-5ths col-xs-6 nav-button-box">
                 <a class="nav-button" data-toggle="collapse" data-target="#events" data-parent="#accordion-parent">
                     <div class="nav-button-icon">
-                        <img src="{$Top.CloudUrl("images/community/globe.png")}" />
+                        <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/community-globe.png" />
                     </div>
                     <div>Events</div>
                 </a>
@@ -36,7 +36,7 @@
             <div class="col-md-5ths col-xs-6 nav-button-box">
                 <a href="https://www.meetup.com/pro/openinfradev" class="nav-button" target="_blank">
                     <div class="nav-button-icon">
-                        <img src="{$Top.CloudUrl("images/community/pin.png")}" />
+                        <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/community-pin.png" />
                     </div>
                     <div>User Groups</div>
                 </a>
@@ -52,7 +52,7 @@
             <div class="col-md-5ths col-xs-6 nav-button-box">
                 <a class="nav-button" data-toggle="collapse" data-target="#sponsorship" data-parent="#accordion-parent">
                     <div class="nav-button-icon">
-                        <img src="{$Top.CloudUrl("images/community/book.png")}">
+                        <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/community-book.png">
                     </div>
                     <div>Operators</div>
                 </a>
@@ -60,7 +60,7 @@
             <div class="col-md-5ths col-xs-6 nav-button-box">
                 <a href="https://docs.openstack.org/contributors/common/mentoring.html" class="nav-button" target="_blank">
                     <div class="nav-button-icon">
-                        <img src="{$Top.CloudUrl("images/community/bulb.png")}" />
+                        <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/community-bulb.png" />
                     </div>
                     <div>Mentoring</div>
                 </a>
@@ -273,14 +273,14 @@
     </div>
 </div>
 <div class="quick-links-banner">
-    <img src="{$Top.CloudUrl("images/community/quicklinks.png")}" />
+    <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/community-bg.png" />
 </div>
 <div class="communicate">
     <div class="container">
         <div class="row">
             <div class="col-md-12 communicate-header">
                 <div class="communicate-title">
-                    <img class="communicate-icon" src="{$Top.CloudUrl("images/community/message.png")}">
+                    <img class="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/community-message.png">
                     How to communicate
                 </div>
                 <p>
