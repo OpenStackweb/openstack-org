@@ -2698,7 +2698,7 @@ ul.resource-links li a:hover {
 /*Blog Page*/
 .blog-title {
   width: 100%;
-  background: url(/images/images/summit-promo-bkgd1.jpg) no-repeat center center;
+  background: url("https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/OS-Blog-1314x492-blue.jpg") no-repeat center center;
   background-size: cover;
   padding: 50px 0;
   text-align: center; }
@@ -2731,7 +2731,19 @@ ul.resource-links li a:hover {
   border-top: 1px dotted #c5e2ea;
   margin-bottom: 15px;
   padding: 12px 0;
-  font-size: 12px; }
+  font-size: 12px; 
+}
+
+@media screen and (max-width: 769px) {
+  .home.blog .post-byline {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .home.blog .post-byline > .col-lg-6.col-md-6.col-sm-6 {
+    width: 50%;
+  }
+}
 
 .post-byline p {
   margin-bottom: 0; }
@@ -6170,3 +6182,9 @@ a.dedication-tab {
 @media (max-width: 767px) {
   a.dedication-tab {
     right: 20px; } }
+
+#survey-2023 .hero-survey {
+  @media screen and (max-width: 600px) {
+    background-size: auto;
+  }
+}

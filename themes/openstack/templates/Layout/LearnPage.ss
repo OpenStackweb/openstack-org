@@ -28,7 +28,7 @@
                     <!-- Single Learn Element -->
                     <div class="col-sm-6">
                         <div class="learn-single">
-                            <i class="fa fa-graduation-cap learn-icon"></i>
+                            <i class="fa fa-graduation-cap learn-icon training-icon"></i>
                             <h2>Training</h2>
                             <p>
                                 Find online and location specific trainings for all levels of expertise from the OpenStack Marketplace.
@@ -42,7 +42,7 @@
                     <!-- Single Learn Element -->
                     <div class="col-sm-6">
                         <div class="learn-single">
-                        	<img class="learn-coa-icon" src="{$Top.CloudUrl('assets/learn/COA-learn-icon.svg')}" onerror="this.onerror=null; this.src={$Top.CloudUrl('assets/learn/COA-learn-icon.svg')}" alt="Certified OpenStack Administrator">
+                        	<img class="learn-coa-icon" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/COA-learn-icon2.svg" onerror="this.onerror=null; this.src={$Top.CloudUrl('assets/learn/COA-learn-icon.svg')}" alt="Certified OpenStack Administrator">
                             <h2>Get Certified</h2>
                             <p>
                                 Register for the COA exam, the first professional certification offered by the Open Infrastructure Foundation.
@@ -58,7 +58,7 @@
                     <!-- Single Learn Element -->
                     <div class="col-sm-6">
                         <div class="learn-single">
-                        <img class="learn-superuser-icon" src="{$Top.CloudUrl("images/learn/superuser-icon.svg")}" onerror="{$Top.CloudUrl("images/learn/superuser-icon.jpg")}" alt="OpenStack Superuser Magazine">
+                        <img class="learn-superuser-icon" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/superuser-icon.svg" onerror="{$Top.CloudUrl("images/learn/superuser-icon.jpg")}" alt="OpenStack Superuser Magazine">
                             <h2>Superuser Magazine</h2>
                             <p>
                                 With topics ranging from how-tos, case studies, organizational culture and more, this publication will give you the tools needed to become a Superuser.
@@ -72,7 +72,7 @@
                     <!-- Single Learn Element -->
                     <div class="col-sm-6">
                         <div class="learn-single">
-                            <i class="fa fa-comments learn-icon"></i>
+                            <i class="fa fa-comments learn-icon ask-icon"></i>
                             <h2>Ask OpenStack</h2>
                             <p>
                                 Dig deep into the the world of OpenStack through the eyes of those who operate and develop OpenStack. Ask, find and answer OpenStack specific questions here.
@@ -88,7 +88,7 @@
                     <!-- Single Learn Element -->
                     <div class="col-sm-6">
                         <div class="learn-single">
-                            <i class="fa fa-play-circle learn-icon"></i>
+                            <i class="fa fa-play-circle learn-icon videos-icon"></i>
                             <h2>Summit Videos</h2>
                             <p>
                                 Did you know almost every session at an OpenStack Summit is recorded and shared for the world to see? They are and you can find them here!
@@ -102,7 +102,7 @@
                     <!-- Single Learn Element -->
                     <div class="col-sm-6">
                         <div class="learn-single">
-                            <i class="fa fa-line-chart learn-icon"></i>
+                            <i class="fa fa-line-chart learn-icon analyst-icon"></i>
                             <h2>Analyst Reports</h2>
                             <p>
                                 Find the latest research and insights from leading technology analysts on the power of OpenStack’s cloud services.
@@ -118,7 +118,7 @@
                     <!-- Single Learn Element -->
                     <div class="col-sm-6">
                         <div class="learn-single">
-                            <i class="fa fa-microphone learn-icon"></i>
+                            <i class="fa fa-microphone learn-icon blog-icon"></i>
                             <h2>Blog</h2>
                             <p>
                                 The OpenStack blog is an ever-changing wealth of information, highlighting everything from technical committee updates to events and weekly community newsletters.
@@ -132,7 +132,7 @@
                     <!-- Single Learn Element -->
                     <div class="col-sm-6">
                         <div class="learn-single">
-                            <i class="fa fa-newspaper-o learn-icon"></i>
+                            <i class="fa fa-newspaper-o learn-icon news-icon"></i>
                             <h2>News</h2>
                             <p>
                                 Read about the latest happenings in the OpenStack ecosystem. The news section features news from around the community and the Open Infrastructure Foundation.

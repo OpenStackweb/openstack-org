@@ -323,15 +323,15 @@ div#user, div#time, div#private {
 }
 
 div#user {
-	background: url(#{$static_images_base_url}/user-survey/user-survey.gif) no-repeat center 20px;
+	background: url(https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/user-survey-private.gif) no-repeat center 20px;
 }
 
 div#time {
-	background: url(#{$static_images_base_url}/user-survey/stopwatch.gif) no-repeat center 20px;
+	background: url(https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/user-survey-stopwatch.gif) no-repeat center 20px;
 }
 
 div#private {
-	background: url(#{$static_images_base_url}/user-survey/private.gif) no-repeat center 20px;
+	background: url(https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/user-survey-user-survey.gif) no-repeat center 20px;
 }
 
 div.current-user {
