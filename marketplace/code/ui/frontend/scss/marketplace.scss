@@ -785,13 +785,17 @@ ul.marketplace-nav {
     background: none;
     display: block;
     width: 90px;
-    height: 60px;
+    height: 70px;
     text-align: center;
     margin: 0 auto; }
 
 @media (max-width: 1200px) and (min-width: 1001px) {
   ul.marketplace-nav #pcaas-wrapper:after {
     top: 120%; } }
+
+.marketplace-driver-section .marketplace-single-icon {
+  width: 100px;
+}
 
 @media (max-width: 1000px) and (min-width: 767px) {
   ul.marketplace-nav {
