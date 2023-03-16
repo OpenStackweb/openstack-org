@@ -461,6 +461,12 @@ border-radius: 4px;
 text-align: center;
 }
 
+@media screen and (min-width: 1200px) {
+    div#user {
+        min-height: 200px;
+    }
+}
+
 fieldset.fake {
     border: 1px solid #CCCCCC;
     padding: 20px 17px 20px 17px;
