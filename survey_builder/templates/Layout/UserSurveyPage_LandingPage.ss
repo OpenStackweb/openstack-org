@@ -1,7 +1,7 @@
 <style>
     .hero-survey {
         background-color: transparent;
-        background-image: url('assets/survey/Crowd-General-Session-3.jpg');
+        background-image: url('https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/UserSurvey-hero.jpg');
         background-repeat: no-repeat;
         background-position: left center;
         background-attachment: scroll;
