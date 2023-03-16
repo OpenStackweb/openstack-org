@@ -934,3 +934,24 @@ h3.largeHeadline {
 .news-container .recentHeadline > a {
     font-size: 16px;
 }
+
+#news-slider .carousel-inner > .item:first-of-type {
+    background-image: url('https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/News-Hero-1.jpg');
+}
+
+#news-slider .carousel-inner > .item:nth-of-type(2) {
+    background-image: url('https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/News-Hero-2.jpg');
+}
+
+#news-slider .carousel-inner > .item:nth-of-type(3) {
+    background-image: url('https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/News-Hero-3.jpg');
+}
+
+#news-slider .carousel-inner > .item:nth-of-type(4) {
+    background-image: url('https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/News-Hero-4.jpg');
+}
+
+#news-slider .carousel-inner > .item:nth-of-type(5) {
+    background-image: url('https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/News-Hero-5.jpg');
+}
+
