@@ -58,7 +58,7 @@
                     <!-- Single Learn Element -->
                     <div class="col-sm-6">
                         <div class="learn-single">
-                        <img class="learn-superuser-icon" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/superuser-icon.svg" onerror="{$Top.CloudUrl("images/learn/superuser-icon.jpg")}" alt="OpenStack Superuser Magazine">
+                        <img class="learn-superuser-icon learn-superuser-icon-tall" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/superuser-icon.svg" onerror="{$Top.CloudUrl("images/learn/superuser-icon.jpg")}" alt="OpenStack Superuser Magazine">
                             <h2>Superuser Magazine</h2>
                             <p>
                                 With topics ranging from how-tos, case studies, organizational culture and more, this publication will give you the tools needed to become a Superuser.
