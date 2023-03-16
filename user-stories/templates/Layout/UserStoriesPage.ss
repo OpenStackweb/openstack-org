@@ -9,7 +9,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
-            <div id="user-stories-video-trigger" class="user-story-main-bkgd" style="background-image: url(https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/UseCase-hero.jpg)">
+            <div id="user-stories-video-trigger" class="user-story-main-bkgd" style="background-image: url($HeroImage.getURL())">
                 <span class="text-wrapper">
                     $HeroText
                     <span class="user-story-main-btn">Watch The Video <i class="fa fa-play-circle"></i></span>
