@@ -44,7 +44,7 @@
             <div class="col-md-5ths col-xs-6 nav-button-box">
                 <a class="nav-button" data-toggle="collapse" data-target="#users" data-parent="#accordion-parent">
                     <div class="nav-button-icon">
-                        <i class="fa fa-users"></i>
+                        <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/community-User.png" />
                     </div>
                     <div>Users</div>
                 </a>
