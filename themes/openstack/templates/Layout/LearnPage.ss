@@ -72,7 +72,7 @@
                     <!-- Single Learn Element -->
                     <div class="col-sm-6">
                         <div class="learn-single">
-                            <img class="learn-superuser-icon" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/Ask-learn-icon.svg" onerror="{$Top.CloudUrl("images/learn/superuser-icon.jpg)}" alt="Ask OpenStack Icon">
+                            <i class="fa fa-line-chart learn-icon analyst-icon"></i>
                             <h2>Ask OpenStack</h2>
                             <p>
                                 Dig deep into the the world of OpenStack through the eyes of those who operate and develop OpenStack. Ask, find and answer OpenStack specific questions here.
@@ -88,7 +88,7 @@
                     <!-- Single Learn Element -->
                     <div class="col-sm-6">
                         <div class="learn-single">
-                            <img class="learn-superuser-icon" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/Video-learn-icon.svg" onerror="{$Top.CloudUrl("images/learn/superuser-icon.jpg)}" alt="OpenStack Videos Icon">
+                            <i class="fa fa-line-chart learn-icon videos-icon"></i>
                             <h2>Summit Videos</h2>
                             <p>
                                 Did you know almost every session at an OpenStack Summit is recorded and shared for the world to see? They are and you can find them here!
