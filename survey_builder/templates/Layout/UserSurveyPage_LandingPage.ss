@@ -8,13 +8,14 @@
         background-size: 100%;
         height: 150px;
         border-radius: 15px;
-        -webkit-box-shadow: 8px 10px 5px 1px rgba(0, 0, 0, 0.4);
-        -moz-box-shadow: 8px 10px 5px 1px rgba(0, 0, 0, 0.4);
-        box-shadow: 8px 10px 5px 1px rgba(0, 0, 0, 0.4);
+        box-shadow: none;
         margin-bottom: 25px;
     }
     .hero-survey h1 {
         margin: 55px 0 40px;
+    }
+    .hero-survey i.fa.fa-info-circle {
+        display: none;
     }
 </style>
 <div id="language-selector"></div>
