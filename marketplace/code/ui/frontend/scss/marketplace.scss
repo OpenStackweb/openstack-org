@@ -556,6 +556,11 @@ table.course-schedule tr:last-child td {
     border: 1px solid #e1e1e1 !important;
     border-radius: 4px !important;
 }
+
+#training .chosen-container-single .chosen-single div b {
+  display: none !important;
+}
+
 .chosen-container-single .chosen-single:before {
   content: '';
   right: 6px;
