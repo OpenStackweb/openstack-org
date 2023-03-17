@@ -8,10 +8,12 @@
         background-size: 100%;
         height: 300px;
         border-radius: 15px;
-        -webkit-box-shadow: 8px 10px 5px 1px rgba(0, 0, 0, 0.4);
-        -moz-box-shadow: 8px 10px 5px 1px rgba(0, 0, 0, 0.4);
-        box-shadow: 8px 10px 5px 1px rgba(0, 0, 0, 0.4);
         margin-bottom: 25px;
+        box-shadow: none;
+    }
+
+    .hero-survey i.fa.fa-info-circle {
+        display: none;
     }
 </style>
 <div class="container">
