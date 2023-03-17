@@ -177,8 +177,8 @@ $CloudInfraContent
 <div class="container">
 <div class="row">
 <div class="col-lg-12 col-sm-12" style="text-align: center;">
-<img src="/themes/openstack/home_images/Logos/OpenInfrastructureFoundation-logo-RGB-horiz2.svg" alt="Open Infrastructure Foundation Logo" />
-<p>OpenStack is a top-level open infrastructure project supported by the <a href="https://openinfra.dev" target="_blank">Open Infrastructure Foundation</a> (OpenInfra Foundation)</p>
+<a href="https://openinfra.dev" target="_blank"><img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/OpenInfraFoundation-logo-RGB-horiz2.svg" alt="OpenInfra Foundation Logo" /></a>
+<p>OpenStack is a top-level open infrastructure project supported by the <a href="https://openinfra.dev" target="_blank">OpenInfra Foundation</a></p>
 </div>
 </div>
 </div>
