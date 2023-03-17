@@ -261,7 +261,7 @@
 }
 
 .where-to-start .start-option {
-    background-color: #79c674;
+    background-color: #2A4E68;
     padding: 10px 10px;
     color: white;
     font-style: italic;
@@ -389,7 +389,7 @@ a.staff-linkedin{background:url(#{$static_images_base_url}/foundation-staff/icon
 a.staff-openstack{background:url(#{$static_images_base_url}/foundation-staff/icon_openstack.png) center no-repeat;display:inline-block;width:25px;height:25px}
 
 .communicate {
-    background-color: #63bb5e;
+    background-color: #2A4E68;
     color: white;
     padding: 30px 0px;
 }
@@ -884,6 +884,10 @@ a.staff-openstack{background:url(#{$static_images_base_url}/foundation-staff/ico
         padding-left: 5%;
         padding-right: 5%;
     }
+}
+
+#community .footer-bottom {
+    margin-bottom: 0;
 }
 
 

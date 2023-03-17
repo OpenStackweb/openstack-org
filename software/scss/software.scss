@@ -1721,6 +1721,16 @@ a.software-link-button {
   border-color: #2B4D68;
 }
 
+.software-main-wrapper .inner-software a.software-link-button {
+  color: #fff;
+  background-color: #2B4D68;
+  padding: 12px 25px;
+  border-color: #2B4D68;
+  .fa-stack.fa-lg {
+    display: none;
+  }
+}
+
 @media (max-width: 790px) {
   p.minheight100 {
   min-height: 0px;
