@@ -1,17 +1,21 @@
 <style>
     .hero-survey {
         background-color: transparent;
-        background-image: url('assets/survey/Crowd-General-Session-3.jpg');
+        background-image: url('https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/UserSurvey-hero.jpg');
         background-repeat: no-repeat;
         background-position: left center;
         background-attachment: scroll;
         background-size: 100%;
-        height: 300px;
+        height: 150px;
         border-radius: 15px;
-        -webkit-box-shadow: 8px 10px 5px 1px rgba(0, 0, 0, 0.4);
-        -moz-box-shadow: 8px 10px 5px 1px rgba(0, 0, 0, 0.4);
-        box-shadow: 8px 10px 5px 1px rgba(0, 0, 0, 0.4);
+        box-shadow: none;
         margin-bottom: 25px;
+    }
+    .hero-survey h1 {
+        margin: 55px 0 40px;
+    }
+    .hero-survey i.fa.fa-info-circle {
+        display: none;
     }
 </style>
 <div id="language-selector"></div>
