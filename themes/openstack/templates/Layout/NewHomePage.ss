@@ -142,7 +142,7 @@ $CloudInfraContent
 <div class="twros-section">
 <div class="container">
 <h2>The World Runs on OpenStack</h2>
-<p>OpenStack is trusted to manage 20 Million+ cores around the world, across dozens of industries.</p>
+<p>OpenStack is trusted to manage 40 Million+ cores around the world, across dozens of industries.</p>
 <div class="twros-example">
   <% loop UserStories %>
     <div class="twros-row">
