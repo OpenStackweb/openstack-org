@@ -210,8 +210,8 @@ $cta_color: #EA2046;
 }
 
 .summit-announcement-banner {
-  img {
-    display: inline-block;
+  .summit-announcement-banner-img-sm {
+    display: none;
   }
   h2 {
     font-size: 35px;
@@ -225,8 +225,12 @@ $cta_color: #EA2046;
     line-height: 25px;
   }
   .cta-container {
+    p {
+      text-align: center;
+      margin-bottom: 15px;
+    }
     a {
-      background-color: #43B85C;
+      background-color: #39ae4a;
       width: 250px;
       font-size: 20px;
       svg {
@@ -236,6 +240,7 @@ $cta_color: #EA2046;
   }
   .summit-announcement-bottom-bar {
     bottom: 0;
+    left: 0;
     display: flex;
     height: 7px;
     position: absolute;
@@ -246,14 +251,24 @@ $cta_color: #EA2046;
     .summit-announcement-bar-1 {
       background-color: #e61e24;
     }
-    .summit-announcement-bar-1 {
+    .summit-announcement-bar-2 {
       background-color: #f4a93a;
     }
-    .summit-announcement-bar-1 {
+    .summit-announcement-bar-3 {
       background-color: #28a4db;
     }
-    .summit-announcement-bar-1 {
+    .summit-announcement-bar-4 {
       background-color: #39ae4a;
     }
+  }
+  @media screen and (max-width: 990px) {
+      h2 {
+        .summit-announcement-banner-img-sm {
+          display: block;
+        }
+        .summit-announcement-banner-img-lg {
+          display: none;
+        }
+      }
   }
 }
