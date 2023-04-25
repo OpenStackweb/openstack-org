@@ -211,7 +211,7 @@ $cta_color: #EA2046;
 
 .summit-announcement-banner {
   .summit-announcement-banner-img-sm {
-    display: none;
+    display: none !important;
   }
   h2 {
     font-size: 35px;
@@ -262,12 +262,24 @@ $cta_color: #EA2046;
     }
   }
   @media screen and (max-width: 990px) {
+    .cta-container {
+      margin-top: 18%;
+    }
+}
+  @media screen and (max-width: 991px) {
+    .cta-container {
+      margin-top: 30px;
+      margin-bottom: 15px;
+      p {
+        padding-bottom: 5px;
+      }
+    }
       h2 {
         .summit-announcement-banner-img-sm {
-          display: block;
+          display: inline-block !important;
         }
         .summit-announcement-banner-img-lg {
-          display: none;
+          display: none !important;
         }
       }
   }
