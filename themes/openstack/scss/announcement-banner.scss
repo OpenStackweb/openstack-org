@@ -208,3 +208,52 @@ $cta_color: #EA2046;
   }
 
 }
+
+.summit-announcement-banner {
+  img {
+    display: inline-block;
+  }
+  h2 {
+    font-size: 35px;
+    display: inline-block;
+    margin-left: 15px;
+    bottom: 6px;
+    position: relative;
+  }
+  p {
+    font-size: 18px;
+    line-height: 25px;
+  }
+  .cta-container {
+    a {
+      background-color: #43B85C;
+      width: 250px;
+      font-size: 20px;
+      svg {
+        padding-left: 5px;
+      }
+    }
+  }
+  .summit-announcement-bottom-bar {
+    bottom: 0;
+    display: flex;
+    height: 7px;
+    position: absolute;
+    width: 100%;
+    .summit-announcement-bar {
+      width: 25%;
+    }
+    .summit-announcement-bar-1 {
+      background-color: #e61e24;
+    }
+    .summit-announcement-bar-1 {
+      background-color: #f4a93a;
+    }
+    .summit-announcement-bar-1 {
+      background-color: #28a4db;
+    }
+    .summit-announcement-bar-1 {
+      background-color: #39ae4a;
+    }
+  }
+}
