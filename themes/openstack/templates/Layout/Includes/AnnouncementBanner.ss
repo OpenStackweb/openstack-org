@@ -41,3 +41,4 @@ var days = Math.floor(distance / (1000 * 60 * 60 * 24));
 
 // Display the result in the element with id="demo"
 document.getElementById("summit-announcement-timer").innerHTML = days;
+</script>
