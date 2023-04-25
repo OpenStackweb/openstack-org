@@ -3,6 +3,7 @@
 <div class="container">
 
 </div>
+<% include AnnouncementBanner %>
 <div class="intro-header featured">
   <div class="container">
     <div class="row">
@@ -29,8 +30,6 @@
 <!-- /.intro-header -->
 
 <!-- Page Content -->
-
-<% include AnnouncementBanner %>
 <!-- /.news-anniversary -->
 
 <!-- Page Content -->
