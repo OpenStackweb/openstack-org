@@ -3,7 +3,7 @@
         <div class="col-md-8 col-xs-12 col-sm-12 col-lg-8">
             <div class="row">
             <div class="col-md-12 col-sm-12">
-                    <h2><img class="summit-announcement-banner-img-sm" style="height:42px;width: 42px;display: inline-block;" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-images-prod/OpenInfrastructureFoundation-icon-RGB.svg"> OpenInfra Summit Vancouver</h2>
+                    <img class="summit-announcement-banner-img-sm" style="height:42px;width: 42px;display: inline-block;" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-images-prod/OpenInfrastructureFoundation-icon-RGB.svg">
                 </div>
                 <div class="col-md-12 col-sm-12">
                     <h2><img class="summit-announcement-banner-img-lg" style="height:42px;width: 42px;display: inline-block;" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-images-prod/OpenInfrastructureFoundation-icon-RGB.svg"> OpenInfra Summit Vancouver</h2>
