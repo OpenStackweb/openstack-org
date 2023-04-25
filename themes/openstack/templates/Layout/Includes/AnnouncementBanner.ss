@@ -1,22 +1,18 @@
-<div class="banner">
+<div class="banner summit-announcement-banner">
     <div class="row">
-            <div class="col-md-2 col-sm-2">
-                <img style="height:42px;width: 42px" src="{$Top.CloudUrl("images/OpenInfrastructureFoundation-icon-RGB.svg")}">
-            </div>
-    </div>
-    <div class="row">
-        <div class="col-md-9 col-xs-12 col-sm-9 col-lg-10">
+        <div class="col-md-8 col-xs-12 col-sm-12 col-lg-8">
             <div class="row">
                 <div class="col-md-10 col-sm-10">
+                <img style="height:42px;width: 42px;display: inline-block;" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-images-prod/OpenInfrastructureFoundation-icon-RGB.svg">
                     <h2>OpenInfra Summit Vancouver</h2>
-                    <p style="padding-top:15px;">Join the global community in Vancouver from June 13–15, 2023 to collaborate directly with the people building and running open source infrastructure using OpenStack, Kubernetes and 30+ other technologies</p>
+                    <p style="padding-top:15px;">Join the OpenStack community in <b>Vancouver from June 13 - 15</b> to hear how <b>NVIDIA</b> is running OpenStack for AI, different <b>OpenStack + Kubernetes</b> production use cases, and how organizations like <b>Bloomberg, LINE and CERN</b> continue to scale their OpenStack footprint.</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-3 col-xs-12 col-sm-3 col-lg-2">
+        <div class="col-md-4 col-xs-12 col-sm-12 col-lg-4">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-lg-12 cta-container">
-                    <a href="https://openinfra.dev/summit/vancouver-2023">Learn More
+                    <a href="https://openinfra.dev/summit/vancouver-2023">Register Now
                         <svg width="21" height="11" viewBox="0 0 21 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15.4828 1L19.6207 5.48M19.6207 5.48L15.4828 9.96M19.6207 5.48L1 5.48" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -26,4 +22,5 @@
 
         </div>
     </div>
+    <div class="summit-announcement-bottom-bar"><div class="summit-announcement-bar-1 summit-announcement-bar"></div><div class="summit-announcement-bar-2 summit-announcement-bar"></div><div class="summit-announcement-bar-3 summit-announcement-bar"></div><div class="summit-announcement-bar-4 summit-announcement-bar"></div></div>
 </div>
