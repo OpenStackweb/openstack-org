@@ -318,6 +318,9 @@ $cta_color: #EA2046;
         display: block !important;
         margin: 0 auto;
       }
+      .summit-announcement-banner-img-lg {
+        display: none !important;
+      }
   }
   @media screen and (max-width: 600px) {
     .cta-container {
