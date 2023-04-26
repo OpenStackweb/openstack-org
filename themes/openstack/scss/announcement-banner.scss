@@ -242,6 +242,12 @@ $cta_color: #EA2046;
           display: none;
         }
       }
+      @media screen and (max-width: 1200px) {
+        line-height: 35px;
+        br {
+          display: none;
+        }
+      }
     }
     @media screen and (max-width: 1600px) {
       display: block;
