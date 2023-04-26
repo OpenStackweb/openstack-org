@@ -215,13 +215,39 @@ $cta_color: #EA2046;
   .summit-announcement-banner-img-sm {
     display: none !important;
   }
+  .summit-announcement-header-container {
+    .summit-announcement-banner-img-sm {
+      display: none !important;
+    }
+  }
   h2 {
     font-size: 35px;
     display: inline-block;
     bottom: 6px;
     position: relative;
-    .summit-announcement-banner-img-sm {
-      display: none !important;
+    span {
+      font-size: 14px;
+    }
+    br {
+      display: none;
+      @media screen and (max-width: 1600px) {
+        line-height: 25px;
+        br {
+          display: block;
+        }
+      }
+      @media screen and (max-width: 1200px) {
+        line-height: 35px;
+        br {
+          display: none;
+        }
+      }
+    }
+    @media screen and (max-width: 1600px) {
+      display: block;
+    }
+    @media screen and (max-width: 1200px) {
+      display: none;
     }
   }
   p {
