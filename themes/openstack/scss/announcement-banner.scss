@@ -233,30 +233,23 @@ $cta_color: #EA2046;
     }
     br {
       display: none;
-      @media screen and (max-width: 1600px) {
-        line-height: 25px;
-        br {
-          display: block;
-        }
-      }
-      @media screen and (max-width: 1200px) {
-        line-height: 35px;
-        br {
-          display: none;
-        }
-      }
-      @media screen and (max-width: 1200px) {
-        line-height: 35px;
-        br {
-          display: none;
-        }
-      }
     }
     @media screen and (max-width: 1600px) {
-      display: block;
+      line-height: 25px;
+      br {
+        display: block;
+      }
     }
     @media screen and (max-width: 1200px) {
-      display: none;
+      line-height: 35px;
+      br {
+        display: none;
+      }
+    }
+    @media screen and (max-width: 1000px) {
+      br {
+        display: block;
+      }
     }
   }
   p {
