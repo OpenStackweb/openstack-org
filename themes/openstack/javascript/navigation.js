@@ -95,3 +95,14 @@ jQuery(document).ready(function($) {
         });
     });
 });
+
+jQuery(document).ready(function($) {
+    $(document).on("click", "#vancouver-banner-btn", function(){
+        var href  = $(this).attr('href');
+        ga('send', 'event', {
+            eventCategory: 'Summit Banner',
+            eventAction: 'Click',
+            eventLabel: href
+        });
+    });
+});
