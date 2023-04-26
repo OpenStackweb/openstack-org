@@ -327,4 +327,11 @@ $cta_color: #EA2046;
       margin-top: 20px;
     }
   }
+  @media screen and (max-width: 370px) {
+    .cta-container {
+      a {
+        width: 220px;
+      }
+    }
+  }
 }
