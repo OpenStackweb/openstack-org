@@ -307,12 +307,12 @@ $cta_color: #EA2046;
         padding-bottom: 5px;
         padding-top: 0;
       }
+      .summit-announcement-banner-img-lg {
+        display: none !important;
+      }
     }
       h2 {
         width: 100%;
-        .summit-announcement-banner-img-lg {
-          display: none !important;
-        }
       }
       .summit-announcement-banner-img-sm {
         display: block !important;
