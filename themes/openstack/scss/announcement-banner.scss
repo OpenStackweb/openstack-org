@@ -216,6 +216,9 @@ $cta_color: #EA2046;
     display: none !important;
   }
   .summit-announcement-header-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
     .summit-announcement-banner-img-sm {
       display: none !important;
     }
