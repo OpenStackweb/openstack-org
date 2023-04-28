@@ -61,6 +61,7 @@ class UserStoriesPage_Controller extends Page_Controller
         Requirements::javascript("user-stories/js/user-stories.js");
         Requirements::javascript('themes/openstack/javascript/urlfragment.jquery.js');
         Requirements::css("user-stories/css/user-stories.css");
+        Requirements::css("themes/openstack/css/announcement-banner.css");
     }
 
     /**
