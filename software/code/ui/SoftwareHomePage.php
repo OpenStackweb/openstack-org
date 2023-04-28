@@ -110,6 +110,7 @@ class SoftwareHomePage_Controller extends Page_Controller
 		Requirements::add_i18n_javascript('software/lang');
         Requirements::css("node_modules/webui-popover/dist/jquery.webui-popover.min.css");
         Requirements::css("software/css/software.css");
+        Requirements::css("themes/openstack/css/announcement-banner.css");
         Requirements::javascript("node_modules/webui-popover/dist/jquery.webui-popover.min.js");
         Requirements::javascript("software/js/software.js");
     }
