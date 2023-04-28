@@ -1,5 +1,3 @@
-<% include AnnouncementBanner %>
-
 <% include SoftwareHomePage_MainNavMenu Active='overview' %>
 
 <div class="software-main-wrapper">
