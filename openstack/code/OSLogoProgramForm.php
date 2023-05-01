@@ -60,7 +60,7 @@ class OsLogoProgramForm extends HoneyPotForm {
                 OsLogoProgramResponse::$avialable_programs
             ),
             new LiteralField('HR','<hr/>'),
-            new CheckboxField('CurrentSponsor','My company is a Silver Sponsor or Gold/Platinum Member of the Open Infrastructure Foundation.'),
+            new CheckboxField('CurrentSponsor','My company is a Silver, Gold, or Platinum Member of the OpenInfra Foundation.'),
             new LiteralField('DIV','<div id="openstack-companies">'),
             $companiesField,
             new TextField('OtherCompany','Other Company (if not listed above)'),
