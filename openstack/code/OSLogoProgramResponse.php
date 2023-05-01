@@ -60,7 +60,7 @@ class OSLogoProgramResponse extends DataObject {
     public static $avialable_programs = array (
         'Powered' => 'Powered',
         'Compatible' => 'Compatible',
-        'Training' => 'Training'
+        'Expertise' => 'Expertise'
     );
 
 }
