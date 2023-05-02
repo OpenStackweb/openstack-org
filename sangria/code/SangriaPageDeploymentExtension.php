@@ -1466,40 +1466,37 @@ WHERE CC.ContinentID = {$continent_id} GROUP BY CC.CountryCode; ");
         $join_members = rtrim($join_members, ",");
 
 
-        $query = new SQLQuery();
-        $select_fields = array(
-            'Member.FirstName',
-            'Member.Surname',
-            'Member.Email',
-            'Member.City',
-            'Member.State',
-            'Member.Country',
-            'Continent.Name'
-        );
-        $query->setFrom('Member');
-        $query->setSelect($select_fields);
-        $query->addInnerJoin('Group_Members', 'Group_Members.MemberID = Member.ID');
-        $query->addInnerJoin('Group', "Group.ID = Group_Members.GroupID AND Group.Code IN (" . $join_members . ")");
-        $query->addLeftJoin('Continent_Countries', 'Continent_Countries.CountryCode = Member.Country');
-        $query->addLeftJoin('Continent', 'Continent.ID = Continent_Countries.ContinentID');
-        $query->setWhere("Member.Country IN (" . $join_countries . ")");
-        $query->setOrderBy('SurName,FirstName');
+        $sql = <<<SQL
+SELECT DISTINCT Member.FirstName, Member.Surname, 
+                Member.Email, Member.Company, Member.City, 
+                Member.State, Member.Country, Continent.Name, Member.Company, 
+                GROUP_CONCAT(Org.Name,'|') AS Affiliations 
+FROM `Member` 
+    INNER JOIN Group_Members ON Group_Members.MemberID = Member.ID 
+    INNER JOIN `Group` ON `Group`.ID = Group_Members.GroupID AND `Group`.Code IN ({$join_members}) 
+    LEFT JOIN Continent_Countries ON Continent_Countries.CountryCode = Member.Country 
+    LEFT JOIN Continent ON Continent.ID = Continent_Countries.ContinentID 
+    LEFT JOIN Affiliation ON Affiliation.MemberID = Member.ID AND Affiliation.Current = 1 LEFT JOIN Org ON Org.ID = Affiliation.OrganizationID 
+WHERE Member.Country IN ({$join_countries}) GROUP BY Member.ID ORDER BY Member.SurName, Member.FirstName;
+SQL;
 
-        $result = $query->execute();
 
-        $data = array();
-        foreach ($result as $row) {
-            $member = array(
+        $data = [];
+        $res = DB::query($sql);
+        foreach ($res as $row) {
+            $member = [
                 'FirstName' => $row['FirstName'],
                 'Surname' => $row['Surname'],
                 'Email' => $row['Email'],
+                'Company' => $row['Company'],
+                'Affiliations' => $row['Affiliations'],
                 'City' => $row['City'],
                 'State' => $row['State'],
                 'Country' => CountryCodes::$iso_3166_countryCodes[$row['Country']],
                 'Continent' => $row['Name']
-            );
+            ];
 
-            array_push($data, $member);
+            $data[] = $member;
         }
 
         $filename = "UsersPerCountry" . date('Ymd') . ".csv";
