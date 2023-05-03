@@ -111,7 +111,7 @@
 	<div class="row">
 		<div class="col-sm-8 col-sm-push-2 center marketplace-driver-section">
 			<hr class="marketplace-hr">
-			<img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/marketplace-drivers.svg" class="marketplace-single-icon" alt="">
+			<img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/learn/marketplace-drivers.svg" class="marketplace-single-icon" alt="">
 			<h2 class="marketplace-title">Software Drivers for all your Devices</h2>
 			<p>
 				A growing collection of software drivers are available to plug all kinds of storage, networking and compute devices into your OpenStack infrastructure.

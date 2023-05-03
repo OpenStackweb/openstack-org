@@ -22,7 +22,7 @@
         </p>
       </div>
       <div class="col-lg-3 col-lg col-sm-6" style="padding-left: 0px; padding-right: 0px">
-        <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/homepage-OpenStack-SFAs.svg">
+        <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/learn/homepage-OpenStack-SFAs.svg">
       </div>
     </div>
   </div>
@@ -38,7 +38,7 @@
 <div class="container">
 <div class="row">
 <div class="col-lg-6 col-sm-12 col-xs-12">
-<img width="100%" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/homepage-overview-diagram-new.svg">
+<img width="100%" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/learn/homepage-overview-diagram-new.svg">
 </div>
 <div class="col-lg-6 col-sm-12">
 <h2>$CloudInfraTitle</h2>
@@ -52,19 +52,19 @@ $CloudInfraContent
 </div>
 <div class="row diagram-icons">
 <div class="col-lg-4 col-xs-12 col-md-4 col-sm-4">
-<a href="/marketplace/remotely-managed-private-clouds/"><img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/homepage-On-Premises-Icon.svg"></a>
+<a href="/marketplace/remotely-managed-private-clouds/"><img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/learn/homepage-At-theEdge-Icon.svg"></a>
 <a href="/marketplace/remotely-managed-private-clouds/" style="text-decoration:none;"><h2>On-Premises</h2></a>
 <a href="/marketplace/remotely-managed-private-clouds/"><p>Host your cloud infrastructure internally or find an OpenStack partner in the Marketplace</p></a>
 </div>
 <div class="col-lg-4 col-xs-12 col-md-4 col-sm-4">
 <a href="/marketplace/public-clouds/">
-<img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/homepage-Public-Cloud-Icon.svg"></a>
+<img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/learn/homepage-On-Premises-Icon.svg"></a>
 <a href="/marketplace/public-clouds/" style="text-decoration:none;"><h2>Public Cloud</h2></a>
 <a href="/marketplace/public-clouds/"><p>Leverage one of the 180+ OpenStack powered public cloud data centers</p></a>
 </div>
 <div class="col-lg-4 col-xs-12 col-md-4 col-sm-4">
 <a href="/edge-computing/">
-<img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-dev/learn/homepage-At-theEdge-Icon.svg"></a>
+<img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/learn/homepage-Public-Cloud-Icon.svg"></a>
 <a href="/edge-computing/" style="text-decoration:none;"><h2>At the Edge</h2></a>
 <a href="/edge-computing/"><p>Telecoms and retailers rely on OpenStack for their distributed systems</p></a>
 </div>
