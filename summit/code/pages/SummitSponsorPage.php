@@ -115,7 +115,6 @@ class SummitSponsorPage extends SummitPage
             $sponsor_config->getComponentByType('GridFieldDataColumns')->setDisplayFields(
                 [
                     'Company.Name'       => 'Name',
-                    'DDLSponsorshipType' => 'Sponsorship Type',
                     'InputSubmitPageUrl' => 'Sponsor Link'
                 ]
             );
@@ -284,8 +283,18 @@ class SummitSponsorPage extends SummitPage
     {
         $page_id = $this->ID;
         $page = SummitSponsorPage::get()->byID($page_id);
+
+        /*
+         * SELECT * FROM `Sponsor`
+         * LEFT JOIN Summit_SponsorshipType ON Summit_SponsorshipType.ID = Sponsor.SummitSponsorshipTypeID
+         * LEFT JOIN SponsorshipType ON SponsorshipType.ID = Summit_SponsorshipType.SponsorshipTypeID
+         * WHERE Sponsor.SummitID = XYZ;
+         */
+
         $res = $page->Summit()->Sponsors()
-                ->leftJoin('SponsorshipType', 'SponsorshipType.ID = Sponsor.SponsorshipTypeID')
+
+                ->leftJoin('Summit_SponsorshipType', 'Summit_SponsorshipType.ID = Sponsor.SummitSponsorshipTypeID ')
+                ->leftJoin('SponsorshipType', 'SponsorshipType.ID = Summit_SponsorshipType.SponsorshipTypeID ')
                 ->where("SponsorshipType.Name='{$type}'")
                 ->sort('Order');
 
@@ -320,6 +329,8 @@ class SummitSponsorPage extends SummitPage
     }
 
     public function sponsorHasReachedRowLimit($items_limit, $pos) {
+        if(!$items_limit) return false;
+        if(!$pos) return false;
         return ($pos % $items_limit) == 0;
     }
 }

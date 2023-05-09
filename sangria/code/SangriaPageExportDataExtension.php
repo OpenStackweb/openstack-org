@@ -995,7 +995,8 @@ SQL;
                 case 'sponsorship_type' :
                     $query->setFrom('Company');
                     $query->addLeftJoin('Sponsor', 'Sponsor.CompanyID = Company.ID');
-                    $query->addLeftJoin('SponsorshipType', 'Sponsor.SponsorshipTypeID = SponsorshipType.ID');
+                    $query->addLeftJoin('Summit_SponsorshipType', 'Summit_SponsorshipType.ID = Sponsor.SummitSponsorshipTypeID');
+                    $query->addLeftJoin('SponsorshipType', 'SponsorshipType.ID = Summit_SponsorshipType.SponsorshipTypeID');
                     $query->addLeftJoin('Summit', 'Summit.ID = Sponsor.SummitID');
                     $query->addLeftJoin('Countries', 'Company.Country = Countries.Code');
                     $query->addLeftJoin('Continent_Countries', 'Continent_Countries.CountryCode = Company.Country');
