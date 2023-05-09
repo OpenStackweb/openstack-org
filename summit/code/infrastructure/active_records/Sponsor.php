@@ -23,9 +23,9 @@ class Sponsor extends DataObject implements ISponsor
 
     static $has_one = array
     (
-        'Company'         => 'Company',
-        'SponsorshipType' => 'SponsorshipType',
-        'Summit'          => 'Summit'
+        'Company'              => 'Company',
+        'Summit'                => 'Summit',
+        'SummitSponsorshipType' => 'Summit_SponsorshipType',
     );
 
     private static $many_many = [
@@ -48,7 +48,6 @@ class Sponsor extends DataObject implements ISponsor
     (
         'ID'                      => 'ID',
         'Company.Name'            => 'Company',
-        'SponsorshipType.Name'    => 'SponsorshipType',
     );
 
     /**
@@ -57,14 +56,6 @@ class Sponsor extends DataObject implements ISponsor
     public function getIdentifier()
     {
         return (int)$this->getField('ID');
-    }
-
-    //helper function to create Drop Down for Sponsorship type
-    public function getDDLSponsorshipType()
-    {
-        $types = SponsorshipType::get()->map();
-        $type = $this->SponsorshipTypeID;
-        return new DropdownField("SponsorshipType_{$this->ID}", "SponsorshipType_{$this->ID}", $types, $type);
     }
 
     public function getSubmitPageUrl()
