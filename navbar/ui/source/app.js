@@ -25,6 +25,8 @@ class App extends React.Component {
             projects: projects,
             currentProject: window.navBarConfig.currentProject,
             containerClass: "container",
+            navbarTitle: "An OpenInfra Foundation Project",
+            popupTitle: "More OpenInfra Foundation Projects",
         };
 
         return (
