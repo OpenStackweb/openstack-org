@@ -6,7 +6,7 @@
   "description": "",
   "slug": "openinfra-foundation",
   "is_active": true,
-  "nav_bar_title": "An OpenInfra Project",
+  "nav_bar_title": "An OpenInfra Foundation Project",
   "should_show_on_nav_bar": true,
   "learn_more_link": "https://openinfra.dev/learn_more",
   "learn_more_text": "Learn More Test",
