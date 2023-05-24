@@ -47,6 +47,8 @@ class EventPage
       'Industry',
       'Meetups',
       'Mid-Cycle Sprints',
+      'PTGs',
+      'OpenInfra Days',
       'OpenStack Days',
       'Summit',
       'Upstream Training',
