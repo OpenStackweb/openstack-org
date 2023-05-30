@@ -510,10 +510,17 @@ SQL;
         return 'missing';
     }
 
+    function onAfterSkippedWrite(){
+        $this->saveCompanyAdmins();
+    }
+
     function onAfterWrite()
     {
         parent::onAfterWrite();
+        $this->saveCompanyAdmins();
+    }
 
+    function saveCompanyAdmins(){
         if (Controller::curr() instanceof CompanyAdmin) { // check if we are on admin (CMS side)
             //update all relationships with Administrators
             foreach ($this->Administrators() as $member) {
