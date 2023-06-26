@@ -29,7 +29,7 @@
         <% include SiteBanner %>
         <% include Navigation %>
     <!-- Page Content -->
-    <% include AnnouncementBanner %>
+   
         $Message
     <div class="container software">
         <div class="row">
