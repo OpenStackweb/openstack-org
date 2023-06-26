@@ -3,7 +3,6 @@
 <div class="container">
 
 </div>
-<% include AnnouncementBanner %>
 <div class="intro-header featured">
   <div class="container">
     <div class="row">
