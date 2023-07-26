@@ -30,7 +30,7 @@
     <div class="col-sm-12">
       <p>
         Share your story, and take the OpenStack user survey
-        <a href="https://www.openstack.org/user-survey/survey-2016/landing?BackURL=/user-survey/survey-2016/" class="user-story-add-btn">Take the User Survey</a>
+        <a href="https://openstack.org/usersurvey" class="user-story-add-btn">Take the User Survey</a>
       </p>
     </div>
   </div>
