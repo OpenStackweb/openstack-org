@@ -6,7 +6,6 @@
             </div>
         </div>
     </div>
-    <% include LiveBanner Type=Minimal %>
     <div class="row">
         <div id='upcoming-events-container' class="col-sm-6" style="min-height:500px">
             <div style="float:left;"><h2>Upcoming Events</h2></div>
