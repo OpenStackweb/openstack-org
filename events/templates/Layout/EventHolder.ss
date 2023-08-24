@@ -11,7 +11,7 @@
         <div id='upcoming-events-container' class="col-sm-6" style="min-height:500px">
             <div style="float:left;"><h2>Upcoming Events</h2></div>
             <div style="clear: both; margin:5px 0 10px 0px">
-                <div class="event-type-links">
+                <div class="event-type-links">   
                     $EventTypes
                 </div>
                 <span class="events-loading hidden">&nbsp;</span>
