@@ -5,7 +5,7 @@
     the Secretary by visiting this page: <a href="{$TakeActionLink}">$TakeActionLink</a>.</p>
 <p>If you take no action, we will automatically change your account status from "Foundation Member" to "Community Member".
     As a "Community Member" you can continue to engage in many activities on openstack.org and openinfra.dev including s
-    ubmitting talks for OpenInfra Summits.  However, you will not have all of the rights and responsibilities of being
+    submitting talks for OpenInfra Summits.  However, you will not have all of the rights and responsibilities of being
     a full Foundation Member, including voting in future Board of Directors elections.</p>
 <p>If you wish to remain a Foundation Member, you have until {$ExpirationDate} to request that the Secretary reinstate
     your account.  You also have the option to delete your account entirely.  Either option may be selected on this page
