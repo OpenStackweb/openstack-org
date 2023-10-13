@@ -36,6 +36,18 @@ final class SapphireFoundationMemberRepository
 	{
 		$specification = new FoundationMembershipRevocationSpecification;
 		$sql           = $specification->sql($n, $necessary_votes = 2 , $election_repository, $offset, $limit);
+        if(Director::is_cli()){
+            fwrite
+            (
+                STDOUT,
+                sprintf
+                (
+                    "%s - [SapphireFoundationMemberRepository::getMembersThatNotVotedOnLatestNElections] sql %s",
+                    gmdate('Y-m-d h:i:s \G\M\T', time()),
+                    $sql
+                ).PHP_EOL
+            );
+        }
 		$res           = DB::query($sql);
 		$list          = [];
 
