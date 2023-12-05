@@ -288,7 +288,11 @@ class SummitVideoAppBackend
     public function getSummits($params = [])
     {
         $summits = Summit::get()
-            ->filter('SummitBeginDate:LessThan', SS_DateTime::now()->Rfc2822())
+            ->filter(
+                [
+                    'SummitBeginDate:LessThan' => SS_DateTime::now()->Rfc2822(),
+                    'AvailableOnApi' => true
+                ])
             ->sort('SummitBeginDate DESC');
 
         $response = [
