@@ -1,4 +1,7 @@
 </div> <!-- Killing the main site .container -->
+<div class="user-stories-announcement-banner">
+<% include AnnouncementBanner %>
+</div>
 
 <div class="user-stories-hero container">
     <div class="row">
