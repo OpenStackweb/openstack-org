@@ -34,7 +34,7 @@
         <!-- Page Content -->
         <div class="software-announcement-banner">
             <% include AnnouncementBanner %>
-        </div>s
+        </div>
         $Message
         <div class="container software">
             <div class="row">
