@@ -18,22 +18,8 @@
             <img src="/marketplace/code/ui/frontend/images/openstack-powered.png" alt="OpenStack Powered" width="170">
         </div>
         <div class="powered-description">
-        <p>
-            This product is OpenStack Powered. It contains OpenStack software and has been validated through testing to provide API compatibility for OpenStack core services. <a href="/brand/interop/">Learn more about the testing criteria and core services here</a>.
-            <% if isOpenStackTested %>
-                <div class="tested-badge-wrapper">
-                    <div class="tested-badge">
-                        <div class="tested-icon">
-                            <i class="fa fa-check"></i>
-                        </div>
-                        <div class="tested-text">
-                            Tested
-                        </div>
-                    </div>
-                    <div class="tested-description">OpenStack Powered $TestedCapabilityTypeLabel $ProgramVersion.Name .
-                        <a href="#" id="see-results-link">See full results [+]</a>.</div>
-                </div>
-            <% end_if %>
+            <p>
+                This product is OpenStack Powered. It contains OpenStack software and has been approved by the OpenInfra Foundation. <a href="/brand/openstack-powered/">Learn more about becoming an OpenStack Powered product here</a>.
             </p>
         </div>
         <% if isOpenStackTested %>

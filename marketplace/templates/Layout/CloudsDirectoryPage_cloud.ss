@@ -14,7 +14,6 @@
         </div>
         <div class="col-sm-9 marketplace-body">
             <% include MarketPlaceCompany %>
-            <% include OpenStackImplementationCapabilities %>
             <div class="row">
                 <div class="col-lg-6">
                     <h3 style="color: #000000 !important;">Other Details</h3>
