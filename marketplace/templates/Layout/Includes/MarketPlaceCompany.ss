@@ -22,41 +22,51 @@
                 This product is OpenStack Powered. It contains OpenStack software and has been approved by the OpenInfra Foundation. <a href="/brand/openstack-powered/">Learn more about becoming an OpenStack Powered product here</a>.
             </p>
         </div>
-        <% if isOpenStackTested %>
-            <div class="test-details-list">
-                <h4>OpenStack Powered $TestedCapabilityTypeLabel $ProgramVersion.Name</h4>
-                <table>
-                    <tbody>
-                    <thead>
+    </div>
+</div>
+<% end_if %>
+<% if isOpenStackTested %>
+<div class="row powered-wrapper">
+    <div class="col-sm-12">
+        <div class="tested-description">OpenStack Powered $TestedCapabilityTypeLabel $ProgramVersion.Name .
+            <a href="#" id="see-results-link">See full results [+]</a>.
+        </div>
+        <br/><br/>
+    </div>
+    <div class="col-sm-12">
+        <div class="test-details-list">
+            <h4>OpenStack Powered $TestedCapabilityTypeLabel $ProgramVersion.Name</h4>
+            <table>
+                <tbody>
+                <thead>
+                <tr>
+                    <th>$TestedCapabilityTypeLabel Capabilities</th>
+                    <th>&nbsp;</th>
+                </tr>
+                </thead>
+                <% loop TestedCapabilities %>
                     <tr>
-                        <th>$TestedCapabilityTypeLabel Capabilities</th>
-                        <th>&nbsp;</th>
+                        <td>$Name</td>
+                        <td><i class="fa fa-check"></i></td>
                     </tr>
-                    </thead>
-                    <% loop TestedCapabilities %>
-                        <tr>
-                            <td>$Name</td>
-                            <td><i class="fa fa-check"></i></td>
-                        </tr>
-                    <% end_loop %>
-                    </tbody>
-                    <tbody>
-                    <thead>
+                <% end_loop %>
+                </tbody>
+                <tbody>
+                <thead>
+                <tr>
+                    <th>Designated Sections</th>
+                    <th>&nbsp;</th>
+                </tr>
+                </thead>
+                <% loop DesignatedSections %>
                     <tr>
-                        <th>Designated Sections</th>
-                        <th>&nbsp;</th>
+                        <td>$Guidance</td>
+                        <td><i class="fa fa-check"></i></td>
                     </tr>
-                    </thead>
-                    <% loop DesignatedSections %>
-                        <tr>
-                            <td>$Guidance</td>
-                            <td><i class="fa fa-check"></i></td>
-                        </tr>
-                    <% end_loop %>
-                    </tbody>
-                </table>
-            </div>
-        <% end_if %>
+                <% end_loop %>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 <% end_if %>
