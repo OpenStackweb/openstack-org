@@ -17,9 +17,8 @@
             <p>$Overview</p>
             <% if isOpenStackTested %>
                 <div class="tested-listing">
-                    <i class="fa fa-check-square"></i>
-                    <div class="tested-listing-title">Tested</div>
-                    <div class="tested-listing-description">OpenStack Powered $TestedCapabilityTypeLabel $ProgramVersion.Name</div>
+                    <img src="/marketplace/code/ui/frontend/images/openstack-powered.png" alt="OpenStack Powered" width="90">
+                    <div class="tested-listing-description">OpenStack Powered</div>
                 </div>
             <% end_if %>
             <a style="background-color: #{$Company.CompanyColor}" href="<% with $MarketPlace  %><% if Name == "Appliance"  %>$Top.ApplianceLink<% end_if %><% if Name == "Distribution"  %>$Top.DistroLink<% end_if %><% end_with %>/{$Company.URLSegment}/{$Slug}" class="details-button">Details</a>
