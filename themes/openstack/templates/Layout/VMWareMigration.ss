@@ -647,7 +647,7 @@
 
                             <dt>Is this a danger or an opportunity for open source software solutions?</dt>
                             <dd>
-                                <p>This is an opportunity for open source solutions that follow the "4 opens" - open source, open development, open governance, and open design. Relying on single vendor open source projects puts companies at risk similar to proprietary software. Projects like OpenStack, with its 14-year history and multi-vendor support, are seeing a resurgence due to this uncertainty.</p>
+                                This is an opportunity for open source solutions that follow the "4 opens" - open source, open development, open governance, and open design. Relying on single vendor open source projects puts companies at risk similar to proprietary software. Projects like OpenStack, with its 14-year history and multi-vendor support, are seeing a resurgence due to this uncertainty.
                             </dd>
 
                             <dt>Why should VMware users consider migrating to OpenStack over other solutions? Who is that best for?</dt>
@@ -671,7 +671,7 @@
 
                             <dt>What are some of the challenges in migrating from VMware to OpenStack?</dt>
                             <dd>
-                                <p>The primary challenges are terminology and education. VMware has a very simple UX and many companies have been invested in VMware solutions for a long time. The OpenInfra Foundation is working to educate the market around feature parity and address potential gaps between OpenStack and VMware.</p>
+                                The primary challenges are terminology and education. VMware has a very simple UX and many companies have been invested in VMware solutions for a long time. The OpenInfra Foundation is working to educate the market around feature parity and address potential gaps between OpenStack and VMware.
                             </dd>
 
                             <dt>What migration tools are available to migrate from VMware to OpenStack?</dt>
