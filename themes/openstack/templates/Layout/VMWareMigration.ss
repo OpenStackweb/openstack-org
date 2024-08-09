@@ -483,10 +483,10 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <p class="vmwmigration-table-source">
+                            Source: <a class="source" href="https://cloudification.io/vmware-alternative/">Cloudification</a>
+                        </p>
                     </div>
-                    <p class="vmwmigration-table-source">
-                        Source: <a href="https://cloudification.io/vmware-alternative/">Cloudification</a>
-                    </p>
                 </div>
             </div> <!-- .container -->
         </section>
