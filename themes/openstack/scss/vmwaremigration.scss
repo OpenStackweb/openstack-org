@@ -191,6 +191,13 @@ table.vmwmigration-table {
 .vmwmigration-table th {
   background-color: #f2f2f2;
   font-weight: bold;
+  font-size: 20px;
+}
+.vmwmigration-table th.th-openstack {
+  background-color: #bc1518;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
 }
 .vmwmigration-table tr:nth-child(even) {
   background-color: #f9f9f9;
@@ -211,6 +218,11 @@ table.vmwmigration-table {
   text-align: left;
   font-weight: 400;
   margin-top: 20px;
+}
+
+.vmwmigration-table-source {
+  font-size: 10px;
+  font-style: italic;
 }
 
 /* -- 5 Columns -- */

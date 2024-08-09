@@ -43,14 +43,15 @@
                             <thead>
                                 <tr>
                                     <th>VMware</th>
-                                    <th>OpenStack</th>
+                                    <th class="th-openstack">OpenStack</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>
-                                        <h3>VMware vSphere (Hypervisor ESXi)</h3>
+                                        <h3><b>VMware vSphere</b> (Hypervisor ESXi)</h3>
                                         <h4>Key features:</h4>
+                                        <p>(subject to subscription type and extra costs)</p>
                                         <ul>
                                             <li>Web console</li>
                                             <li>VM Live migration (vMotion)</li>
@@ -63,56 +64,99 @@
                                         </ul>
                                     </td>
                                     <td>
-                                        <h3>OpenStack (Hypervisor KVM)</h3>
+                                        <h3><b>OpenStack</b> (Hypervisor KVM)</h3>
                                         <h4>Comparable features:</h4>
                                         <ul>
-                                            <li>Web console - <strong>yes</strong></li>
-                                            <li>Live migration - <strong>yes</strong></li>
-                                            <li>Volume migration - <strong>yes</strong></li>
-                                            <li>Control plane HA - <strong>yes</strong></li>
-                                            <li>Backup-Integrations - <strong>yes</strong></li>
-                                            <li>VMHA - <strong>yes(1)</strong></li>
-                                            <li>Hot plug and extend (Networks/Volumes) - <strong>yes</strong></li>
-                                            <li>Site-to-site VM migration - <strong>yes(2)</strong></li>
+                                            <li>Web console - <b>yes</b></li>
+                                            <li>Live migration - <b>yes</b></li>
+                                            <li>Volume migration - <b>yes</b></li>
+                                            <li>Control plane HA - <b>yes</b></li>
+                                            <li>Backup-Integrations - <b>yes</b></li>
+                                            <li>VMHA - <b>yes(1)</b></li>
+                                            <li>Hot plug and extend (Networks/Volumes) - <b>yes</b></li>
+                                            <li>Site-to-site VM migration - <b>yes(2)</b></li>
                                         </ul>
-                                        <p><strong>1</strong> OpenStack provides VMHA functionality with Masakari<br>
-                                        <strong>2</strong> When OpenStack control plane stretched across DCs</p>
+                                        <p><b>1</b> OpenStack provides VMHA functionality with <a href="https://docs.openstack.org/masakari/latest/">Masakari</a><br>
+                                        <b>2</b> When OpenStack control plane stretched across DCs</p>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <h3>VMware NSX (VCF + VMware Firewall)</h3>
+                                        <h3><b>VMware NSX</b> (VCF + VMware Firewall)</h3>
                                         <h4>Key features:</h4>
                                         <ul>
-                                            <li>Switching (Layer 2 networks over Layer 3)</li>
-                                            <li>Routing (Distributed, Active-active failover, Static, Dynamic, IPv6)</li>
-                                            <li>Virtual routing and forwarding (VRF)</li>
+                                            <li>Switching (Layer 2 networks over Layer 3)
+                                                <ul>
+                                                    <li>Within data center</li>
+                                                    <li>Across data centers</li>
+                                                </ul>
+                                            </li>
+                                            <li>Routing
+                                                <ul>
+                                                    <li>Distributed routing</li>
+                                                    <li>Active-active failover with physical routers</li>
+                                                    <li>Static routing</li>
+                                                    <li>Dynamic routing</li>
+                                                    <li>IPv6 support</li>
+                                                </ul>
+                                            </li>
+                                            <li>Virtual routing and forwarding (VRF)
+                                                <ul>
+                                                    <li>Tenant isolation</li>
+                                                    <li>Separate routing tables</li>
+                                                    <li>NAT</li>
+                                                    <li>EDGE Firewall</li>
+                                                </ul>
+                                            </li>
                                             <li>Quality of service control (QoS)</li>
                                             <li>Security Groups</li>
                                             <li>NSX gateway (L2 Gateway)</li>
                                             <li>DPU-based acceleration</li>
                                             <li>Federation and Multi-cloud networking</li>
                                         </ul>
+                                        <p>(consistent networking and security across DCs,<br>private/public cloud boundaries)</p>
                                     </td>
                                     <td>
-                                        <h3>OpenStack Neutron</h3>
+                                        <h3><b>OpenStack Neutron</b></h3>
                                         <h4>Comparable features:</h4>
                                         <ul>
-                                            <li>Switching - <strong>yes</strong></li>
-                                            <li>Routing - <strong>yes</strong></li>
-                                            <li>Virtual routing and forwarding (VRF) - <strong>yes</strong></li>
-                                            <li>QoS - <strong>yes</strong></li>
-                                            <li>Security Groups - <strong>yes</strong></li>
-                                            <li>L2 Gateway - <strong>yes</strong></li>
-                                            <li>DPU-based acceleration - <strong>yes</strong></li>
-                                            <li>Federation and Multi-cloud networking - <strong>yes(3)</strong></li>
+                                            <li>Switching
+                                                <ul>
+                                                    <li>Within data center - <b>yes</b></li>
+                                                    <li>Across data centers - <b>yes(1)</b></li>
+                                                </ul>
+                                            </li>
+                                            <li>Routing
+                                                <ul>
+                                                    <li>Distributed routing - <b>yes</b></li>
+                                                    <li>Active-active failover with physical routers - <b>yes</b></li>
+                                                    <li>Static routing - <b>yes</b></li>
+                                                    <li>Dynamic routing - <b>yes</b></li>
+                                                    <li>IPv6 support - <b>yes</b></li>
+                                                </ul>
+                                            </li>
+                                            <li>Virtual routing and forwarding (VRF)
+                                                <ul>
+                                                    <li>Tenant isolation - <b>yes</b></li>
+                                                    <li>Separate routing tables - <b>yes</b></li>
+                                                    <li>NAT - <b>yes</b></li>
+                                                    <li>EDGE Firewall - <b>no(2)</b></li>
+                                                </ul>
+                                            </li>
+                                            <li>QoS - <b>yes</b></li>
+                                            <li>Security Groups - <b>yes</b></li>
+                                            <li>L2 Gateway - <b>yes</b></li>
+                                            <li>DPU-based acceleration - <b>yes</b></li>
+                                            <li>Federation and Multi-cloud networking - <b>yes(3)</b></li>
                                         </ul>
-                                        <p><strong>3</strong> Partially with BGP VPN interconnection extension</p>
+                                        <p><b>1</b> if OpenStack control plane stretched across DCs<br>
+                                        <b>2</b> OpenStack has <a href="https://docs.openstack.org/neutron/latest/admin/fwaas.html">FWaaS extension</a><br>
+                                        <b>3</b> Partially with <a href="https://docs.openstack.org/networking-bgpvpn/latest/">BGP VPN interconnection extension</a></p>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <h3>VMware NSX Advanced Load Balancer (by Avi Networks)</h3>
+                                        <h3><b>VMware NSX Advanced Load Balancer</b><br>(<a href="https://www.vmware.com/content/dam/digitalmarketing/vmware/en/pdf/products/nsx/vmware-nsx-advanced-load-balancer-data-sheet.pdf">by Avi Networks</a>)</h3>
                                         <h4>Key features:</h4>
                                         <ul>
                                             <li>L4-L7 load balancing</li>
@@ -126,55 +170,90 @@
                                         </ul>
                                     </td>
                                     <td>
-                                        <h3>OpenStack Octavia</h3>
+                                        <h3><b>OpenStack Octavia</b></h3>
                                         <h4>Comparable features:</h4>
                                         <ul>
-                                            <li>L4-L7 load balancing - <strong>yes</strong></li>
-                                            <li>Container ingress gateway - <strong>yes</strong></li>
-                                            <li>HA architecture - <strong>yes</strong> (stand-by)</li>
-                                            <li>Global server load balancing (GSLB) - <strong>no</strong></li>
-                                            <li>Web application firewall (WAF) - <strong>no</strong></li>
-                                            <li>Real-time application analytics - <strong>no</strong></li>
-                                            <li>Multi-cloud load balancing - <strong>no</strong></li>
-                                            <li>Application performance monitoring - <strong>no</strong></li>
+                                            <li>L4-L7 load balancing - <b>yes</b></li>
+                                            <li>Container ingress gateway - <b>yes</b></li>
+                                            <li>HA architecture - <b>yes</b> (stand-by)</li>
+                                            <li>Global server load balancing (GSLB) - <b>no</b></li>
+                                            <li>Web application firewall (WAF) - <b>no</b></li>
+                                            <li>Real-time application analytics - <b>no</b></li>
+                                            <li>Multi-cloud load balancing - <b>no</b></li>
+                                            <li>Application performance monitoring - <b>no</b></li>
                                         </ul>
-                                        <p>AVI networks support integrations with previous versions of OpenStack</p>
+                                        <p>AVI networks support integrations with <a href="https://avinetworks.com/docs/latest/openstack-support-matrix/">previous versions of OpenStack</a></p>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <h3>VMware vSAN (Express Storage Architecture)</h3>
+                                        <h3><b>VMware vSAN</b> (<a href="https://core.vmware.com/blog/introduction-vsan-express-storage-architecture">Express Storage Architecture</a>)</h3>
                                         <h4>Key features:</h4>
                                         <ul>
-                                            <li>Distributed Architecture</li>
-                                            <li>Data redundancy</li>
-                                            <li>Scalability</li>
+                                            <li>Distributed Architecture:
+                                                <ul>
+                                                    <li>Hyperconverged, integrates with vSphere</li>
+                                                    <li>Based on local storage in ESXi hosts</li>
+                                                    <li>Eliminates the need for external storage arrays</li>
+                                                    <li>Cluster size: min 2 hosts, max: 64 hosts</li>
+                                                    <li>Uses fast disks for caching and efficient placement</li>
+                                                </ul>
+                                            </li>
+                                            <li>Data redundancy:
+                                                <ul>
+                                                    <li>Distributed RAID, caching, and read/write optimizations</li>
+                                                    <li>Provides fault tolerance at the storage policy level</li>
+                                                </ul>
+                                            </li>
+                                            <li>Scalability:
+                                                <ul>
+                                                    <li>Scalable with additional ESXi hosts to the cluster</li>
+                                                    <li>Linear scalability of storage capacity and performance resources</li>
+                                                </ul>
+                                            </li>
                                             <li>Network speed: 25Gb/100Gb</li>
                                             <li>File protocols: SMB, NFSv3, NFSv4.1</li>
                                             <li>S3-Compatible Object Storage</li>
                                             <li>Native snapshots</li>
                                         </ul>
-                                        <p>Multi-site cluster: vSAN Stretched Cluster</p>
+                                        <p>Multi-site cluster: <a href="https://core.vmware.com/resource/vsan-stretched-cluster-guide">vSAN Stretched Cluster</a></p>
                                     </td>
                                     <td>
-                                        <h3>OpenStack Cinder + Manila (based on Ceph)</h3>
+                                        <h3><b>OpenStack Cinder + Manila</b> (based on <a href="https://ceph.io/en/" target="_blank" rel="noopener">Ceph</a>)</h3>
                                         <h4>Comparable features:</h4>
                                         <ul>
-                                            <li>Distributed Architecture - <strong>yes</strong></li>
-                                            <li>Data redundancy - <strong>yes</strong></li>
-                                            <li>Scalability - <strong>yes</strong></li>
-                                            <li>Network speed: 10Gb/25Gb/100Gb - <strong>yes</strong></li>
-                                            <li>File protocols: CephFS, NFS via Manila - <strong>yes</strong></li>
-                                            <li>S3-Compatible Object Storage - <strong>yes</strong></li>
-                                            <li>Native snapshots - <strong>yes</strong></li>
-                                            <li>Multi-site: Ceph RBD Mirroring - <strong>yes(4)</strong></li>
+                                            <li>Distributed Architecture - <b>yes</b>
+                                                <ul>
+                                                    <li>Distributed architecture with a cluster of storage nodes running OSDs</li>
+                                                    <li>Supports object, block, and file storage interfaces</li>
+                                                    <li>Cluster size: min 6 hosts, max: 1000+ hosts</li>
+                                                    <li>Does not require disks for caching</li>
+                                                </ul>
+                                            </li>
+                                            <li>Data redundancy - <b>yes</b>
+                                                <ul>
+                                                    <li>Data redundancy through replication (3 copies) and erasure coding</li>
+                                                    <li>Replicates data across multiple OSDs or uses erasure coding for fault tolerance</li>
+                                                </ul>
+                                            </li>
+                                            <li>Scalability - <b>yes</b>
+                                                <ul>
+                                                    <li>Highly scalable, can scale out to tens of PBs of data</li>
+                                                    <li>Allows adding or removing storage nodes dynamically without disruption</li>
+                                                </ul>
+                                            </li>
+                                            <li>Network speed: 10Gb/25Gb/100Gb - <b>yes</b></li>
+                                            <li>File protocols: CephFS, NFS via <a href="https://wiki.openstack.org/wiki/Manila">Manila</a> - <b>yes</b></li>
+                                            <li>S3-Compatible Object Storage - <b>yes</b></li>
+                                            <li>Native snapshots - <b>yes</b></li>
+                                            <li>Multi-site: <a href="https://docs.ceph.com/en/latest/rbd/rbd-mirroring/">Ceph RBD Mirroring</a> - <b>yes(1)</b></li>
                                         </ul>
-                                        <p><strong>4</strong> RBD mirroring affects performance due to journaling</p>
+                                        <p><b>1</b> RBD mirroring affects performance due to journaling</p>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <h3>VMware vCenter (VCF, VVF and vSphere STD)</h3>
+                                        <h3><b>VMware vCenter</b> (VCF, VVF and vSphere STD)</h3>
                                         <h4>Key features:</h4>
                                         <ul>
                                             <li>Centralized Control and Visibility</li>
@@ -186,28 +265,28 @@
                                         </ul>
                                     </td>
                                     <td>
-                                        <h3>OpenStack + Prometheus, MaaS, ArgoCD</h3>
+                                        <h3><b>OpenStack + Prometheus, MaaS, ArgoCD</b></h3>
                                         <h4>Comparable features:</h4>
                                         <ul>
-                                            <li>Centralized control-plane - <strong>yes(5)</strong></li>
-                                            <li>Web client and APIs - <strong>yes</strong></li>
-                                            <li>Inventory search - <strong>yes</strong></li>
-                                            <li>Alerts and notifications - <strong>yes(6)</strong></li>
-                                            <li>Dynamic resource allocation - <strong>yes(7)</strong></li>
-                                            <li>Multi-tenant management - <strong>yes</strong></li>
+                                            <li>Centralized control-plane - <b>yes(1)</b></li>
+                                            <li>Web client and APIs - <b>yes</b></li>
+                                            <li>Inventory search - <b>yes</b></li>
+                                            <li>Alerts and notifications - <b>yes(2)</b></li>
+                                            <li>Dynamic resource allocation - <b>yes(3)</b></li>
+                                            <li>Multi-tenant management - <b>yes</b></li>
                                         </ul>
-                                        <p><strong>5</strong> When OpenStack control plane stretched across DCs<br>
-                                        <strong>6</strong> Based on Prometheus + Alertmanager with integrations<br>
-                                        <strong>7</strong> Provided by OpenStack Watcher</p>
+                                        <p><b>1</b> When OpenStack control plane stretched across DCs<br>
+                                        <b>2</b> Based on Prometheus + Alertmanager with integrations<br>
+                                        <b>3</b> Provided by <a href="https://docs.openstack.org/watcher/latest/">OpenStack Watcher</a></p>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <h3>VMware Cloud Director (Cloud Management Platform)</h3>
+                                        <h3><b>VMware Cloud Director</b> (Cloud Management Platform)</h3>
                                         <h4>Key features:</h4>
                                         <ul>
                                             <li>Multi-site control</li>
-                                            <li>Cloud-native approach</li>
+                                            <li>Cloud-native approach<br>(Containers and VMs in the same environment)</li>
                                             <li>Automation</li>
                                             <li>Policy-driven Approach for Cloud management</li>
                                             <li>Global Hybrid Cloud Management</li>
@@ -215,25 +294,25 @@
                                         </ul>
                                     </td>
                                     <td>
-                                        <h3>OpenStack + Kubernetes</h3>
+                                        <h3><b>OpenStack + Kubernetes</b></h3>
                                         <h4>Comparable features:</h4>
                                         <ul>
-                                            <li>Multi-site control - <strong>yes(8)</strong></li>
-                                            <li>Cloud-native approach - <strong>yes(9)</strong></li>
-                                            <li>Automation - <strong>yes(10)</strong></li>
-                                            <li>Policy-driven Approach - <strong>yes</strong></li>
-                                            <li>Global Hybrid Cloud Management - <strong>no</strong></li>
-                                            <li>Cloud Migration - <strong>yes(11)</strong></li>
+                                            <li>Multi-site control - <b>yes(1)</b></li>
+                                            <li>Cloud-native approach - <b>yes(2)</b></li>
+                                            <li>Automation - <b>yes(3)</b></li>
+                                            <li>Policy-driven Approach - <b>yes</b></li>
+                                            <li>Global Hybrid Cloud Management - <b>no</b></li>
+                                            <li>Cloud Migration - <b>yes(4)</b></li>
                                         </ul>
-                                        <p><strong>8</strong> When OpenStack control plane stretched across DCs (Alternatively using ManageIQ)<br>
-                                        <strong>9</strong> Requires Managed Kubernetes service installation<br>
-                                        <strong>10</strong> Via Terraform, Heat or SDK<br>
-                                        <strong>11</strong> Using third-party migration service</p>
+                                        <p><b>1</b> When OpenStack control plane stretched across DCs (Alternatively using <a href="https://www.manageiq.org/" target="_blank" rel="noopener">ManageIQ</a>)<br>
+                                        <b>2</b> Requires Managed Kubernetes service installation<br>
+                                        <b>3</b> Via Terraform, Heat or SDK<br>
+                                        <b>4</b> Using third-party migration service</p>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <h3>VMware Aria Operations for Logs (vRealize Log Insight)</h3>
+                                        <h3><b>VMware Aria</b> Operations for Logs (vRealize Log Insight)</h3>
                                         <h4>Key features:</h4>
                                         <ul>
                                             <li>Collect logs in files</li>
@@ -242,18 +321,18 @@
                                         </ul>
                                     </td>
                                     <td>
-                                        <h3>Elasticsearch + Logstash + Kibana</h3>
+                                        <h3><b>Elasticsearch + Logstash + Kibana</b></h3>
                                         <h4>Comparable features:</h4>
                                         <ul>
-                                            <li>Collect logs in files - <strong>yes</strong></li>
-                                            <li>Send logs to centralized system - <strong>yes</strong></li>
-                                            <li>Interface for search and analysis - <strong>yes</strong></li>
+                                            <li>Collect logs in files - <b>yes</b></li>
+                                            <li>Send logs to centralized system - <b>yes</b></li>
+                                            <li>Interface for search and analysis - <b>yes</b></li>
                                         </ul>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <h3>VMware Aria Automation</h3>
+                                        <h3><b>VMware Aria</b> Automation</h3>
                                         <h4>Key features:</h4>
                                         <ul>
                                             <li>Multi-cloud environments management</li>
@@ -265,43 +344,81 @@
                                         </ul>
                                     </td>
                                     <td>
-                                        <h3>OpenStack + ArgoCD</h3>
+                                        <h3><b>OpenStack + ArgoCD</b></h3>
                                         <h4>Comparable features:</h4>
                                         <ul>
-                                            <li>Multi-cloud environments management - <strong>yes(12)</strong></li>
-                                            <li>DevOps for infrastructure - <strong>yes</strong></li>
-                                            <li>Infrastructure as code and Kubernetes automation - <strong>yes</strong></li>
-                                            <li>Network automation - <strong>yes</strong></li>
-                                            <li>SecOps for infrastructure - <strong>yes</strong></li>
-                                            <li>Ansible + GitOps approach - <strong>yes</strong></li>
+                                            <li>Multi-cloud environments management - <b>yes(1)</b></li>
+                                            <li>DevOps for infrastructure - <b>yes</b></li>
+                                            <li>Infrastructure as code and Kubernetes automation - <b>yes</b></li>
+                                            <li>Network automation - <b>yes</b></li>
+                                            <li>SecOps for infrastructure - <b>yes</b></li>
+                                            <li>Ansible + GitOps approach - <b>yes</b></li>
                                         </ul>
-                                        <p><strong>12</strong> Via GitOps approach based on ArgoCD</p>
+                                        <p><b>1</b> Via GitOps approach based on ArgoCD</p>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <h3>VMware Aria Operations for Networks</h3>
+                                        <h3><b>VMware Aria</b> Operations for Networks</h3>
                                         <h4>Key features:</h4>
                                         <ul>
-                                            <li>Networking</li>
-                                            <li>Applications</li>
-                                            <li>Security</li>
+                                            <li>Networking
+                                                <ul>
+                                                    <li>End-to-end troubleshooting traffic and path</li>
+                                                    <li>Network assurance and verification</li>
+                                                    <li>Overlay and underlay network troubleshooting</li>
+                                                </ul>
+                                            </li>
+                                            <li>Applications
+                                                <ul>
+                                                    <li>Application discovery and plan for migration</li>
+                                                    <li>Measure application latency and performance</li>
+                                                    <li>Finding network bottlenecks for application</li>
+                                                    <li>Analyze traffic</li>
+                                                </ul>
+                                            </li>
+                                            <li>Security
+                                                <ul>
+                                                    <li>Troubleshoot security</li>
+                                                    <li>FW policies and network segmentation recommendations</li>
+                                                    <li>Dependencies map to reduce risk during migrations</li>
+                                                </ul>
+                                            </li>
                                         </ul>
                                     </td>
                                     <td>
-                                        <h3>OpenStack Neutron + Hubble + SkyDive</h3>
+                                        <h3><b>OpenStack Neutron + Hubble + SkyDive</b></h3>
                                         <h4>Comparable features:</h4>
                                         <ul>
-                                            <li>Networking - <strong>yes(13)</strong></li>
-                                            <li>Applications - Partial</li>
-                                            <li>Security - Partial</li>
+                                            <li>Networking
+                                                <ul>
+                                                    <li>End-to-end troubleshooting traffic and path - <b>yes(1)</b></li>
+                                                    <li>Network assurance and verification - <b>yes</b></li>
+                                                    <li>Overlay and underlay network troubleshooting - <b>yes(1)</b></li>
+                                                </ul>
+                                            </li>
+                                            <li>Applications
+                                                <ul>
+                                                    <li>Application discovery and plan for migration - <b>no</b></li>
+                                                    <li>Measure application latency and performance - <b>no</b></li>
+                                                    <li>Finding network bottlenecks for application - <b>no</b></li>
+                                                    <li>Analyze traffic - <b>yes</b></li>
+                                                </ul>
+                                            </li>
+                                            <li>Security
+                                                <ul>
+                                                    <li>Troubleshoot security - <b>no</b></li>
+                                                    <li>FW policies and network segmentation recommendations - <b>yes</b></li>
+                                                    <li>Dependencies map to reduce risk during migrations - <b>no</b></li>
+                                                </ul>
+                                            </li>
                                         </ul>
-                                        <p><strong>13</strong> Underlay network with Cilium Hubble, overlay (cloud) networks with SkyDive</p>
+                                        <p><b>1</b> Underlay network with Cilium <a href="https://github.com/cilium/hubble" target="_blank" rel="noopener">Hubble</a>, overlay (cloud) networks with <a href="https://github.com/skydive-project/skydive" target="_blank" rel="noopener">SkyDive</a></p>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <h3>VMware Tanzu (Container Orchestration)</h3>
+                                        <h3><b>VMware Tanzu</b> (Container Orchestration)</h3>
                                         <h4>Key features:</h4>
                                         <ul>
                                             <li>Kubernetes cluster management</li>
@@ -312,22 +429,22 @@
                                         </ul>
                                     </td>
                                     <td>
-                                        <h3>OpenStack + Gardener</h3>
+                                        <h3><b>OpenStack + Gardener</b></h3>
                                         <h4>Comparable features:</h4>
                                         <ul>
-                                            <li>Kubernetes cluster management - <strong>yes(14)</strong></li>
-                                            <li>Multi-cloud - <strong>no</strong></li>
-                                            <li>Application catalog - <strong>yes(15)</strong></li>
-                                            <li>Service Mesh - <strong>yes</strong></li>
-                                            <li>Observability - <strong>yes</strong></li>
+                                            <li>Kubernetes cluster management - <b>yes(1)</b></li>
+                                            <li>Multi-cloud - <b>no</b></li>
+                                            <li>Application catalog - <b>yes(2)</b></li>
+                                            <li>Service Mesh - <b>yes</b></li>
+                                            <li>Observability - <b>yes</b></li>
                                         </ul>
-                                        <p><strong>14</strong> Using either Magnum or Gardener<br>
-                                        <strong>15</strong> Any Helm3 - based application</p>
+                                        <p><b>1</b> Using either <a href="https://docs.openstack.org/magnum/latest/" target="_blank" rel="noopener">Magnum</a> or <a href="https://gardener.cloud/" target="_blank" rel="noopener">Gardener</a><br>
+                                        <b>2</b> Any Helm3 - based application</p>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <h3>VMware Horizon (Virtual Desktop Infrastructure)</h3>
+                                        <h3><b>VMware Horizon</b> (Virtual Desktop Infrastructure)</h3>
                                         <h4>Key features:</h4>
                                         <ul>
                                             <li>Remote desktops</li>
@@ -335,17 +452,17 @@
                                         </ul>
                                     </td>
                                     <td>
-                                        <h3>OpenStack + OpenUDS</h3>
+                                        <h3><b>OpenStack + OpenUDS</b></h3>
                                         <h4>Comparable features:</h4>
                                         <ul>
-                                            <li>Remote desktops - <strong>yes</strong></li>
-                                            <li>Hybrid cloud management - <strong>no</strong></li>
+                                            <li>Remote desktops - <b>yes</b></li>
+                                            <li>Hybrid cloud management - <b>no</b></li>
                                         </ul>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <h3>VMware SQL (Database as Service)</h3>
+                                        <h3><b>VMware SQL</b> (Database as Service)</h3>
                                         <h4>Key features:</h4>
                                         <ul>
                                             <li>PostgreSQL support</li>
@@ -353,20 +470,23 @@
                                         </ul>
                                     </td>
                                     <td>
-                                        <h3>OpenStack Trove</h3>
+                                        <h3><b>OpenStack Trove</b></h3>
                                         <h4>Comparable features:</h4>
                                         <ul>
-                                            <li>PostgreSQL support - <strong>yes</strong></li>
-                                            <li>MySQL support - <strong>yes</strong></li>
-                                            <li>MongoDB support - <strong>yes</strong></li>
-                                            <li>Redis support - <strong>yes</strong></li>
-                                            <li>Cassandra support - <strong>yes</strong></li>
+                                            <li>PostgreSQL support - <b>yes</b></li>
+                                            <li>MySQL support - <b>yes</b></li>
+                                            <li>MongoDB support - <b>yes</b></li>
+                                            <li>Redis support - <b>yes</b></li>
+                                            <li>Cassandra support - <b>yes</b></li>
                                         </ul>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
+                    <p class="vmwmigration-table-source">
+                        Source: <a href="https://cloudification.io/vmware-alternative/">Cloudification</a>
+                    </p>
                 </div>
             </div> <!-- .container -->
         </section>
