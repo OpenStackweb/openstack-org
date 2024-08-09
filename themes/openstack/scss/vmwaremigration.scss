@@ -73,15 +73,17 @@ img.center {
 }
 
 .vmwmigration.download-btn {
-  display: block;
+  display: inline-block;
   background: #b9301d;
   padding: 10px 20px;
   border: none;
   border-radius: 2px;
   width: 220px;
-  margin: 10px auto 0;
+  margin: 20px auto 0;
   color: #fff;
-  font-weight: 600; }
+  font-weight: 600;
+  text-align: center;
+}
 
 .download-btn a, a:visited {
   color: #fff;
@@ -168,11 +170,23 @@ table.vmwmigration-table {
   margin: 0 auto;
   font-family: Arial, sans-serif;
 }
-.vmwmigration-table th, .vmwmigration-table td {
+.vmwmigration-table th {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
+  vertical-align: top;
+}
+.vmwmigration-table td {
   border: 1px solid #ddd;
   padding: 12px;
   text-align: left;
   vertical-align: top;
+}
+.vmwmigration-table td p {
+  font-size: 12px;
+  color: #333;
+  text-align: left;
+  margin-left: 10px;
 }
 .vmwmigration-table th {
   background-color: #f2f2f2;
@@ -188,6 +202,15 @@ table.vmwmigration-table {
 .vmwmigration-table h3 {
   margin-top: 0;
   margin-bottom: 10px;
+  font-size: 20px;
+  text-align: left;
+  font-weight: 400;
+}
+.vmwmigration-table h4 {
+  font-size: 14px;
+  text-align: left;
+  font-weight: 400;
+  margin-top: 20px;
 }
 
 /* -- 5 Columns -- */

@@ -382,103 +382,103 @@
                 </div>
                 <div class="row five-columns row01">
                     <div class="col-md-5th-1 col-sm-4 col-md-offset-0 col-sm-offset-2">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/vmwmigration/ecosystem/vexxhost-logo.png")}" alt="Vexxhost logo">
+                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/vexxhost-logo.png")}" alt="Vexxhost logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/vmwmigration/ecosystem/sardina-logo.png")}" alt="Sardina logo">
+                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/sardina-logo.png")}" alt="Sardina logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/vmwmigration/ecosystem/sentinella-logo.png")}" alt="Sentinella logo">
+                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/sentinella-logo.png")}" alt="Sentinella logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/vmwmigration/ecosystem/Btech-logo.png")}" alt="Btech logo">
+                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/Btech-logo.png")}" alt="Btech logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/vmwmigration/ecosystem/china-mobile-logo.png")}" alt="China Mobile logo">
+                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/china-mobile-logo.png")}" alt="China Mobile logo">
                     </div>
 	            </div>
 
                 <div class="row five-columns row02">
                     <div class="col-md-5th-1 col-sm-4 col-md-offset-0 col-sm-offset-2">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/vmwmigration/ecosystem/devstack-lg-logo.png")}" alt="DevStack logo">
+                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/devstack-lg-logo.png")}" alt="DevStack logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/vmwmigration/ecosystem/tencent-logo.png")}" alt="Tencent logo">
+                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/tencent-logo.png")}" alt="Tencent logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/vmwmigration/ecosystem/verneglobal-logo.png")}" alt="Verne Global logo">
+                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/verneglobal-logo.png")}" alt="Verne Global logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
                     <img class="ecosystem-logo" src="{$Top.CloudUrl("assets/bare-metal-logo-program/verizon-media.png")}" alt="Verzion Media logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/vmwmigration/ecosystem/ovh-logo.png")}" alt="OVH logo">
+                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/ovh-logo.png")}" alt="OVH logo">
                     </div>
 	            </div>
 
                 <div class="row five-columns row03">
                     <div class="col-md-5th-1 col-sm-4 col-md-offset-0 col-sm-offset-2">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/vmwmigration/ecosystem/chinatelecom-logo.png")}" alt="China Telecom logo">
+                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/chinatelecom-logo.png")}" alt="China Telecom logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/vmwmigration/ecosystem/stc-logo.png")}" alt="STC logo">
+                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/stc-logo.png")}" alt="STC logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/vmwmigration/ecosystem/opencloud-logo.png")}" alt="OpenCloud logo">
+                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/opencloud-logo.png")}" alt="OpenCloud logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/vmwmigration/ecosystem/avaya-logo.png")}" alt="Avaya logo">
+                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/avaya-logo.png")}" alt="Avaya logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/vmwmigration/ecosystem/debian-logo.png")}" alt="Debian logo">
+                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/debian-logo.png")}" alt="Debian logo">
                     </div>
 	            </div>
 
                 <div class="row five-columns row04">
                     <div class="col-md-5th-1 col-sm-4 col-md-offset-0 col-sm-offset-2">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/vmwmigration/ecosystem/zte-logo.png")}" alt="ZTE logo">
+                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/zte-logo.png")}" alt="ZTE logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/vmwmigration/ecosystem/suse-logo.png")}" alt="SUSE logo">
+                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/suse-logo.png")}" alt="SUSE logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/vmwmigration/ecosystem/H3C-logo.png")}" alt="H3C logo">
+                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/H3C-logo.png")}" alt="H3C logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/vmwmigration/ecosystem/chinaunicom-logo.png")}" alt="China Unicom logo">
+                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/chinaunicom-logo.png")}" alt="China Unicom logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/vmwmigration/ecosystem/StackHPC-logo.png")}" alt="Stack HPC logo">
+                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/StackHPC-logo.png")}" alt="Stack HPC logo">
                     </div>
 	            </div>
 
                 <div class="row five-columns row05">
                     <div class="col-md-5th-1 col-sm-4 col-md-offset-0 col-sm-offset-2">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/vmwmigration/ecosystem/ZConverter-logo.png")}" alt="ZConverter logo">
+                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/ZConverter-logo.png")}" alt="ZConverter logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/vmwmigration/ecosystem/EasyStack-logo.png")}" alt="Easy Stack logo">
+                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/EasyStack-logo.png")}" alt="Easy Stack logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/vmwmigration/ecosystem/tfcloud-logo.png")}" alt="tfcloud logo">
+                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/tfcloud-logo.png")}" alt="tfcloud logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/vmwmigration/ecosystem/fiberhome-logo.png")}" alt="fiberhome logo">
+                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/fiberhome-logo.png")}" alt="fiberhome logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/vmwmigration/ecosystem/leboncoin-logo.png")}" alt="leboncoin logo">
+                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/leboncoin-logo.png")}" alt="leboncoin logo">
                     </div>
 	            </div>
 
                 <div class="row five-columns row06">
                     <div class="col-md-5th-1 col-sm-4 col-md-offset-0 col-sm-offset-2">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/vmwmigration/ecosystem/Platform9-logo.png")}" alt="Platform9 logo">
+                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/Platform9-logo.png")}" alt="Platform9 logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/vmwmigration/ecosystem/mirantis-logo.png")}" alt="mirantis logo">
+                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/mirantis-logo.png")}" alt="mirantis logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/vmwmigration/ecosystem/99cloud-sm-logo.png")}" alt="99cloud logo">
+                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/99cloud-sm-logo.png")}" alt="99cloud logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
                     <img class="ecosystem-logo" src="{$Top.CloudUrl("assets/vmwmigration/red-hat-sm.png")}" alt="RedHat logo">
