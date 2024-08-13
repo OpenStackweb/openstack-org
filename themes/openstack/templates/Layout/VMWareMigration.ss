@@ -22,7 +22,7 @@
                         </ul>
                             <a class="vmwmigration download-btn" alt="Join the OpenInfra Foundation" type="button" href="https://openinfra.dev/join/members" target="_blank">
                              Join Us&nbsp;&nbsp;<i class="fa fa-arrow-circle-right"></i>
-                        </a>&nbsp;&nbsp;<a class="download-btn" alt="VMware Migration to OpenStack White Paper" type="button" href="">
+                        </a>&nbsp;&nbsp;<a class="vmwmigration download-btn" alt="VMware Migration to OpenStack White Paper" type="button" href="">
                              Read the Whitepaper&nbsp;<i class="fa fa-arrow-circle-right"></i>
                         </a>
                     </div>
@@ -33,7 +33,7 @@
 
 
     <!-- Overview -->
-        <section class="vmwmigration-white page-intro">
+        <section class="vmwmigration-grayback vmwmigration-video-wall">
             <div class="container">
                 <div class="row ">
                     <div class="col-sm-12">
@@ -43,6 +43,10 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+        <section class="vmwmigration-white page-intro">
+            <div class="container">
                 <div class="row ">
                     <div class="col-sm-12">
                         <div class="intro-message"> 
@@ -511,6 +515,13 @@
                         <h2>OpenInfra Foundation Members Supporting Migration from VMware to OpenStack</h2>
                     </div>
                 </div>
+                <div class="row info-block">
+                    <div class="col-sm-12">
+                        <p>The OpenInfra Member: VMware Migration working group formed to collaboratively address the market opportunity for organizations to re-define their virtualization strategy. Participants represent the global ecosystem of OpenStack experts who support the OpenInfra Foundation. New participants are welcome to join, share VMware migration experience, and build more OpenStack awareness as a virtualization alternative.
+                        </p>
+                        <p><a class="vmwmigration red-button"  href="https://openinfra.dev/join/members" target="_blank">Join the OpenInfra Foundation Today <i class="icon-arrow-right"></i></a></p>
+                    </div>
+                </div>
                 <div class="row five-columns row01">
                     <div class="col-md-5th-1 col-sm-4 col-md-offset-0 col-sm-offset-2">
                     <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/vexxhost-logo.png")}" alt="Vexxhost logo">
@@ -527,7 +538,7 @@
                     <div class="col-md-5th-1 col-sm-4">
                     <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/china-mobile-logo.png")}" alt="China Mobile logo">
                     </div>
-	            </div>
+                </div>
 
                 <div class="row five-columns row02">
                     <div class="col-md-5th-1 col-sm-4 col-md-offset-0 col-sm-offset-2">
@@ -545,7 +556,7 @@
                     <div class="col-md-5th-1 col-sm-4">
                     <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/ovh-logo.png")}" alt="OVH logo">
                     </div>
-	            </div>
+                </div>
 
                 <div class="row five-columns row03">
                     <div class="col-md-5th-1 col-sm-4 col-md-offset-0 col-sm-offset-2">
@@ -563,7 +574,7 @@
                     <div class="col-md-5th-1 col-sm-4">
                     <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/debian-logo.png")}" alt="Debian logo">
                     </div>
-	            </div>
+                </div>
 
                 <div class="row five-columns row04">
                     <div class="col-md-5th-1 col-sm-4 col-md-offset-0 col-sm-offset-2">
@@ -581,7 +592,7 @@
                     <div class="col-md-5th-1 col-sm-4">
                     <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/StackHPC-logo.png")}" alt="Stack HPC logo">
                     </div>
-	            </div>
+                </div>
 
                 <div class="row five-columns row05">
                     <div class="col-md-5th-1 col-sm-4 col-md-offset-0 col-sm-offset-2">
@@ -599,7 +610,7 @@
                     <div class="col-md-5th-1 col-sm-4">
                     <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/leboncoin-logo.png")}" alt="leboncoin logo">
                     </div>
-	            </div>
+                </div>
 
                 <div class="row five-columns row06">
                     <div class="col-md-5th-1 col-sm-4 col-md-offset-0 col-sm-offset-2">
@@ -617,20 +628,13 @@
                     <div class="col-md-5th-1 col-sm-4">
                     <img class="ecosystem-logo" src="{$Top.CloudUrl("assets/Uploads/0003supportedblack-orangehex.png")}" alt="Ubuntu logo">
                     </div>
-	            </div>
+                </div>
                 <div class="row five-columns row06">
                     <div class="col-md-5th-1 col-sm-4 col-md-offset-0 col-sm-offset-2">
                     <img class="ecosystem-logo" src="{$Top.CloudUrl("assets/vmwmigration/dell-technologies.jpg")}" alt="Dell logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
                     <img class="ecosystem-logo" src="{$Top.CloudUrl("assets/companies/main_logo/_resampled/ScaleWidthWzIwN10/inspur-lg.jpg")}" alt="Inspur">
-                    </div>
-                </div>
-                <div class="row info-block">
-                    <div class="col-sm-12">
-                        <p>The OpenInfra Member: VMware Migration working group formed to collaboratively address the market opportunity for organizations to re-define their virtualization strategy. Participants represent the global ecosystem of OpenStack experts who support the OpenInfra Foundation. New participants are welcome to join, share VMware migration experience, and build more OpenStack awareness as a virtualization alternative.
-                        </p>
-                        <p><a class="vmwmigration red-button"  href="https://openinfra.dev/join/members" target="_blank">Join the OpenInfra Foundation Today <i class="icon-arrow-right"></i></a></p>
                     </div>
                 </div>
             </div> <!-- .container -->
