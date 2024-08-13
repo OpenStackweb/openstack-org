@@ -31,25 +31,18 @@
         </div> 
     </div><!-- /.intro-header -->
 
+
     <!-- Overview -->
-    <div class="overview baremetal">
-        <section class="baremetal-white page-intro">
+        <section class="vmwmigration-white page-intro">
             <div class="container">
                 <div class="row ">
                     <div class="col-sm-12">
                         <div class="intro-message"> 
-                            <H2>"OpenStack allows us to avoid vendor lock-in and allows us to customize our infrastructure to meet our specific needs. We can integrate various open-source tools and platforms, which is something we couldn't do with VMware. Additionally, OpenStack's community-driven development model means we can contribute back and benefit from innovations made by others." - Tad Van Fleet, GEICO Distinguished Architect 
-                            </H2>
+                            <h2>"OpenStack allows us to avoid vendor lock-in and allows us to customize our infrastructure to meet our specific needs. We can integrate various open-source tools and platforms, which is something we couldn't do with VMware. Additionally, OpenStack's community-driven development model means we can contribute back and benefit from innovations made by others."<br/>- Tad Van Fleet, GEICO Distinguished Architect 
+                            </h2>
                         </div>
                     </div>
                 </div>
-            </div> <!-- .container -->
-        </section>
-
-    <!-- Overview -->
-    <div class="overview vmwmigration">
-        <section class="vmwmigration-white page-intro">
-            <div class="container">
                 <div class="row ">
                     <div class="col-sm-12">
                         <div class="intro-message"> 
