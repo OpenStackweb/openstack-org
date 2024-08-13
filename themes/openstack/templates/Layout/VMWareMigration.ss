@@ -20,14 +20,31 @@
                             <li>Rely on a global ecosystem and diverse, active open source contributors</li>
                             <li>Maintain complete ownership of their infrastructure</li>
                         </ul>
-                            <a class="vmwmigration download-btn" alt="Join the OpenInfra Foundation" type="button" href="https://openinfra.dev/join">
+                            <a class="vmwmigration download-btn" alt="Join the OpenInfra Foundation" type="button" href="https://openinfra.dev/join/members" target="_blank">
                              Join Us&nbsp;&nbsp;<i class="fa fa-arrow-circle-right"></i>
+                        </a>&nbsp;&nbsp;<a class="download-btn" alt="VMware Migration to OpenStack White Paper" type="button" href="">
+                             Read the Whitepaper&nbsp;<i class="fa fa-arrow-circle-right"></i>
                         </a>
                     </div>
                 </div>
             </div>
         </div> 
     </div><!-- /.intro-header -->
+
+    <!-- Overview -->
+    <div class="overview baremetal">
+        <section class="baremetal-white page-intro">
+            <div class="container">
+                <div class="row ">
+                    <div class="col-sm-12">
+                        <div class="intro-message"> 
+                            <H2>"OpenStack allows us to avoid vendor lock-in and allows us to customize our infrastructure to meet our specific needs. We can integrate various open-source tools and platforms, which is something we couldn't do with VMware. Additionally, OpenStack's community-driven development model means we can contribute back and benefit from innovations made by others." - Tad Van Fleet, GEICO Distinguished Architect 
+                            </H2>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- .container -->
+        </section>
 
     <!-- Overview -->
     <div class="overview vmwmigration">
@@ -38,6 +55,7 @@
                         <div class="intro-message"> 
                             <h2>OpenStack to VMware Feature Comparison</h2>
                             <p>There is not complete feature parity between VMware, a proprietary virtualization platform, and OpenStack, an open source project composed of services that can replicate specific functionality. A comparable or enhanced virtualization platform can be implemented by combining OpenStack’s existing suite of projects with services provided by the global ecosystem of OpenStack vendors.</p>
+                            <p>We'd like to thank our friends at <a href="https://cloudification.io/" target="_blank">Cloudification</a> and the OpenStack VMware Migration Working Group for providing the content for this comparison chart. If you're interested in joining the Working Group, please <a href="mailto:bizdev@openinfra.dev">email us</a>.</p>
                         </div>
                         <table class="vmwmigration-table">
                             <thead>
@@ -619,7 +637,7 @@
                     <div class="col-sm-12">
                         <p>The OpenInfra Member: VMware Migration working group formed to collaboratively address the market opportunity for organizations to re-define their virtualization strategy. Participants represent the global ecosystem of OpenStack experts who support the OpenInfra Foundation. New participants are welcome to join, share VMware migration experience, and build more OpenStack awareness as a virtualization alternative.
                         </p>
-                        <p><a class="vmwmigration red-button" href="https://openinfra.dev/join" target="_blank">Join the OpenInfra Foundation Today <i class="icon-arrow-right"></i></a></p>
+                        <p><a class="vmwmigration red-button"  href="https://openinfra.dev/join/members" target="_blank">Join the OpenInfra Foundation Today <i class="icon-arrow-right"></i></a></p>
                     </div>
                 </div>
             </div> <!-- .container -->
