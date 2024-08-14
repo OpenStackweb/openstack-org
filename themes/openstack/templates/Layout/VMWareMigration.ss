@@ -524,28 +524,28 @@
                         </p>
                     </div>
                 </div>
-                <div class="row five-columns row01">
-                    <div class="col-md-5th-1 col-sm-4 col-md-offset-0 col-sm-offset-2">
+                <div class="row logos">
+                    <div class="col-sm-3 col-xs-6">
                         <div class="img-wrapper">
                             <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/BSystems.jpg" alt="B1 Systems">
                         </div>
                     </div>
-                    <div class="col-md-5th-1 col-sm-4">
+                    <div class="col-sm-3 col-xs-6">
                         <div class="img-wrapper">
                             <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/binariocloud-lg.png" alt="Binario Cloud logo">
                         </div>
                     </div>
-                    <div class="col-md-5th-1 col-sm-4">
+                    <div class="col-sm-3 col-xs-6">
                         <div class="img-wrapper">
                             <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/Binero-lg.png" alt="Binero logo">
                         </div>
                     </div>
-                    <div class="col-md-5th-1 col-sm-4">
+                    <div class="col-sm-3 col-xs-6">
                         <div class="img-wrapper">
                             <img class="ecosystem-logo" src="https://www.openstack.org/companies/57/logos_resampled/ScaleWidthWzIwN10/Canonical-s.png" alt="Canonical logo">
                         </div>
                     </div>
-                    <div class="col-md-5th-1 col-sm-4">
+                    <div class="col-sm-3 col-xs-6">
                         <div class="img-wrapper">
                             <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/695/logos/_resampled/ScaleWidthWzIwN10/cleura-lg1.jpg" alt="Cleura logo">
                         </div>
