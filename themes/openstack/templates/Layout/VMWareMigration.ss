@@ -61,7 +61,7 @@
                             <thead>
                                 <tr>
                                     <th>VMware</th>
-                                    <th class="th-openstack">OpenStack</th>
+                                    <th class="th-openstack">OpenStack & OpenStack Ecosystem</th>
                                 </tr>
                             </thead>
                             <tbody>
