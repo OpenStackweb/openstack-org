@@ -38,8 +38,11 @@
                 <div class="row ">
                     <div class="col-sm-12">
                         <div class="intro-message"> 
-                            <h2>"OpenStack allows us to avoid vendor lock-in and allows us to customize our infrastructure to meet our specific needs. We can integrate various open-source tools and platforms, which is something we couldn't do with VMware. Additionally, OpenStack's community-driven development model means we can contribute back and benefit from innovations made by others."<br/>- Tad Van Fleet, GEICO Distinguished Architect 
-                            </h2>
+                            <p>&nbsp;</p>
+                            <h2>"OpenStack allows us to avoid vendor lock-in and allows us to customize our infrastructure to meet our specific needs. We can integrate various open-source tools and platforms, which is something we couldn't do with VMware. Additionally, OpenStack's community-driven development model means we can contribute back and benefit from innovations made by others."</h2>
+                            <h4>- Tad Van Fleet, GEICO Distinguished Architect 
+                            </h4>
+                            <p>&nbsp;</p>
                         </div>
                     </div>
                 </div>
@@ -519,122 +522,97 @@
                     <div class="col-sm-12">
                         <p>The OpenInfra Member: VMware Migration working group formed to collaboratively address the market opportunity for organizations to re-define their virtualization strategy. Participants represent the global ecosystem of OpenStack experts who support the OpenInfra Foundation. New participants are welcome to join, share VMware migration experience, and build more OpenStack awareness as a virtualization alternative.
                         </p>
-                        <p><a class="vmwmigration red-button"  href="https://openinfra.dev/join/members" target="_blank">Join the OpenInfra Foundation Today <i class="icon-arrow-right"></i></a></p>
                     </div>
                 </div>
                 <div class="row five-columns row01">
                     <div class="col-md-5th-1 col-sm-4 col-md-offset-0 col-sm-offset-2">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/vexxhost-logo.png")}" alt="Vexxhost logo">
+                    <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/BSystems.jpg" alt="B1 Systems">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/sardina-logo.png")}" alt="Sardina logo">
+                    <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/binariocloud-lg.png" alt="Binario Cloud logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/sentinella-logo.png")}" alt="Sentinella logo">
+                    <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/Binero-lg.png" alt="Binero logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/Btech-logo.png")}" alt="Btech logo">
+                    <img class="ecosystem-logo" src="https://www.openstack.org/companies/57/logos_resampled/ScaleWidthWzIwN10/Canonical-s.png" alt="Canonical logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/china-mobile-logo.png")}" alt="China Mobile logo">
+                    <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/695/logos/_resampled/ScaleWidthWzIwN10/cleura-lg1.jpg" alt="Cleura logo">
                     </div>
                 </div>
 
                 <div class="row five-columns row02">
                     <div class="col-md-5th-1 col-sm-4 col-md-offset-0 col-sm-offset-2">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/devstack-lg-logo.png")}" alt="DevStack logo">
+                    <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/cloudheat-lg.jpg" alt="Cloud & Heat logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/tencent-logo.png")}" alt="Tencent logo">
+                    <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/cloudbase-lg2.jpg" alt="Cloudbase Solutions logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/verneglobal-logo.png")}" alt="Verne Global logo">
+                    <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/cloudification-blue-logo-small.png" alt="Cloudification logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("assets/bare-metal-logo-program/verizon-media.png")}" alt="Verzion Media logo">
+                    <img class="ecosystem-logo" src="https://www.openstack.org/companies/582/logos_resampled/ScaleWidthWzIwN10/fairbanks-lg1.png" alt="Fairbanks logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/ovh-logo.png")}" alt="OVH logo">
+                    <img class="ecosystem-logo" src="{https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/huawei-new-lg.jpg" alt="Huawei logo">
                     </div>
                 </div>
 
                 <div class="row five-columns row03">
                     <div class="col-md-5th-1 col-sm-4 col-md-offset-0 col-sm-offset-2">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/chinatelecom-logo.png")}" alt="China Telecom logo">
+                    <img class="ecosystem-logo" src="https://www.openstack.org/companies/1331/logos_resampled/ScaleWidthWzIwN10/hydolix-lg.png" alt="Hydrolix logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/stc-logo.png")}" alt="STC logo">
+                    <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/mirantis-lg.png" alt="Mirantis logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/opencloud-logo.png")}" alt="OpenCloud logo">
+                    <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/okestro-lg3.png" alt="Okestro logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/avaya-logo.png")}" alt="Avaya logo">
+                    <img class="ecosystem-logo" src="https://www.openstack.org/companies/1277/logos_resampled/ScaleWidthWzIwN10/planethoster-lg.png" alt="PlanetHoster logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/debian-logo.png")}" alt="Debian logo">
+                    <img class="ecosystem-logo" src="https://www.openstack.org/companies/1/logos_resampled/ScaleWidthWzIwN10/rackspace-lg2.png" alt="Rackspace logo">
                     </div>
                 </div>
 
                 <div class="row five-columns row04">
                     <div class="col-md-5th-1 col-sm-4 col-md-offset-0 col-sm-offset-2">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/zte-logo.png")}" alt="ZTE logo">
+                    <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/RedHat-lg.png" alt="Red Hat logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/suse-logo.png")}" alt="SUSE logo">
+                    <img class="ecosystem-logo" src="https://www.openstack.org/companies/489/logos_resampled/ScaleWidthWzIwN10/sardina-lg2.png" alt="Sardina Systems logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/H3C-logo.png")}" alt="H3C logo">
+                    <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/storware-lg.png" alt="Storware logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/chinaunicom-logo.png")}" alt="China Unicom logo">
+                    <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/ULTIMUM-TECHNOLOGIES-320x132.png" alt="Ultimum Technologieslogo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/StackHPC-logo.png")}" alt="Stack HPC logo">
+                    <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/vexxhost-lg2.jpg" alt="Vexxhost logo">
                     </div>
                 </div>
 
                 <div class="row five-columns row05">
+                    <div class="col-md-5th-1 col-sm-4">&nbsp;
+                    </div>
                     <div class="col-md-5th-1 col-sm-4 col-md-offset-0 col-sm-offset-2">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/ZConverter-logo.png")}" alt="ZConverter logo">
+                    <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/virtuozzo-lg-new.jpg" alt="Virtuozzo logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/EasyStack-logo.png")}" alt="Easy Stack logo">
+                    <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/vyos-lg.png" alt="VyOS logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/tfcloud-logo.png")}" alt="tfcloud logo">
+                    <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/zconverter-lg.png" alt="ZConverter logo">
                     </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/fiberhome-logo.png")}" alt="fiberhome logo">
-                    </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/leboncoin-logo.png")}" alt="leboncoin logo">
+                    <div class="col-md-5th-1 col-sm-4">&nbsp;
                     </div>
                 </div>
-
-                <div class="row five-columns row06">
-                    <div class="col-md-5th-1 col-sm-4 col-md-offset-0 col-sm-offset-2">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/Platform9-logo.png")}" alt="Platform9 logo">
-                    </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/mirantis-logo.png")}" alt="mirantis logo">
-                    </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/99cloud-sm-logo.png")}" alt="99cloud logo">
-                    </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("assets/vmwmigration/red-hat-sm.png")}" alt="RedHat logo">
-                    </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("assets/Uploads/0003supportedblack-orangehex.png")}" alt="Ubuntu logo">
-                    </div>
-                </div>
-                <div class="row five-columns row06">
-                    <div class="col-md-5th-1 col-sm-4 col-md-offset-0 col-sm-offset-2">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("assets/vmwmigration/dell-technologies.jpg")}" alt="Dell logo">
-                    </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("assets/companies/main_logo/_resampled/ScaleWidthWzIwN10/inspur-lg.jpg")}" alt="Inspur">
+                <div class="row info-block">
+                        <p><a class="vmwmigration red-button"  href="https://openinfra.dev/join/members" target="_blank">Join the OpenInfra Foundation Today <i class="icon-arrow-right"></i></a></p>
                     </div>
                 </div>
             </div> <!-- .container -->
