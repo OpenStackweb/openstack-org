@@ -562,7 +562,7 @@
                     </div>
                     <div class="col-sm-3 col-xs-6">
                         <div class="img-wrapper">
-                            <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/cloudification-blue-logo-small.png" alt="Cloudification logo">
+                            <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/cloudification-blue-logo-small.png" alt="Cloudification logo" height="107">
                         </div>
                     </div>
                     <div class="col-sm-3 col-xs-6">
@@ -572,7 +572,7 @@
                     </div>
                     <div class="col-sm-3 col-xs-6">
                         <div class="img-wrapper">
-                            <img class="ecosystem-logo" src="{https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/huawei-new-lg.jpg" alt="Huawei logo">
+                            <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/huawei-new-lg.jpg" alt="Huawei logo">
                         </div>
                     </div>
                     <div class="col-sm-3 col-xs-6">
