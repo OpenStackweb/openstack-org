@@ -550,75 +550,95 @@
                             <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/695/logos/_resampled/ScaleWidthWzIwN10/cleura-lg1.jpg" alt="Cleura logo">
                         </div>
                     </div>
-                </div>
-
-                <div class="row five-columns row02">
-                    <div class="col-md-5th-1 col-sm-4 col-md-offset-0 col-sm-offset-2">
-                    <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/cloudheat-lg.jpg" alt="Cloud & Heat logo">
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/cloudheat-lg.jpg" alt="Cloud & Heat logo">
+                        </div>
                     </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/cloudbase-lg2.jpg" alt="Cloudbase Solutions logo">
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/cloudbase-lg2.jpg" alt="Cloudbase Solutions logo">
+                        </div>
                     </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/cloudification-blue-logo-small.png" alt="Cloudification logo">
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/cloudification-blue-logo-small.png" alt="Cloudification logo">
+                        </div>
                     </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="https://www.openstack.org/companies/582/logos_resampled/ScaleWidthWzIwN10/fairbanks-lg1.png" alt="Fairbanks logo">
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img class="ecosystem-logo" src="https://www.openstack.org/companies/582/logos_resampled/ScaleWidthWzIwN10/fairbanks-lg1.png" alt="Fairbanks logo">
+                        </div>
                     </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/huawei-new-lg.jpg" alt="Huawei logo">
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img class="ecosystem-logo" src="{https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/huawei-new-lg.jpg" alt="Huawei logo">
+                        </div>
                     </div>
-                </div>
-
-                <div class="row five-columns row03">
-                    <div class="col-md-5th-1 col-sm-4 col-md-offset-0 col-sm-offset-2">
-                    <img class="ecosystem-logo" src="https://www.openstack.org/companies/1331/logos_resampled/ScaleWidthWzIwN10/hydolix-lg.png" alt="Hydrolix logo">
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img class="ecosystem-logo" src="https://www.openstack.org/companies/1331/logos_resampled/ScaleWidthWzIwN10/hydolix-lg.png" alt="Hydrolix logo">
+                        </div>
                     </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/mirantis-lg.png" alt="Mirantis logo">
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/mirantis-lg.png" alt="Mirantis logo">
+                        </div>
                     </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/okestro-lg3.png" alt="Okestro logo">
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/okestro-lg3.png" alt="Okestro logo">
+                        </div>
                     </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="https://www.openstack.org/companies/1277/logos_resampled/ScaleWidthWzIwN10/planethoster-lg.png" alt="PlanetHoster logo">
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img class="ecosystem-logo" src="https://www.openstack.org/companies/1277/logos_resampled/ScaleWidthWzIwN10/planethoster-lg.png" alt="PlanetHoster logo">
+                        </div>
                     </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="https://www.openstack.org/companies/1/logos_resampled/ScaleWidthWzIwN10/rackspace-lg2.png" alt="Rackspace logo">
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img class="ecosystem-logo" src="https://www.openstack.org/companies/1/logos_resampled/ScaleWidthWzIwN10/rackspace-lg2.png" alt="Rackspace logo">
+                        </div>
                     </div>
-                </div>
-
-                <div class="row five-columns row04">
-                    <div class="col-md-5th-1 col-sm-4 col-md-offset-0 col-sm-offset-2">
-                    <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/RedHat-lg.png" alt="Red Hat logo">
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/RedHat-lg.png" alt="Red Hat logo">
+                        </div>
                     </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="https://www.openstack.org/companies/489/logos_resampled/ScaleWidthWzIwN10/sardina-lg2.png" alt="Sardina Systems logo">
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img class="ecosystem-logo" src="https://www.openstack.org/companies/489/logos_resampled/ScaleWidthWzIwN10/sardina-lg2.png" alt="Sardina Systems logo">
+                        </div>
                     </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/storware-lg.png" alt="Storware logo">
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                             <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/storware-lg.png" alt="Storware logo">
+                        </div>
                     </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/ULTIMUM-TECHNOLOGIES-320x132.png" alt="Ultimum Technologieslogo">
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/ULTIMUM-TECHNOLOGIES-320x132.png" alt="Ultimum Technologieslogo">
+                        </div>
                     </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/vexxhost-lg2.jpg" alt="Vexxhost logo">
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/vexxhost-lg2.jpg" alt="Vexxhost logo">
+                        </div>
                     </div>
-                </div>
-
-                <div class="row five-columns row05">
-                    <div class="col-md-5th-1 col-sm-4">&nbsp;
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/virtuozzo-lg-new.jpg" alt="Virtuozzo logo">
+                        </div>
                     </div>
-                    <div class="col-md-5th-1 col-sm-4 col-md-offset-0 col-sm-offset-2">
-                    <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/virtuozzo-lg-new.jpg" alt="Virtuozzo logo">
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/vyos-lg.png" alt="VyOS logo">
+                        </div>
                     </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/vyos-lg.png" alt="VyOS logo">
-                    </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/zconverter-lg.png" alt="ZConverter logo">
-                    </div>
-                    <div class="col-md-5th-1 col-sm-4">&nbsp;
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img class="ecosystem-logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/zconverter-lg.png" alt="ZConverter logo">
+                        </div>
                     </div>
                 </div>
                 <div class="row info-block">
