@@ -700,11 +700,12 @@
                             <dt>What migration tools are available to migrate from VMware to OpenStack?</dt>
                             <dd>
                                 <ul>
-                                    <li>migratekit: A complete open source solution</li>
-                                    <li>Coriolis by Cloudbase Solutions: A blend of proprietary and open source technologies</li>
-                                    <li>ZConverter: An any-to-any cloud migration tool</li>
-                                    <li>Hystax</li>
-                                    <li>Mirantis Migration Service</li>
+                                    <li><a href="https://cloudbase.it/coriolis/" target="_blank">Coriolis by Cloudbase Solutions</a></li>
+                                    <li><a href="https://www.sardinasystems.com/tag/fishosmoveit/" target="_blank">FishOS MoveIt from Sardina Systems</a></li>
+                                    <li><a href="https://github.com/vexxhost/migratekit" target="_blank">migratekit from Vexxhost</a> (open source)</li>
+                                    <li><a href="https://www.mirantis.com/bespoke/solutions/" target="_blank">Mirantis Migration Service</a></li>
+                                    <li><a href="https://libguestfs.org/virt-v2v.1.html" target="_blank">virt-v2v</a> (open source)</li>
+                                    <li><a href="https://www.zconverter.com/" target="_blank">ZConverter</a></li>
                                 </ul>
                             </dd>
 
