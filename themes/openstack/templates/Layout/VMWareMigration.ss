@@ -54,7 +54,7 @@
                     <div class="col-sm-12">
                         <div class="intro-message"> 
                             <h2>OpenStack to VMware Feature Comparison</h2>
-                            <p>There is not complete feature parity between VMware, a proprietary virtualization platform, and OpenStack, an open source project composed of services that can replicate specific functionality. A comparable or enhanced virtualization platform can be implemented by combining OpenStack’s existing suite of projects with services provided by the global ecosystem of OpenStack vendors.</p>
+                            <p>There is no one-for-one feature parity between VMware, a proprietary datacenter virtualization platform, and OpenStack, an open source project allowing to build a private or public alternative to proprietary public clouds, and therefore following the same "separate API-driven services" approach as those clouds. A comparable or enhanced datacenter virtualization platform can however be implemented by combining OpenStack’s existing suite of projects with services provided by the global ecosystem of OpenStack vendors.</p>
                             <p>We'd like to thank our friends at <a href="https://cloudification.io/" target="_blank">Cloudification</a> and the OpenStack VMware Migration Working Group for providing the content for this comparison chart. If you're interested in joining the Working Group, please <a href="mailto:bizdev@openinfra.dev">email us</a>.</p>
                         </div>
                         <table class="vmwmigration-table">
@@ -93,9 +93,11 @@
                                             <li>VMHA - <b>yes(1)</b></li>
                                             <li>Hot plug and extend (Networks/Volumes) - <b>yes</b></li>
                                             <li>Site-to-site VM migration - <b>yes(2)</b></li>
+                                            <li>L4-L7 load balancing - <b>yes(3)</b></li>
                                         </ul>
                                         <p><b>1</b> OpenStack provides VMHA functionality with <a href="https://docs.openstack.org/masakari/latest/">Masakari</a><br>
-                                        <b>2</b> When OpenStack control plane stretched across DCs</p>
+                                        <b>2</b> When OpenStack control plane stretched across DCs<br/>
+                                        <b>3</b> OpenStack <a href="https://docs.openstack.org/octavia/latest/reference/introduction.html">Octavia</a></p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -158,7 +160,7 @@
                                                     <li>Tenant isolation - <b>yes</b></li>
                                                     <li>Separate routing tables - <b>yes</b></li>
                                                     <li>NAT - <b>yes</b></li>
-                                                    <li>EDGE Firewall - <b>no(2)</b></li>
+                                                    <li>EDGE Firewall - <b>yes(2)</b></li>
                                                 </ul>
                                             </li>
                                             <li>QoS - <b>yes</b></li>
@@ -170,37 +172,6 @@
                                         <p><b>1</b> if OpenStack control plane stretched across DCs<br>
                                         <b>2</b> OpenStack has <a href="https://docs.openstack.org/neutron/latest/admin/fwaas.html">FWaaS extension</a><br>
                                         <b>3</b> Partially with <a href="https://docs.openstack.org/networking-bgpvpn/latest/">BGP VPN interconnection extension</a></p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h3><b>VMware NSX Advanced Load Balancer</b><br>(<a href="https://www.vmware.com/content/dam/digitalmarketing/vmware/en/pdf/products/nsx/vmware-nsx-advanced-load-balancer-data-sheet.pdf">by Avi Networks</a>)</h3>
-                                        <h4>Key features:</h4>
-                                        <ul>
-                                            <li>L4-L7 load balancing</li>
-                                            <li>Container ingress gateway</li>
-                                            <li>HA architecture</li>
-                                            <li>Global server load balancing (GSLB)</li>
-                                            <li>Web application firewall (WAF)</li>
-                                            <li>Real-time application analytics</li>
-                                            <li>Multi-cloud load balancing</li>
-                                            <li>Application performance monitoring</li>
-                                        </ul>
-                                    </td>
-                                    <td>
-                                        <h3><b>OpenStack Octavia</b></h3>
-                                        <h4>Comparable features:</h4>
-                                        <ul>
-                                            <li>L4-L7 load balancing - <b>yes</b></li>
-                                            <li>Container ingress gateway - <b>yes</b></li>
-                                            <li>HA architecture - <b>yes</b> (stand-by)</li>
-                                            <li>Global server load balancing (GSLB) - <b>no</b></li>
-                                            <li>Web application firewall (WAF) - <b>no</b></li>
-                                            <li>Real-time application analytics - <b>no</b></li>
-                                            <li>Multi-cloud load balancing - <b>no</b></li>
-                                            <li>Application performance monitoring - <b>no</b></li>
-                                        </ul>
-                                        <p>AVI networks support integrations with <a href="https://avinetworks.com/docs/latest/openstack-support-matrix/">previous versions of OpenStack</a></p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -237,7 +208,7 @@
                                         <p>Multi-site cluster: <a href="https://core.vmware.com/resource/vsan-stretched-cluster-guide">vSAN Stretched Cluster</a></p>
                                     </td>
                                     <td>
-                                        <h3><b>OpenStack Cinder + Manila</b> (based on <a href="https://ceph.io/en/" target="_blank" rel="noopener">Ceph</a>)</h3>
+                                        <h3><b>OpenStack Cinder and Manila</b> (based on <a href="https://ceph.io/en/" target="_blank" rel="noopener">Ceph</a>)</h3>
                                         <h4>Comparable features:</h4>
                                         <ul>
                                             <li>Distributed Architecture - <b>yes</b>
@@ -339,7 +310,7 @@
                                         </ul>
                                     </td>
                                     <td>
-                                        <h3><b>Elasticsearch + Logstash + Kibana</b></h3>
+                                        <h3><b>OpenStack + Logstash + OpenSearch</b> OR <b>OpenStack Venus</b></h3>
                                         <h4>Comparable features:</h4>
                                         <ul>
                                             <li>Collect logs in files - <b>yes</b></li>
@@ -362,7 +333,7 @@
                                         </ul>
                                     </td>
                                     <td>
-                                        <h3><b>OpenStack + ArgoCD</b></h3>
+                                        <h3><b>OpenStack Heat</b></h3>
                                         <h4>Comparable features:</h4>
                                         <ul>
                                             <li>Multi-cloud environments management - <b>yes(1)</b></li>
@@ -372,7 +343,6 @@
                                             <li>SecOps for infrastructure - <b>yes</b></li>
                                             <li>Ansible + GitOps approach - <b>yes</b></li>
                                         </ul>
-                                        <p><b>1</b> Via GitOps approach based on ArgoCD</p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -432,32 +402,6 @@
                                             </li>
                                         </ul>
                                         <p><b>1</b> Underlay network with Cilium <a href="https://github.com/cilium/hubble" target="_blank" rel="noopener">Hubble</a>, overlay (cloud) networks with <a href="https://github.com/skydive-project/skydive" target="_blank" rel="noopener">SkyDive</a></p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h3><b>VMware Tanzu</b> (Container Orchestration)</h3>
-                                        <h4>Key features:</h4>
-                                        <ul>
-                                            <li>Kubernetes cluster management</li>
-                                            <li>Multi-cloud</li>
-                                            <li>Application catalog</li>
-                                            <li>Service Mesh</li>
-                                            <li>Observability</li>
-                                        </ul>
-                                    </td>
-                                    <td>
-                                        <h3><b>OpenStack + Gardener</b></h3>
-                                        <h4>Comparable features:</h4>
-                                        <ul>
-                                            <li>Kubernetes cluster management - <b>yes(1)</b></li>
-                                            <li>Multi-cloud - <b>no</b></li>
-                                            <li>Application catalog - <b>yes(2)</b></li>
-                                            <li>Service Mesh - <b>yes</b></li>
-                                            <li>Observability - <b>yes</b></li>
-                                        </ul>
-                                        <p><b>1</b> Using either <a href="https://docs.openstack.org/magnum/latest/" target="_blank" rel="noopener">Magnum</a> or <a href="https://gardener.cloud/" target="_blank" rel="noopener">Gardener</a><br>
-                                        <b>2</b> Any Helm3 - based application</p>
                                     </td>
                                 </tr>
                                 <tr>
