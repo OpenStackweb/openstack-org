@@ -22,7 +22,7 @@
                         </ul>
                             <a class="vmwmigration download-btn" alt="Join the OpenInfra Foundation" type="button" href="https://openinfra.dev/join/members" target="_blank">
                              Join Us&nbsp;&nbsp;<i class="fa fa-arrow-circle-right"></i>
-                        </a>&nbsp;&nbsp;<a class="vmwmigration download-btn" alt="VMware Migration to OpenStack White Paper" type="button" href="">
+                        </a>&nbsp;&nbsp;<a class="vmwmigration download-btn" alt="VMware Migration to OpenStack White Paper" type="button" href="https://www.openstack.org/vmware-migration-to-openstack-white-paper">
                              Read the Whitepaper&nbsp;<i class="fa fa-arrow-circle-right"></i>
                         </a>
                     </div>
