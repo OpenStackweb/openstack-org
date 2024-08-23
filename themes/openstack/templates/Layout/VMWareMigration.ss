@@ -7,11 +7,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="hero-message"> 
+                    <div class="hero-message">
                         <h1>Migration to OpenStack</h1>
                         <p>Broadcom’s acquisition of VMware and subsequent licensing changes have incentivized organizations around the world to re-evaluate their virtualization strategy. OpenStack, the open source standard for cloud infrastructure, has emerged as a leading alternative. Over 80% of OpenInfra members have already talked to customers about migrating workloads from VMware to OpenStack. </p>
                         <p>
-                        OpenStack’s flexibility and open development enables organizations to: 
+                        OpenStack’s flexibility and open development enables organizations to:
                         </p>
                         <ul>
                             <li>Implement a cost effective virtualization strategy by avoiding vendor lock-in</li>
@@ -26,7 +26,7 @@
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
     </div><!-- /.intro-header -->
 
     <!-- Overview -->
@@ -35,7 +35,7 @@
             <div class="container">
                 <div class="row ">
                     <div class="col-sm-12">
-                        <div class="intro-message"> 
+                        <div class="intro-message">
                             <h2>OpenStack to VMware Feature Comparison</h2>
                             <p>There is not complete feature parity between VMware, a proprietary virtualization platform, and OpenStack, an open source project composed of services that can replicate specific functionality. A comparable or enhanced virtualization platform can be implemented by combining OpenStack’s existing suite of projects with services provided by the global ecosystem of OpenStack vendors.</p>
                         </div>
@@ -625,6 +625,61 @@
             </div> <!-- .container -->
         </section>
 
+        <!-- Sponsors-->
+        <section class="vmwmigration-bluegrayback vmwmigration-sponsors">
+            <div class="container">
+                <div class="row info-block">
+                    <div class="col-sm-12">
+                        <h2>Successfully migrate from VMware to OpenStack like the following companies:</h2>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="vmwmigration-sponsors-wrapper">
+                            <div class="vmwmigration-sponsor">
+                                <div>
+                                    <img class="sponsor-logo" src="/themes/openstack/vmwaremigration_images/Migratekit - svg-01.svg" alt="Vexxhost logo">
+                                </div>
+                                <p class="description">
+                                    Part of the open-source ecosystem by VEXXHOST,
+                                    <a href="https://github.com/vexxhost/migratekit">Migratekit</a>
+                                    is a CLI tool for seamless VMware to OpenStack VM migrations. It is designed to streamline
+                                    transfers and reduce downtime to nearly zero with a two-phase process.
+                                </p>
+                                <a class="vmwmigration white-button" href="https://vexxhost.com/solutions/vmware-migration/" target="_blank">
+                                    LEARN MORE <img src="/themes/openstack/vmwaremigration_images/arrow-right.svg" />
+                                </a>
+                            </div>
+                            <div class="vmwmigration-sponsor">
+                                <div>
+                                    <img class="sponsor-logo" src="/themes/openstack/vmwaremigration_images/cloudbase.png" alt="Cloudbase logo">
+                                </div>
+                                <p class="description">
+                                    Cloudbase is thrilled to migrate from VMware to OpenStack, embracing a future of greater scalability and cost savings.
+                                    This transition to OpenStack's dynamic, open-source platform promises enhanced flexibility and innovation for optimized
+                                    resource management.
+                                </p>
+                                <a class="vmwmigration white-button" href="https://www.zconverter.com/openstack" target="_blank">
+                                    LEARN MORE <img src="/themes/openstack/vmwaremigration_images/arrow-right.svg" />
+                                </a>
+                            </div>
+                            <div class="vmwmigration-sponsor">
+                                <div>
+                                    <img class="sponsor-logo" src="/themes/openstack/vmwaremigration_images/zconverter-logo.svg" alt="ZConverter logo">
+                                </div>
+                                <p class="description">
+                                    ZConverter offers seamless migration, hybrid backup, and serverless disaster
+                                    recovery across multi-cloud platforms, supporting mass migration and drills.
+                                    Get free migration licenses when switching your customer’s backup solution to
+                                    ZConverter Backup.
+                                </p>
+                                <a class="vmwmigration white-button" href="https://openinfra.dev/join" target="_blank">
+                                    LEARN MORE <img src="/themes/openstack/vmwaremigration_images/arrow-right.svg" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- Videos-->
         <section class="vmwmigration-grayback vmwmigration-video-wall">
@@ -697,7 +752,7 @@
                                 </ul>
                             </dd>
                         </dl>
-                        
+
                     </div>
                 </div>
             </div> <!-- .container -->
