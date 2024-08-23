@@ -1,0 +1,77 @@
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      args:
+        GITHUB_OAUTH_TOKEN: ${GITHUB_OAUTH_TOKEN}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    image: www-openstack
+    container_name: www-openstack
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+    networks:
+      - www-openstack-local-net
+    depends_on:
+      redis:
+        condition: service_started
+      db_model:
+        condition: service_healthy
+  redis:
+    image: redis:latest
+    container_name: redis-www-openstack
+    restart: always
+    command: redis-server --save 20 1 --loglevel warning --requirepass ${REDIS_PASSWORD}
+    ports:
+      - ${REDIS_PORT}
+    volumes:
+      - /tmp/www-openstack/redis:/root/redis
+      - ./docker-compose/redis/redis.conf:/usr/local/etc/redis/redis.conf
+    networks:
+      - www-openstack-local-net
+    env_file: ./.env
+  db_model:
+    image: mysql:8.0
+    container_name: www-openstack-model-db-local
+    command: --default-authentication-plugin=mysql_native_password --sql_mode=NO_ENGINE_SUBSTITUTION
+    restart: unless-stopped
+    ports:
+      - "32010:3306"
+    environment:
+      MYSQL_DATABASE: ${SS_DATABASE}
+      MYSQL_PASSWORD: ${SS_DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${SS_DB_PASSWORD}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    healthcheck:
+      test: mysql -u ${SS_DB_USERNAME} --password=${SS_DB_PASSWORD} ${SS_DATABASE} -e 'SHOW TABLES;' | [ $(wc -l) -gt 885 ]
+      interval: 60s
+      timeout: 10s
+      retries: 60
+      start_period: 60s
+    volumes:
+      - ./docker-compose/mysql/model:/docker-entrypoint-initdb.d
+      - /tmp/mysql/www-openstack/model:/var/lib/mysql
+    networks:
+      - www-openstack-local-net
+    env_file: ./.env
+  nginx:
+    image: nginx:alpine
+    container_name: nginx-www-openstack
+    restart: unless-stopped
+    ports:
+      - "9000:80"
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+    networks:
+      - www-openstack-local-net
+    env_file: ./.env
+    depends_on:
+      - app
+networks:
+  www-openstack-local-net:
+    driver: bridge
