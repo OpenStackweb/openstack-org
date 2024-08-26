@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="hero-message">
-                    <h1>Migration to OpenStack</h1>
+                    <h1>VMware Migration to OpenStack</h1>
                     <p>Broadcom’s acquisition of VMware and subsequent licensing changes have incentivized organizations around the world to re-evaluate their virtualization strategy. OpenStack, the open source standard for cloud infrastructure, has emerged as a leading alternative. Over 80% of OpenInfra members have already talked to customers about migrating workloads from VMware to OpenStack. </p>
                     <p>
                         OpenStack’s flexibility and open development enables organizations to:
