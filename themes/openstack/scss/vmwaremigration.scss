@@ -20,6 +20,10 @@ section.vmwmigration-grayback {
     background-color: #F7F7F7;
 }
 
+section.vmwmigration-bluegrayback {
+  background-color: #EDF2F7;
+}
+
 section.vmwmigration-blue {
     background-color: #2A4E68;
 }
@@ -42,8 +46,9 @@ img.center {
 
 /* -- Hero Intro --------- */
 .intro-header.vmwmigration {
-    background: rgba(5, 54, 86, 1);
     padding-bottom: 0;
+    background: url("/themes/openstack/vmwaremigration_images/header.png") no-repeat, #002659;
+    background-size: cover;
 }
 
 .intro-header.vmwmigration .hero-message {
@@ -137,7 +142,24 @@ a.vmwmigration.red-button {
     width: 400px;
     font-weight: normal;
     font-size: 16px;
-    text-align: center;
+}
+
+a.vmwmigration.white-button {
+  display: block;
+  text-align: center;
+  color: #bc1518;
+  border: 1px solid #bc1518;
+  background-color: white;
+  border-radius: 5px;
+  margin: 0 auto;
+  padding: 12px 0px;
+  font-weight: normal;
+  font-size: 14px;
+  width: 100%;
+
+  img {
+    margin: -3px 0 0 10px;
+  }
 }
 
 .vmwmigration-blue.get-involved {
@@ -163,6 +185,52 @@ a.vmwmigration.red-button {
 }
 .vmwmigration-faqs dd {
   margin-bottom: 15px;
+}
+
+/* -- Sponsors -- */
+
+.vmwmigration-sponsors {
+  h2 {
+    max-width: 816px;
+    margin: 0 auto 64px;
+  }
+
+  .vmwmigration-sponsors-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 976px;
+    margin: 0 auto;
+
+    @media (min-width: 767px) {
+      flex-direction: row;
+    }
+
+    .vmwmigration-sponsor {
+      background-color: white;
+      width: 100%;
+      margin-bottom: 30px;
+      padding: 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+
+      @media (min-width: 767px) {
+        width: 30%;
+        margin-bottom: 0;
+      }
+
+      .sponsor-logo {
+        max-width: 110px;
+        max-height: 68px;
+      }
+
+      .description {
+        margin: 30px 0;
+        flex: 1;
+      }
+    }
+  }
 }
 
 /* -- Parity table -- */
