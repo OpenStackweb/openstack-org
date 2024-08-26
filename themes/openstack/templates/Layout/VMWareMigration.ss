@@ -521,11 +521,6 @@
                 </div>
                 <div class="col-sm-3 col-xs-6">
                     <div class="img-wrapper">
-                        <img src="https://www.openstack.org/companies/1331/logos_resampled/ScaleWidthWzIwN10/hydolix-lg.png" alt="Hydrolix logo">
-                    </div>
-                </div>
-                <div class="col-sm-3 col-xs-6">
-                    <div class="img-wrapper">
                         <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/mirantis-lg.png" alt="Mirantis logo">
                     </div>
                 </div>
