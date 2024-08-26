@@ -20,30 +20,48 @@
                             <li>Rely on a global ecosystem and diverse, active open source contributors</li>
                             <li>Maintain complete ownership of their infrastructure</li>
                         </ul>
-                            <a class="vmwmigration download-btn" alt="Join the OpenInfra Foundation" type="button" href="https://openinfra.dev/join">
+                            <a class="vmwmigration download-btn" alt="Join the OpenInfra Foundation" type="button" href="https://openinfra.dev/join/members" target="_blank">
                              Join Us&nbsp;&nbsp;<i class="fa fa-arrow-circle-right"></i>
+                        </a>&nbsp;&nbsp;<a class="vmwmigration download-btn" alt="VMware Migration to OpenStack White Paper" type="button" href="https://www.openstack.org/vmware-migration-to-openstack-white-paper">
+                             Read the Whitepaper&nbsp;<i class="fa fa-arrow-circle-right"></i>
                         </a>
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
     </div><!-- /.intro-header -->
 
+
     <!-- Overview -->
-    <div class="overview vmwmigration">
+        <section class="vmwmigration-grayback vmwmigration-video-wall">
+            <div class="container">
+                <div class="row ">
+                    <div class="col-sm-12">
+                        <div class="intro-message">
+                            <p>&nbsp;</p>
+                            <h2>"OpenStack allows us to avoid vendor lock-in and allows us to customize our infrastructure to meet our specific needs. We can integrate various open-source tools and platforms, which is something we couldn't do with VMware. Additionally, OpenStack's community-driven development model means we can contribute back and benefit from innovations made by others."</h2>
+                            <h4>- Tad Van Fleet, GEICO Distinguished Architect
+                            </h4>
+                            <p>&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <section class="vmwmigration-white page-intro">
             <div class="container">
                 <div class="row ">
                     <div class="col-sm-12">
-                        <div class="intro-message"> 
+                        <div class="intro-message">
                             <h2>OpenStack to VMware Feature Comparison</h2>
-                            <p>There is not complete feature parity between VMware, a proprietary virtualization platform, and OpenStack, an open source project composed of services that can replicate specific functionality. A comparable or enhanced virtualization platform can be implemented by combining OpenStack’s existing suite of projects with services provided by the global ecosystem of OpenStack vendors.</p>
+                            <p>There is no one-for-one feature parity between VMware, a proprietary datacenter virtualization platform, and OpenStack, an open source project allowing to build a private or public alternative to proprietary public clouds, and therefore following the same "separate API-driven services" approach as those clouds. A comparable or enhanced datacenter virtualization platform can however be implemented by combining OpenStack’s existing suite of projects with services provided by the global ecosystem of OpenStack vendors.</p>
+                            <p>We'd like to thank our friends at <a href="https://cloudification.io/" target="_blank">Cloudification</a> and the OpenStack VMware Migration Working Group for providing the content for this comparison chart. If you're interested in joining the Working Group, please <a href="mailto:bizdev@openinfra.dev">email us</a>.</p>
                         </div>
                         <table class="vmwmigration-table">
                             <thead>
                                 <tr>
                                     <th>VMware</th>
-                                    <th class="th-openstack">OpenStack</th>
+                                    <th class="th-openstack">OpenStack & OpenStack Ecosystem</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -75,9 +93,11 @@
                                             <li>VMHA - <b>yes(1)</b></li>
                                             <li>Hot plug and extend (Networks/Volumes) - <b>yes</b></li>
                                             <li>Site-to-site VM migration - <b>yes(2)</b></li>
+                                            <li>L4-L7 load balancing - <b>yes(3)</b></li>
                                         </ul>
                                         <p><b>1</b> OpenStack provides VMHA functionality with <a href="https://docs.openstack.org/masakari/latest/">Masakari</a><br>
-                                        <b>2</b> When OpenStack control plane stretched across DCs</p>
+                                        <b>2</b> When OpenStack control plane stretched across DCs<br/>
+                                        <b>3</b> OpenStack <a href="https://docs.openstack.org/octavia/latest/reference/introduction.html">Octavia</a></p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -140,7 +160,7 @@
                                                     <li>Tenant isolation - <b>yes</b></li>
                                                     <li>Separate routing tables - <b>yes</b></li>
                                                     <li>NAT - <b>yes</b></li>
-                                                    <li>EDGE Firewall - <b>no(2)</b></li>
+                                                    <li>EDGE Firewall - <b>yes(2)</b></li>
                                                 </ul>
                                             </li>
                                             <li>QoS - <b>yes</b></li>
@@ -152,37 +172,6 @@
                                         <p><b>1</b> if OpenStack control plane stretched across DCs<br>
                                         <b>2</b> OpenStack has <a href="https://docs.openstack.org/neutron/latest/admin/fwaas.html">FWaaS extension</a><br>
                                         <b>3</b> Partially with <a href="https://docs.openstack.org/networking-bgpvpn/latest/">BGP VPN interconnection extension</a></p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h3><b>VMware NSX Advanced Load Balancer</b><br>(<a href="https://www.vmware.com/content/dam/digitalmarketing/vmware/en/pdf/products/nsx/vmware-nsx-advanced-load-balancer-data-sheet.pdf">by Avi Networks</a>)</h3>
-                                        <h4>Key features:</h4>
-                                        <ul>
-                                            <li>L4-L7 load balancing</li>
-                                            <li>Container ingress gateway</li>
-                                            <li>HA architecture</li>
-                                            <li>Global server load balancing (GSLB)</li>
-                                            <li>Web application firewall (WAF)</li>
-                                            <li>Real-time application analytics</li>
-                                            <li>Multi-cloud load balancing</li>
-                                            <li>Application performance monitoring</li>
-                                        </ul>
-                                    </td>
-                                    <td>
-                                        <h3><b>OpenStack Octavia</b></h3>
-                                        <h4>Comparable features:</h4>
-                                        <ul>
-                                            <li>L4-L7 load balancing - <b>yes</b></li>
-                                            <li>Container ingress gateway - <b>yes</b></li>
-                                            <li>HA architecture - <b>yes</b> (stand-by)</li>
-                                            <li>Global server load balancing (GSLB) - <b>no</b></li>
-                                            <li>Web application firewall (WAF) - <b>no</b></li>
-                                            <li>Real-time application analytics - <b>no</b></li>
-                                            <li>Multi-cloud load balancing - <b>no</b></li>
-                                            <li>Application performance monitoring - <b>no</b></li>
-                                        </ul>
-                                        <p>AVI networks support integrations with <a href="https://avinetworks.com/docs/latest/openstack-support-matrix/">previous versions of OpenStack</a></p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -219,7 +208,7 @@
                                         <p>Multi-site cluster: <a href="https://core.vmware.com/resource/vsan-stretched-cluster-guide">vSAN Stretched Cluster</a></p>
                                     </td>
                                     <td>
-                                        <h3><b>OpenStack Cinder + Manila</b> (based on <a href="https://ceph.io/en/" target="_blank" rel="noopener">Ceph</a>)</h3>
+                                        <h3><b>OpenStack Cinder and Manila</b> (based on <a href="https://ceph.io/en/" target="_blank" rel="noopener">Ceph</a>)</h3>
                                         <h4>Comparable features:</h4>
                                         <ul>
                                             <li>Distributed Architecture - <b>yes</b>
@@ -321,7 +310,7 @@
                                         </ul>
                                     </td>
                                     <td>
-                                        <h3><b>Elasticsearch + Logstash + Kibana</b></h3>
+                                        <h3><b>OpenStack + Logstash + OpenSearch</b> OR <b>OpenStack Venus</b></h3>
                                         <h4>Comparable features:</h4>
                                         <ul>
                                             <li>Collect logs in files - <b>yes</b></li>
@@ -344,7 +333,7 @@
                                         </ul>
                                     </td>
                                     <td>
-                                        <h3><b>OpenStack + ArgoCD</b></h3>
+                                        <h3><b>OpenStack Heat</b></h3>
                                         <h4>Comparable features:</h4>
                                         <ul>
                                             <li>Multi-cloud environments management - <b>yes(1)</b></li>
@@ -354,7 +343,6 @@
                                             <li>SecOps for infrastructure - <b>yes</b></li>
                                             <li>Ansible + GitOps approach - <b>yes</b></li>
                                         </ul>
-                                        <p><b>1</b> Via GitOps approach based on ArgoCD</p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -418,32 +406,6 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <h3><b>VMware Tanzu</b> (Container Orchestration)</h3>
-                                        <h4>Key features:</h4>
-                                        <ul>
-                                            <li>Kubernetes cluster management</li>
-                                            <li>Multi-cloud</li>
-                                            <li>Application catalog</li>
-                                            <li>Service Mesh</li>
-                                            <li>Observability</li>
-                                        </ul>
-                                    </td>
-                                    <td>
-                                        <h3><b>OpenStack + Gardener</b></h3>
-                                        <h4>Comparable features:</h4>
-                                        <ul>
-                                            <li>Kubernetes cluster management - <b>yes(1)</b></li>
-                                            <li>Multi-cloud - <b>no</b></li>
-                                            <li>Application catalog - <b>yes(2)</b></li>
-                                            <li>Service Mesh - <b>yes</b></li>
-                                            <li>Observability - <b>yes</b></li>
-                                        </ul>
-                                        <p><b>1</b> Using either <a href="https://docs.openstack.org/magnum/latest/" target="_blank" rel="noopener">Magnum</a> or <a href="https://gardener.cloud/" target="_blank" rel="noopener">Gardener</a><br>
-                                        <b>2</b> Any Helm3 - based application</p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
                                         <h3><b>VMware Horizon</b> (Virtual Desktop Infrastructure)</h3>
                                         <h4>Key features:</h4>
                                         <ul>
@@ -500,126 +462,131 @@
                         <h2>OpenInfra Foundation Members Supporting Migration from VMware to OpenStack</h2>
                     </div>
                 </div>
-                <div class="row five-columns row01">
-                    <div class="col-md-5th-1 col-sm-4 col-md-offset-0 col-sm-offset-2">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/vexxhost-logo.png")}" alt="Vexxhost logo">
-                    </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/sardina-logo.png")}" alt="Sardina logo">
-                    </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/sentinella-logo.png")}" alt="Sentinella logo">
-                    </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/Btech-logo.png")}" alt="Btech logo">
-                    </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/china-mobile-logo.png")}" alt="China Mobile logo">
-                    </div>
-	            </div>
-
-                <div class="row five-columns row02">
-                    <div class="col-md-5th-1 col-sm-4 col-md-offset-0 col-sm-offset-2">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/devstack-lg-logo.png")}" alt="DevStack logo">
-                    </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/tencent-logo.png")}" alt="Tencent logo">
-                    </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/verneglobal-logo.png")}" alt="Verne Global logo">
-                    </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("assets/bare-metal-logo-program/verizon-media.png")}" alt="Verzion Media logo">
-                    </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/ovh-logo.png")}" alt="OVH logo">
-                    </div>
-	            </div>
-
-                <div class="row five-columns row03">
-                    <div class="col-md-5th-1 col-sm-4 col-md-offset-0 col-sm-offset-2">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/chinatelecom-logo.png")}" alt="China Telecom logo">
-                    </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/stc-logo.png")}" alt="STC logo">
-                    </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/opencloud-logo.png")}" alt="OpenCloud logo">
-                    </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/avaya-logo.png")}" alt="Avaya logo">
-                    </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/debian-logo.png")}" alt="Debian logo">
-                    </div>
-	            </div>
-
-                <div class="row five-columns row04">
-                    <div class="col-md-5th-1 col-sm-4 col-md-offset-0 col-sm-offset-2">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/zte-logo.png")}" alt="ZTE logo">
-                    </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/suse-logo.png")}" alt="SUSE logo">
-                    </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/H3C-logo.png")}" alt="H3C logo">
-                    </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/chinaunicom-logo.png")}" alt="China Unicom logo">
-                    </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/StackHPC-logo.png")}" alt="Stack HPC logo">
-                    </div>
-	            </div>
-
-                <div class="row five-columns row05">
-                    <div class="col-md-5th-1 col-sm-4 col-md-offset-0 col-sm-offset-2">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/ZConverter-logo.png")}" alt="ZConverter logo">
-                    </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/EasyStack-logo.png")}" alt="Easy Stack logo">
-                    </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/tfcloud-logo.png")}" alt="tfcloud logo">
-                    </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/fiberhome-logo.png")}" alt="fiberhome logo">
-                    </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/leboncoin-logo.png")}" alt="leboncoin logo">
-                    </div>
-	            </div>
-
-                <div class="row five-columns row06">
-                    <div class="col-md-5th-1 col-sm-4 col-md-offset-0 col-sm-offset-2">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/Platform9-logo.png")}" alt="Platform9 logo">
-                    </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/mirantis-logo.png")}" alt="mirantis logo">
-                    </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/99cloud-sm-logo.png")}" alt="99cloud logo">
-                    </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("assets/vmwmigration/red-hat-sm.png")}" alt="RedHat logo">
-                    </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("assets/Uploads/0003supportedblack-orangehex.png")}" alt="Ubuntu logo">
-                    </div>
-	            </div>
-                <div class="row five-columns row06">
-                    <div class="col-md-5th-1 col-sm-4 col-md-offset-0 col-sm-offset-2">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("assets/vmwmigration/dell-technologies.jpg")}" alt="Dell logo">
-                    </div>
-                    <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("assets/companies/main_logo/_resampled/ScaleWidthWzIwN10/inspur-lg.jpg")}" alt="Inspur">
-                    </div>
-                </div>
                 <div class="row info-block">
                     <div class="col-sm-12">
                         <p>The OpenInfra Member: VMware Migration working group formed to collaboratively address the market opportunity for organizations to re-define their virtualization strategy. Participants represent the global ecosystem of OpenStack experts who support the OpenInfra Foundation. New participants are welcome to join, share VMware migration experience, and build more OpenStack awareness as a virtualization alternative.
                         </p>
-                        <p><a class="vmwmigration red-button" href="https://openinfra.dev/join" target="_blank">Join the OpenInfra Foundation Today <i class="icon-arrow-right"></i></a></p>
+                    </div>
+                </div>
+                <div class="row logos">
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/BSystems.jpg" alt="B1 Systems">
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/binariocloud-lg.png" alt="Binario Cloud logo">
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/Binero-lg.png" alt="Binero logo">
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img src="https://www.openstack.org/companies/57/logos_resampled/ScaleWidthWzIwN10/Canonical-s.png" alt="Canonical logo">
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/695/logos/_resampled/ScaleWidthWzIwN10/cleura-lg1.jpg" alt="Cleura logo">
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/cloudheat-lg.jpg" alt="Cloud & Heat logo">
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/cloudbase-lg2.jpg" alt="Cloudbase Solutions logo">
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/cloudification-lg2.png" alt="Cloudification logo" height="107">
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img src="https://www.openstack.org/companies/582/logos_resampled/ScaleWidthWzIwN10/fairbanks-lg1.png" alt="Fairbanks logo">
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/huawei-new-lg.jpg" alt="Huawei logo">
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img src="https://www.openstack.org/companies/1331/logos_resampled/ScaleWidthWzIwN10/hydolix-lg.png" alt="Hydrolix logo">
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/mirantis-lg.png" alt="Mirantis logo">
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/okestro-lg3.png" alt="Okestro logo">
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img src="https://www.openstack.org/companies/1277/logos_resampled/ScaleWidthWzIwN10/planethoster-lg.png" alt="PlanetHoster logo">
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img src="https://www.openstack.org/companies/1/logos_resampled/ScaleWidthWzIwN10/rackspace-lg2.png" alt="Rackspace logo">
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/RedHat-lg.png" alt="Red Hat logo">
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img src="https://www.openstack.org/companies/489/logos_resampled/ScaleWidthWzIwN10/sardina-lg2.png" alt="Sardina Systems logo">
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                             <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/storware-lg.png" alt="Storware logo">
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/ULTIMUM-TECHNOLOGIES-320x132.png" alt="Ultimum Technologieslogo">
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/vexxhost-lg2.jpg" alt="Vexxhost logo">
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/virtuozzo-lg-new.jpg" alt="Virtuozzo logo">
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/vyos-lg.png" alt="VyOS logo">
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="img-wrapper">
+                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/zconverter-lg.png" alt="ZConverter logo">
+                        </div>
+                    </div>
+                </div>
+                <div class="row info-block">
+                        <p><a class="vmwmigration red-button"  href="https://openinfra.dev/join/members" target="_blank">Join the OpenInfra Foundation Today <i class="icon-arrow-right"></i></a></p>
                     </div>
                 </div>
             </div> <!-- .container -->
@@ -677,11 +644,12 @@
                             <dt>What migration tools are available to migrate from VMware to OpenStack?</dt>
                             <dd>
                                 <ul>
-                                    <li>migratekit: A complete open source solution</li>
-                                    <li>Coriolis by Cloudbase Solutions: A blend of proprietary and open source technologies</li>
-                                    <li>ZConverter: An any-to-any cloud migration tool</li>
-                                    <li>Hystax</li>
-                                    <li>Mirantis Migration Service</li>
+                                    <li><a href="https://cloudbase.it/coriolis/" target="_blank">Coriolis by Cloudbase Solutions</a></li>
+                                    <li><a href="https://www.sardinasystems.com/tag/fishosmoveit/" target="_blank">FishOS MoveIt from Sardina Systems</a></li>
+                                    <li><a href="https://github.com/vexxhost/migratekit" target="_blank">migratekit from Vexxhost</a> (open source)</li>
+                                    <li><a href="https://www.mirantis.com/bespoke/solutions/" target="_blank">Mirantis Migration Service</a></li>
+                                    <li><a href="https://libguestfs.org/virt-v2v.1.html" target="_blank">virt-v2v</a> (open source)</li>
+                                    <li><a href="https://www.zconverter.com/" target="_blank">ZConverter</a></li>
                                 </ul>
                             </dd>
 
