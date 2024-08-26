@@ -55,7 +55,7 @@
                         <div class="intro-message"> 
                             <h2>OpenStack to VMware Feature Comparison</h2>
                             <p>There is no one-for-one feature parity between VMware, a proprietary datacenter virtualization platform, and OpenStack, an open source project allowing to build a private or public alternative to proprietary public clouds, and therefore following the same "separate API-driven services" approach as those clouds. A comparable or enhanced datacenter virtualization platform can however be implemented by combining OpenStack’s existing suite of projects with services provided by the global ecosystem of OpenStack vendors.</p>
-                            <p>We'd like to thank our friends at <a href="https://cloudification.io/" target="_blank">Cloudification</a> and the OpenStack VMware Migration Working Group for providing the content for this comparison chart. If you're interested in joining the Working Group, please <a href="mailto:bizdev@openinfra.dev">email us</a>.</p>
+                            <p>We'd like to thank our friends at <a href="https://cloudification.io/" target="_blank">Cloudification</a> and the OpenStack VMware Migration Working Group for providing the content for this comparison chart. If you're interested in joining the Working Group, please <a href="mailto:ecosystem@openinfra.dev">email us</a>.</p>
                         </div>
                         <table class="vmwmigration-table">
                             <thead>
