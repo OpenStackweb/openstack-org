@@ -597,7 +597,7 @@
             <div class="container">
                 <div class="row info-block">
                     <div class="col-sm-12">
-                        <h2>Successfully migrate from VMware to OpenStack like the following companies:</h2>
+                        <h2>Successfully migrate from VMware to any OpenStack Powered cloud using tools from these companies:</h2>
                     </div>
                     <div class="col-sm-12">
                         <div class="vmwmigration-sponsors-wrapper">
