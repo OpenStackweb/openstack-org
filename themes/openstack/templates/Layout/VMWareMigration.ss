@@ -620,9 +620,7 @@
                                     <img class="sponsor-logo" src="/themes/openstack/vmwaremigration_images/coriolis-logo.svg" alt="Coriolis logo">
                                 </div>
                                 <p class="description">
-                                    Coriolis® is the simplest way to migrate virtual machines with associated storage and networking across cloud platforms.
-                                    It performs both migrations and DRaaS, excelling in automating cloud migration and avoiding manual steps prone to errors.
-                                    Coriolis® simplifies cloud infrastructure transitions while ensuring minimal downtime during the migration process.
+                                    Coriolis® simplifies migrating VMs with storage and networking across clouds. It automates migrations and DRaaS, reducing manual errors and ensuring minimal downtime during cloud infrastructure transitions.
                                 </p>
                                 <a class="vmwmigration white-button" href="https://cloudbase.it/coriolis" target="_blank">
                                     LEARN MORE <img src="/themes/openstack/vmwaremigration_images/arrow-right.svg" />
