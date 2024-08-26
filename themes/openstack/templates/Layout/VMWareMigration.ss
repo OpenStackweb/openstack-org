@@ -636,7 +636,7 @@
                         <div class="vmwmigration-sponsors-wrapper">
                             <div class="vmwmigration-sponsor">
                                 <div>
-                                    <img class="sponsor-logo" src="/themes/openstack/vmwaremigration_images/Migratekit - svg-01.svg" alt="Vexxhost logo">
+                                    <img class="sponsor-logo" src="/themes/openstack/vmwaremigration_images/Migratekit - svg-01.svg" alt="Migratekit logo">
                                 </div>
                                 <p class="description">
                                     Part of the open-source ecosystem by VEXXHOST,
@@ -650,14 +650,14 @@
                             </div>
                             <div class="vmwmigration-sponsor">
                                 <div>
-                                    <img class="sponsor-logo" src="/themes/openstack/vmwaremigration_images/cloudbase.png" alt="Cloudbase logo">
+                                    <img class="sponsor-logo" src="/themes/openstack/vmwaremigration_images/coriolis-logo.svg" alt="Coriolis logo">
                                 </div>
                                 <p class="description">
-                                    Cloudbase is thrilled to migrate from VMware to OpenStack, embracing a future of greater scalability and cost savings.
-                                    This transition to OpenStack's dynamic, open-source platform promises enhanced flexibility and innovation for optimized
-                                    resource management.
+                                    Coriolis® is the simplest way to migrate virtual machines with associated storage and networking across cloud platforms.
+                                    It performs both migrations and DRaaS, excelling in automating cloud migration and avoiding manual steps prone to errors.
+                                    Coriolis® simplifies cloud infrastructure transitions while ensuring minimal downtime during the migration process.
                                 </p>
-                                <a class="vmwmigration white-button" href="https://www.zconverter.com/openstack" target="_blank">
+                                <a class="vmwmigration white-button" href="https://cloudbase.it/coriolis" target="_blank">
                                     LEARN MORE <img src="/themes/openstack/vmwaremigration_images/arrow-right.svg" />
                                 </a>
                             </div>
