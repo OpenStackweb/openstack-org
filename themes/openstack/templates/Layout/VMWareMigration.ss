@@ -631,7 +631,7 @@
                             Get free migration licenses when switching your customer’s backup solution to
                             ZConverter Backup.
                         </p>
-                        <a class="vmwmigration white-button" href="https://openinfra.dev/join" target="_blank">
+                        <a class="vmwmigration white-button" href="https://www.zconverter.com/openstack" target="_blank">
                             LEARN MORE <img src="/themes/openstack/vmwaremigration_images/arrow-right.svg" />
                         </a>
                     </div>
