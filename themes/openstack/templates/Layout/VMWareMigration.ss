@@ -694,7 +694,7 @@
                         <ul>
                             <li><a href="https://cloudbase.it/coriolis/" target="_blank">Coriolis by Cloudbase Solutions</a></li>
                             <li><a href="https://www.sardinasystems.com/tag/fishosmoveit/" target="_blank">FishOS MoveIt from Sardina Systems</a></li>
-                            <li><a href="https://github.com/vexxhost/migratekit" target="_blank">migratekit from Vexxhost</a> (open source)</li>
+                            <li><a href="https://github.com/vexxhost/migratekit" target="_blank">MigrateKit from VEXXHOST, Inc.</a> (open source)</li>
                             <li><a href="https://www.mirantis.com/bespoke/solutions/" target="_blank">Mirantis Migration Service</a></li>
                             <li><a href="https://libguestfs.org/virt-v2v.1.html" target="_blank">virt-v2v</a> (open source)</li>
                             <li><a href="https://www.zconverter.com/" target="_blank">ZConverter</a></li>
