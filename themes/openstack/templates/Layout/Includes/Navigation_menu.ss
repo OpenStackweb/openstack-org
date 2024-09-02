@@ -13,6 +13,7 @@
 <li>
     <a href="{$BaseHref}use-cases/" class="drop" id="dropdownMenuUsers">Use Cases <i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
     <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuUsers">
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}vmware-migration-to-openstack/">VMware Migration to OpenStack</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}use-cases/">Users in Production</a></li>
         <li role="presentation" class="divider"></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}use-cases/bare-metal/">Ironic Bare Metal</a></li>
