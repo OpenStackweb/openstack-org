@@ -39,7 +39,7 @@
             <div class="col-sm-12">
                 <div class="intro-message">
                     <p>&nbsp;</p>
-                    <h2>"OpenStack allows us to avoid vendor lock-in and allows us to customize our infrastructure to meet our specific needs. We can integrate various open-source tools and platforms, which is something we couldn't do with VMware. Additionally, OpenStack's community-driven development model means we can contribute back and benefit from innovations made by others."</h2>
+                    <h2>OpenStack allows us to avoid vendor lock-in and allows us to customize our infrastructure to meet our specific needs. We can integrate various open-source tools and platforms, which is something we couldn't do with proprietary systems. Additionally, OpenStack's community-driven development model means we can contribute back and benefit from innovations made by others."</h2>
                     <h4>- Tad Van Fleet, GEICO Distinguished Architect
                     </h4>
                     <p>&nbsp;</p>
