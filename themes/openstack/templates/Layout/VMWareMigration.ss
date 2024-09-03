@@ -511,6 +511,11 @@
                 </div>
                 <div class="col-sm-3 col-xs-6">
                     <div class="img-wrapper">
+                        <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/coredge-lg.png" alt="Coredge logo">
+                    </div>
+                </div>
+                <div class="col-sm-3 col-xs-6">
+                    <div class="img-wrapper">
                         <img src="https://www.openstack.org/companies/582/logos_resampled/ScaleWidthWzIwN10/fairbanks-lg1.png" alt="Fairbanks logo">
                     </div>
                 </div>
