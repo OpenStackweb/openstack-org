@@ -66,6 +66,7 @@ abstract class SapphireRegionalSupportedCompanyServiceRepository
                 if (!empty($filter)) {
                     $company_filter = ' AND ' . $company_filter;
                 }
+                if(!empty($filter)) $filter = ' ( '.$filter.' ) ';
                 $filter = $filter . $company_filter;
             }
         }
