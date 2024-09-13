@@ -83,12 +83,12 @@
                 var date_picker_start = $('#StartDate', affiliation_form);
                 date_picker_start.datepicker({dateFormat: 'yy-mm-dd'});
                 var date_picker_end = $('#EndDate', affiliation_form);
+                var current = $('#Current', affiliation_form);
 
                 date_picker_end.datepicker({dateFormat: 'yy-mm-dd',onSelect:function(date_str,inst){
                     var date_arr = date_str.split("-");
                     var end_date = new Date(parseInt(date_arr[0]),parseInt(date_arr[1])-1,parseInt(date_arr[2]));
                     var today = new Date();
-                    var current = $('#Current', affiliation_form);
                     if(end_date < today){
                         //reset checkbox
                         $('#Current', affiliation_form).prop('checked', false);
@@ -97,6 +97,11 @@
                     else
                         current.show();
                 }});
+
+                current.change(function(ev) {
+                    date_picker_end.val('');
+                    date_picker_end.prop('disabled', current.is(':checked'));
+                });
 
                 // add handler
                 $("#add-affiliation").click(function(event){
@@ -309,10 +314,13 @@
         $("#JobTitle", dlg).val(affiliation.JobTitle);
         $("#OrgName", dlg).val(affiliation.OrgName);
         $("#StartDate", dlg).val(affiliation.StartDate);
-        if(affiliation.EndDate!='')
+        if (affiliation.EndDate !== '' && affiliation.Current != 1)
             $("#EndDate", dlg).val(affiliation.EndDate);
         $("#Id", dlg).val(affiliation.Id);
         $("#Current", dlg).prop('checked', affiliation.Current == 1 ? true : false);
+
+        // disable end date if current
+        $("#EndDate", dlg).prop('disabled', affiliation.Current == 1);
 
         dlg.modal('show')
 
