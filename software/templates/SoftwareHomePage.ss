@@ -32,9 +32,9 @@
         <% include SiteBanner %>
         <% include Navigation %>
         <!-- Page Content -->
-        <div class="software-announcement-banner">
+        <!-- <div class="software-announcement-banner">
             <% include AnnouncementBanner %>
-        </div>
+        </div> -->
         $Message
         <div class="container software">
             <div class="row">
