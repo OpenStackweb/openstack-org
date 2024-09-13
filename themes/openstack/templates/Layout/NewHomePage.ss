@@ -29,7 +29,6 @@
 <!-- /.intro-header -->
 
 <!-- Page Content -->
-<!--<% include AnnouncementBanner %>-->
 <!-- /.news-anniversary -->
 
 <!-- Page Content -->
