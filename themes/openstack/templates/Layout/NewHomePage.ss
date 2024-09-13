@@ -29,7 +29,7 @@
 <!-- /.intro-header -->
 
 <!-- Page Content -->
-<% include AnnouncementBanner %>
+<!--<% include AnnouncementBanner %>-->
 <!-- /.news-anniversary -->
 
 <!-- Page Content -->
