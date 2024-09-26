@@ -19,15 +19,15 @@
         <div class="row">
             <div class="col-sm-8">
                 <div class="intro-message">
-                    <h1>Leveraging OpenStack and Containers: A Comprehensive Review</h1>
-                    <h3>Download the white paper featuring case studies that illustrate the power of OpenStack and Kubernetes integration, as well as recent cross-community development milestones.</h3>
+                    <h1>Building the Open Infrastructure Blueprint</h1>
+                    <h3>How Linux OpenStack and Kubernetes Combine to Deliver an Open Source Powered Infrastructure Stack.</h3>
                 </div>
             </div> 
             <div class="col-sm-4">
                 <div class="download-container">
                   <!-- <img src="{$Top.CloudUrl("images/containers-r/summit-logo-white.svg")}" class="summit-cta-logo" alt=""> -->
-                    <div class="download-text"><strong>Leveraging OpenStack and Containers: A Comprehensive Review</strong><br/>Now available in multiple languages!</div>
-                    <a href="//www.openstack.org/containers/whitepaper" class="download-btn"><i class="fa fa-arrow-circle-right"></i> Read the Whitepaper</a>
+                    <div class="download-text">This white paper was developed by the OpenStack community in collaboration with adjacent open source infrastructure communities.</div>
+                    <a href="//openinfra.dev/open-infrastructure-blueprint-white-paper " class="download-btn"><i class="fa fa-arrow-circle-right"></i> Learn More</a>
                 </div>
             </div>
         </div>
