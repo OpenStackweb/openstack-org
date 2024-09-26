@@ -133,6 +133,8 @@
     .intro-header.containers-r .download-container .download-btn {
       margin-top: 20px;
       font-weight: 400; }
+      .intro-header.containers-r .download-container .download-btn:visited {
+        color: #fff; }
 
 @media (max-width: 767px) {
   .intro-header.containers-r .intro-message {
