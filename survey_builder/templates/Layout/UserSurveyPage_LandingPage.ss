@@ -22,8 +22,8 @@
 <div class="container">
 
     
-    <h1>$_T("survey_ui", "Welcome to the 2024 OpenStack User Survey")</h1>
-    <p>$_T("survey_ui", "The User Survey deadline is %1$s", "Wednesday, August 28, 2024")</p>
+    <h1>$_T("survey_ui", "Welcome to the 2025 OpenStack User Survey")</h1>
+    <p>$_T("survey_ui", "The User Survey deadline is %1$s", "Friday, August 29, 2025")</p>
     <% if $LoginPageSlide1Content && $LoginPageSlide2Content && $LoginPageSlide3Content %>
     <div class="row">
 
