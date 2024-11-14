@@ -20,8 +20,13 @@ echo "installing python virtual env...";
 if [[ -f "$ROOT_DIR/requirements.txt" ]]; then
 	echo "found requirements.txt files";
 	# install virtual env
-	cd $ROOT_DIR && virtualenv env;
-	source $ROOT_DIR/env/bin/activate;
+
+	echo "creating py venv"
+  python -m venv env
+  source $ROOT_DIR/env/bin/activate;
+  cd $ROOT_DIR && pip install --upgrade pip
+  cd $ROOT_DIR && pip install --upgrade setuptools
+
 	# install dependencies
 	$ROOT_DIR/env/bin/python env/bin/pip install -r requirements.txt;
 
