@@ -17,13 +17,15 @@
 ROOT_DIR=$PWD;
 
 echo "installing python virtual env...";
+
 if [[ -f "$ROOT_DIR/requirements.txt" ]]; then
 	echo "found requirements.txt files";
 	# install virtual env
 
 	echo "creating py venv"
-  python -m venv env
+  python3 -m venv env
   source $ROOT_DIR/env/bin/activate;
+
   cd $ROOT_DIR && pip install --upgrade pip
   cd $ROOT_DIR && pip install --upgrade setuptools
 
