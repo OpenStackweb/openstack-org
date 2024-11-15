@@ -145,7 +145,7 @@ class SummitVideoApp_Controller extends Page_Controller
     public function getJSONConfig()
     {
         $config = [
-            'baseURL' => rtrim($this->Link(), '/'),
+            'baseURL' => rtrim($this->RelativeLink(), '/'),
             'initialState' => $this->getInitialState(),
             'pollInterval' => SummitVideoApp::config()->video_poll_interval,
             'securityToken' => SecurityToken::inst()->getValue()
