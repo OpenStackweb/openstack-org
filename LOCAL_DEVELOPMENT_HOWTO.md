@@ -40,7 +40,7 @@ define('SENDGRID_API_KEY', '<SENDGRID API KEY>');
 3. Drop here  [docker-compose/mysql/model](docker-compose/mysql/model) the database dump *.sql file
 4. Install docker and docker compose see 
    [https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-22-04](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-22-04) and [https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-22-04](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-22-04)
-5. Run script ./start_local_server.sh
+5. Run script ./start_local_server.sh (http://localhost:9000/)
 6. In order to use CMS admin locally without IDP integration do the following (https://localhost:9000/admin)[https://localhost:9000/admin]
    1. run this SQL command at DB
       1. ````bash

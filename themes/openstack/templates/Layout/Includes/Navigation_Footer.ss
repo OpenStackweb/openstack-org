@@ -46,6 +46,13 @@
                 <a href="https://www.linkedin.com/groups/3239106/" target="_blank"><i class="fab fa-linkedin" style="font-size: 36px;color:#eaeaea;padding-right:10px;"></i></a>
                 <a href="https://www.youtube.com/user/OpenStackFoundation" target="_blank"><i class="fab fa-youtube-square" style="font-size: 36px;color:#eaeaea;padding-right:10px;"></i></a>
                 <a href="" data-toggle="modal" data-target="#wechat-modal"><i style="font-size: 36px;color:#eaeaea;padding-right:10px;" class="fab fa-weixin"></i></a>
+                <a href="https://bsky.app/profile/openstack.org" target="_blank"/>
+                    <img
+                        src="/themes/openstack/home_images/Icons/SVG/Bluesky_Logo.svg"
+                        alt="bluesky"
+                        style="width: 36px;position:relative;top:-10px;left:-5px"
+                    />
+                </a>
                 <!-- <form class="form-inline">
                     <div class="form-group newsletter-form">
                         <label>Join Our Newsletter</label>
