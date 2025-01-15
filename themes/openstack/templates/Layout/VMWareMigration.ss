@@ -711,6 +711,7 @@
                             <li><a href="https://www.sardinasystems.com/tag/fishosmoveit/" target="_blank">FishOS MoveIt from Sardina Systems</a></li>
                             <li><a href="https://github.com/vexxhost/migratekit" target="_blank">MigrateKit from VEXXHOST, Inc.</a> (open source)</li>
                             <li><a href="https://www.mirantis.com/bespoke/solutions/" target="_blank">Mirantis Migration Service</a></li>
+                            <li><a href="https://github.com/os-migrate/" target="_blank">OS-Migrate Ansible collection</a> (open source)</li>
                             <li><a href="https://libguestfs.org/virt-v2v.1.html" target="_blank">virt-v2v</a> (open source)</li>
                             <li><a href="https://www.zconverter.com/" target="_blank">ZConverter</a></li>
                         </ul>
