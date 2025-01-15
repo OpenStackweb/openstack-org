@@ -650,6 +650,24 @@
                             LEARN MORE <img src="/themes/openstack/vmwaremigration_images/arrow-right.svg" />
                         </a>
                     </div>
+                    <div class="vmwmigration-sponsor">
+                        <div>
+                            <img class="sponsor-logo" src="/themes/openstack/vmwaremigration_images/os-migrate.svg" alt="OS-Migrate logo">
+                        </div>
+                        <p class="description">
+                            OS-Migrate is an open-source toolbox designed for parallel cloud migrations
+                            between VMware and OpenStack environments. It is an Ansible collection that
+                            facilitates seamless migration of workloads from either OpenStack or VMware
+                            source clouds to an OpenStack target cloud.
+                            OS-Migrate is agentless, highly flexible and cross platforms, it can be
+                            integrated into Ansible Automation Platform (AAP) in order to scale the
+                            workloads migration to very high level.
+                            The collections are supported by Red Hat.
+                        </p>
+                        <a class="vmwmigration white-button" href="https://github.com/os-migrate/" target="_blank">
+                            LEARN MORE <img src="/themes/openstack/vmwaremigration_images/arrow-right.svg" />
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
