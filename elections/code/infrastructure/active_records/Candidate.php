@@ -19,6 +19,7 @@ class Candidate extends DataObject implements ICandidate
 		'IsGoldMemberCandidate'   => 'Boolean',
         // Q and A (Candidate's answer to the application question)
         'RelationshipToOpenStack' => 'HTMLText',
+        'Bio'                     => 'HTMLText',
         'Experience'              => 'HTMLText',
         'BoardsRole'              => 'HTMLText',
         'TopPriority'             => 'HTMLText',

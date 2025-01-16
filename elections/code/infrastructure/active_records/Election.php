@@ -246,6 +246,7 @@ final class Election extends DataObject implements IElection {
                 new CheckboxField('HasAcceptedNomination', 'Has Accepted Nomination?'),
                 new CheckboxField('IsGoldMemberCandidate', 'Is Gold Member Candidate?'),
                 new HtmlEditorField('RelationshipToOpenStack', 'Relationship To OpenStack'),
+                new HtmlEditorField('Bio', 'Bio'),
                 new HtmlEditorField('Experience', 'Experience'),
                 new HtmlEditorField('BoardsRole', 'Boards Role'),
                 new HtmlEditorField('TopPriority', 'Top Priority')
