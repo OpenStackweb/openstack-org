@@ -650,6 +650,24 @@
                             LEARN MORE <img src="/themes/openstack/vmwaremigration_images/arrow-right.svg" />
                         </a>
                     </div>
+                    <div class="vmwmigration-sponsor">
+                        <div>
+                            <img class="sponsor-logo" src="/themes/openstack/vmwaremigration_images/os-migrate.svg" alt="OS-Migrate logo">
+                        </div>
+                        <p class="description">
+                            OS-Migrate is an open-source toolbox designed for parallel cloud migrations
+                            between VMware and OpenStack environments. It is an Ansible collection that
+                            facilitates seamless migration of workloads from either OpenStack or VMware
+                            source clouds to an OpenStack target cloud.
+                            OS-Migrate is agentless, highly flexible and cross platforms, it can be
+                            integrated into Ansible Automation Platform (AAP) in order to scale the
+                            workloads migration to very high level.
+                            The collections are supported by Red Hat.
+                        </p>
+                        <a class="vmwmigration white-button" href="https://github.com/os-migrate/" target="_blank">
+                            LEARN MORE <img src="/themes/openstack/vmwaremigration_images/arrow-right.svg" />
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -711,6 +729,7 @@
                             <li><a href="https://www.sardinasystems.com/tag/fishosmoveit/" target="_blank">FishOS MoveIt from Sardina Systems</a></li>
                             <li><a href="https://github.com/vexxhost/migratekit" target="_blank">MigrateKit from VEXXHOST, Inc.</a> (open source)</li>
                             <li><a href="https://www.mirantis.com/bespoke/solutions/" target="_blank">Mirantis Migration Service</a></li>
+                            <li><a href="https://github.com/os-migrate/" target="_blank">OS-Migrate Ansible collection</a> (open source)</li>
                             <li><a href="https://libguestfs.org/virt-v2v.1.html" target="_blank">virt-v2v</a> (open source)</li>
                             <li><a href="https://www.zconverter.com/" target="_blank">ZConverter</a></li>
                         </ul>
