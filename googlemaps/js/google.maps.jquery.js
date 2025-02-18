@@ -114,9 +114,17 @@
                         var place = places[i];
                         var color = place.color;
                         if(!(color in markers_images)){
-                            var image_url = 'maps_images/pins/'+color;
-                            var icon      = new google.maps.MarkerImage(image_url, new google.maps.Size(width, height));
-                            icon.anchor   = new google.maps.Point(width / 2, height);
+                            // see https://developers.google.com/maps/documentation/javascript/examples/marker-symbol-custom
+                            var icon = {
+                                path: "M-1.547 12l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM0 0q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
+                                fillOpacity: 0.8,
+                                strokeWeight: 0,
+                                rotation: 0,
+                                scale: 2,
+                                size :  new google.maps.Size(width, height),
+                            };
+                            icon.fillColor = '#' + color;
+                            icon.anchor   = new google.maps.Point(width / 12 , height/2);
                             markers_images[color] = icon;
                         }
                         var marker_image = markers_images[color];
