@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { fetchAll, fetchReleases, ingestContributors, exportContributors } from './actions';
 import { Pagination } from 'react-bootstrap';
 import { AjaxLoader, Table, Dropdown } from 'openstack-uicore-foundation/lib/components';
-import 'react-select/dist/react-select.css';
 import Select from 'react-select';
 
 class SangriaContributorsAdminApp extends React.Component

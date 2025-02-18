@@ -1,7 +1,5 @@
 import React from 'react';
 import { Router, Route, browserHistory, IndexRoute, Redirect } from 'react-router';
-import URL from './utils/url';
-
 import App from './components/pages/App';
 import AllVideos from './components/pages/AllVideos';
 import Summits from './components/pages/Summits';
