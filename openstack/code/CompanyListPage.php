@@ -82,40 +82,53 @@ class CompanyListPage_Controller extends Page_Controller
 
     function DisplayedCompanies($type)
     {
-        if ($type == 'Combined') {
-
-	        $DisplayedCompanies = Company::get()->filter(array( 'DisplayOnSite' => 1 ))->filterAny( array( 'MemberLevel' => array('Startup','Silver') ))->sort('Name');
-
-        } else {
-
-            $DisplayedCompanies =  Company::get()->filter(array('DisplayOnSite' => 1, 'MemberLevel' => $type ))->sort('Name');
+        $cache = SS_Cache::factory('cache_company_list_page');
+        $list = unserialize($cache->load('var_cache_company_list_page_displayed_companies_' . $type));
+        if (!$list) {
+            if ($type == 'Combined') {
+                $list = Company::get()->filter(array('DisplayOnSite' => 1))->filterAny(array('MemberLevel' => array('Startup', 'Silver')))->sort('Name');
+            } else {
+                $list = Company::get()->filter(array('DisplayOnSite' => 1, 'MemberLevel' => $type))->sort('Name');
+            }
+            $cache->save(serialize($list), 'var_cache_company_list_page_displayed_companies_' . $type);
         }
-        if ($DisplayedCompanies) {
-            return $DisplayedCompanies;
-        } else {
-            return NULL;
-        }
+        if(!$list) $list = NULL;
+        return $list;
     }
 
     function MostRecent()
     {
-
-        $DisplayedCompanies =  Company::get()->filter(array('DisplayOnSite' => 1))->sort('Name');
-        $DisplayedCompanies->sort('Created');
-        $MostRecent = $DisplayedCompanies->Last();
-        return $MostRecent;
+        $cache = SS_Cache::factory('cache_company_list_page');
+        $most_recent = unserialize($cache->load('var_cache_company_list_page_most_recent'));
+        if(!$most_recent){
+            $list =  Company::get()->filter(array('DisplayOnSite' => 1))->sort('Name');
+            $list->sort('Created');
+            $most_recent = $list->Last();
+            $cache->save(serialize($most_recent), 'var_cache_company_list_page_most_recent');
+        }
+        return $most_recent;
     }
 
     function Featured()
     {
-        $FeaturedCompanies = Company::get()->filter('Featured' , 1)->sort('Name');
-        return $FeaturedCompanies;
+        $cache = SS_Cache::factory('cache_company_list_page');
+        $list = unserialize($cache->load('var_cache_company_list_page_featured'));
+        if(!$list) {
+            $list = Company::get()->filter('Featured', 1)->sort('Name');
+            $cache->save(serialize($list), 'var_cache_company_list_page_featured');
+        }
+        return $list;
     }
 
     function getDonorsOrdered()
     {
-        $DonorCompanies = $this->Donors()->sort('SortOrder');
-        return $DonorCompanies;
+        $cache = SS_Cache::factory('cache_company_list_page');
+        $list = unserialize($cache->load('var_cache_company_list_donors_ordered'));
+        if(!$list) {
+            $list = $this->Donors()->sort('SortOrder');
+            $cache->save(serialize($list), 'var_cache_company_list_donors_ordered');
+        }
+        return $list;
     }
 
     //Show the Company detail page using the CompanyListPage_show.ss template
