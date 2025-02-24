@@ -41,7 +41,13 @@
             </div>
             <div class="col-lg-4 col-sm-4">
                 <h3>Stay In Touch</h3>
-                <a href="https://twitter.com/OpenStack" target="_blank"><i class="fab fa-twitter-square" style="font-size: 36px;color:#eaeaea;padding-right:10px;"></i></a>
+                <a href="https://twitter.com/OpenStack" target="_blank">
+                    <img
+                            src="/themes/openstack/home_images/Icons/SVG/x-icon.svg"
+                            alt="x"
+                            style="width: 36px;position:relative;top:-10px;left:-5px"
+                    />
+                </a>
                 <a href="https://www.facebook.com/openinfradev/" target="_blank"><i class="fab fa-facebook-square" style="font-size: 36px;color:#eaeaea;padding-right:10px;"></i></a>
                 <a href="https://www.linkedin.com/groups/3239106/" target="_blank"><i class="fab fa-linkedin" style="font-size: 36px;color:#eaeaea;padding-right:10px;"></i></a>
                 <a href="https://www.youtube.com/user/OpenStackFoundation" target="_blank"><i class="fab fa-youtube-square" style="font-size: 36px;color:#eaeaea;padding-right:10px;"></i></a>
@@ -52,6 +58,13 @@
                         alt="bluesky"
                         style="width: 36px;position:relative;top:-10px;left:-5px"
                     />
+                </a>
+                <a href="https://social.openinfra.dev/@OpenStack" rel="me" target="_blank"/>
+                <img
+                        src="/themes/openstack/home_images/Icons/SVG/mastodon.svg"
+                        alt="Mastodon"
+                        style="width: 36px;position:relative;top:-10px;left:-5px"
+                />
                 </a>
                 <!-- <form class="form-inline">
                     <div class="form-group newsletter-form">
