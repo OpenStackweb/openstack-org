@@ -486,7 +486,7 @@
                 </div>
                 <div class="col-sm-3 col-xs-6">
                     <div class="img-wrapper">
-                        <img src="https://www.openstack.org/companies/57/logos_resampled/ScaleWidthWzIwN10/Canonical-s.png" alt="Canonical logo">
+                        <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/canonicallg.png" alt="Canonical logo">
                     </div>
                 </div>
                 <div class="col-sm-3 col-xs-6">
@@ -521,7 +521,7 @@
                 </div>
                 <div class="col-sm-3 col-xs-6">
                     <div class="img-wrapper">
-                        <img src="https://www.openstack.org/companies/582/logos_resampled/ScaleWidthWzIwN10/fairbanks-lg1.png" alt="Fairbanks logo">
+                        <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/582/logos/fairbanks-lg1.png" alt="Fairbanks logo">
                     </div>
                 </div>
                 <div class="col-sm-3 col-xs-6">
@@ -541,12 +541,12 @@
                 </div>
                 <div class="col-sm-3 col-xs-6">
                     <div class="img-wrapper">
-                        <img src="https://www.openstack.org/companies/1277/logos_resampled/ScaleWidthWzIwN10/planethoster-lg.png" alt="PlanetHoster logo">
+                        <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/1277/logos/planethoster-lg.png" alt="PlanetHoster logo">
                     </div>
                 </div>
                 <div class="col-sm-3 col-xs-6">
                     <div class="img-wrapper">
-                        <img src="https://www.openstack.org/companies/1/logos_resampled/ScaleWidthWzIwN10/rackspace-lg2.png" alt="Rackspace logo">
+                        <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/1/logos/rackspace-lg2.png" alt="Rackspace logo">
                     </div>
                 </div>
                 <div class="col-sm-3 col-xs-6">
@@ -556,7 +556,7 @@
                 </div>
                 <div class="col-sm-3 col-xs-6">
                     <div class="img-wrapper">
-                        <img src="https://www.openstack.org/companies/489/logos_resampled/ScaleWidthWzIwN10/sardina-lg2.png" alt="Sardina Systems logo">
+                        <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/489/logos/sardina-lg2.png" alt="Sardina Systems logo">
                     </div>
                 </div>
                 <div class="col-sm-3 col-xs-6">
