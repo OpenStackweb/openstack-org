@@ -31,7 +31,7 @@ fs.readdir(dir, (err, list) => {
 `);
                     if (fs.existsSync(packagePath)) {
                         console.log('Loading dependencies...');
-                        execSync(`cd ${moduleName}/ui && npm install`, {stdio: 'inherit'});
+                        execSync(`cd ${moduleName}/ui && yarn install`, {stdio: 'inherit'});
                         execSync(`cd ${dir}`);
                     }
                     execSync(`node ./webpack ${moduleName}`, {stdio: 'inherit'});
