@@ -35,7 +35,7 @@ final class SapphireFoundationMemberRepository
 	public function getMembersThatNotVotedOnLatestNElections($n, $limit, $offset, IElectionRepository $election_repository)
 	{
 		$specification = new FoundationMembershipRevocationSpecification;
-		$sql           = $specification->sql($n, $necessary_votes = 2 , $election_repository, $offset, $limit);
+		$sql           = $specification->sql($n, $election_repository, $offset, $limit);
         if(Director::is_cli()){
             fwrite
             (
