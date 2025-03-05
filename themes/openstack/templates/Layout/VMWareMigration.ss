@@ -476,16 +476,6 @@
                 </div>
                 <div class="col-sm-3 col-xs-6">
                     <div class="img-wrapper">
-                        <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/binariocloud-lg.png" alt="Binario Cloud logo">
-                    </div>
-                </div>
-                <div class="col-sm-3 col-xs-6">
-                    <div class="img-wrapper">
-                        <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/Binero-lg.png" alt="Binero logo">
-                    </div>
-                </div>
-                <div class="col-sm-3 col-xs-6">
-                    <div class="img-wrapper">
                         <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/canonicallg.png" alt="Canonical logo">
                     </div>
                 </div>
@@ -546,6 +536,11 @@
                 </div>
                 <div class="col-sm-3 col-xs-6">
                     <div class="img-wrapper">
+                        <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/platform9-lg.png" alt="Platform9 logo">
+                    </div>
+                </div>
+                <div class="col-sm-3 col-xs-6">
+                    <div class="img-wrapper">
                         <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/1/logos/rackspace-lg2.png" alt="Rackspace logo">
                     </div>
                 </div>
@@ -572,11 +567,6 @@
                 <div class="col-sm-3 col-xs-6">
                     <div class="img-wrapper">
                         <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/vexxhost-lg2.jpg" alt="Vexxhost logo">
-                    </div>
-                </div>
-                <div class="col-sm-3 col-xs-6">
-                    <div class="img-wrapper">
-                        <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/_resampled/ScaleWidthWzIwN10/virtuozzo-lg-new.jpg" alt="Virtuozzo logo">
                     </div>
                 </div>
                 <div class="col-sm-3 col-xs-6">
