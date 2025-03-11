@@ -8,10 +8,10 @@
                 <div class="col-md-12 col-sm-12">
                     <div class="summit-announcement-header-container">
                         <img class="summit-announcement-banner-img-lg" style="height:42px;width: 42px;display: inline-block;" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-images-prod/OpenInfrastructureFoundation-icon-RGB.svg">
-                        <h2>OpenInfra Summit > Asia'24</h2>
+                        <h2>OpenInfra Foundation Board Announces Intent to Join the Linux Foundation</h2>
                     </div>
                     <p style="padding-top:15px;">
-                        Join the OpenStack community in Suwon, South Korea from September 3-4 at the first regional OpenInfra Summit Asia! Hear how OpenStack developers and operators are collaborating to define AI requirements, new OpenStack + Kubernetes production use cases and how organizations continue to scale their OpenStack footprint.
+                        Together, the Linux Foundation and the OpenInfra Foundation will unite their growing, vibrant, global ecosystems to empower users and developers with trusted open source solutions.
                     </p>
                 </div>
             </div>
@@ -19,7 +19,7 @@
         <div class="col-md-4 col-xs-12 col-sm-12 col-lg-4">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-lg-12 cta-container">
-                    <a id="vancouver-banner-btn" href="https://2024.openinfraasia.org/">Register Now
+                    <a id="vancouver-banner-btn" href="#">Learn More
                         <svg width="21" height="11" viewBox="0 0 21 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15.4828 1L19.6207 5.48M19.6207 5.48L15.4828 9.96M19.6207 5.48L1 5.48" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
