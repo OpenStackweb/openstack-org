@@ -35,7 +35,7 @@
                 <p><a href="/openstack-map">Download the map <i class="fa fa-chevron-right"></i></a></p>
                 <p>&nbsp; </p>
                 <p>
-                    <img class="openstack-map" width="100%" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/openstack-map/openstack-map-v20240401.svg" onerror="this.onerror=null; this.src=assets/openstack-map/openstack-map-v20240401.svg" alt="OpenStack Cloud landscape map">
+                    <img class="openstack-map" width="100%" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/openstack-map/openstack-map-v20250401.svg" onerror="this.onerror=null; this.src=assets/openstack-map/openstack-map-v20250401.svg" alt="OpenStack Cloud landscape map">
                 </p>
             </div>
             <p>&nbsp; </p>
