@@ -136,7 +136,12 @@ final class RevocationNotificationManager {
                 $batch_size
             );
 			foreach($notifications as $notification){
-				$notification->revoke();
+                try {
+                    $notification->revoke();
+                }
+                catch (Exception $ex){
+                    SS_Log::log($ex,SS_Log::ERR);
+                }
 			}
 		});
 	}
