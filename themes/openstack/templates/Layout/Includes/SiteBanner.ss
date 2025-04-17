@@ -8,10 +8,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="top-site-banner">
     <div class="container">
         <div class="text">
-            OpenInfra Foundation Board Announces Intent to Join the Linux Foundation
+            Join the OpenInfra Summit Europe in Paris, Oct 17-19! Registration, CFP & Sponsorships are Open!
         </div>
         <div class="button">
-            <a href="https://openinfra.org/blog/openinfra-linux-foundation-collaboration" target="_blank" class="top-site-banner-button">Learn More</a>
+            <a href="https://summit2025.openinfra.org/" target="_blank" class="top-site-banner-button">JOIN US!</a>
         </div>
     </div>
 </div>
