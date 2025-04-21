@@ -107,7 +107,7 @@ $(document).ready(function(){
             {
                 hint: true,
                 highlight: true,
-                minLength: 3
+                minLength: 1
             },
             {
                 name: 'tags_source',
