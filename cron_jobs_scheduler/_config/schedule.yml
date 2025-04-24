@@ -2,7 +2,7 @@
 jobs:
   - name: "PullCLAFromGerritTask"
     cron_expression: "00 01 * * *"
-    enabled: 1
+    enabled: 0
 
   - name: "EventbriteSummitTicketTypeConciliation"
     params: "summit_external_id=52606153421"
@@ -136,4 +136,8 @@ jobs:
 
   - name: "UpdateTechnicalCommitteeTask"
     cron_expression: "00 23 * * *" # run every day at 2300
+    enabled: 1
+
+  - name: "MascotsDataIngestionTask"
+    cron_expression: "0 * * * *" # run every hour
     enabled: 1
