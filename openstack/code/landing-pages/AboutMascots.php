@@ -35,23 +35,25 @@ class AboutMascots_Controller extends Page_Controller {
 
     }
 
-    private function getCache(){
-        return SS_Cache::factory(strtolower(get_class($this)) . '_mascots_cache');
+    static function getCache(){
+        return SS_Cache::factory(strtolower( 'AboutMascots_mascots_cache'));
     }
 
-    function getMascots() {
-        $mascots = Mascot::get();
+    static function processMascots($force = false) {
 
+        $mascots = Mascot::get();
         $mascotsAL = new ArrayList();
         $client = new \GuzzleHttp\Client();
+
         foreach ($mascots as $mascot) {
+
             $mascot_folder = $mascot->getRelativeImageDir();
             $mascot->MascotFiles     = '';
             $mascot->CodeNameString = $mascot->CodeName;
 
             if ($mascot_folder) {
                 // ask if we have cached values
-                if($value = $this->getCache()->load(md5($mascot->CodeName))) {
+                if(!$force && $value = self::getCache()->load(md5($mascot->CodeName))) {
                     $value                    = unserialize($value);
                     $mascot->MascotFiles      = $value['MascotFiles'];
                     $mascot->EPSThumbFileUrl  = $value['EPSThumbFileUrl'];
@@ -76,7 +78,7 @@ class AboutMascots_Controller extends Page_Controller {
                             'EPSThumbFileUrl' => $mascot->EPSThumbFileUrl
                         ];
                         // store on cache
-                        $this->getCache()->save
+                        self::getCache()->save
                         (
                             serialize($data),
                             md5($mascot->CodeName),
@@ -88,7 +90,11 @@ class AboutMascots_Controller extends Page_Controller {
             }
             $mascotsAL->push($mascot);
         }
+        return $mascotsAL;
+    }
 
+    function getMascots() {
+        $mascotsAL = self::processMascots();
         return $mascotsAL->sort('CodeNameString');
     }
 
