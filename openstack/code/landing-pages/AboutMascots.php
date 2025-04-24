@@ -81,7 +81,7 @@ class AboutMascots_Controller extends Page_Controller {
                             serialize($data),
                             md5($mascot->CodeName),
                             $tags = [],
-                            $specificLifetime = 120
+                            $specificLifetime = 3600 * 24 // 24 hours
                         );
                     }
                 }
