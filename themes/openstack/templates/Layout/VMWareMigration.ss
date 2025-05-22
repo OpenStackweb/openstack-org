@@ -476,7 +476,7 @@
                 </div>
                 <div class="col-sm-3 col-xs-6">
                     <div class="img-wrapper">
-                        <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/canonicallg.png" alt="Canonical logo">
+                        <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/57/logos/Canonical-lg.png" alt="Canonical logo">
                     </div>
                 </div>
                 <div class="col-sm-3 col-xs-6">
