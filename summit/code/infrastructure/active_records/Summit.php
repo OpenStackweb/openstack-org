@@ -846,7 +846,7 @@ class Summit extends DataObject implements ISummit
         $query = new QueryObject();
         $query->addAndCondition(QueryCriteria::equal('Published', 1));
         if (!is_null($level)) {
-            $query->addAndCondition(QueryCriteria::equal('Level', $level));
+            $query->addAndCondition(QueryCriteria::equal('SummitEvent.Level', $level));
         }
 
         $query
