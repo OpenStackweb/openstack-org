@@ -71,6 +71,12 @@ final class DriverRestfullApi extends AbstractRestfulJsonApi
             $query_string = $request->getVars();
             $sort_field   = (isset($query_string['sort_field']) ? Convert::raw2sql($query_string['sort_field']) : 'Project');
             $sort_dir     = (isset($query_string['sort_dir']) ? Convert::raw2sql($query_string['sort_dir']) : 'ASC');
+            // if the sort field is not one of the allowed values, we default to Project / AS
+            if(!in_array($sort_field, array('Project', 'Vendor','Driver')))
+                $sort_field = 'Project';
+            if(!in_array($sort_dir, array('ASC', 'DESC')))
+                $sort_field = 'ASC';
+
             $order        = $sort_field.' '.$sort_dir;
             $filters['project'] = (boolval(isset($query_string['project'])) ? Convert::raw2sql($query_string['project']) : 'all');
             $filters['release'] = (boolval(isset($query_string['release'])) ? Convert::raw2sql($query_string['release']) : 'all');
