@@ -16,7 +16,7 @@
 	
 				
 				<% end_if %>
-                <% include CurrentUserInfoBox LogOutLink=$Top.LogoutUrl, ResignLink=$Top.ResignUrl %>
+                <% include CurrentUserInfoBox LogOutLink=$Top.LogoutUrl, ResignLink=$Top.ResignUrl, RenewLink=$Top.RenewMembershipUrl %>
 				<% include ProfileNav %>
 	
 				<form><fieldset>

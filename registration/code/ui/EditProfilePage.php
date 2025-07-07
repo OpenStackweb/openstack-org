@@ -550,6 +550,11 @@ class EditProfilePage_Controller extends Page_Controller
         return $this->Link('resign');
     }
 
+    public function RenewMembershipUrl()
+    {
+        return 'https://deploy-preview-669--openinfra-dev.netlify.app/a/renew-membership';
+    }
+
     public function downgrade2communitymember()
     {
         $CurrentMember = Member::currentUser();
