@@ -21,7 +21,7 @@ class OpenStackMember
         'ThirdEmail'             => 'Varchar(254)', // See RFC 5321, Section 4.5.3.1.3. (256 minus the < and > character)
         'HasBeenEmailed'         => 'Boolean',
         'ShirtSize'              => "Enum('Extra Small, Small, Medium, Large, XL, XXL')",
-        'MembershipType'         => "Enum('Foundation,Community,None', 'None')",
+        'MembershipType'         => "Enum('Foundation,Community,None,Individual', 'None')",
         'StatementOfInterest'    => 'Text',
         'Bio'                    => 'HTMLText',
         'FoodPreference'         => 'Text',

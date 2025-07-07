@@ -130,6 +130,11 @@ final class FoundationMember
         return $group || $this->isSpeaker() || $is_foundation_member;
     }
 
+    public function isIndividualMember():bool
+    {
+        return $this->owner->MembershipType = IOpenStackMember::MembershipTypeIndividual;
+    }
+
     /**
      * @return bool
      */

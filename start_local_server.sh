@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 export DOCKER_SCAN_SUGGEST=false
+export BUILDX_NO_DEFAULT_ATTESTATIONS=0
 docker compose run --rm app composer install
 docker compose run --rm app ./framework/sake installsake;
 docker compose run --rm app yarn install
