@@ -3,7 +3,7 @@
 
         <div class="col-md-6" style="height: 35px;line-height: 35px;"><span style="display:inline-block; vertical-align:middle;">You are logged in as: <strong>$CurrentMember.Name</strong></span></div>
         <div class="col-md-6  text-right">
-            <% if $CurrentMember.isFoundationMember || $CurrentMember.isCommunityMember %>
+            <% if not $CurrentMember.isIndividualMember %>
                 <a class="roundedButton" href="{$RenewLink}">Renew Membership</a>
             <% end_if %>
             <% if $CurrentMember.isIndividualMember %>
@@ -13,7 +13,11 @@
         </div>
     </div>
     <div class="row">
-        <% if $CurrentMember.isFoundationMember %>
+        <% if $CurrentMember.isIndividualMember %>
+            <div class="col-md-12" style="height: 35px;line-height: 35px;">
+                <span style="display:inline-block; vertical-align:middle;">Current Member Level: <strong>OIF Individual Member</strong></span>
+            </div>
+        <% else_if $CurrentMember.isFoundationMember %>
             <div class="col-md-12" style="height: 35px;line-height: 35px;">
                 <span style="display:inline-block; vertical-align:middle;">Current Member Level: <strong>Foundation Member</strong>&nbsp;<a href="{$RenewLink}">(Renew your Membership)</a></span>
             </div>

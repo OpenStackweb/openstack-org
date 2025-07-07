@@ -135,7 +135,7 @@ final class FoundationMember
 
     public function isIndividualMember():bool
     {
-        return $this->owner->MembershipType = IOpenStackMember::MembershipTypeIndividual;
+        return $this->owner->MembershipType == IOpenStackMember::MembershipTypeIndividual;
     }
 
     /**
