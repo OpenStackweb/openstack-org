@@ -550,6 +550,11 @@ class EditProfilePage_Controller extends Page_Controller
         return $this->Link('resign');
     }
 
+    public function RenewMembershipUrl()
+    {
+        return 'https://openinfra.org/a/renew-membership';
+    }
+
     public function downgrade2communitymember()
     {
         $CurrentMember = Member::currentUser();

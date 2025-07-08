@@ -19,6 +19,6 @@ class MemberDeleted extends DataObject
         'Email'          => 'Varchar(254)',
         'OriginalID'     => 'Int',
         'FromUrl'        => 'Text',
-        'MembershipType' => "Enum('Foundation,Community,None', 'None')",
+        'MembershipType' => "Enum('Foundation,Community,None,Individual', 'None')",
     ];
 }

@@ -235,6 +235,9 @@ final class MemberManager implements IMemberManager
                if($member->isFoundationMember()){
                    $membershipType =  IOpenStackMember::MembershipTypeFoundation;
                }
+               else if($member->isIndividualMember()){
+                   $membershipType =  IOpenStackMember::MembershipTypeIndividual;
+               }
                else if($member->isCommunityMember()){
                    $membershipType =  IOpenStackMember::MembershipTypeCommunity;
                }
