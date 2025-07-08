@@ -55,6 +55,24 @@ class OpenStackMember
         'Type'                   =>  "Enum('None, Ham, Spam', 'None')",
     ];
 
+    private static $searchable_fields = array(
+        'FirstName',
+        'Surname',
+        'Email',
+        'MembershipType',
+    );
+
+    /**
+     * @config
+     * @var array
+     */
+    private static $summary_fields = array(
+        'FirstName',
+        'Surname',
+        'Email',
+        'MembershipType',
+    );
+
     static $defaults = [
         'SubscribedToNewsletter' => true,
         'DisplayOnSite'          => false,
