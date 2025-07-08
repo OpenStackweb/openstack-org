@@ -21,6 +21,8 @@ interface IOpenStackMember
 
     const MembershipTypeCommunity  = 'Community';
 
+    const MembershipTypeIndividual = 'Individual';
+
     const MembershipTypeNone       = 'None';
     /**
      * @return string

@@ -47,11 +47,11 @@ services:
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     healthcheck:
-      test: mysql -u ${SS_DB_USERNAME} --password=${SS_DB_PASSWORD} ${SS_DATABASE} -e 'SHOW TABLES;' | [ $(wc -l) -gt 885 ]
+      test: mysql -u ${SS_DB_USERNAME} --password=${SS_DB_PASSWORD} ${SS_DATABASE} -e 'SHOW TABLES;' | [ $(wc -l) -gt 300 ]
       interval: 60s
-      timeout: 10s
+      timeout: 60s
       retries: 60
-      start_period: 60s
+      start_period: 10s
     volumes:
       - ./docker-compose/mysql/model:/docker-entrypoint-initdb.d
       - /tmp/mysql/www-openstack/model:/var/lib/mysql
