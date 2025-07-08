@@ -24,6 +24,7 @@ final class FoundationMember
     (
         'ShowDupesOnProfile' => "Boolean",
         'ResignDate'         => 'SS_Datetime',
+        'IndividualMemberJoinDate' => 'SS_Datetime',
     );
 
     private static $has_many = array
@@ -66,6 +67,7 @@ final class FoundationMember
         }
         $this->owner->MembershipType = IOpenStackMember::MembershipTypeCommunity;
         $this->owner->ResignDate     = CustomMySQLDatabase::nowRfc2822();
+        $this->owner->IndividualMemberJoinDate = null;
     }
 
     public function onBeforeDelete()
@@ -97,6 +99,7 @@ final class FoundationMember
             $legalAgreement->write();
             $this->owner->MembershipType = IOpenStackMember::MembershipTypeFoundation;
             $this->owner->ResignDate  = null;
+            $this->owner->IndividualMemberJoinDate = null;
             $this->owner->write();
             return true;
         }
@@ -128,6 +131,11 @@ final class FoundationMember
         $group = $this->owner->inGroup(IFoundationMember::CommunityMemberGroupSlug);
         $is_foundation_member = $this->isFoundationMember();
         return $group || $this->isSpeaker() || $is_foundation_member;
+    }
+
+    public function isIndividualMember():bool
+    {
+        return $this->owner->MembershipType == IOpenStackMember::MembershipTypeIndividual;
     }
 
     /**

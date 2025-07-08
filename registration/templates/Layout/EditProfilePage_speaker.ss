@@ -7,12 +7,11 @@
     <h1>$Title</h1>
     <% if CurrentMember %>
         <% if Saved %>
-
             <div class="span-24 last siteMessage" id="SuccessMessage">
                 <p>Your Profile has been saved!</p>
             </div>
         <% end_if %>
-        <% include CurrentUserInfoBox LogOutLink=$Top.LogoutUrl, ResignLink=$Top.ResignUrl %>
+        <% include CurrentUserInfoBox LogOutLink=$Top.LogoutUrl, ResignLink=$Top.ResignUrl, RenewLink=$Top.RenewMembershipUrl %>
         <% include ProfileNav %>
         $EditSpeakerProfileForm
     <% else %>

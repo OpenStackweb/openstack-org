@@ -3,7 +3,7 @@
 
     <h1>Downgrade To Community Member</h1>
     <% if CurrentMember %>
-        <p>If you select this option, you will be revoking your right to vote in elections and to commit code to OpenStack via Gerrit. Additionally, any administrative rights to the Marketplace Admin or Company Admin will be revoked.</p>
+        <p>If you select this option, you will be revoking your right to vote and run in elections.</p>
         <p><a href="{$Top.Link}downgrade2communitymember/?confirmed=1" class="roundedButton">Yes, Agree</a> &nbsp; <a
                 href="{$Top.Link}" class="roundedButton">Cancel</a></p>
 

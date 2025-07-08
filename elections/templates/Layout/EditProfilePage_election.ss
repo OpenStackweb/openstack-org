@@ -3,7 +3,7 @@
 	<% require themedCSS(profile-section) %>
 		<h1>$Title</h1>
         <% if CurrentMember.isFoundationMember %>
-                <% include CurrentUserInfoBox LogOutLink=$Top.LogoutUrl, ResignLink=$Top.ResignUrl %>
+                <% include CurrentUserInfoBox LogOutLink=$Top.LogoutUrl, ResignLink=$Top.ResignUrl, RenewLink=$Top.RenewMembershipUrl %>
 
 				<% include ProfileNav %>
 

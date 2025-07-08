@@ -34,7 +34,7 @@ $SetCurrentTab(1)
 				</div>
 			<% end_if %>
             $getRenderUITopExtensions
-            <% include CurrentUserInfoBox LogOutLink=$Top.LogoutUrl, ResignLink=$Top.ResignUrl %>
+            <% include CurrentUserInfoBox LogOutLink=$Top.LogoutUrl, ResignLink=$Top.ResignUrl, RenewLink=$Top.RenewMembershipUrl %>
 			<% include ProfileNav %>
 			<div class="profile-appearance">See how your <a href="/community/members/profile/{$CurrentMember.ID}/{$CurrentMember.NameSlug}">public profile</a> appears.</div>
 			$EditProfileForm
