@@ -72,7 +72,7 @@
                 <i class="fa fa-area-chart fa-4x"></i>
                 <h3>Performance-Based</h3>
                 <p class="coa-point-description">
-                    Test your skills and problem solving in the command line and Horizon dashboard, based on the OpenStack Newton version
+                    Test your skills and problem solving in the command line and Horizon dashboard, based on the OpenStack Caracal version
                 </p>
             </div>
             <div class="col-sm-4">
@@ -146,7 +146,7 @@
                             <div class="title">
                                 OpenStack release being tested
                             </div>
-                            <img src="{$Top.CloudUrl('assets/Ussuri-release-logo-web.svg')}" alt="OpenStack Ussuri Release" class="logo">
+                            <img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/openstackcaracal.png" alt="OpenStack Caracal Release" class="logo">
                         </div>
                     </div>
                 </div>
