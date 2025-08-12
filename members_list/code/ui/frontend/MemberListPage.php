@@ -93,7 +93,7 @@ class MemberListPage_Controller extends Page_Controller
         {
 
             // Check to make sure they are in the foundation membership group
-            If (
+            if (
                 $member->MembershipType === IOpenStackMember::MembershipTypeIndividual &&
                 $member->isActive())
             {
