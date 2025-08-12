@@ -28,7 +28,8 @@ RUN apt-get update && apt-get install -y \
     g++\
     gpg \
     gettext \
-    libgmp-dev
+    libgmp-dev \
+    ca-certificates
 
 RUN apt clean && rm -rf /var/lib/apt/lists/*
 
@@ -43,12 +44,14 @@ RUN echo 'memory_limit = 512M' >> $PHP_INI_DIR/php.ini;
 
 # nvm
 
-RUN mkdir $NVM_DIR  \
-    && curl https://raw.githubusercontent.com/creationix/nvm/$NVM_VERSION/install.sh | bash \
-    && . $NVM_DIR/nvm.sh \
-    && nvm install $NODE_VERSION \
-    && nvm alias default $NODE_VERSION \
-    && nvm use default
+# Install nvm
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+
+# Install Node via nvm (must be in same RUN to source nvm.sh)
+RUN . "$NVM_DIR/nvm.sh" \
+ && nvm install $NODE_VERSION \
+ && nvm alias default $NODE_VERSION \
+ && nvm use default
 
 ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
 ENV PATH      $NVM_DIR/v$NODE_VERSION/bin:$PATH
@@ -57,10 +60,6 @@ ENV PATH      $NVM_DIR/v$NODE_VERSION/bin:$PATH
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 RUN apt update && apt install -y yarn
-
-# install node
-RUN curl -fsSL https://deb.nodesource.com/setup_12.x | bash -
-RUN apt-get install -y nodejs
 
 WORKDIR /var/www
 COPY . /var/www
