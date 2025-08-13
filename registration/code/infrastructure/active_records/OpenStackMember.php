@@ -321,10 +321,13 @@ class OpenStackMember
     // Used to group members by last name when displaying the member listing
     public function getSurnameFirstLetter()
     {
-        $firstLetter = $this->owner->Surname[0];
+        $firstLetter = substr($this->owner->Surname, 0, 1);
         $firstLetter = strtr($firstLetter,
-            'ŠŽšžŸµÀÁÂÃÄÅÈÉÊËÌÍÎÏÐÑÒÓÔÕÖÙÚÛÜÝ',
-            'SZszYuAAAAAAEEEEIIIIDNOOOOOUUUUY');
+            array_combine(
+                explode("", 'ŠŽšžŸµÀÁÂÃÄÅÈÉÊËÌÍÎÏÐÑÒÓÔÕÖÙÚÛÜÝ'),
+                explode("", 'SZszYuAAAAAAEEEEIIIIDNOOOOOUUUUY')
+            )
+        );
         $firstLetter = strtoupper($firstLetter);
 
         return $firstLetter;
