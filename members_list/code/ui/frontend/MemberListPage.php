@@ -78,10 +78,9 @@ class MemberListPage_Controller extends Page_Controller
             $likeString = "Surname LIKE 'a%'";
         }
 
-
+        $IndividualMembership = Convert::raw2sql(IOpenStackMember::MembershipTypeIndividual, true);
         $list = Member::get()
-            ->where("Group_Members.GroupID = 5 AND " . $likeString)
-            ->leftJoin('Group_Members', 'Member.ID = Group_Members.MemberID')
+            ->where("MembershipType = " . $IndividualMembership . " AND " . $likeString)
             ->sort('Surname');
 
         return GroupedList::create($list);
@@ -92,8 +91,11 @@ class MemberListPage_Controller extends Page_Controller
         $member  = Member::get()->byID(intval($member_id));
         if(!is_null($member))
         {
+
             // Check to make sure they are in the foundation membership group
-            If ($member->inGroup(5, true) && $member->isActive())
+            if (
+                $member->MembershipType === IOpenStackMember::MembershipTypeIndividual &&
+                $member->isActive())
             {
                 return $member;
             }
