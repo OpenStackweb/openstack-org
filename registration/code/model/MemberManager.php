@@ -232,11 +232,11 @@ final class MemberManager implements IMemberManager
            else{
                // member already exists , calculate membership type
                $membershipType =  IOpenStackMember::MembershipTypeNone;
-               if($member->isFoundationMember()){
-                   $membershipType =  IOpenStackMember::MembershipTypeFoundation;
-               }
-               else if($member->isIndividualMember()){
+               if($member->isIndividualMember()){
                    $membershipType =  IOpenStackMember::MembershipTypeIndividual;
+               }
+               else if($member->isFoundationMember()){
+                   $membershipType =  IOpenStackMember::MembershipTypeFoundation;
                }
                else if($member->isCommunityMember()){
                    $membershipType =  IOpenStackMember::MembershipTypeCommunity;
