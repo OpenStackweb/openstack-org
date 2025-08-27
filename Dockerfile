@@ -35,10 +35,11 @@ RUN apt clean && rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-install mbstring exif pcntl bcmath sockets gettext gmp gd mysqli
 RUN docker-php-ext-enable gd mysqli
-# XDEBUG
+# XDEBUG ( check xdebug.client_port )
 RUN yes | pecl install ${XDEBUG_VERSION}
 COPY docker-compose/php/docker-php-ext-xdebug.ini $PHP_DIR/conf.d/docker-php-ext-xdebug.ini
-
+# ERROR REPORTING
+COPY docker-compose/php/99-error-reporting.ini $PHP_DIR/conf.d/99-error-reporting.ini
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 RUN echo 'memory_limit = 512M' >> $PHP_INI_DIR/php.ini;
 

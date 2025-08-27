@@ -9,6 +9,7 @@ services:
       - "host.docker.internal:host-gateway"
     image: www-openstack
     container_name: www-openstack
+    pull_policy: never
     restart: unless-stopped
     working_dir: /var/www/
     volumes:
