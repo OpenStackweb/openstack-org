@@ -31,11 +31,14 @@ final class OpenStackIdCommon {
      */
     public static function getRegistrationUrl(string $redirect_uri, bool $append_back_url = true):string{
         $back_url = urlencode(self::getRedirectBackUrl());
+        $aux_redirect_uri = $redirect_uri;
         if($append_back_url && !empty($back_url)){
-            $append_char = strstr($redirect_uri, '?') == false ? '?' : '&';
-            $redirect_uri .= $append_char.'BackURL='.$back_url;
+            $append_char = strstr($aux_redirect_uri, '?') == false ? '?' : '&';
+            $has_alreadyBackURL = strstr($redirect_uri, 'BackURL') !== false;
+            if($has_alreadyBackURL) $append_char = urlencode($append_char);
+            $aux_redirect_uri .= $append_char.'BackURL='.$back_url;
         }
-        return sprintf("%s/auth/register?client_id=%s&redirect_uri=%s",IDP_OPENSTACKID_URL,OIDC_CLIENT, urlencode($redirect_uri));
+        return sprintf("%s/auth/register?client_id=%s&redirect_uri=%s",IDP_OPENSTACKID_URL,OIDC_CLIENT, urlencode($aux_redirect_uri));
     }
 
     /**
