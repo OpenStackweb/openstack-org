@@ -1,5 +1,4 @@
-<script id="matias-test">
-
+<script>
     document.addEventListener('DOMContentLoaded', () => {
       const csrfToken = "$SecurityToken";
       try {
@@ -39,12 +38,13 @@
             'Authorization': 'Bearer ' + accessToken,
             'X-CSRF-Token': csrfToken,
           },
-          data: {
+          dataType: "json",
+          data: JSON.stringify({
             accessTokenUpdatedAt,
             accessToken,
             idToken,
             expiresIn,
-          },
+          }),
           success: function(response) {
             console.log('OIDC session bootstrap successful:', response);
           },

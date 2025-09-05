@@ -17,19 +17,20 @@
  * Handles OIDC session bootstrap requests
  */
 final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
-{
+{    private static $api_prefix = 'api/v1/oidc/session/bootstrap';
+
     /**
      * @var array
      */
     private static $url_handlers = [
-        'POST ' => 'bootstrap',
+        'POST ' => 'index',
     ];
 
     /**
      * @var array
      */
     private static $allowed_actions = [
-        'bootstrap',
+        'index',
     ];
 
     /**
@@ -63,7 +64,7 @@ final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
      * @param SS_HTTPRequest $request
      * @return SS_HTTPResponse
      */
-    public function bootstrap(SS_HTTPRequest $request)
+    public function index(SS_HTTPRequest $request)
     {
         try {
             // Check if request method is POST
@@ -90,9 +91,9 @@ final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
             }
 
             // Check X-CSRF-Token header
-            $csrfToken = $request->getHeader('X-CSRF-Token');
+            $csrfToken = $request->getHeader('X-CSRF-Token') ?: $request->getHeader('X-Csrf-Token');
             if (empty($csrfToken)) {
-                return $this->validationError(['X-CSRF-Token header is required']);
+                return $this->validationError(['X-CSRF-Token header is required', "headers" => $request->getHeaders()]);
             }
 
             // Check X-CSRF-Token header
@@ -129,12 +130,13 @@ final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
                 SS_Log::INFO
             );
 
-            return $this->ok([
-                'status' => 'success',
-                'message' => 'Session bootstrapped successfully',
-                'timestamp' => time(),
-                'external_response' => $externalResponse
-            ]);
+			$success = $externalResponse['status'] === 'success';
+			$response = new SS_HTTPResponse();
+			$response->setStatusCode($success ? $externalResponse['http_code'] : 400);
+			$response->addHeader('Content-Type', 'application/json');
+			$response->setBody($success ? json_encode($externalResponse['data']) : json_encode(['error' => $externalResponse['message']]));
+			// $response->setBody('');
+            return $response;
 
         } catch (EntityValidationException $ex1) {
             SS_Log::log($ex1, SS_Log::WARN);
