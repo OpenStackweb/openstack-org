@@ -11,8 +11,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-use Doctrine\Common\Annotations\AnnotationReader;
 use Openstack\Annotations\CachedMethod;
+use Doctrine\Common\Annotations\AnnotationReader;
 /**
  * Class AbstractRestfulJsonApi
  */
@@ -575,6 +575,21 @@ abstract class AbstractRestfulJsonApi extends Controller
         $response->setStatusCode(201);
         $response->addHeader('Content-Type', 'application/json');
         $response->setBody(json_encode($id));
+
+        return $response;
+    }
+
+    /**
+     * @return SS_HTTPResponse
+     */
+    public function badRequest($message = "Bad Request")
+    {
+        $response = new SS_HTTPResponse();
+        $response->setStatusCode(400);
+        $response->addHeader('Content-Type', 'application/json');
+        $response->setBody(json_encode(
+            ['error' => 'validation', 'messages' => [['message' => $message]]]
+        ));
 
         return $response;
     }

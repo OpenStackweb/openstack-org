@@ -137,7 +137,7 @@ class Page extends SiteTree
         //return the customized template
         return $template->process(new ArrayData($customise));
 
-    }    
+    }
 
 
     function requireDefaultRecords()
@@ -272,6 +272,11 @@ class Page_Controller extends ContentController
     public function getTime()
     {
         return time();
+    }
+
+    public function getSecurityToken()
+    {
+        return SecurityToken::inst() ? SecurityToken::inst()->getValue() : null;
     }
 
     protected function CustomScripts()
