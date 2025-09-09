@@ -218,7 +218,8 @@ final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
             $response = $client->request('POST', "{$auth_server_url}/oauth2/token/introspection", $options);
 
             $content_type = $response->getHeaderLine('content-type');
-            if ($content_type !== 'application/json') {
+            $is_json = in_array("application/json", explode(';', $content_type));
+            if (!$is_json) {
                 // invalid content type
                 $body = $response->getBody()->getContents();
                 $status = $response->getStatusCode();
@@ -265,13 +266,14 @@ final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
         if ($is_json) {
             $body = json_decode($body, true);
         }
+        SS_Log::log("Error Response:", SS_Log::WARN, $body);
 
         $invalid = [
             OAuth2Protocol::OAuth2Protocol_Error_InvalidToken,
             OAuth2Protocol::OAuth2Protocol_Error_InvalidGrant
         ];
 
-        if ($code === 400 && $is_json && isset($body['error']) && (in_array($body['error'], $invalid))) {
+        if ($code === 400 && $is_json && isset($body['error']) && in_array($body['error'], $invalid)) {
             SS_Log::log(sprintf("%s token %s marked as revoked (400 %s)", __METHOD__, $token_value, $body['error']), SS_Log::WARN);
             throw new InvalidGrantTypeException($body['error']);
         }
