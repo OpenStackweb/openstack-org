@@ -92,7 +92,8 @@
     "php-opencloud/openstack": "dev-master",
     "jumbojett/openid-connect-php": "dev-master",
     "mikehaertl/phpwkhtmltopdf": "dev-master",
-    "spatie/dropbox-api": "dev-master"
+    "spatie/dropbox-api": "dev-master",
+    "caseyamcl/guzzle_retry_middleware": "2.13.0"
   },
   "require-dev": {
     "phpunit/phpunit": "^7.0",

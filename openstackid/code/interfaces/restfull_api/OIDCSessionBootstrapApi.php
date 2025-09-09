@@ -4,6 +4,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\HandlerStack;
 // use GuzzleRetry\GuzzleRetryMiddleware;
+use GuzzleRetry\GuzzleRetryMiddleware;
 use Libs\OAuth2\InvalidGrantTypeException;
 use Libs\OAuth2\OAuth2InvalidIntrospectionResponse;
 use libs\oauth2\OAuth2Protocol;
@@ -121,8 +122,9 @@ final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
     /**
      * Validate request data
      * @param array $data
+     * @return array|SS_HTTPResponse
      */
-    private function validateRequestData(SS_HTTPRequest $request): array|SS_HTTPResponse
+    private function validateRequestData(SS_HTTPRequest $request)
     {
         // Check if request method is POST
         if (!$request->isPOST()) {
@@ -174,9 +176,9 @@ final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
      * Make a dummy call to an external server
      * @param string $token_value
      * @param array $data
-     * @return array
+     * @return array|bool|SS_HTTPResponse
      */
-    private function doIntrospectionRequest($token_value): array|bool|SS_HTTPResponse
+    private function doIntrospectionRequest(string $token_value)
     {
         try {
             SS_Log::log(sprintf(__METHOD__ . " token %s", $token_value), SS_Log::DEBUG);
@@ -187,7 +189,7 @@ final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
             $auth_server_url = defined('IDP_OPENSTACKID_URL') ? IDP_OPENSTACKID_URL : '';
             $verify = defined('OIDC_PUBLIC_APP_VERIFY_HOST') ? OIDC_PUBLIC_APP_VERIFY_HOST : false;
 
-            // $stack->push(GuzzleRetryMiddleware::factory());
+            $stack->push(GuzzleRetryMiddleware::factory());
             $client = new Client([
                 'handler' => $stack,
                 'verify' => $verify,
