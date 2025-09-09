@@ -26,7 +26,8 @@ use libs\oauth2\OAuth2Protocol;
  * Handles OIDC session bootstrap requests
  */
 final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
-{    private static $api_prefix = 'oidc/session/bootstrap';
+{
+    private static $api_prefix = 'oidc/session/bootstrap';
 
     /**
      * @var array
@@ -48,7 +49,8 @@ final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
     protected function isApiCall()
     {
         $request = $this->getRequest();
-        if (is_null($request)) return false;
+        if (is_null($request))
+            return false;
         return true;
     }
 
@@ -86,33 +88,26 @@ final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
 
             // Validate access token with OIDC provider
             try {
-                $oidc = OIDCClientFactory::build();
-                $tokenData = $oidc->introspectToken($accessToken);
+                $tokenData = $this->doIntrospectionRequest($accessToken);
 
-                if (isset($tokenData->error) || (isset($tokenData->active) && !$tokenData->active)) {
-                    return $this->validationError(['Invalid or expired access token']);
+                if ($tokenData instanceof SS_HTTPResponse) {
+                    return $tokenData; // Return the error response
+                }
+
+                if ($tokenData === false || isset($tokenData['error']) || (isset($tokenData['active']) && !$tokenData['active'])) {
+                    return $this->validationError(['Invalid or expired access token'], 400);
                 }
             } catch (Exception $ex) {
-                SS_Log::log($ex, SS_Log::WARN);
-                return $this->validationError(['Token validation failed']);
+                return $this->validationError([$ex->getMessage()], 400);
             }
-
-            // Make dummy call to external server
-            $externalResponse = $this->doIntrospectionRequest($accessToken);
 
             // Log the bootstrap attempt
             SS_Log::log(
                 sprintf('OIDC session bootstrap successful for token: %s', substr($accessToken, 0, 10) . '...'),
-                SS_Log::INFO
+                SS_Log::DEBUG
             );
 
-			$success = $externalResponse['status'] === 'success';
-			$response = new SS_HTTPResponse();
-			$response->setStatusCode($success ? $externalResponse['http_code'] : 400);
-			$response->addHeader('Content-Type', 'application/json');
-			$response->setBody($success ? json_encode($externalResponse['data']) : json_encode(['error' => $externalResponse['message']]));
-			// $response->setBody('');
-            return $response;
+            return $this->noContent();
 
         } catch (EntityValidationException $ex1) {
             SS_Log::log($ex1, SS_Log::WARN);
@@ -181,62 +176,46 @@ final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
      * @param array $data
      * @return array
      */
-    private function doIntrospectionRequest($token_value): array|bool
+    private function doIntrospectionRequest($token_value): array|bool|SS_HTTPResponse
     {
         try {
             SS_Log::log(sprintf(__METHOD__ . " token %s", $token_value), SS_Log::DEBUG);
+
             $stack = HandlerStack::create();
+            $client_id = defined('OIDC_CLIENT_ID_PUBLIC') ? OIDC_CLIENT_ID_PUBLIC : '';
+            $client_secret = defined('OIDC_CLIENT_SECRET_PUBLIC') ? OIDC_CLIENT_SECRET_PUBLIC : '';
+            $auth_server_url = defined('IDP_OPENSTACKID_URL') ? IDP_OPENSTACKID_URL : '';
+            $verify = defined('OIDC_PUBLIC_APP_VERIFY_HOST') ? OIDC_PUBLIC_APP_VERIFY_HOST : false;
+
             // $stack->push(GuzzleRetryMiddleware::factory());
             $client = new Client([
-                'handler'         => $stack,
-                'timeout'         => ini_get('curl.timeout') ?: 60,
-                'allow_redirects' => ini_get('curl.allow_redirects') ?: false,
-                'verify'          => ini_get('curl.verify_ssl_cert') ?: true,
-
+                'handler' => $stack,
+                'verify' => $verify,
+                'timeout' => 120,
             ]);
 
-            $client_id       = defined('OIDC_CLIENT_ID_PUBLIC') ? OIDC_CLIENT_ID_PUBLIC : '';
-            $client_secret   = defined('OIDC_CLIENT_SECRET_PUBLIC') ? OIDC_CLIENT_SECRET_PUBLIC : '';
-            $auth_server_url = defined('IDP_OPENSTACKID_URL') ? IDP_OPENSTACKID_URL : '';
-
             if (empty($client_id)) {
-                return [
-                    'status' => 'error',
-                    'http_code' => 500,
-                    'message' => 'OIDC_CLIENT_ID_PUBLIC is not configured'
-                ];
+                return $this->validationError('OIDC_CLIENT_ID_PUBLIC is not configured');
             }
 
             if (empty($client_secret)) {
-                return [
-                    'status' => 'error',
-                    'http_code' => 500,
-                    'message' => 'OIDC_CLIENT_SECRET_PUBLIC is not configured'
-                ];
+                return $this->validationError('OIDC_CLIENT_SECRET_PUBLIC is not configured');
             }
 
             if (empty($auth_server_url)) {
-                return [
-                    'status' => 'error',
-                    'http_code' => 500,
-                    'message' => 'IDP_OPENSTACKID_URL is not configured'
-                ];
+                return $this->validationError('IDP_OPENSTACKID_URL is not configured');
             }
 
             // http://docs.guzzlephp.org/en/stable/request-options.html
-            $response = $client->request('POST',
-                  "{$auth_server_url}/oauth2/token/introspection",
-                [
-                    'form_params'  => ['token' => $token_value],
-                    'auth'         => [$client_id, $client_secret],
-                    'timeout'      => 120,
-                    'http_errors' => true
-                ]
-            );
+            $options = [
+                'form_params' => ['token' => $token_value],
+                'auth' => [$client_id, $client_secret],
+                'http_errors' => true
+            ];
+            $response = $client->request('POST', "{$auth_server_url}/oauth2/token/introspection", $options);
 
             $content_type = $response->getHeaderLine('content-type');
-            if($content_type !== 'application/json')
-            {
+            if ($content_type !== 'application/json') {
                 // invalid content type
                 $body = $response->getBody()->getContents();
                 $status = $response->getStatusCode();
@@ -245,24 +224,39 @@ final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
             }
             return json_decode($response->getBody()->getContents(), true);
 
-        }
-        catch (RequestException $ex) {
+        } catch (RequestException $ex) {
             $this->handleInstropectionException($ex, $token_value);
-            return false;
+        } catch (Exception $ex) {
+            SS_Log::log($ex, SS_Log::ERR);
+
+            $data = [
+                "error" => "Server Error",
+                "message" => $ex->getMessage(),
+            ];
+            if (defined('SS_ENVIRONMENT_TYPE') && SS_ENVIRONMENT_TYPE === 'dev') {
+                $data['trace'] = $ex->getTrace();
+            }
+            $response = new SS_HTTPResponse();
+            $response->setStatusCode(500);
+            $response->addHeader('Content-Type', 'application/json');
+            $response->setBody(json_encode($data));
+            return $response;
         }
+
+        return false;
     }
 
     protected function handleInstropectionException(RequestException &$ex, string $token_value)
     {
         SS_Log::log($ex, SS_Log::WARN);
-        $response  = $ex->getResponse();
+        $response = $ex->getResponse();
 
-        if(is_null($response))
+        if (is_null($response))
             throw new Exception(sprintf('http code %s', $ex->getCode()));
         $content_type = $response->getHeaderLine('content-type');
-        $is_json      = $content_type === 'application/json';
-        $body         = $response->getBody()->getContents();
-        $code         = $response->getStatusCode();
+        $is_json = $content_type === 'application/json';
+        $body = $response->getBody()->getContents();
+        $code = $response->getStatusCode();
 
         SS_Log::log(sprintf("%s token %s code %s body %s", __METHOD__, $token_value, $code, $body), SS_Log::WARN);
 
@@ -271,14 +265,12 @@ final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
             OAuth2Protocol::OAuth2Protocol_Error_InvalidGrant
         ];
 
-        if ($code === 400 && $is_json && isset($body['error']) && (in_array($body['error'], $invalid)))
-        {
+        if ($code === 400 && $is_json && isset($body['error']) && (in_array($body['error'], $invalid))) {
             SS_Log::log(sprintf("%s token %s marked as revoked (400 %s)", __METHOD__, $token_value, $body['error']), SS_Log::WARN);
             throw new InvalidGrantTypeException($body['error']);
         }
 
-        if ($code == 503 )
-        {
+        if ($code == 503) {
             // service went offline temporally ... revoke token
             SS_Log::log(sprintf("%s token %s marked as revoked (503 offline IDP)", __METHOD__, $token_value), SS_Log::WARN);
             throw new InvalidGrantTypeException(OAuth2Protocol::OAuth2Protocol_Error_InvalidToken);
