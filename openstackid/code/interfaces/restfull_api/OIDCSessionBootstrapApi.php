@@ -79,20 +79,18 @@ final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
     public function index(SS_HTTPRequest $request)
     {
         try {
-            // Validate request method and headers
             $response = $this->validateRequestData($request);
             if ($response instanceof SS_HTTPResponse) {
-                return $response; // Return the error response
+                return $response;
             }
             $data = &$response['data'];
             $accessToken = &$response['accessToken'];
 
-            // Validate access token with OIDC provider
             try {
                 $tokenData = $this->doIntrospectionRequest($accessToken);
 
                 if ($tokenData instanceof SS_HTTPResponse) {
-                    return $tokenData; // Return the error response
+                    return $tokenData;
                 }
 
                 if ($tokenData === false || isset($tokenData['error']) || (isset($tokenData['active']) && !$tokenData['active'])) {
@@ -102,7 +100,6 @@ final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
                 return $this->validationError([$ex->getMessage()], 400);
             }
 
-            // Log the bootstrap attempt
             SS_Log::log(
                 sprintf('OIDC session bootstrap successful for token: %s', substr($accessToken, 0, 10) . '...'),
                 SS_Log::DEBUG
