@@ -181,8 +181,8 @@ final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
             SS_Log::log(sprintf(__METHOD__ . " token %s", $token_value), SS_Log::DEBUG);
 
             $stack = HandlerStack::create();
-            $client_id = defined('OIDC_CLIENT_ID_PUBLIC') ? OIDC_CLIENT_ID_PUBLIC : '';
-            $client_secret = defined('OIDC_CLIENT_SECRET_PUBLIC') ? OIDC_CLIENT_SECRET_PUBLIC : '';
+            $client_id = defined('OIDC_PUBLIC_APP_CLIENT_ID') ? OIDC_PUBLIC_APP_CLIENT_ID : '';
+            $client_secret = defined('OIDC_PUBLIC_APP_CLIENT_SECRET') ? OIDC_PUBLIC_APP_CLIENT_SECRET : '';
             $auth_server_url = defined('IDP_OPENSTACKID_URL') ? IDP_OPENSTACKID_URL : '';
             $verify = defined('OIDC_PUBLIC_APP_VERIFY_HOST') ? OIDC_PUBLIC_APP_VERIFY_HOST : false;
 
