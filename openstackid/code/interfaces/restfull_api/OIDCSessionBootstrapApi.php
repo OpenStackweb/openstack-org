@@ -125,7 +125,7 @@ final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
     {
         // Check if request method is POST
         if (!$request->isPOST()) {
-            return $this->methodNotAllowed('Only POST requests are allowed');
+            return $this->methodNotAllowed();
         }
 
         // Check Content-Type header
@@ -283,10 +283,10 @@ final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
      * @param string $message
      * @return SS_HTTPResponse
      */
-    protected function methodNotAllowed($message = 'Method Not Allowed')
+    protected function methodNotAllowed()
     {
-        return (new SS_HTTPResponse($message, 405))
-            ->addHeader('Content-Type', 'application/json')
+        return parent::methodNotAllowed()
+            ->setBody(json_encode("Only POST requests are allowed"))
             ->addHeader('Allow', 'POST');
     }
 
