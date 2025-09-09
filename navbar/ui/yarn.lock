@@ -1162,10 +1162,10 @@ ms@2.0.0:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
   integrity sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==
 
-navigation-widget@1.0.27:
-  version "1.0.27"
-  resolved "https://registry.yarnpkg.com/navigation-widget/-/navigation-widget-1.0.27.tgz#1f84bba8bd81ff34f01ea8b476bcb2c27a9fc867"
-  integrity sha512-JXB0xF3sJI2b1STnS3ak9stpIXzaQZmhPw26yf1ELx8h+UPyyRTD3NW+23ZNMqGkx+X3cH3Za94GQ2KWbovchQ==
+navigation-widget@^1.0.13:
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/navigation-widget/-/navigation-widget-1.0.13.tgz#f40060aa78a99a8495ce5ddf9649f93e027833cf"
+  integrity sha512-4wDK9gQYi9c8cTmVXVH7itIQXpr4zzVLbzc69w81NX0Cb6hVdMkcUbTuyviTfOHn/NFeqDRtd0fDnqn/AlwBeQ==
 
 object-assign@^4.0.1, object-assign@^4.1.1:
   version "4.1.1"
