@@ -256,8 +256,9 @@ final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
 
         if (is_null($response))
             throw new Exception(sprintf('http code %s', $ex->getCode()));
+
         $content_type = $response->getHeaderLine('content-type');
-        $is_json = $content_type === 'application/json';
+        $is_json = in_array("application/json", explode(';', $content_type));
         $body = $response->getBody()->getContents();
         $code = $response->getStatusCode();
 
