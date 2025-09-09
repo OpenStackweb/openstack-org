@@ -2,7 +2,6 @@
     document.addEventListener('DOMContentLoaded', () => {
       const csrfToken = "$SecurityToken";
       try {
-        console.log('Page_LoggedInVerification.ss loaded');
         const {
           accessTokenUpdatedAt,
           accessToken,
@@ -14,13 +13,6 @@
           expiresIn &&
           accessTokenUpdatedAt &&
           ((expiresIn + accessTokenUpdatedAt) * 1000) > Date.now().valueOf();
-
-        console.log('authInfo:', {
-          accessTokenUpdatedAt,
-          accessToken,
-          idToken,
-          expiresIn,
-        }, isValid);
 
         // No access token found => user is not logged in
         if (!isValid)
@@ -52,7 +44,7 @@
             console.error('OIDC session bootstrap failed:', {
               status: xhr.status,
               statusText: xhr.statusText,
-              response: xhr.responseText,
+              response: JSON.parse(xhr.responseText || 'false') || xhr.responseText,
               error: error
             });
           }
