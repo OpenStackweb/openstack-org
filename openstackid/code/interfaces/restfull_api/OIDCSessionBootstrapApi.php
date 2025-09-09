@@ -1,13 +1,17 @@
 <?php
 
+require_once __DIR__.'/Libs/OAuth2/InvalidGrantTypeException.php';
+require_once __DIR__.'/Libs/OAuth2/OAuth2InvalidIntrospectionResponse.php';
+require_once __DIR__.'/Libs/OAuth2/OAuth2Protocol.php';
+
+
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\HandlerStack;
-// use GuzzleRetry\GuzzleRetryMiddleware;
 use GuzzleRetry\GuzzleRetryMiddleware;
 use Libs\OAuth2\InvalidGrantTypeException;
 use Libs\OAuth2\OAuth2InvalidIntrospectionResponse;
-use libs\oauth2\OAuth2Protocol;
+use Libs\OAuth2\OAuth2Protocol;
 
 /**
  * Copyright 2025 OpenStack Foundation
@@ -257,7 +261,9 @@ final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
         $body = $response->getBody()->getContents();
         $code = $response->getStatusCode();
 
-        SS_Log::log(sprintf("%s token %s code %s body %s", __METHOD__, $token_value, $code, $body), SS_Log::WARN);
+        if ($is_json) {
+            $body = json_decode($body, true);
+        }
 
         $invalid = [
             OAuth2Protocol::OAuth2Protocol_Error_InvalidToken,
@@ -275,7 +281,7 @@ final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
             throw new InvalidGrantTypeException(OAuth2Protocol::OAuth2Protocol_Error_InvalidToken);
         }
         SS_Log::log(sprintf("%s token %s OAuth2InvalidIntrospectionResponse (%s %s)", __METHOD__, $token_value, $ex->getCode(), $body), SS_Log::WARN);
-        throw new OAuth2InvalidIntrospectionResponse(sprintf('http code %s - body %s', $ex->getCode(), $body));
+        throw new OAuth2InvalidIntrospectionResponse(sprintf('http code %s - body %s', $code, $body));
     }
 
     /**
