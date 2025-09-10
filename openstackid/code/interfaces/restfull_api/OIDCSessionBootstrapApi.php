@@ -97,9 +97,17 @@ final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
 					return $tokenData;
 				}
 
-				if ($tokenData === false or isset($tokenData['error']) or !$tokenData['active']) {
+				if ($tokenData === false)
+				{
+					SS_Log::log(sprintf("%s token %s introspection returned false", __METHOD__, $accessToken), SS_Log::WARN);
+				}
+
+				if (
+						$tokenData === false or
+						(is_array($tokenData) and isset($tokenData['error']))
+					) {
 					$error = 'Invalid or expired access token';
-					if ($tokenData and $tokenData['error']) {
+					if (is_array($tokenData) and !empty($tokenData['error'])) {
 						$error = $tokenData['error'];
 					}
 					return $this->validationError([$error], 400);
@@ -108,16 +116,13 @@ final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
 				// at this point we have a valid and active token
 				// we can create a session for the user
 				$member = null;
-				if ($tokenData['user_id']) {
-					$member = Member::get()->filter('Email', $tokenData['user_email'])->first();
-				}
 
 				if (!$member && $tokenData['user_email']) {
 					$member = Member::get()->filter('Email', $tokenData['user_email'])->first();
 				}
 
 				if (!$member) {
-					return $this->validationError(['User not found'], 400);
+					return $this->validationError(['User not found'], 404);
 				}
 				// log in the user
 				$member->logIn();
@@ -204,18 +209,10 @@ final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
 		try {
 			SS_Log::log(sprintf(__METHOD__ . " token %s", $token_value), SS_Log::DEBUG);
 
-			$stack = HandlerStack::create();
 			$client_id = defined('OIDC_PUBLIC_APP_CLIENT_ID') ? OIDC_PUBLIC_APP_CLIENT_ID : '';
 			$client_secret = defined('OIDC_PUBLIC_APP_CLIENT_SECRET') ? OIDC_PUBLIC_APP_CLIENT_SECRET : '';
 			$auth_server_url = defined('IDP_OPENSTACKID_URL') ? IDP_OPENSTACKID_URL : '';
 			$verify = defined('OIDC_PUBLIC_APP_VERIFY_HOST') ? OIDC_PUBLIC_APP_VERIFY_HOST : false;
-
-			$stack->push(GuzzleRetryMiddleware::factory());
-			$client = new Client([
-				'handler' => $stack,
-				'verify' => $verify,
-				'timeout' => 120,
-			]);
 
 			if (empty($client_id)) {
 				return $this->validationError('OIDC_CLIENT_ID_PUBLIC is not configured');
@@ -229,34 +226,54 @@ final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
 				return $this->validationError('IDP_OPENSTACKID_URL is not configured');
 			}
 
+			$stack = HandlerStack::create();
+			$stack->push(GuzzleRetryMiddleware::factory());
+
+			$client = new Client([
+				'base_uri' => $auth_server_url,
+				'handler' => $stack,
+				'verify' => $verify,
+				'timeout' => 120,
+			]);
+
 			// http://docs.guzzlephp.org/en/stable/request-options.html
 			$options = [
 				'form_params' => ['token' => $token_value],
 				'auth' => [$client_id, $client_secret],
-				'http_errors' => true
+				'http_errors' => true,
+				'synchronous' => true,
 			];
-			$response = $client->request('POST', "{$auth_server_url}/oauth2/token/introspection", $options);
+			$endpoint = "/oauth2/token/introspection";
+			SS_Log::log(sprintf(__METHOD__ . " DEBUG options %s", json_encode($options)), SS_Log::DEBUG);
+			$response = $client->request('POST', $endpoint, $options);
 
 			$content_type = $response->getHeaderLine('content-type');
 			$is_json = in_array("application/json", explode(';', $content_type));
+			$body = $response->getBody()->getContents();
 			if (!$is_json) {
 				// invalid content type
-				$body = $response->getBody()->getContents();
 				$status = $response->getStatusCode();
 				SS_Log::log(sprintf(__METHOD__ . " status %s content type %s body %s", $status, $content_type, $body), SS_Log::WARN);
-				throw new \Exception($body);
+				return $this->validationError($body, 500);
+			}
+			SS_Log::log(sprintf(__METHOD__ . " DEBUG response %s", $body), SS_Log::DEBUG);
+
+			$jsonResponse = json_decode($body, true);
+			if (!$jsonResponse) {
+				SS_Log::log(sprintf(__METHOD__ . " invalid JSON response %s", $body), SS_Log::ERR);
+				return $this->validationError('Invalid JSON response from IDP', 500);
 			}
 
-			$jsonResponse = json_decode($response->getBody()->getContents(), true);
+			SS_Log::log(sprintf(__METHOD__ . " DEBUG JSON RESPONSE %s", json_encode($jsonResponse, JSON_PRETTY_PRINT)), SS_Log::DEBUG);
 			$defaults = array_fill_keys(["error", "user_id", "user_external_id", "user_identifier", "user_email", "active"], null);
 			$defaults['active'] = false;
 			$jsonResponse = array_merge($defaults, $jsonResponse);
 
 			$json = [
-				'active' => !!$jsonResponse['active'],
 				'user_id' => $jsonResponse['user_id'] ?: $jsonResponse['user_external_id'],
 				'user_email' => $jsonResponse['user_email'] ?: $jsonResponse['user_identifier'],
 			];
+			SS_Log::log(sprintf(__METHOD__ . " DEBUG JSON RETURN %s", json_encode($json, JSON_PRETTY_PRINT)), SS_Log::DEBUG);
 			return $json;
 
 		} catch (RequestException $ex) {
@@ -268,7 +285,7 @@ final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
 				"error" => "Server Error",
 				"message" => $ex->getMessage(),
 			];
-			if (defined('SS_ENVIRONMENT_TYPE') && SS_ENVIRONMENT_TYPE === 'dev') {
+			if (defined('SS_ENVIRONMENT_TYPE') && SS_ENVIRONMENT_TYPE !== 'production') {
 				$data['trace'] = $ex->getTrace();
 			}
 			$response = new SS_HTTPResponse();
