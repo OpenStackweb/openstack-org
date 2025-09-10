@@ -1,27 +1,42 @@
-<script>
+<% if $IsSSOBootstrapEnabled %>
+<script id="SSOBootstrap" type="text/javascript">
     document.addEventListener('DOMContentLoaded', () => {
       const csrfToken = "$SecurityToken";
       try {
+        const authInfo = localStorage.authInfo;
+        if (!authInfo) return;
+
         const {
           accessTokenUpdatedAt,
           accessToken,
           idToken,
           expiresIn,
-        } = JSON.parse(localStorage.getItem('authInfo') || '{}');
+          checked,
+        } = (JSON.parse(authInfo) || {});
+        delete authInfo;
+
+        if (checked) return;
 
         const isValid = accessToken &&
           expiresIn &&
           accessTokenUpdatedAt &&
           ((expiresIn + accessTokenUpdatedAt) * 1000) > Date.now().valueOf();
 
-        // No access token found => user is not logged in
         if (!isValid)
         {
+          localStorage.removeItem('authInfo');
           return;
         }
 
-        // Bootstrap OIDC session
+        localStorage.setItem('authInfo', JSON.stringify({
+          accessTokenUpdatedAt,
+          accessToken,
+          idToken,
+          expiresIn,
+          checked: true
+          }));
 
+        // Check token validity and bootstrap session
         jQuery.ajax({
           url: '/oidc/session/bootstrap',
           method: 'POST',
@@ -37,15 +52,24 @@
             idToken,
             expiresIn,
           }),
-          success: function(response) {
-            console.log('OIDC session bootstrap successful:', response);
+          success: function(response, textStatus, jqXHR) {
+            if (jqXHR.status === 204) {
+              window.location.reload();
+            }
           },
-          error: function(xhr, status, error) {
+          error: function({responseText, status, statusText}, statusType, error) {
+            if (statusType !== "error") {
+              console.warn('OIDC session bootstrap failed - Non-error status received:', statusType);
+              return;
+            }; // Ignore non-error statuses
+
+            const response = JSON.parse(responseText || 'false');
+
             console.error('OIDC session bootstrap failed:', {
-              status: xhr.status,
-              statusText: xhr.statusText,
-              response: JSON.parse(xhr.responseText || 'false') || xhr.responseText,
-              error: error
+              error,
+              status,
+              statusText,
+              response: response || responseText,
             });
           }
         });
@@ -57,3 +81,4 @@
 
     });
 </script>
+<% end_if %>

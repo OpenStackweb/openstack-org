@@ -279,6 +279,17 @@ class Page_Controller extends ContentController
         return SecurityToken::inst() ? SecurityToken::inst()->getValue() : null;
     }
 
+    public function getIsSSOBootstrapEnabled()
+    {
+        $enabled = (bool) (defined('SHELL_SSO_BOOTSTRAP_ENABLED') and SHELL_SSO_BOOTSTRAP_ENABLED);
+        return $enabled and Member::currentUserID() !== null;
+    }
+
+    public function getMemberIsLoggedIn()
+    {
+        return Member::currentUserID() !== null;
+    }
+
     protected function CustomScripts()
     {
         $js_files = [
