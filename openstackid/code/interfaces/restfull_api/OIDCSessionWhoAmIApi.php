@@ -76,9 +76,7 @@ final class OIDCSessionWhoAmIApi extends AbstractRestfulJsonApi
 				return $response;
 			}
 
-			$memberID = Session::get('loggedInAs');
-			$member = $memberID ? Member::get()->filter(['ID' => $memberID])->first() : null;
-
+			$member = Member::currentUser();
 			if (!$member) {
 				$response = $this->notFound('No authenticated user found');
 			} else {
