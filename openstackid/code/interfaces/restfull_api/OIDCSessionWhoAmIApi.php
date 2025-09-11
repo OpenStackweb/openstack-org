@@ -76,7 +76,8 @@ final class OIDCSessionWhoAmIApi extends AbstractRestfulJsonApi
 				return $response;
 			}
 
-			$member = Member::currentUser();
+			$memberID = Session::get('loggedInAs');
+			$member = $memberID ? Member::get()->filter(['ID' => $memberID])->first() : null;
 
 			if (!$member) {
 				$response = $this->notFound('No authenticated user found');
@@ -122,7 +123,7 @@ final class OIDCSessionWhoAmIApi extends AbstractRestfulJsonApi
 		}
 
 		// Check X-CSRF-Token header value
-		if ($csrfToken !== $this->getSecurityToken()) {
+		if ($csrfToken !== Session::get('SecurityID')) {
 			return $this->badRequest('X-CSRF-Token header is invalid');
 		}
 
