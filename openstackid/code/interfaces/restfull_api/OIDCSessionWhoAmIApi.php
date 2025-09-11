@@ -76,24 +76,17 @@ final class OIDCSessionWhoAmIApi extends AbstractRestfulJsonApi
 				return $response;
 			}
 
-      $member = Member::currentUser();
+			$member = Member::currentUser();
 
-      $response = new SS_HTTPResponse();
-      $response->addHeader('Content-Type', 'application/json');
-
-      if (!$member) {
-        $response->setStatusCode(404);
-        $response->setBody(json_encode(['message' => 'No authenticated user found']));
-      }
-      else
-      {
-        $response->setStatusCode(200);
-        $response->setBody(json_encode([
-          'user_id' => $member->ID,
-          'email' => $member->Email,
-        ]));
-      }
-      return $response;
+			if (!$member) {
+				$response = $this->notFound('No authenticated user found');
+			} else {
+				$response = $this->ok([
+					'user_id' => $member->ID,
+					'email' => $member->Email,
+				]);
+			}
+			return $response;
 
 		} catch (EntityValidationException $ex1) {
 			SS_Log::log($ex1, SS_Log::WARN);
@@ -146,6 +139,21 @@ final class OIDCSessionWhoAmIApi extends AbstractRestfulJsonApi
 		return parent::methodNotAllowed()
 			->setBody(json_encode("Only POST requests are allowed"))
 			->addHeader('Allow', 'POST');
+	}
+
+
+	/**
+	 * Return method bad request response
+	 * @param string $error
+	 * @return SS_HTTPResponse
+	 */
+	protected function badRequest(string $error)
+	{
+		$response = new SS_HTTPResponse();
+		$response->setStatusCode(400);
+		$response->addHeader('Content-Type', 'application/json');
+		$response->setBody(json_encode(["error" => $error]));
+		return $response;
 	}
 
 	protected function getSecurityToken()
