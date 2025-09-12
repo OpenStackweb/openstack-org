@@ -108,12 +108,6 @@ final class OIDCSessionWhoAmIApi extends AbstractRestfulJsonApi
 			return $this->methodNotAllowed();
 		}
 
-		// Check Content-Type header
-		$contentType = $request->getHeader('Content-Type');
-		if (strpos($contentType, 'application/json') === false) {
-			return $this->validationError(['Content-Type must be application/json']);
-		}
-
 		// Check X-CSRF-Token header
 		$csrfToken = $request->getHeader('X-CSRF-Token') ?: $request->getHeader('X-Csrf-Token');
 		if (empty($csrfToken)) {
