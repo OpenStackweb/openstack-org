@@ -11,10 +11,10 @@
           accessToken,
           idToken,
           expiresIn,
-          checked,
         } = (JSON.parse(authInfo) || {});
         delete authInfo;
 
+        const checked = localStorage.authInfoChecked === "true";
         if (checked) return;
 
         const isValid = accessToken &&
@@ -28,13 +28,7 @@
           return;
         }
 
-        localStorage.setItem('authInfo', JSON.stringify({
-          accessTokenUpdatedAt,
-          accessToken,
-          idToken,
-          expiresIn,
-          checked: true
-          }));
+        localStorage.setItem('authInfoChecked', "true");
 
         // Check token validity and bootstrap session
         jQuery.ajax({
