@@ -159,20 +159,20 @@ final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
 		// Check Content-Type header
 		$contentType = $request->getHeader('Content-Type');
 		if (strpos($contentType, 'application/json') === false) {
-			return $this->validationError(['Content-Type must be application/json']);
+			return $this->badRequest('Content-Type must be application/json');
 		}
 
 		// Check Authorization header
 		$authHeader = $request->getHeader('Authorization');
 		$accessToken = str_replace('Bearer ', '', $authHeader ?: '');
 		if (empty($authHeader) || strpos($authHeader, 'Bearer ') !== 0) {
-			return $this->validationError(['Authorization header with Bearer token is required']);
+			return $this->badRequest('Authorization header with Bearer token is required');
 		}
 
 		// Check X-CSRF-Token header
 		$csrfToken = $request->getHeader('X-CSRF-Token') ?: $request->getHeader('X-Csrf-Token');
 		if (empty($csrfToken)) {
-			return $this->validationError(['X-CSRF-Token header is required']);
+			return $this->badRequest('X-CSRF-Token header is required');
 		}
 
 		// Check X-CSRF-Token header value
@@ -183,14 +183,14 @@ final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
 		// Check Sec-Fetch-Site header
 		$SecFetchSite = $request->getHeader('Sec-Fetch-Site') ?: "";
 		if ($SecFetchSite !== 'same-origin') {
-			return $this->validationError(['Sec-Fetch-Site header is required and must be same-origin']);
+			return $this->badRequest('Sec-Fetch-Site header is required and must be same-origin');
 		}
 
 		// Check Referer and Origin headers
 		$Referer = $request->getHeader('Referer') ?: "";
 		$Origin = $request->getHeader('Origin') ?: "";
 		if (empty($Referer) or empty($Origin) || $Origin !== $Referer) {
-			return $this->validationError(['same-origin is in place, Referer and Origin headers must be present and match']);
+			return $this->badRequest('same-origin is in place, Referer and Origin headers must be present and match');
 		}
 
 		// Get JSON payload
