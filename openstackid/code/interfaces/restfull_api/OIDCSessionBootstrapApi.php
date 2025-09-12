@@ -252,17 +252,17 @@ final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
 		try {
 			SS_Log::log(sprintf(__METHOD__ . " token %s", $token_value), SS_Log::DEBUG);
 
-			$client_id = defined('OIDC_PUBLIC_APP_CLIENT_ID') ? OIDC_PUBLIC_APP_CLIENT_ID : '';
-			$client_secret = defined('OIDC_PUBLIC_APP_CLIENT_SECRET') ? OIDC_PUBLIC_APP_CLIENT_SECRET : '';
+			$client_id = defined('SESSION_CHECKER_OAUTH2_APP_CLIENT_ID') ? SESSION_CHECKER_OAUTH2_APP_CLIENT_ID : '';
+			$client_secret = defined('SESSION_CHECKER_OAUTH2_APP_CLIENT_SECRET') ? SESSION_CHECKER_OAUTH2_APP_CLIENT_SECRET : '';
 			$auth_server_url = defined('IDP_OPENSTACKID_URL') ? IDP_OPENSTACKID_URL : '';
-			$verify = defined('OIDC_PUBLIC_APP_VERIFY_HOST') ? OIDC_PUBLIC_APP_VERIFY_HOST : false;
+			$verify = defined('SESSION_CHECKER_OAUTH2_APP_VERIFY_HOST') ? SESSION_CHECKER_OAUTH2_APP_VERIFY_HOST : false;
 
 			if (empty($client_id)) {
-				return $this->validationError('OIDC_CLIENT_ID_PUBLIC is not configured');
+				return $this->validationError('SESSION_CHECKER_OAUTH2_APP_CLIENT_ID is not configured');
 			}
 
 			if (empty($client_secret)) {
-				return $this->validationError('OIDC_CLIENT_SECRET_PUBLIC is not configured');
+				return $this->validationError('SESSION_CHECKER_OAUTH2_APP_CLIENT_SECRET is not configured');
 			}
 
 			if (empty($auth_server_url)) {

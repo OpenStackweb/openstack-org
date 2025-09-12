@@ -78,10 +78,10 @@ define('OIDC_CLIENT_SECRET', '');
 define('OIDC_VERIFY_HOST',false);
 
 
-define('OIDC_PUBLIC_APP_CLIENT_ID', '');
-define('OIDC_PUBLIC_APP_CLIENT_SECRET', '');
+define('SESSION_CHECKER_OAUTH2_APP_CLIENT_ID', '');
+define('SESSION_CHECKER_OAUTH2_APP_CLIENT_SECRET', '');
 //set true on production mode, otherwise false
-define('OIDC_PUBLIC_APP_VERIFY_HOST', false);
+define('SESSION_CHECKER_OAUTH2_APP_VERIFY_HOST', false);
 
 ````
 
