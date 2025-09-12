@@ -104,7 +104,7 @@ final class OIDCSessionWhoAmIApi extends AbstractRestfulJsonApi
 	private function validateRequestData(SS_HTTPRequest $request)
 	{
 		// Check if request method is POST
-		if (!$request->isPOST()) {
+		if (!$request->isGET()) {
 			return $this->methodNotAllowed();
 		}
 
@@ -136,8 +136,8 @@ final class OIDCSessionWhoAmIApi extends AbstractRestfulJsonApi
 	protected function methodNotAllowed()
 	{
 		return parent::methodNotAllowed()
-			->setBody(json_encode("Only POST requests are allowed"))
-			->addHeader('Allow', 'POST');
+			->setBody(json_encode("Only GET requests are allowed"))
+			->addHeader('Allow', 'GET');
 	}
 
 
