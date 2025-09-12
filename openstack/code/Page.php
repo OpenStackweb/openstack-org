@@ -276,7 +276,7 @@ class Page_Controller extends ContentController
 
     public function getSecurityToken()
     {
-        return SecurityToken::inst() ? SecurityToken::inst()->getValue() : null;
+        return SecurityToken::inst() ? str_replace('"', '\\"', SecurityToken::inst()->getValue()) : null;
     }
 
     public function getIsSSOBootstrapEnabled()

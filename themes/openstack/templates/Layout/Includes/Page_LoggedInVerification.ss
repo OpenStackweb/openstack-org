@@ -12,9 +12,8 @@
           idToken,
           expiresIn,
         } = (JSON.parse(authInfo) || {});
-        delete authInfo;
 
-        const checked = localStorage.authInfoChecked === "true";
+        const checked = localStorage.getItem('sso:bootstrapped') === "true";
         if (checked) return;
 
         const isValid = accessToken &&
@@ -28,7 +27,6 @@
           return;
         }
 
-        localStorage.setItem('authInfoChecked', "true");
 
         // Check token validity and bootstrap session
         jQuery.ajax({
@@ -48,6 +46,7 @@
           }),
           success: function(response, textStatus, jqXHR) {
             if (jqXHR.status === 204) {
+              localStorage.setItem('sso:bootstrapped', "true");
               window.location.reload();
             }
           },
@@ -58,6 +57,10 @@
             }; // Ignore non-error statuses
 
             const response = JSON.parse(responseText || 'false');
+
+            if (status === 404 || (response && ['invalid_token', 'invalid_grant'].includes(response.code))) {
+              localStorage.setItem('sso:bootstrapped', "true");
+            }
 
             console.error('OIDC session bootstrap failed:', {
               error,
