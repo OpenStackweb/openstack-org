@@ -87,8 +87,7 @@ final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
 			if ($response instanceof SS_HTTPResponse) {
 				return $response;
 			}
-			$data = &$response['data'];
-			$accessToken = &$response['accessToken'];
+			$accessToken = &$response;
 
 			try {
 				$tokenData = $this->doIntrospectionRequest($accessToken);
@@ -159,13 +158,6 @@ final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
 		if (!$request->isPOST()) {
 			return $this->methodNotAllowed();
 		}
-
-		// Check Content-Type header
-		$contentType = $request->getHeader('Content-Type');
-		if (strpos($contentType, 'application/json') === false) {
-			return $this->badRequest('Content-Type must be application/json');
-		}
-
 		// Check Authorization header
 		$authHeader = $request->getHeader('Authorization');
 		$accessToken = str_replace('Bearer ', '', $authHeader ?: '');
@@ -233,16 +225,7 @@ final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
 			return $this->badRequest('same-origin check failed: Origin and Referer headers must have the same origin');
 		}
 
-		// Get JSON payload
-		$data = $this->getJsonRequest();
-		if (!$data) {
-			return $this->badRequest('Invalid JSON payload');
-		}
-
-		return [
-			'data' => $data,
-			'accessToken' => $accessToken
-		];
+		return $accessToken;
 	}
 
 	/**
