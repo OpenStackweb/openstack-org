@@ -120,6 +120,14 @@ final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
 					$member = Member::get()->filter('Email', $tokenData['user_email'])->first();
 				}
 
+				if (!$member && $tokenData['user_external_id']) {
+					$member = Member::get()->filter('ID', $tokenData['user_external_id'])->first();
+				}
+
+				if (!$member && $tokenData['user_email']) {
+					$member = Member::get()->filter('Email', $tokenData['user_email'])->first();
+				}
+
 				if (!$member) {
 					return $this->validationError(['User not found'], 404);
 				}
