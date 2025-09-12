@@ -38,12 +38,6 @@
             'X-CSRF-Token': csrfToken,
           },
           dataType: "json",
-          data: JSON.stringify({
-            accessTokenUpdatedAt,
-            accessToken,
-            idToken,
-            expiresIn,
-          }),
           success: function(response, textStatus, jqXHR) {
             if (jqXHR.status === 204) {
               localStorage.setItem('sso:bootstrapped', "true");
