@@ -186,11 +186,47 @@ final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
 			return $this->badRequest('Sec-Fetch-Site header is required and must be same-origin');
 		}
 
-		// Check Referer and Origin headers
-		$Referer = $request->getHeader('Referer') ?: "";
-		$Origin = $request->getHeader('Origin') ?: "";
-		if (empty($Referer) or empty($Origin) || $Origin !== $Referer) {
-			return $this->badRequest('same-origin is in place, Referer and Origin headers must be present and match');
+		// Check Referer and Origin headers for same-origin
+		$origin = $request->getHeader('Origin') ?: "";
+		$referer = $request->getHeader('Referer') ?: "";
+
+		if (empty($referer) || empty($origin)) {
+			return $this->badRequest('same-origin is in place, Referer and Origin headers must be present');
+		}
+
+		// Parse origins from both URLs
+		$originParsed = parse_url($origin);
+		$refererParsed = parse_url($referer);
+
+		if (!$originParsed || !$refererParsed) {
+			return $this->badRequest('Invalid Origin or Referer URL format');
+		}
+
+		// Compare scheme, host, and port for same-origin check
+		$originScheme = $originParsed['scheme'] ?? '';
+		$originHost = $originParsed['host'] ?? '';
+		$originPort = $originParsed['port'] ?? ($originScheme === 'https' ? 443 : 80);
+
+		$refererScheme = $refererParsed['scheme'] ?? '';
+		$refererHost = $refererParsed['host'] ?? '';
+		$refererPort = $refererParsed['port'] ?? ($refererScheme === 'https' ? 443 : 80);
+
+		if ($originScheme !== $refererScheme || $originHost !== $refererHost || $originPort !== $refererPort) {
+			SS_Log::log(
+				sprintf(
+					'Same-origin check failed: Origin=%s (scheme=%s, host=%s, port=%d) vs Referer=%s (scheme=%s, host=%s, port=%d)',
+					$origin,
+					$originScheme,
+					$originHost,
+					$originPort,
+					$referer,
+					$refererScheme,
+					$refererHost,
+					$refererPort
+				),
+				SS_Log::DEBUG
+			);
+			return $this->badRequest('same-origin check failed: Origin and Referer headers must have the same origin');
 		}
 
 		// Get JSON payload
