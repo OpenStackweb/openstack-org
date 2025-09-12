@@ -116,10 +116,6 @@ final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
 				// we can create a session for the user
 				$member = null;
 
-				if (!$member && $tokenData['user_email']) {
-					$member = Member::get()->filter('Email', $tokenData['user_email'])->first();
-				}
-
 				if (!$member && $tokenData['user_external_id']) {
 					$member = Member::get()->filter('ID', $tokenData['user_external_id'])->first();
 				}
@@ -316,12 +312,12 @@ final class OIDCSessionBootstrapApi extends AbstractRestfulJsonApi
 			}
 
 			SS_Log::log(sprintf(__METHOD__ . " DEBUG JSON RESPONSE %s", json_encode($jsonResponse, JSON_PRETTY_PRINT)), SS_Log::DEBUG);
-			$defaults = array_fill_keys(["error", "user_id", "user_external_id", "user_identifier", "user_email", "active"], null);
+			$defaults = array_fill_keys(["error", "user_external_id", "user_identifier", "user_email"], null);
 			$defaults['active'] = false;
 			$jsonResponse = array_merge($defaults, $jsonResponse);
 
 			$json = [
-				'user_id' => $jsonResponse['user_id'] ?: $jsonResponse['user_external_id'],
+				'user_external_id' => $jsonResponse['user_external_id'],
 				'user_email' => $jsonResponse['user_email'] ?: $jsonResponse['user_identifier'],
 			];
 			SS_Log::log(sprintf(__METHOD__ . " DEBUG JSON RETURN %s", json_encode($json, JSON_PRETTY_PRINT)), SS_Log::DEBUG);
