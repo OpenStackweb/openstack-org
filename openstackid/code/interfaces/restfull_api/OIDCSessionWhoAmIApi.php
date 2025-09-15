@@ -26,7 +26,7 @@ final class OIDCSessionWhoAmIApi extends AbstractRestfulJsonApi
 	 * @var array
 	 */
 	private static $url_handlers = [
-		'POST ' => 'index',
+		'GET ' => 'index',
 	];
 
 	/**
