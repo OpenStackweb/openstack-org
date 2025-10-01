@@ -25,7 +25,7 @@ Unless otherwise noted, all code is released under the APACHE 2.0 License http:/
 ## Installation and further documentation
 
 Detailed installation instructions for a virtual machine environment using Vagrant are located at:
-[Vagrant virtual machine installation](./installation.md) 
+[Vagrant virtual machine installation](./installation.md)
 
 Information for installation to a local machine environment can be found at:
 <http://openstackweb.github.io/openstack-org/>
@@ -41,7 +41,7 @@ configuration file for this should be located here
 
 openstack/_config/cloudassets.yml
 
-and with following content 
+and with following content
 
 
 * https://docs.openstack.org/keystone/rocky/user/application_credentials.html
@@ -62,8 +62,8 @@ CloudAssets:
       ApplicationCredentialId: application credential id
       ApplicationCredentialSecret: application credential secret
       ProjectName: your project name
-      AuthURL: keystone base url 
-      LocalCopy: false     
+      AuthURL: keystone base url
+      LocalCopy: false
 ````
 
 ## OIDC
@@ -73,19 +73,23 @@ settings for oidc configuration on _ss_environment.php file
 ````PHP
 // OIDC
 define('OIDC_CLIENT', '');
-
 define('OIDC_CLIENT_SECRET', '');
-
-
 //set true on production mode, otherwise false
 define('OIDC_VERIFY_HOST',false);
+
+
+define('SESSION_CHECKER_OAUTH2_APP_CLIENT_ID', '');
+define('SESSION_CHECKER_OAUTH2_APP_CLIENT_SECRET', '');
+//set true on production mode, otherwise false
+define('SESSION_CHECKER_OAUTH2_APP_VERIFY_HOST', false);
+
 ````
 
 on idp under allowed URIs you need to register following one
 
 * https://hostname/openstackidauthenticator
 
-under security settings you need to set Id Token Signed Response Algorithm 
+under security settings you need to set Id Token Signed Response Algorithm
 
 
 

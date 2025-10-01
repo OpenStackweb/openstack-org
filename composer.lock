@@ -1,11 +1,84 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "588fea3911bc0293ed0a1a2e87f1ce79",
+    "content-hash": "abf949ebcacd420c81c40530c4f73ff3",
     "packages": [
+        {
+            "name": "caseyamcl/guzzle_retry_middleware",
+            "version": "v2.13.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/caseyamcl/guzzle_retry_middleware.git",
+                "reference": "17c9299cde438b00bbeb099c6480319a81636a60"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/caseyamcl/guzzle_retry_middleware/zipball/17c9299cde438b00bbeb099c6480319a81636a60",
+                "reference": "17c9299cde438b00bbeb099c6480319a81636a60",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.3|^7.0",
+                "php": "^7.1|^8.0"
+            },
+            "require-dev": {
+                "jaschilz/php-coverage-badger": "^2.0",
+                "nesbot/carbon": "^2.0|^3.0",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^1.0",
+                "phpunit/phpunit": "^7.5|^8.0|^9.0",
+                "squizlabs/php_codesniffer": "^3.5",
+                "symfony/var-dumper": "^5.0|^6.0|^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GuzzleRetry\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Casey McLaughlin",
+                    "email": "caseyamcl@gmail.com",
+                    "homepage": "https://caseymclaughlin.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Guzzle v6+ retry middleware that handles 429/503 status codes and connection timeouts",
+            "homepage": "https://github.com/caseyamcl/guzzle_retry_middleware",
+            "keywords": [
+                "Guzzle",
+                "back-off",
+                "caseyamcl",
+                "guzzle_retry_middleware",
+                "middleware",
+                "retry",
+                "retry-after"
+            ],
+            "support": {
+                "issues": "https://github.com/caseyamcl/guzzle_retry_middleware/issues",
+                "source": "https://github.com/caseyamcl/guzzle_retry_middleware/tree/v2.13.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/caseyamcl",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-07-11T12:33:22+00:00"
+        },
         {
             "name": "composer/installers",
             "version": "dev-master",
@@ -1480,11 +1553,6 @@
                 "reference": "38654be8419d4abb59114ff6b9982fb094406bff",
                 "shasum": ""
             },
-            "archive": {
-                "exclude": [
-                    ".*"
-                ]
-            },
             "require": {
                 "ext-curl": "*",
                 "ext-json": "*",
@@ -1495,6 +1563,11 @@
             "autoload": {
                 "classmap": [
                     "src/"
+                ]
+            },
+            "archive": {
+                "exclude": [
+                    ".*"
                 ]
             },
             "license": [
@@ -6089,25 +6162,26 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "unclecheese/dropzone": 20,
-        "unclecheese/bootstrap-tagfield": 20,
-        "silverstripe/gridfieldajaxrefresh": 20,
-        "tractorcow/silverstripe-colorpicker": 20,
-        "tractorcow/silverstripe-opengraph": 20,
+        "google/recaptcha": 20,
+        "jumbojett/openid-connect-php": 20,
+        "markguinn/silverstripe-cloudassets": 20,
+        "mikehaertl/phpwkhtmltopdf": 20,
         "nnnick/chartjs": 20,
         "openid/php-openid": 20,
-        "google/recaptcha": 20,
-        "smarcet/silverstripe-cloudassets-swift": 20,
-        "markguinn/silverstripe-cloudassets": 20,
         "php-opencloud/openstack": 20,
-        "jumbojett/openid-connect-php": 20,
-        "mikehaertl/phpwkhtmltopdf": 20,
-        "spatie/dropbox-api": 20
+        "silverstripe/gridfieldajaxrefresh": 20,
+        "smarcet/silverstripe-cloudassets-swift": 20,
+        "spatie/dropbox-api": 20,
+        "tractorcow/silverstripe-colorpicker": 20,
+        "tractorcow/silverstripe-opengraph": 20,
+        "unclecheese/bootstrap-tagfield": 20,
+        "unclecheese/dropzone": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": "^7.1.3"
     },
-    "platform-dev": []
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
 }

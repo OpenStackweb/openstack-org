@@ -137,7 +137,7 @@ class Page extends SiteTree
         //return the customized template
         return $template->process(new ArrayData($customise));
 
-    }    
+    }
 
 
     function requireDefaultRecords()
@@ -272,6 +272,22 @@ class Page_Controller extends ContentController
     public function getTime()
     {
         return time();
+    }
+
+    public function getSecurityToken()
+    {
+        return SecurityToken::inst() ? str_replace('"', '\\"', SecurityToken::inst()->getValue()) : null;
+    }
+
+    public function getIsSSOBootstrapEnabled()
+    {
+        $enabled = (bool) (defined('SHELL_SSO_BOOTSTRAP_ENABLED') and SHELL_SSO_BOOTSTRAP_ENABLED);
+        return $enabled and Member::currentUserID() !== null;
+    }
+
+    public function getMemberIsLoggedIn()
+    {
+        return Member::currentUserID() !== null;
     }
 
     protected function CustomScripts()

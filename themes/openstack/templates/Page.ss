@@ -32,6 +32,7 @@
     <% include Page_GoogleAnalytics %>
     <% include Page_MicrosoftAdvertising %>
     <% include Page_LinkedinInsightTracker %>
+    <% include Page_LoggedInVerification %>
 
   </head>
   <body id="$URLSegment">

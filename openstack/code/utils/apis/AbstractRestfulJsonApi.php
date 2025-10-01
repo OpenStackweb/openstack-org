@@ -11,8 +11,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-use Doctrine\Common\Annotations\AnnotationReader;
 use Openstack\Annotations\CachedMethod;
+use Doctrine\Common\Annotations\AnnotationReader;
 /**
  * Class AbstractRestfulJsonApi
  */
@@ -524,6 +524,19 @@ abstract class AbstractRestfulJsonApi extends Controller
     /**
      * @return SS_HTTPResponse
      */
+    protected function noContent(): SS_HTTPResponse
+    {
+        $response = new SS_HTTPResponse();
+        $response->setStatusCode(204);
+        $response->addHeader('Content-Type', 'application/json');
+        $response->setBody('');
+
+        return $response;
+    }
+
+    /**
+     * @return SS_HTTPResponse
+     */
     public function serverError()
     {
         $response = new SS_HTTPResponse();
@@ -550,10 +563,10 @@ abstract class AbstractRestfulJsonApi extends Controller
      * @param $messages
      * @return SS_HTTPResponse
      */
-    public function validationError($messages)
+    public function validationError($messages, $code = 412)
     {
         $response = new SS_HTTPResponse();
-        $response->setStatusCode(412);
+        $response->setStatusCode($code);
         $response->addHeader('Content-Type', 'application/json');
         if (!is_array($messages)) {
             $messages = [['message' => $messages]];
@@ -575,6 +588,21 @@ abstract class AbstractRestfulJsonApi extends Controller
         $response->setStatusCode(201);
         $response->addHeader('Content-Type', 'application/json');
         $response->setBody(json_encode($id));
+
+        return $response;
+    }
+
+    /**
+     * @return SS_HTTPResponse
+     */
+    public function badRequest($message = "Bad Request")
+    {
+        $response = new SS_HTTPResponse();
+        $response->setStatusCode(400);
+        $response->addHeader('Content-Type', 'application/json');
+        $response->setBody(json_encode(
+            ['error' => 'validation', 'messages' => [['message' => $message]]]
+        ));
 
         return $response;
     }
