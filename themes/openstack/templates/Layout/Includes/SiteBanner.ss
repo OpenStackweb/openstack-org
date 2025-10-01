@@ -8,7 +8,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="top-site-banner">
     <div class="container">
         <div class="text">
-            Join the OpenStack community at the OpenInfra Summit Europe, October 17-19. Register before prices double on July 2!
+            Join the OpenStack community at the OpenInfra Summit Europe, October 17-19.
         </div>
         <div class="button">
             <a href="https://summit2025.openinfra.org/" target="_blank" class="top-site-banner-button">JOIN US!</a>
