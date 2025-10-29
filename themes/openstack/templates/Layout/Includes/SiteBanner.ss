@@ -8,10 +8,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="top-site-banner">
     <div class="container">
         <div class="text">
-            Join the OpenStack community at the OpenInfra Summit Europe, October 17-19.
+            Learn more about OpenStack's latest release, 2025.2 Flamingo! 
         </div>
         <div class="button">
-            <a href="https://summit2025.openinfra.org/" target="_blank" class="top-site-banner-button">JOIN US!</a>
+            <a href="https://www.openstack.org/software/openstack-flamingo/" target="_blank" class="top-site-banner-button">Learn more</a>
         </div>
     </div>
 </div>
