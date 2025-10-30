@@ -107,18 +107,6 @@ final class OIDCSessionWhoAmIApi extends AbstractRestfulJsonApi
 		if (!$request->isGET()) {
 			return $this->methodNotAllowed();
 		}
-
-		// Check X-CSRF-Token header
-		$csrfToken = $request->getHeader('X-CSRF-Token') ?: $request->getHeader('X-Csrf-Token');
-		if (empty($csrfToken)) {
-			return $this->validationError(['X-CSRF-Token header is required', "headers" => $request->getHeaders()]);
-		}
-
-		// Check X-CSRF-Token header value
-		if ($csrfToken !== Session::get('SecurityID')) {
-			return $this->badRequest('X-CSRF-Token header is invalid');
-		}
-
 		return true;
 	}
 
