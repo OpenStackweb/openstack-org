@@ -23,6 +23,7 @@
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}use-cases/containers/">Containers</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}use-cases/enterprise/">Enterprise</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}surveys/landing">User Survey</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}openstack-for-ai">AI</a></li>
     </ul>
 </li>
 <li>
