@@ -1,0 +1,132 @@
+0
+Topics0
+Wikis12
+Users0
+Languages
+2,591 HTML
+1,684 YAML
+520 Markdown
+339 JSON
+323 Text
+207 XML
+185 CSV
+27 TeX
+24 Java
+21 reStructuredText
+Advanced search 
+6,275 code results
+@tobysaville
+tobysaville/veda-hackathon2 – screech-context.xml
+Showing the top three matches Last indexed on Jun 28, 2018
+XML
+			<from ref="screech-gateway" />
+			<!-- <setBody><simple>resource:classpath:/payloads/screech/business_small.txt</simple></setBody> -->
+			<from ref="screech-response-visualiser" />
+
+			<setHeader headerName="visualise.template">
+				<simple>resource:classpath:/templates/addBusiness.json</simple>
+@nautilustar
+nautilustar/nautilustar-orchestrator-api-nodejs – README.md
+Showing the top three matches Last indexed on Jul 7, 2018
+Markdown
+# nautilus-orchestrator-api-nodejs
+Project with Orchestrator API - ECMA6 - Auto Generator Crud RESTFul
+https://github.com/nautilustar/nautilustar-orchestrator-api-nodejs.git
+
+## Installation
+
+**Install gulp**
+`npm install -g gulp-cli`
+
+**Install packages**
+`npm install`
+@Automic-Community
+Automic-Community/Managed-FileTransfer-ECC-Dashboard – README.md
+Showing the top two matches Last indexed on Jun 30, 2018
+Markdown
+MFT Reporting Dashboard for the ECC using Predictive Analytics and Policy Orchestrator
+http://github.com/Automic-Community/Managed-FileTransfer-ECC-Dashboard-
+<h3>The transfer of data is the foundation for any business and Automic helps to faciliate and manage these transfers.<br /> Reporting is a must for reviewing and analyzing the 100's (if not 1000's) of individual transfers.</h3>
+@indigo-dc
+indigo-dc/orchestrator – DeploymentServiceImpl.java
+Showing the top three matches Last indexed on Oct 31, 2018
+Java
+ * limitations under the License.
+ */
+
+package it.reply.orchestrator.service;
+
+import alien4cloud.model.topology.NodeTemplate;
+import it.reply.orchestrator.config.properties.OidcProperties;
+import it.reply.orchestrator.dal.entity.Deployment;
+@MascaraDeemo
+MascaraDeemo/Capstone-Group-76 – desktop.widgets.admin.business.policies.js
+Showing the top four matches Last indexed on Jul 9, 2018
+JavaScript
+/**
+ * Name: BizAgi Desktop Widget Administration Processes (orchestrator)
+ * 
+ * @author Christian Collazos
+        self._super(workportalFacade, dataService, params);
+
+        //Load templates
+        self.loadTemplates({
+            "admin.business.policies.wrapper": bizagi.getTemplate("bizagi.workportal.desktop.widgets.admin.business.policies").concat( "#ui-bizagi-workportal-widget-admin-business-policies-wrapper"),
+@MascaraDeemo
+MascaraDeemo/Capstone-Group-76 – desktop.widgets.admin.business.policies.js
+Showing the top four matches Last indexed on Jul 9, 2018
+JavaScript
+/**
+ * Name: BizAgi Desktop Widget Administration Processes (orchestrator)
+ * 
+ * @author Christian Collazos
+        self._super(workportalFacade, dataService, params);
+
+        //Load templates
+        self.loadTemplates({
+            "admin.business.policies.wrapper": bizagi.getTemplate("bizagi.workportal.desktop.widgets.admin.business.policies").concat( "#ui-bizagi-workportal-widget-admin-business-policies-wrapper"),
+@guillermoipn242
+guillermoipn242/banamex-bne – backbase.properties
+Showing the top three matches Last indexed on Jul 9, 2018
+INI
+## Proxies used by orchestrator and content services
+
+## Orchestrator proxy
+foundation.orchestrator.proxy.destination=http://${orchestrator.host}:${orchestrator.port}/${orchestrator.context}
+@sunny200745
+sunny200745/training-bb-solutions – backbase.properties
+Showing the top three matches Last indexed on Jul 8, 2018
+INI
+## Proxies used by orchestrator and content services
+
+## Orchestrator proxy
+foundation.orchestrator.proxy.destination=http://${orchestrator.host}:${orchestrator.port}/${orchestrator.context}
+@fhilton
+fhilton/fhilton.github.io – 2017-03-24-Running-Docker-Containers-Azure.md
+Showing the top match Last indexed on Jul 23, 2018
+Markdown
+    You can setup a continuous delivery pipeline for your App Service in Visual Studio Team Services using the [Continuous Delivery Tools for Visual Studio](https://marketplace.visualstudio.com/items?itemName=VSIDEDevOpsMSFT.ContinuousDeliveryToolsforVisualStudio) extension.
+
+* <strong>Azure VM - IAAS using ARM Templates</strong>
+
+    You can create your own VM using [Azure Resource Manager (ARM)](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-overview) Templates and install Docker.  From there you can use [Azure VM Scale Sets](https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-overview) to scale your service as needed.
+@DarioAvilaAC
+DarioAvilaAC/scrum_training_proj – backbase.properties
+Showing the top three matches Last indexed on Jul 15, 2018
+INI
+## Proxies used by orchestrator and content services
+
+## Orchestrator proxy
+foundation.orchestrator.proxy.destination=http://${orchestrator.host}:${orchestrator.port}/${orchestrator.context}
+© 2019 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
