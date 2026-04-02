@@ -30,7 +30,7 @@
     "redux-router": "^1.0.0-beta7",
     "redux-thunk": "^1.0.3",
     "shallowequal": "^0.2.2",
-    "superagent": "^1.7.0"
+    "superagent": "^8.0.8"
   },
   "devDependencies": {
     "expect": "^1.13.4",
