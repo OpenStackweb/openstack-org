@@ -21,7 +21,7 @@
     "form-serialize": "~0.6.0",
     "json-loader": "^0.5.4",
     "markdown": "^0.5.0",
-    "moment": "^2.11.2",
+    "moment": "^2.29.4",
     "moment-timezone": "^0.5.3",
     "object-assign": "^4.0.1",
     "rc-animate": "^2.0.3",
