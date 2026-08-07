@@ -48,7 +48,7 @@
         <% end_if %>
         <div class="add-your-course">
             <p>
-                Does your company offer products or services that belong in the marketplace? <a href="mailto:ecosystem@openstack.org">Email us for details</a> or <a href="https://calendly.com/jimmy-mcarthur">put some time on our calendar</a> to meet remotely.
+                Does your company offer products or services that belong in the marketplace? <a href="mailto:ecosystem@openstack.org">Email us for details</a> or <a href="https://www.linuxfoundation.org/meetings/jmcarthur3">book a time</a> to meet remotely.
             </p>
         </div>
     </div>
