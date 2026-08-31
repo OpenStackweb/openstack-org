@@ -23,7 +23,7 @@
 
     
     <h1>$_T("survey_ui", "Welcome to the 2026 OpenStack User Survey")</h1>
-    <p>$_T("survey_ui", "The User Survey deadline is %1$s", "Friday, August 28, 2026")</p>
+    <p>$_T("survey_ui", "The User Survey deadline is %1$s", "Monday, November 30, 2026")</p>
     <% if $LoginPageSlide1Content && $LoginPageSlide2Content && $LoginPageSlide3Content %>
     <div class="row">
 
