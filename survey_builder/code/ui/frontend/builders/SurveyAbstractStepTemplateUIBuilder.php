@@ -38,12 +38,11 @@ abstract class SurveyAbstractStepTemplateUIBuilder implements ISurveyStepUIBuild
      * @return String
      */
     protected function getPreviousStepUrl(ISurveyStep $previous_step){
-        $prev_step_url = Controller::join_links
+        $prev_step_url = Director::absoluteURL(Controller::join_links
         (
-            Director::absoluteBaseURL(),
             Controller::curr()->Link(),
             $previous_step->template()->title()
-        );
+        ));
         return $prev_step_url;
     }
 

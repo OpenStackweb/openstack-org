@@ -71,15 +71,14 @@ class EntitySurveyRegularStepTemplateUIBuilder extends SurveyRegularStepTemplate
             throw new LogicException('step empty! - member_id %s', Member::currentUserID());
 
         $entity_survey_id = intval($request->param('ENTITY_SURVEY_ID'));
-        $prev_step_url = Controller::join_links
+        $prev_step_url = Director::absoluteURL(Controller::join_links
         (
-            Director::absoluteBaseURL(),
             Controller::curr()->Link(),
             $step,
             'edit',
             $entity_survey_id,
             $previous_step->template()->title()
-        );
+        ));
         return $prev_step_url;
     }
 }
