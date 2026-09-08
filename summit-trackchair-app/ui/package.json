@@ -47,8 +47,8 @@
     "redux-thunk": "^1.0.3",
     "reselect": "^2.5.3",
     "rx": "^4.1.0",
-    "superagent": "^1.3.0",
-    "superagent-mock": "^1.10.0"
+    "superagent": "^8.0.5",
+    "superagent-mock": "^4.0.0"
   },
   "devDependencies": {
     "babel-polyfill": "^6.13.0",
