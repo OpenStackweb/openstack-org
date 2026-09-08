@@ -703,15 +703,14 @@ class SurveyPage_Controller extends Page_Controller
                     {
                         // if we are not allowed to go to desired step , redirect to current step
 
-                        $current_url = Controller::join_links
+                        $current_url = Director::absoluteURL(Controller::join_links
                         (
-                            Director::absoluteBaseURL(),
                             $this->Link(),
                             $step,
                             'edit',
                             $entity_survey_id,
                             $entity_step_template->title()
-                        );
+                        ));
 
                         return $this->redirect($current_url);
                     }
