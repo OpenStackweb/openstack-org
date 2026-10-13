@@ -36,10 +36,13 @@ class TrainingServiceAdminUI extends DataExtension {
 		$companies = Company::get();
 
 		if($companies){
-			$fields->push(new DropdownField(
+			$companyField = new DropdownField(
 				'CompanyID',
 				'Company',
-				$companies->map("ID", "Name", "Please Select a Company")));
+				$companies->map("ID", "Name", "Please Select a Company"));
+			// Keep the full company list native to avoid rebuilding thousands of Chosen results.
+			$companyField->addExtraClass('no-chzn');
+			$fields->push($companyField);
 		}
 
 		if($types && $levels && $this->owner->ID>0){
